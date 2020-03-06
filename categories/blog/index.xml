@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>blog on Beautiful Hugo</title>
-    <link>//lechgu.github.io/categories/blog/</link>
+    <link>//blog.aiki.dev/categories/blog/</link>
     <description>Recent content in blog on Beautiful Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>youremail@domain.com (Some Person)</managingEditor>
     <webMaster>youremail@domain.com (Some Person)</webMaster>
     <lastBuildDate>Mon, 31 Dec 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="//lechgu.github.io/categories/blog/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="//blog.aiki.dev/categories/blog/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Dummy</title>
-      <link>//lechgu.github.io/posts/dummy/</link>
+      <link>//blog.aiki.dev/posts/dummy/</link>
       <pubDate>Mon, 31 Dec 2018 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (Some Person)</author>
-      <guid>//lechgu.github.io/posts/dummy/</guid>
+      <guid>//blog.aiki.dev/posts/dummy/</guid>
       <description>Nada para ver aqui!</description>
     </item>
     

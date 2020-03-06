@@ -2,130 +2,130 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Beautiful Hugo</title>
-    <link>//lechgu.github.io/tags/</link>
+    <link>//blog.aiki.dev/tags/</link>
     <description>Recent content in Tags on Beautiful Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>youremail@domain.com (Some Person)</managingEditor>
     <webMaster>youremail@domain.com (Some Person)</webMaster>
     <lastBuildDate>Thu, 17 Jan 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="//lechgu.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="//blog.aiki.dev/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>development</title>
-      <link>//lechgu.github.io/tags/development/</link>
+      <link>//blog.aiki.dev/tags/development/</link>
       <pubDate>Thu, 17 Jan 2019 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (Some Person)</author>
-      <guid>//lechgu.github.io/tags/development/</guid>
+      <guid>//blog.aiki.dev/tags/development/</guid>
       <description></description>
     </item>
     
     <item>
       <title>hugo</title>
-      <link>//lechgu.github.io/tags/hugo/</link>
+      <link>//blog.aiki.dev/tags/hugo/</link>
       <pubDate>Thu, 17 Jan 2019 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (Some Person)</author>
-      <guid>//lechgu.github.io/tags/hugo/</guid>
+      <guid>//blog.aiki.dev/tags/hugo/</guid>
       <description></description>
     </item>
     
     <item>
       <title>themes</title>
-      <link>//lechgu.github.io/tags/themes/</link>
+      <link>//blog.aiki.dev/tags/themes/</link>
       <pubDate>Thu, 17 Jan 2019 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (Some Person)</author>
-      <guid>//lechgu.github.io/tags/themes/</guid>
+      <guid>//blog.aiki.dev/tags/themes/</guid>
       <description></description>
     </item>
     
     <item>
       <title>i18n</title>
-      <link>//lechgu.github.io/tags/i18n/</link>
+      <link>//blog.aiki.dev/tags/i18n/</link>
       <pubDate>Mon, 31 Dec 2018 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (Some Person)</author>
-      <guid>//lechgu.github.io/tags/i18n/</guid>
+      <guid>//blog.aiki.dev/tags/i18n/</guid>
       <description></description>
     </item>
     
     <item>
       <title>example</title>
-      <link>//lechgu.github.io/tags/example/</link>
+      <link>//blog.aiki.dev/tags/example/</link>
       <pubDate>Mon, 20 Mar 2017 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (Some Person)</author>
-      <guid>//lechgu.github.io/tags/example/</guid>
+      <guid>//blog.aiki.dev/tags/example/</guid>
       <description></description>
     </item>
     
     <item>
       <title>photoswipe</title>
-      <link>//lechgu.github.io/tags/photoswipe/</link>
+      <link>//blog.aiki.dev/tags/photoswipe/</link>
       <pubDate>Mon, 20 Mar 2017 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (Some Person)</author>
-      <guid>//lechgu.github.io/tags/photoswipe/</guid>
+      <guid>//blog.aiki.dev/tags/photoswipe/</guid>
       <description></description>
     </item>
     
     <item>
       <title>bigimg</title>
-      <link>//lechgu.github.io/tags/bigimg/</link>
+      <link>//blog.aiki.dev/tags/bigimg/</link>
       <pubDate>Tue, 07 Mar 2017 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (Some Person)</author>
-      <guid>//lechgu.github.io/tags/bigimg/</guid>
+      <guid>//blog.aiki.dev/tags/bigimg/</guid>
       <description></description>
     </item>
     
     <item>
       <title>math</title>
-      <link>//lechgu.github.io/tags/math/</link>
+      <link>//blog.aiki.dev/tags/math/</link>
       <pubDate>Sun, 05 Mar 2017 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (Some Person)</author>
-      <guid>//lechgu.github.io/tags/math/</guid>
+      <guid>//blog.aiki.dev/tags/math/</guid>
       <description></description>
     </item>
     
     <item>
       <title>code</title>
-      <link>//lechgu.github.io/tags/code/</link>
+      <link>//blog.aiki.dev/tags/code/</link>
       <pubDate>Tue, 08 Mar 2016 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (Some Person)</author>
-      <guid>//lechgu.github.io/tags/code/</guid>
+      <guid>//blog.aiki.dev/tags/code/</guid>
       <description></description>
     </item>
     
     <item>
       <title>markdown</title>
-      <link>//lechgu.github.io/tags/markdown/</link>
+      <link>//blog.aiki.dev/tags/markdown/</link>
       <pubDate>Fri, 20 Feb 2015 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (Some Person)</author>
-      <guid>//lechgu.github.io/tags/markdown/</guid>
+      <guid>//blog.aiki.dev/tags/markdown/</guid>
       <description></description>
     </item>
     
     <item>
       <title>go</title>
-      <link>//lechgu.github.io/tags/go/</link>
+      <link>//blog.aiki.dev/tags/go/</link>
       <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (Some Person)</author>
-      <guid>//lechgu.github.io/tags/go/</guid>
+      <guid>//blog.aiki.dev/tags/go/</guid>
       <description></description>
     </item>
     
     <item>
       <title>golang</title>
-      <link>//lechgu.github.io/tags/golang/</link>
+      <link>//blog.aiki.dev/tags/golang/</link>
       <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (Some Person)</author>
-      <guid>//lechgu.github.io/tags/golang/</guid>
+      <guid>//blog.aiki.dev/tags/golang/</guid>
       <description></description>
     </item>
     
     <item>
       <title>templates</title>
-      <link>//lechgu.github.io/tags/templates/</link>
+      <link>//blog.aiki.dev/tags/templates/</link>
       <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (Some Person)</author>
-      <guid>//lechgu.github.io/tags/templates/</guid>
+      <guid>//blog.aiki.dev/tags/templates/</guid>
       <description></description>
     </item>
     
