@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on johndoe</title>
+    <title>Tags on Beautiful Hugo</title>
     <link>//lechgu.github.io/tags/</link>
-    <description>Recent content in Tags on johndoe</description>
+    <description>Recent content in Tags on Beautiful Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
+    <managingEditor>youremail@domain.com (Some Person)</managingEditor>
+    <webMaster>youremail@domain.com (Some Person)</webMaster>
     <lastBuildDate>Thu, 17 Jan 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="//lechgu.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
@@ -15,7 +16,7 @@
       <title>development</title>
       <link>//lechgu.github.io/tags/development/</link>
       <pubDate>Thu, 17 Jan 2019 00:00:00 +0000</pubDate>
-      
+      <author>youremail@domain.com (Some Person)</author>
       <guid>//lechgu.github.io/tags/development/</guid>
       <description></description>
     </item>
@@ -24,7 +25,7 @@
       <title>hugo</title>
       <link>//lechgu.github.io/tags/hugo/</link>
       <pubDate>Thu, 17 Jan 2019 00:00:00 +0000</pubDate>
-      
+      <author>youremail@domain.com (Some Person)</author>
       <guid>//lechgu.github.io/tags/hugo/</guid>
       <description></description>
     </item>
@@ -33,8 +34,71 @@
       <title>themes</title>
       <link>//lechgu.github.io/tags/themes/</link>
       <pubDate>Thu, 17 Jan 2019 00:00:00 +0000</pubDate>
-      
+      <author>youremail@domain.com (Some Person)</author>
       <guid>//lechgu.github.io/tags/themes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>i18n</title>
+      <link>//lechgu.github.io/tags/i18n/</link>
+      <pubDate>Mon, 31 Dec 2018 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (Some Person)</author>
+      <guid>//lechgu.github.io/tags/i18n/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>example</title>
+      <link>//lechgu.github.io/tags/example/</link>
+      <pubDate>Mon, 20 Mar 2017 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (Some Person)</author>
+      <guid>//lechgu.github.io/tags/example/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>photoswipe</title>
+      <link>//lechgu.github.io/tags/photoswipe/</link>
+      <pubDate>Mon, 20 Mar 2017 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (Some Person)</author>
+      <guid>//lechgu.github.io/tags/photoswipe/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bigimg</title>
+      <link>//lechgu.github.io/tags/bigimg/</link>
+      <pubDate>Tue, 07 Mar 2017 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (Some Person)</author>
+      <guid>//lechgu.github.io/tags/bigimg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>math</title>
+      <link>//lechgu.github.io/tags/math/</link>
+      <pubDate>Sun, 05 Mar 2017 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (Some Person)</author>
+      <guid>//lechgu.github.io/tags/math/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>code</title>
+      <link>//lechgu.github.io/tags/code/</link>
+      <pubDate>Tue, 08 Mar 2016 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (Some Person)</author>
+      <guid>//lechgu.github.io/tags/code/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>markdown</title>
+      <link>//lechgu.github.io/tags/markdown/</link>
+      <pubDate>Fri, 20 Feb 2015 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (Some Person)</author>
+      <guid>//lechgu.github.io/tags/markdown/</guid>
       <description></description>
     </item>
     
@@ -42,7 +106,7 @@
       <title>go</title>
       <link>//lechgu.github.io/tags/go/</link>
       <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
+      <author>youremail@domain.com (Some Person)</author>
       <guid>//lechgu.github.io/tags/go/</guid>
       <description></description>
     </item>
@@ -51,7 +115,7 @@
       <title>golang</title>
       <link>//lechgu.github.io/tags/golang/</link>
       <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
+      <author>youremail@domain.com (Some Person)</author>
       <guid>//lechgu.github.io/tags/golang/</guid>
       <description></description>
     </item>
@@ -60,7 +124,7 @@
       <title>templates</title>
       <link>//lechgu.github.io/tags/templates/</link>
       <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
+      <author>youremail@domain.com (Some Person)</author>
       <guid>//lechgu.github.io/tags/templates/</guid>
       <description></description>
     </item>
