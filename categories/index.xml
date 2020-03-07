@@ -5,8 +5,6 @@
     <link>//aiki.dev/categories/</link>
     <description>Recent content in Categories on aiki.dev</description>
     <generator>Hugo -- gohugo.io</generator>
-    <managingEditor>youremail@domain.com (Some Person)</managingEditor>
-    <webMaster>youremail@domain.com (Some Person)</webMaster>
     <lastBuildDate>Thu, 17 Jan 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="//aiki.dev/categories/index.xml" rel="self" type="application/rss+xml" />
@@ -16,7 +14,7 @@
       <title>Development</title>
       <link>//aiki.dev/categories/development/</link>
       <pubDate>Thu, 17 Jan 2019 00:00:00 +0000</pubDate>
-      <author>youremail@domain.com (Some Person)</author>
+      
       <guid>//aiki.dev/categories/development/</guid>
       <description></description>
     </item>
@@ -25,7 +23,7 @@
       <title>blog</title>
       <link>//aiki.dev/categories/blog/</link>
       <pubDate>Mon, 31 Dec 2018 00:00:00 +0000</pubDate>
-      <author>youremail@domain.com (Some Person)</author>
+      
       <guid>//aiki.dev/categories/blog/</guid>
       <description></description>
     </item>
@@ -34,7 +32,7 @@
       <title>golang</title>
       <link>//aiki.dev/categories/golang/</link>
       <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      <author>youremail@domain.com (Some Person)</author>
+      
       <guid>//aiki.dev/categories/golang/</guid>
       <description></description>
     </item>

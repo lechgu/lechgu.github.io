@@ -5,8 +5,6 @@
     <link>//aiki.dev/tags/golang/</link>
     <description>Recent content in golang on aiki.dev</description>
     <generator>Hugo -- gohugo.io</generator>
-    <managingEditor>youremail@domain.com (Some Person)</managingEditor>
-    <webMaster>youremail@domain.com (Some Person)</webMaster>
     <lastBuildDate>Wed, 02 Apr 2014 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="//aiki.dev/tags/golang/index.xml" rel="self" type="application/rss+xml" />
@@ -16,7 +14,7 @@
       <title>(Hu)go Template Primer</title>
       <link>//aiki.dev/posts/hugo-template-primer/</link>
       <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      <author>youremail@domain.com (Some Person)</author>
+      
       <guid>//aiki.dev/posts/hugo-template-primer/</guid>
       <description>Hugo uses the excellent go html/template library for its template engine. It is an extremely lightweight engine that provides a very small amount of logic. In our experience that it is just the right amount of logic to be able to create a good static website. If you have used other template systems from different languages or frameworks you will find a lot of similarities in go templates.
 This document is a brief primer on using go templates.</description>
@@ -26,7 +24,7 @@ This document is a brief primer on using go templates.</description>
       <title>Getting Started with Hugo</title>
       <link>//aiki.dev/posts/hugoisforlovers/</link>
       <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      <author>youremail@domain.com (Some Person)</author>
+      
       <guid>//aiki.dev/posts/hugoisforlovers/</guid>
       <description>Step 1. Install Hugo Goto hugo releases and download the appropriate version for your os and architecture.
 Save it somewhere specific as we will be using it in the next step.
