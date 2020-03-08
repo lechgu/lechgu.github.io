@@ -59,7 +59,7 @@
   "headline": "Just Enough Webpack",
   "description" : "What is that Wepack thing, anyway? Your typical front-end project is made of a bunch of html, css and javascript files. Also, your javascrpt code undoubtedly calls into various third party libraries to do its work, these, in turn have their own dependencies and so on. You provide necessary \x26lt;script\x26gt; links in your html files, carefully making sure that these are included in the right order, so the dependencies are satisfied.",
   "inLanguage" : "en",
-  "wordCount":  651 ,
+  "wordCount":  1343 ,
   "datePublished" : "2020-03-07T15:48:34",
   "dateModified" : "2020-03-07T15:48:34",
   "image" : "\/\/aiki.dev\/images\/logo.png",
@@ -291,6 +291,68 @@ touch src/index.js
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">npm run build
 </code></pre></div><p>After few seconds webpack will complete the build and produce the directory <code>dist</code>
 If we check that directory we&rsquo;ll see that the result is rather underwhelming. This contains only one file <code>main.js</code> and the content of this file is rather obfuscated javascript. Webpack tries to <em>minify</em> the produced javascript by stripping all necessary parts like whitespace and comments, therefore the result looks quite undecypherable. But don&rsquo;t worry, The browser will be able to execute that just fine. As our actual &ldquo;code&rdquo; is just the empty file for now, this file contains mostly plumbing routines injected by the Webpack.</p>
+<h4 id="where-is-my-indexhtml">Where is my index.html?</h4>
+<p>Ok, we got our javascript <em>bundle</em> file (which does nothing at the moment, but bear with me)
+We could create an <code>index.html</code> manually and inject a <code>&lt;script&gt;</code> script point to our bundle. but ideally we would like to avoid mnual maintenance as much as possible and let Webpack handle that. Well, the Webpack itself is not able to do that, but there is Webpack plugin which will handle maintenance of <code>index.html</code> for us. Let&rsquo;s install it</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">npm install html-webpack-plugin --save-dev
+</code></pre></div><p>The Webpack uses a javascript configuration file to confugure plugins. Let&rsquo;s create this file</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">touch webpack.config.js
+</code></pre></div><p>We&rsquo;ll add more things to it but for now, we&rsquo;ll start with just html plugin. Make it looke like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">const HtmlWebpackPlugin = require(&#39;html-webpack-plugin&#39;);
+
+module.exports = {
+  plugins: [new HtmlWebpackPlugin()]
+};
+</code></pre></div><p>Build again,</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">npm run build
+</code></pre></div><p>You will see that the output directory <code>dist</code> contains, in addition to our <code>main.js</code>, also <code>index.html</code> which contains the properly configured <code>&lt;script&gt;</code> tag.</p>
+<p>Instead of rebuilding the proect every time we introduce some minor change, we are going to start Webpack&rsquo;s dev web server by running</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">npm start
+</code></pre></div><p>After few seconds, the browser window should pop up showing a blank web page qith the title &ldquo;Webapck App&rdquo;. We can look at the source of this page and it indeed shows the link to our <code>main.js</code> bundle which, granted, does nothing. So let&rsquo;s change that.
+A very useful feature of the Webpack&rsquo;s dev server that it watches for the changes in the files and restarts itself once it happens.
+So let&rsquo;s oppen our <code>src/index.js</code> and put some silly javascript code there, like</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">console.log(&#39;Oh, hai!&#39;);
+</code></pre></div><p>Once we save this file, the dev server restarts and we can check in the javascript console that our silly message indeed has been printed.
+While we are here, let&rsquo;s modify the our web page&rsquo;s title from the generic &ldquo;Webpack App&rdquo; to something more interesting. For now, the simplest way to do it is to add a simple configuration to our Html PluginWebpackPlugin:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">module.exports = {
+  plugins: [new HtmlWebpackPlugin({ title: &#39;Pixies&#39; })]
+};
+</code></pre></div><p>On some ocassions, especially when the config has been changed, dev server may fail to pick up the change immediatelly. If it happens, simply restart the dev server.</p>
+<h4 id="lets-add-some-styling">Let&rsquo;s add some styling</h4>
+<p>For the purpose of this tutorial, we are not going to write any sophisticated css.
+Intead we are going to use the styles provided with the popular Bootstrap library.
+First, we install the bootstrap:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">npm install bootstrap jquery popper.js --save-dev
+</code></pre></div><p><code>jquery</code> and <code>popper.js</code> enable extra bootstrap functionality which we might need later.
+One of the coolest Webpack features is that it allows treat non-javascript assets as if there were javascript. To do that, Webpack utilizes <em>loaders</em>. We will need two loaders, <code>css-loader</code> and <code>style-loader</code>, so lets install them:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">npm install css-loader style-loader --save-dev
+</code></pre></div><p>Now, we need to tell the Webpack that, if it sees something that looks like a css file, use these two loaders. This is added by introducing a rule which specifies the regular expressions to match against the file name and which loaders to apply if a match is found:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">{
+    test: /\.css$/,
+    use: [&#39;style-loader&#39;, &#39;css-loader&#39;]
+}
+</code></pre></div><p>That is, if the Webpack sees the file that ends with &lsquo;.css&rsquo;, it is going to apply <code>css-loader</code> first and <code>style-loader</code> next. As you see, the &lsquo;later&rsquo; loader goes earlier in the list.
+Your entire <code>webpack.config.js</code> file, should look like this now:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">const HtmlWebpackPlugin = require(&#39;html-webpack-plugin&#39;);
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [&#39;style-loader&#39;, &#39;css-loader&#39;]
+      }
+    ]
+  },
+
+  plugins: [new HtmlWebpackPlugin({ title: &#39;Pixies&#39; })]
+};
+
+</code></pre></div><p>Now, let&rsquo;s add the bootstrap to our html file. Ordinarely, one would insert the appropriate <code>style</code> and <code>script</code> links, but with the Webpack it is simpler.
+In your <code>src/index.js</code> file remove our test console log output and replace it with:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">import &#39;bootstrap/dist/css/bootstrap.min.css&#39;;
+</code></pre></div><p>That is all. Notice that we are (sort of) pretending that the css file is a javascript file. Believe it or not, once we rebuild our bundle, the whole bootstrap css will be neatly packed inside the <code>main.js</code> file.
+Granted, our webpage is still empty. We will fix this soon. But first, let&rsquo;s do some tidying up.</p>
 
 
         
