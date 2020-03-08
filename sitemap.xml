@@ -3,13 +3,38 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>//aiki.dev/posts/django-react-docker-intro/</loc>
+    <lastmod>2020-03-08T14:33:37-07:00</lastmod>
+  </url>
+  
+  <url>
     <loc>//aiki.dev/</loc>
-    <lastmod>2020-03-07T15:48:34-08:00</lastmod>
+    <lastmod>2020-03-08T14:33:37-07:00</lastmod>
   </url>
   
   <url>
     <loc>//aiki.dev/series/build-an-app-with-django-react-and-docker/</loc>
-    <lastmod>2020-03-07T15:48:34-08:00</lastmod>
+    <lastmod>2020-03-08T14:33:37-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>//aiki.dev/posts/</loc>
+    <lastmod>2020-03-08T14:33:37-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>//aiki.dev/series/</loc>
+    <lastmod>2020-03-08T14:33:37-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>//aiki.dev/tags/</loc>
+    <lastmod>2020-03-08T14:33:37-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>//aiki.dev/tags/tutorial/</loc>
+    <lastmod>2020-03-08T14:33:37-07:00</lastmod>
   </url>
   
   <url>
@@ -19,26 +44,6 @@
   
   <url>
     <loc>//aiki.dev/posts/just-enough-webpack/</loc>
-    <lastmod>2020-03-07T15:48:34-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>//aiki.dev/posts/</loc>
-    <lastmod>2020-03-07T15:48:34-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>//aiki.dev/series/</loc>
-    <lastmod>2020-03-07T15:48:34-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>//aiki.dev/tags/</loc>
-    <lastmod>2020-03-07T15:48:34-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>//aiki.dev/tags/tutorial/</loc>
     <lastmod>2020-03-07T15:48:34-08:00</lastmod>
   </url>
   
