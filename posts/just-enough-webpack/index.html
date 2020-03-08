@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <title>Just Enough Webpack - aiki.dev</title>
-  <meta name="description" content="What is that Wepack thing, anyway? Your typical front-end project is made of a bunch of html, css and javascript files. Also, your javascrpt code undoubtedly calls into various third party libraries to do its work, these, in turn have their own dependencies and so on. You provide necessary &lt;script&gt; links in your html files, carefully making sure that these are included in the right order, so the dependencies are satisfied.">
+  <meta name="description" content="What is this Wepack thing, anyway? Your typical front-end project is made of a bunch of html, css and javascript files. Also, your javascrpt code undoubtedly calls into various third party libraries to do its work, these, in turn have their own dependencies and so on. You provide necessary &lt;script&gt; links in your html files, carefully making sure that these are included in the right order, so the dependencies are satisfied.">
   <meta name="author" content="Lech Gudalewicz"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -57,9 +57,9 @@
     "name" : "Lech Gudalewicz"
   },
   "headline": "Just Enough Webpack",
-  "description" : "What is that Wepack thing, anyway? Your typical front-end project is made of a bunch of html, css and javascript files. Also, your javascrpt code undoubtedly calls into various third party libraries to do its work, these, in turn have their own dependencies and so on. You provide necessary \x26lt;script\x26gt; links in your html files, carefully making sure that these are included in the right order, so the dependencies are satisfied.",
+  "description" : "What is this Wepack thing, anyway? Your typical front-end project is made of a bunch of html, css and javascript files. Also, your javascrpt code undoubtedly calls into various third party libraries to do its work, these, in turn have their own dependencies and so on. You provide necessary \x26lt;script\x26gt; links in your html files, carefully making sure that these are included in the right order, so the dependencies are satisfied.",
   "inLanguage" : "en",
-  "wordCount":  1343 ,
+  "wordCount":  2032 ,
   "datePublished" : "2020-03-07T15:48:34",
   "dateModified" : "2020-03-07T15:48:34",
   "image" : "\/\/aiki.dev\/images\/logo.png",
@@ -79,14 +79,14 @@
 </script>
 
 <meta property="og:title" content="Just Enough Webpack" />
-<meta property="og:description" content="What is that Wepack thing, anyway? Your typical front-end project is made of a bunch of html, css and javascript files. Also, your javascrpt code undoubtedly calls into various third party libraries to do its work, these, in turn have their own dependencies and so on. You provide necessary &lt;script&gt; links in your html files, carefully making sure that these are included in the right order, so the dependencies are satisfied.">
+<meta property="og:description" content="What is this Wepack thing, anyway? Your typical front-end project is made of a bunch of html, css and javascript files. Also, your javascrpt code undoubtedly calls into various third party libraries to do its work, these, in turn have their own dependencies and so on. You provide necessary &lt;script&gt; links in your html files, carefully making sure that these are included in the right order, so the dependencies are satisfied.">
 <meta property="og:image" content="//aiki.dev/images/logo.png" />
 <meta property="og:url" content="//aiki.dev/posts/just-enough-webpack/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="aiki.dev" />
 
   <meta name="twitter:title" content="Just Enough Webpack" />
-  <meta name="twitter:description" content="What is that Wepack thing, anyway? Your typical front-end project is made of a bunch of html, css and javascript files. Also, your javascrpt code undoubtedly calls into various third party libraries …">
+  <meta name="twitter:description" content="What is this Wepack thing, anyway? Your typical front-end project is made of a bunch of html, css and javascript files. Also, your javascrpt code undoubtedly calls into various third party libraries …">
   <meta name="twitter:image" content="//aiki.dev/images/logo.png" />
   <meta name="twitter:card" content="summary" />
   <link href='//aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
@@ -245,7 +245,7 @@ if (!doNotTrack) {
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <h4 id="what-is-that-wepack-thing-anyway">What is that Wepack thing, anyway?</h4>
+        <h4 id="what-is-this-wepack-thing-anyway">What is this Wepack thing, anyway?</h4>
 <p>Your typical front-end project is made of a bunch of html, css and javascript files. Also, your javascrpt code undoubtedly calls into various third party libraries to do its work, these, in turn have their own dependencies and so on.
 You provide necessary <code>&lt;script&gt;</code> links in your html files, carefully making sure that these are included in the right order, so the dependencies are satisfied.
 Css files also have to be included. Then comes the deployment, you need somehow deploy all these dependencies together with your <em>main</em> html file, making sure the links are not broken. CDNs help in part but, I don&rsquo;t know about you, but for me it always feels uncomfortable that my live app depends on some third party code deployed <em>somewhere</em> on which I have very little control.</p>
@@ -351,8 +351,93 @@ module.exports = {
 </code></pre></div><p>Now, let&rsquo;s add the bootstrap to our html file. Ordinarely, one would insert the appropriate <code>style</code> and <code>script</code> links, but with the Webpack it is simpler.
 In your <code>src/index.js</code> file remove our test console log output and replace it with:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">import &#39;bootstrap/dist/css/bootstrap.min.css&#39;;
-</code></pre></div><p>That is all. Notice that we are (sort of) pretending that the css file is a javascript file. Believe it or not, once we rebuild our bundle, the whole bootstrap css will be neatly packed inside the <code>main.js</code> file.
+</code></pre></div><p>That is pretty much all you have to do in order to import the bootstrap css into your project. Notice that we are (sort of) pretending that the css file is a javascript file. Believe it or not, once we rebuild our bundle, the whole bootstrap css will be neatly packed inside the <code>main.js</code> file.
 Granted, our webpage is still empty. We will fix this soon. But first, let&rsquo;s do some tidying up.</p>
+<h4 id="taking-care-of-loose-ends">Taking care of loose ends</h4>
+<p>At the moment, Webpack builds our proect into the <code>dist</code> directory and the bundle name is <code>main.js</code>. As a matter of taste, I would prefer the destination directory to be called <code>build</code> and the bundle called <code>main.bundle.js</code> Of course, you can substitute this to anything you want. Do this in your <code>webpack.config.js</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">const path = require(&#34;path&#34;); // new
+const HtmlWebpackPlugin = require(&#39;html-webpack-plugin&#39;);
+
+module.exports = {
+  entry: &#34;./src/index.js&#34;, // new
+  output: {
+    filename: &#34;[name].bundle.js&#34;,
+    path: path.resolve(__dirname, &#34;build&#34;)
+  }, // new ==================
+  module: { // ...
+    rules: [
+</code></pre></div><p>After you build again, you will notice that the name of the output directory and bundle file have changed.
+Notice that you don&rsquo;t need to do any changes to reflect these renames in the generated <code>index.htm</code> Html Web Plugin will take care of that for you.
+Now, you can delete your old output directory</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">rm -rf dist
+</code></pre></div><p>While we at it, wouldn&rsquo;t it be nice that every time we perform a new build, the old files are cleaned so we are sure that no leftovers left.
+Of course, we can delete the output directory manually every before every build, but Webpack has a plugin which will automate that for us. Let&rsquo;s install it:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">npm install clean-webpack-plugin --save-dev
+</code></pre></div><p>Enable it in your <code>webpack.config.js</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">const path = require(&#39;path&#39;);
+const HtmlWebpackPlugin = require(&#39;html-webpack-plugin&#39;);
+const { CleanWebpackPlugin } = require(&#34;clean-webpack-plugin&#34;); // new
+...
+plugins: [
+    new HtmlWebpackPlugin({ title: &#39;Pixies&#39; }),
+    new CleanWebpackPlugin() // new
+]
+</code></pre></div><h4 id="lets-finally-display-something-on-the-page">Let&rsquo;s finally display something on the page!</h4>
+<p>Granted, this still is going to be very modest but we will have all Webpack machinery hooked up so you can use the result as the template for you future projects.
+Notice that we managed to change the title of the generated page by configuring the Html Webpack plugin, but what if we want to make more complicated changes, say replace something in the html body?
+Html Webpack plugin has a concept of <em>template</em>, that is the file you provide as a starting point for the plugin.
+so. create the template file:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">touch src/index.html
+</code></pre></div><p>and put some basic html structure there</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset=&#34;UTF-8&#34;&gt;
+    &lt;title&gt;Pixies&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div><p>We will also need a html web loader to accept html files as the template (as html is not the only kind of templates supported):</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">npm install html-loader --save-dev
+</code></pre></div><p>Now, we need to tell the plugin to use our template, instead of generating everything from scratch. Also, don&rsquo;t forget the rule which will trigger html loader for your html files.
+In your webpack.config.js,</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">  ...
+  module: {
+      rules: [
+          { // new
+        test: /\.html$/i,
+        loader: &#39;html-loader&#39;,
+      },
+       ...
+      ]
+  }
+  ...
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: &#34;./src/index.html&#34;, // new
+    }),
+    new CleanWebpackPlugin()
+  ]
+</code></pre></div><p>Finally, change the <code>index.html</code> so it displays something:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">...
+&lt;body&gt;
+&lt;section&gt;
+      &lt;h1&gt;Pixies&lt;/h1&gt;
+    &lt;/section&gt;
+&lt;/body&gt;
+....
+</code></pre></div><p>When you run</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">npm start
+</code></pre></div><p>The new page should pop up with the &ldquo;Pixies&rdquo; text proudly displayed.</p>
+<h4 id="section-summary">Section summary</h4>
+<p>Woohoo!!! Was it worth though? You could&rsquo;ve probably create a simple html page which displays the same in 5 minutes.</p>
+<p>The difference though is that we hooked up the complete Webpack machinery to handle more complicated things in the future.</p>
+<p>Another my goal was to try demystifying how the Webpack configuration works.
+Now, once you painfully worked through this, you have a template which you can simply copy and paste to your future projects, like I do. You can easily and conciously introduce new loaders and plugins and make changes with understanding what is going on.</p>
+<p>If you need to drill deeper into some particular loader configuration, you are ready to read the documentation without the <em>What the hell are they talking about?</em>.</p>
+<p>Maybe that surprises you, but in the next section we are not going to improve our &ldquo;website&rdquo; yet. Instead, we are going to create <em>containerize</em> it so we can deploy it anywhere we want easily and reproduceably. Eventually we will deploy it to Heroku so we can access the live deployment with the browser from anywhere in the world.
+Here comes the Docker.</p>
 
 
         
