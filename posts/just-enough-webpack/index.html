@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Just Enough Webpack - aiki.dev</title>
+  <meta name="description" content="What is that Wepack thing, anyway? Your typical front-end project is made of a bunch of html, css and javascript files. Also, your javascrpt code undoubtedly calls into various third party libraries to do its work, these, in turn have their own dependencies and so on. You provide necessary &lt;script&gt; links in your html files, carefully making sure that these are included in the right order, so the dependencies are satisfied.">
+  <meta name="author" content="Lech Gudalewicz"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "aiki.dev",
+    
+    "url": "\/\/aiki.dev\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "\/\/aiki.dev\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "\/\/aiki.dev\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "\/\/aiki.dev\/posts\/just-enough-webpack\/",
+          "name": "Just enough webpack"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Lech Gudalewicz"
+  },
+  "headline": "Just Enough Webpack",
+  "description" : "What is that Wepack thing, anyway? Your typical front-end project is made of a bunch of html, css and javascript files. Also, your javascrpt code undoubtedly calls into various third party libraries to do its work, these, in turn have their own dependencies and so on. You provide necessary \x26lt;script\x26gt; links in your html files, carefully making sure that these are included in the right order, so the dependencies are satisfied.",
+  "inLanguage" : "en",
+  "wordCount":  651 ,
+  "datePublished" : "2020-03-07T15:48:34",
+  "dateModified" : "2020-03-07T15:48:34",
+  "image" : "\/\/aiki.dev\/images\/logo.png",
+  "keywords" : [ "" ],
+  "mainEntityOfPage" : "\/\/aiki.dev\/posts\/just-enough-webpack\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "\/\/aiki.dev\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "\/\/aiki.dev\/images\/logo.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="Just Enough Webpack" />
+<meta property="og:description" content="What is that Wepack thing, anyway? Your typical front-end project is made of a bunch of html, css and javascript files. Also, your javascrpt code undoubtedly calls into various third party libraries to do its work, these, in turn have their own dependencies and so on. You provide necessary &lt;script&gt; links in your html files, carefully making sure that these are included in the right order, so the dependencies are satisfied.">
+<meta property="og:image" content="//aiki.dev/images/logo.png" />
+<meta property="og:url" content="//aiki.dev/posts/just-enough-webpack/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="aiki.dev" />
+
+  <meta name="twitter:title" content="Just Enough Webpack" />
+  <meta name="twitter:description" content="What is that Wepack thing, anyway? Your typical front-end project is made of a bunch of html, css and javascript files. Also, your javascrpt code undoubtedly calls into various third party libraries …">
+  <meta name="twitter:image" content="//aiki.dev/images/logo.png" />
+  <meta name="twitter:card" content="summary" />
+  <link href='//aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.66.0" />
+  <link rel="alternate" href="//aiki.dev/index.xml" type="application/rss+xml" title="aiki.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="//aiki.dev/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="//aiki.dev/css/highlight.min.css" /><link rel="stylesheet" href="//aiki.dev/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-159944114-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="//aiki.dev/">aiki.dev</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="aiki.dev" href="//aiki.dev/">
+            <img class="avatar-img" src="//aiki.dev/images/logo.png" alt="aiki.dev" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              
+                <h1>Just Enough Webpack</h1>
+              
+              
+                <hr class="small">
+              
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <h4 id="what-is-that-wepack-thing-anyway">What is that Wepack thing, anyway?</h4>
+<p>Your typical front-end project is made of a bunch of html, css and javascript files. Also, your javascrpt code undoubtedly calls into various third party libraries to do its work, these, in turn have their own dependencies and so on.
+You provide necessary <code>&lt;script&gt;</code> links in your html files, carefully making sure that these are included in the right order, so the dependencies are satisfied.
+Css files also have to be included. Then comes the deployment, you need somehow deploy all these dependencies together with your <em>main</em> html file, making sure the links are not broken. CDNs help in part but, I don&rsquo;t know about you, but for me it always feels uncomfortable that my live app depends on some third party code deployed <em>somewhere</em> on which I have very little control.</p>
+<p>Wouldn&rsquo;t be nice if all my dependencies are packed into a single, compact file, which is easy to track and deploy.
+That is where Webpack comes into the picture. It pretty much offers a way to generate such file, or <em>bundle</em> as they call it in the community. Granted, you could have achieve the similar effect with the previous generation of the javascrpt tools, like Gulp or Grunt but, in opinion of many, the Webpack brings this workflow to a new level.
+So let&rsquo;s build our front-end app step by step, starting from the empty directory.</p>
+<h4 id="humble-beginnings">Humble beginnings</h4>
+<p>Go to yor <code>pixies/frontend</code> directory and run there:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">npm init -y
+</code></pre></div><p>This will create a <code>package.json</code> file which tracks the 3rd party dependencies and does some other <em>meta</em> stuff, sort of <code>pom.xml</code> if you are doing Java Maven project or <code>.csproj</code> file if .Net is your thing.
+The <code>-y</code> flag indicates that you are going to automatically accept the defaults as answers for many questions the <code>npm init</code> would ask you. You can modify these later</p>
+<p>Now, let&rsquo;s install the webpack:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">npm install webpack webpack-cli webpack-dev-server --save-dev
+</code></pre></div><ul>
+<li><code>webpack</code> is webpack itself</li>
+<li><code>webpack-cli</code> are the command line scripts to interact with the webpack.</li>
+<li><code>webpack-dev-server</code> is the server which allows us to run our webpack app during the development</li>
+<li><code>--save-dev</code> indicates to save these dependencies in the package.json file so we can reproduce the setup easily</li>
+</ul>
+<p>Indeed, if we open the <code>package.json</code> file, it ontains the section</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">  &#34;devDependencies&#34;: {
+    &#34;webpack&#34;: &#34;^4.42.0&#34;,
+    &#34;webpack-cli&#34;: &#34;^3.3.11&#34;,
+    &#34;webpack-dev-server&#34;: &#34;^3.10.3&#34;
+  }
+</code></pre></div><p>Also it contains the section</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">&#34;dependencies&#34;: {},
+</code></pre></div><p>There is a subtle difference between these two, for the purposes of this tutorial we&rsquo;ll modify only <code>devDependencies</code>
+While in the file package.json, notice the section</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">  &#34;scripts&#34;: {
+    &#34;test&#34;: &#34;echo \&#34;Error: no test specified\&#34; &amp;&amp; exit 1&#34;
+  },
+</code></pre></div><p>Although the testing is important, we are not going to do any automated testing in this tutorial, so replace this section with:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">&#34;scripts&#34;: {
+    &#34;start&#34;: &#34;webpack-dev-server --open --mode development&#34;,
+    &#34;build&#34;: &#34;webpack --mode production&#34;
+  },
+</code></pre></div><p>With those, we will have ability to run to serve our project during the development and also produce the final build for development.</p>
+<p>Now we are almost ready to produce the first build. But, before doing that, we need to have the entrypoint file so webpack knows where our app starts. If you check the <code>package.json</code>, it expects the entrypoint file to be called <code>index.js</code>. So let&rsquo;s create it, empty initially:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">mkdir src
+touch src/index.js
+</code></pre></div><p>Finally, we can produce the build:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">npm run build
+</code></pre></div><p>After few seconds webpack will complete the build and produce the directory <code>dist</code>
+If we check that directory we&rsquo;ll see that the result is rather underwhelming. This contains only one file <code>main.js</code> and the content of this file is rather obfuscated javascript. Webpack tries to <em>minify</em> the produced javascript by stripping all necessary parts like whitespace and comments, therefore the result looks quite undecypherable. But don&rsquo;t worry, The browser will be able to execute that just fine. As our actual &ldquo;code&rdquo; is just the empty file for now, this file contains mostly plumbing routines injected by the Webpack.</p>
+
+
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=%2f%2faiki.dev%2fposts%2fjust-enough-webpack%2f&amp;text=Just%20Enough%20Webpack&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=%2f%2faiki.dev%2fposts%2fjust-enough-webpack%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=%2f%2faiki.dev%2fposts%2fjust-enough-webpack%2f&amp;title=Just%20Enough%20Webpack" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=%2f%2faiki.dev%2fposts%2fjust-enough-webpack%2f&amp;title=Just%20Enough%20Webpack" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=%2f%2faiki.dev%2fposts%2fjust-enough-webpack%2f&amp;title=Just%20Enough%20Webpack" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=%2f%2faiki.dev%2fposts%2fjust-enough-webpack%2f&amp;description=Just%20Enough%20Webpack" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+          
+        </ul>
+      
+
+
+      
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="https://github.com/lechgu" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="aiki.dev">Lech Gudalewicz</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2020
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="//aiki.dev/">aiki.dev</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.66.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="//aiki.dev/js/main.js"></script>
+<script src="//aiki.dev/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="//aiki.dev/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+
+    
+  </body>
+</html>
+
