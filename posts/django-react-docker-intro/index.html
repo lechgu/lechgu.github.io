@@ -59,7 +59,7 @@
   "headline": "Pixies, part 0: Introduction",
   "description" : "All modules  Pixies, part 1: Just enough Webpack Pixies, part 0: Introduction  Why this tutorial? I assume you are competent enough software developer. Maybe at your work you are involved with building some enterprise-y Java Spring application or, maybe Asp.Net application or something equally boring. Obviously you are not living in vacuum, so you are hearing all those terms Docker, React, Single Page Application, 12 factor methodology and so on.",
   "inLanguage" : "en",
-  "wordCount":  720 ,
+  "wordCount":  770 ,
   "datePublished" : "2020-03-07T15:48:34",
   "dateModified" : "2020-03-07T15:48:34",
   "image" : "https:\/\/aiki.dev\/images\/logo.png",
@@ -257,17 +257,13 @@ if (!doNotTrack) {
 <li><a href="/posts/django-react-docker-intro/">Pixies, part 0: Introduction</a></li>
 </ul>
 <h4 id="why-this-tutorial">Why this tutorial?</h4>
-<p>I assume you are competent enough software developer. Maybe at your work you are involved with building some enterprise-y Java Spring application or, maybe Asp.Net application or something <del>equally boring</del>. Obviously you are not living in vacuum, so you are hearing all those terms <code>Docker</code>, <code>React</code>, <code>Single Page Application</code>, <code>12 factor methodology</code> and so on. They sound cool but, in part, a little frightening. Your skills seem kind of obsolete. You&rsquo;d like to catch up but do not know <em>where to start</em>. Even worse, you probably tried Googling a little bit, maybe tried some tutorials, but often they are like, <em>click here, click here</em> and voila, your super awesome app is done. I think these two things hold true:</p>
-<ul>
-<li>There is no magic.</li>
-<li>If I mastered one programming language (one framework, one library etc), I can master others too.</li>
-</ul>
-<p>One good way to describe when you know something is when you reach <em>Docker (or React or Haskell) Nirvana</em>. Surely, there is a lot of details about the topic you still don&rsquo;t know yet, but the thing has already <em>clicked</em> in your brain and you will be able to fish the answer for your concrete question from Google, Stack Overflow or just by looking at the source code.
+<p>I assume you are competent enough software developer. Maybe at your work you are involved with building some enterprise-y Java Spring application or, maybe Asp.Net application or something <del>equally boring</del>. Obviously you are not living in vacuum, so you are hearing all those terms <code>Docker</code>, <code>React</code>, <code>Single Page Application</code>, <code>12 factor methodology</code> and so on. They sound cool but, in part, a little frightening. Your skills seem kind of obsolete. You&rsquo;d like to catch up but do not know <em>where to start</em>. Even worse, you probably Googled a little bit, maybe tried some tutorials, but often they are like, <em>click here, click there</em> and voila, your super awesome app is done. I bet you understood pretty quickly that these <em>toy</em> applications have very little which the reality and are more a sort of marketing gimmick</p>
+<p>One good way to describe when you know something is when you reach <em>Docker (or React or Haskell) Nirvana</em>. Surely, there is a lot of details about the topic you still don&rsquo;t know yet, but the thing has already <em>clicked</em> in your brain and you will be able to fish the answer for your concrete question from Google, Stack Overflow or just by looking at the source code. My ultimate goal would be to help you reach that <em>clicked</em> state in at least few topics
 Most of my career I spent writing C++, Java and C# code. But this tutorial is mostly about Python and Javascript. So, in a sense, I wrote it for myself.</p>
 <h3 id="what-we-are-going-to-build">What we are going to build?</h3>
-<p>We are going to build a simple, but complete web application <strong>and deploy it live</strong>
-The application is going to be a simple kiosk-style image gallery. It is my belief though, that is not that important what is the actual application. The hard part is to connect different pieces together to achieve an end-to-end result. Later I can drill into concrete topics if I need.
-Guided by this principle, we are going to <em>ship</em> (deploy live) our app as soon as possible, even if it does not do much.</p>
+<p>We are going to build a simple, but complete &ldquo;single page&rdquo; web application <strong>and deploy it live</strong>. It will not be super sophisticated but will have all moving parts: frontend and backend, both containerized and deployed separately. We will also use a production grade database (PostgreSQL)</p>
+<p>The application is going to be a simple kiosk-style image gallery. It is my belief though, that, for now, it is not that important what kind of application it is. The hard part is to connect different pieces together to achieve an end-to-end result. Later you can drill into concrete topics if you want.
+Guided by this principle, we are going to <em>ship</em> (deploy live) our app as soon as possible, even if it does not do much initially.</p>
 <h3 id="what-technologies-we-will-be-talking-about-in-the-tutorial">What technologies we will be talking about in the tutorial</h3>
 <p>We We will try to teach you <em>to fish</em> with these:</p>
 <ul>
@@ -288,6 +284,9 @@ Guided by this principle, we are going to <em>ship</em> (deploy live) our app as
 </li>
 <li>
 <p>Postgres</p>
+</li>
+<li>
+<p>Nginx</p>
 </li>
 <li>
 <p>Heroku</p>
