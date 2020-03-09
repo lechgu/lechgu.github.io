@@ -8,17 +8,17 @@
   </url>
   
   <url>
-    <loc>https://aiki.dev/series/build-an-app-with-django-react-and-docker/</loc>
-    <lastmod>2020-03-08T14:33:37-07:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://aiki.dev/tags/javascript/</loc>
     <lastmod>2020-03-08T14:33:37-07:00</lastmod>
   </url>
   
   <url>
     <loc>https://aiki.dev/posts/just-enough-webpack/</loc>
+    <lastmod>2020-03-08T14:33:37-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://aiki.dev/series/pixies-build-an-app-with-django-react-and-docker/</loc>
     <lastmod>2020-03-08T14:33:37-07:00</lastmod>
   </url>
   
