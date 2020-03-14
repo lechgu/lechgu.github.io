@@ -59,7 +59,7 @@
   "headline": "Pixies, part 2: What you wanted to know about Docker but were afraid to ask",
   "description" : "Docker in a nutshell Docker allows you to create self-contained turnkey images which contain everything one needs to run your application. These can be copied, shared, uploaded and deleted, when not needed anymore. When I need to run PostgreSQL or, say, Redis on my box I do not bother anymore installing this software and pollute my hard-drive. I just pull corresponding image and run it on my box. When I don\x26rsquo;t need the image anymore I simply delete it and my hard-disk is back to the state it was before.",
   "inLanguage" : "en",
-  "wordCount":  1230 ,
+  "wordCount":  1232 ,
   "datePublished" : "2020-03-09T18:17:29",
   "dateModified" : "2020-03-09T18:17:29",
   "image" : "https:\/\/aiki.dev\/images\/logo.png",
@@ -283,7 +283,7 @@ Let&rsquo;s run it:</p>
 </code></pre></div><p>Now, in your browser, navigate to <a href="http://localhost:8080">http://localhost:8080</a>
 You should be greeted by the nginx welcome page.</p>
 <p>At the moment, our container does not have our app, it just runs default nginx installation</p>
-<h3 id="peek-into-the-nginx-container">Peek into the nginx container</h3>
+<h4 id="peek-into-the-nginx-container">Peek into the nginx container</h4>
 <p>Let&rsquo;s try to connect to our container and see what is there:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker exec -it frontend sh
 </code></pre></div><p>Believe or not, you are <em>inside</em> the container now!
@@ -298,7 +298,7 @@ Let&rsquo;s look at it:</p>
 </code></pre></div><p>This shows where nginx looks for the web content. It looks like the location is <code>/usr/share/nginx/html</code>
 Indeed when we do</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">ls /usr/share/nginx/html
-</code></pre></div><p>we will see that, indeed, it contains the nginx welcome index.html file.</p>
+</code></pre></div><p>we will see that it contains the nginx welcome index.html file.</p>
 <p>It is very important to realize the following:</p>
 <ul>
 <li>the directory <code>/usr/share/nginx/html</code> is in the container, not on your machine!</li>
@@ -318,7 +318,7 @@ docker run -d --name frontend -p 8080:80 pixies_frontend
 </code></pre></div><p>When you go to the <a href="http://localhost:8080">http://localhost:8080</a> now, you should see your simple webpack app proudly responding with the &ldquo;Pixies&rdquo; title, instead of the default nginx prompt. You may need to reload the page in the browser</p>
 <p>When we change anything in our app, we will have to rebuild the webpack app and copy the files over again.
 That is not ver optimal workflow, let&rsquo;s optimize it.</p>
-<h4 id="multistage-docker-builds">Multistage Docker builds</h4>
+<h4 id="multi-stage-docker-builds">Multi-stage Docker builds</h4>
 <p>It would be better if our Dockerfile would just copy the source files into image and rebuild our webpack right there. But our base image is nginx which does not have npm or anything like that to make webpack run.
 We could install the npm on top of the nginx, but that would make the resulting image larger as it now contains npm, webpack and other libraries which are needed only during the build. So what do we do?
 Docker has this nice feature which, instead of copying files from your machine, you can copy them from another image, possibly unrelated to the one you are building.</p>
@@ -355,8 +355,8 @@ We can rebuild the image and check that it works:</li>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker rm -f frontend
 docker build -t pixies_frontend .
 docker run -d --name frontend -p 8080:80 pixies_frontend
-</code></pre></div><p>We can check in the browser and see the nothing has changed. But we eliminated the need to produce the build on the machine and still getting the lean, mean docker image ready to be deployed live.
-But that is in the next module.</p>
+</code></pre></div><p>We can check in the browser and see the nothing has changed. But we eliminated the need to produce the build on the machine and still getting a lean, mean docker image ready to be deployed live.
+But that is going to happen in the next module.</p>
 
 
         
@@ -442,7 +442,7 @@ But that is in the next module.</p>
                 
                     <li><a href="/posts/just-enough-webpack/">Pixies, part 1: Just Enough Webpack</a></li>
                 
-                    <li><a href="/posts/django-react-docker-intro/">Pixies, part 0: Introduction</a></li>
+                    <li><a href="/posts/django-react-docker-intro/">Pixies, part 0: Build an app with Django, React and Docker: Introduction</a></li>
                 
               </ul>
 
@@ -454,7 +454,7 @@ But that is in the next module.</p>
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://aiki.dev/posts/just-enough-webpack/" data-toggle="tooltip" data-placement="top" title="Pixies, part 1: Just Enough Webpack">&larr; Previous Post</a>
+              <a href="https://aiki.dev/posts/what-you-wanted-to-know-about-docker/" data-toggle="tooltip" data-placement="top" title="Pixies, part 2: What you wanted to know about Docker but were afraid to ask">&larr; Previous Post</a>
             </li>
           
           

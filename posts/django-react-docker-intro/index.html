@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Pixies, part 0: Introduction - aiki.dev</title>
+  <title>Pixies, part 0: Build an app with Django, React and Docker: Introduction - aiki.dev</title>
   <meta name="description" content="Why this tutorial? I assume you are competent enough software developer. Maybe at your work you are involved with building some enterprise-y Java Spring application or, maybe Asp.Net application or something equally boring. Obviously you are not living in vacuum, so you are hearing all those terms Docker, React, Single Page Application, 12 factor methodology and so on. They sound cool but, in part, a little frightening. Your skills seem kind of obsolete.">
   <meta name="author" content="Lech Gudalewicz"/><script type="application/ld+json">
 {
@@ -45,7 +45,7 @@
         "position": 3,
         "item": {
           "@id": "https:\/\/aiki.dev\/posts\/django-react-docker-intro\/",
-          "name": "Pixies, part 0 introduction"
+          "name": "Pixies, part 0 build an app with django, react and docker introduction"
         }
     }]
 }
@@ -56,10 +56,10 @@
   "author": {
     "name" : "Lech Gudalewicz"
   },
-  "headline": "Pixies, part 0: Introduction",
+  "headline": "Pixies, part 0: Build an app with Django, React and Docker: Introduction",
   "description" : "Why this tutorial? I assume you are competent enough software developer. Maybe at your work you are involved with building some enterprise-y Java Spring application or, maybe Asp.Net application or something equally boring. Obviously you are not living in vacuum, so you are hearing all those terms Docker, React, Single Page Application, 12 factor methodology and so on. They sound cool but, in part, a little frightening. Your skills seem kind of obsolete.",
   "inLanguage" : "en",
-  "wordCount":  776 ,
+  "wordCount":  782 ,
   "datePublished" : "2020-03-07T15:48:34",
   "dateModified" : "2020-03-07T15:48:34",
   "image" : "https:\/\/aiki.dev\/images\/logo.png",
@@ -78,14 +78,14 @@
 }
 </script>
 
-<meta property="og:title" content="Pixies, part 0: Introduction" />
+<meta property="og:title" content="Pixies, part 0: Build an app with Django, React and Docker: Introduction" />
 <meta property="og:description" content="Why this tutorial? I assume you are competent enough software developer. Maybe at your work you are involved with building some enterprise-y Java Spring application or, maybe Asp.Net application or something equally boring. Obviously you are not living in vacuum, so you are hearing all those terms Docker, React, Single Page Application, 12 factor methodology and so on. They sound cool but, in part, a little frightening. Your skills seem kind of obsolete.">
 <meta property="og:image" content="https://aiki.dev/images/logo.png" />
 <meta property="og:url" content="https://aiki.dev/posts/django-react-docker-intro/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="aiki.dev" />
 
-  <meta name="twitter:title" content="Pixies, part 0: Introduction" />
+  <meta name="twitter:title" content="Pixies, part 0: Build an app with Django, React and Docker: …" />
   <meta name="twitter:description" content="Why this tutorial? I assume you are competent enough software developer. Maybe at your work you are involved with building some enterprise-y Java Spring application or, maybe Asp.Net application or …">
   <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
   <meta name="twitter:card" content="summary" />
@@ -231,7 +231,7 @@ if (!doNotTrack) {
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="posts-heading">
               
-                <h1>Pixies, part 0: Introduction</h1>
+                <h1>Pixies, part 0: Build an app with Django, React and Docker: Introduction</h1>
               
               
                 <hr class="small">
@@ -252,7 +252,7 @@ if (!doNotTrack) {
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
         <h4 id="why-this-tutorial">Why this tutorial?</h4>
-<p>I assume you are competent enough software developer. Maybe at your work you are involved with building some enterprise-y Java Spring application or, maybe Asp.Net application or something <del>equally boring</del>. Obviously you are not living in vacuum, so you are hearing all those terms <code>Docker</code>, <code>React</code>, <code>Single Page Application</code>, <code>12 factor methodology</code> and so on. They sound cool but, in part, a little frightening. Your skills seem kind of obsolete. You&rsquo;d like to catch up but do not know <em>where to start</em>. Even worse, you probably Googled a little bit, maybe tried some tutorials, but often they are like, <em>click here, click there</em> and voila, your super awesome app is done. I bet you understood pretty quickly that these <em>toy</em> applications have very little which the reality and are more a sort of a marketing gimmick</p>
+<p>I assume you are competent enough software developer. Maybe at your work you are involved with building some enterprise-y Java Spring application or, maybe Asp.Net application or something <del>equally boring</del>. Obviously you are not living in vacuum, so you are hearing all those terms <em>Docker</em>, <em>React</em>, <em>Single Page Application</em>, <em>12 factor methodology</em> and so on. They sound cool but, in part, a little frightening. Your skills seem kind of obsolete. You&rsquo;d like to catch up but do not know <em>where to start</em>. Even worse, you probably Googled a little bit, maybe tried some tutorials, but often they are like, <em>click here, click there</em> and voila, your super awesome app is done. I bet you understood pretty quickly that these <em>toy</em> applications have very little which the reality and are more a sort of a marketing gimmick</p>
 <p>One good way to describe when you know something is when you reach <em>Docker (or React or Haskell) Nirvana</em>. Surely, there is a lot of details about the topic you still don&rsquo;t know yet, but the thing has already <em>clicked</em> in your brain and you will be able to fish the answer for your concrete question from Google, Stack Overflow or just by looking at the source code. My ultimate goal would be to help you reach that <em>clicked</em> state in at least a few of these topics.
 Most of my career I spent writing C++, Java and C# code. But this tutorial is mostly about Python and Javascript. So, in a sense, I wrote it for myself.</p>
 <h3 id="what-are-we-going-to-build">What are we going to build?</h3>
@@ -311,7 +311,8 @@ docker --version
 All the software mentioned above is available for Mac, Windows or Linux systems.</p>
 <h4 id="project-structure">Project structure.</h4>
 <p>In fact, these are going to be two projects, one for the frontend and one for the backend.
-We will keep this separation of concerns so both parts are as independent one of another as possible. Later, if you want, you can easily replace React in the frontend with something like Vue or Angular. In the same manner it will be not hard to replace Django backend with Asp.Net Core or Spring Boot backend</p>
+We will keep this separation of concerns so both parts are as independent one of another as possible. Later, if you want, later you can easily replace React in the frontend with something like Vue or Angular. In the same manner it will be not hard to replace Django backend with Asp.Net Core or Spring Boot backend.</p>
+<p>But finish the tutorial first.</p>
 <p>You can start with the following:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">mkdir pixies
 mkdir pixies/frontend
@@ -336,7 +337,7 @@ mkdir pixies/backend
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2faiki.dev%2fposts%2fdjango-react-docker-intro%2f&amp;text=Pixies%2c%20part%200%3a%20Introduction&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=https%3a%2f%2faiki.dev%2fposts%2fdjango-react-docker-intro%2f&amp;text=Pixies%2c%20part%200%3a%20Build%20an%20app%20with%20Django%2c%20React%20and%20Docker%3a%20Introduction&amp;via=" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -350,28 +351,28 @@ mkdir pixies/backend
   
       
       <li>
-        <a href="//reddit.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fdjango-react-docker-intro%2f&amp;title=Pixies%2c%20part%200%3a%20Introduction" target="_blank" title="Share on Reddit">
+        <a href="//reddit.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fdjango-react-docker-intro%2f&amp;title=Pixies%2c%20part%200%3a%20Build%20an%20app%20with%20Django%2c%20React%20and%20Docker%3a%20Introduction" target="_blank" title="Share on Reddit">
           <i class="fab fa-reddit"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2faiki.dev%2fposts%2fdjango-react-docker-intro%2f&amp;title=Pixies%2c%20part%200%3a%20Introduction" target="_blank" title="Share on LinkedIn">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2faiki.dev%2fposts%2fdjango-react-docker-intro%2f&amp;title=Pixies%2c%20part%200%3a%20Build%20an%20app%20with%20Django%2c%20React%20and%20Docker%3a%20Introduction" target="_blank" title="Share on LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fdjango-react-docker-intro%2f&amp;title=Pixies%2c%20part%200%3a%20Introduction" target="_blank" title="Share on StumbleUpon">
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fdjango-react-docker-intro%2f&amp;title=Pixies%2c%20part%200%3a%20Build%20an%20app%20with%20Django%2c%20React%20and%20Docker%3a%20Introduction" target="_blank" title="Share on StumbleUpon">
           <i class="fab fa-stumbleupon"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2faiki.dev%2fposts%2fdjango-react-docker-intro%2f&amp;description=Pixies%2c%20part%200%3a%20Introduction" target="_blank" title="Share on Pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2faiki.dev%2fposts%2fdjango-react-docker-intro%2f&amp;description=Pixies%2c%20part%200%3a%20Build%20an%20app%20with%20Django%2c%20React%20and%20Docker%3a%20Introduction" target="_blank" title="Share on Pinterest">
           <i class="fab fa-pinterest"></i>
         </a>
       </li>
@@ -392,6 +393,8 @@ mkdir pixies/backend
                   <h4 class="see-also">See also</h4>
                   <ul>
                 
+                
+                    <li><a href="/posts/what-you-wanted-to-know-about-docker/">Pixies, part 2: What you wanted to know about Docker but were afraid to ask</a></li>
                 
                     <li><a href="/posts/what-you-wanted-to-know-about-docker/">Pixies, part 2: What you wanted to know about Docker but were afraid to ask</a></li>
                 
