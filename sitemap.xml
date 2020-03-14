@@ -4,12 +4,47 @@
   
   <url>
     <loc>https://aiki.dev/</loc>
-    <lastmod>2020-03-09T18:17:29-07:00</lastmod>
+    <lastmod>2020-03-14T13:50:54-07:00</lastmod>
   </url>
   
   <url>
     <loc>https://aiki.dev/tags/docker/</loc>
-    <lastmod>2020-03-09T18:17:29-07:00</lastmod>
+    <lastmod>2020-03-14T13:50:54-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://aiki.dev/tags/heroku/</loc>
+    <lastmod>2020-03-14T13:50:54-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://aiki.dev/posts/go-live/</loc>
+    <lastmod>2020-03-14T13:50:54-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://aiki.dev/series/pixies-build-an-app-with-django-react-and-docker/</loc>
+    <lastmod>2020-03-14T13:50:54-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://aiki.dev/posts/</loc>
+    <lastmod>2020-03-14T13:50:54-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://aiki.dev/series/</loc>
+    <lastmod>2020-03-14T13:50:54-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://aiki.dev/tags/</loc>
+    <lastmod>2020-03-14T13:50:54-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://aiki.dev/tags/tutorial/</loc>
+    <lastmod>2020-03-14T13:50:54-07:00</lastmod>
   </url>
   
   <url>
@@ -29,31 +64,6 @@
   
   <url>
     <loc>https://aiki.dev/posts/what-you-wanted-to-know-about-docker/</loc>
-    <lastmod>2020-03-09T18:17:29-07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://aiki.dev/series/pixies-build-an-app-with-django-react-and-docker/</loc>
-    <lastmod>2020-03-09T18:17:29-07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://aiki.dev/posts/</loc>
-    <lastmod>2020-03-09T18:17:29-07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://aiki.dev/series/</loc>
-    <lastmod>2020-03-09T18:17:29-07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://aiki.dev/tags/</loc>
-    <lastmod>2020-03-09T18:17:29-07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://aiki.dev/tags/tutorial/</loc>
     <lastmod>2020-03-09T18:17:29-07:00</lastmod>
   </url>
   
