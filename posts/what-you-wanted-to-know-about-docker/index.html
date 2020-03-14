@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Pixies, part 2: What you wanted to know about Docker but were afraid to ask - aiki.dev</title>
+  <meta name="description" content="Docker in a nutshell Docker allows you to create self-contained turnkey images which contain everything one needs to run your application. These can be copied, shared, uploaded and deleted, when not needed anymore. When I need to run PostgreSQL or, say, Redis on my box I do not bother anymore installing this software and pollute my hard-drive. I just pull corresponding image and run it on my box. When I don&rsquo;t need the image anymore I simply delete it and my hard-disk is back to the state it was before.">
+  <meta name="author" content="Lech Gudalewicz"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "aiki.dev",
+    
+    "url": "https:\/\/aiki.dev\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/aiki.dev\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/aiki.dev\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/aiki.dev\/posts\/what-you-wanted-to-know-about-docker\/",
+          "name": "Pixies, part 2 what you wanted to know about docker but were afraid to ask"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Lech Gudalewicz"
+  },
+  "headline": "Pixies, part 2: What you wanted to know about Docker but were afraid to ask",
+  "description" : "Docker in a nutshell Docker allows you to create self-contained turnkey images which contain everything one needs to run your application. These can be copied, shared, uploaded and deleted, when not needed anymore. When I need to run PostgreSQL or, say, Redis on my box I do not bother anymore installing this software and pollute my hard-drive. I just pull corresponding image and run it on my box. When I don\x26rsquo;t need the image anymore I simply delete it and my hard-disk is back to the state it was before.",
+  "inLanguage" : "en",
+  "wordCount":  1230 ,
+  "datePublished" : "2020-03-09T18:17:29",
+  "dateModified" : "2020-03-09T18:17:29",
+  "image" : "https:\/\/aiki.dev\/images\/logo.png",
+  "keywords" : [ "tutorial, docker, javascript, nginx" ],
+  "mainEntityOfPage" : "https:\/\/aiki.dev\/posts\/what-you-wanted-to-know-about-docker\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/aiki.dev\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/aiki.dev\/images\/logo.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="Pixies, part 2: What you wanted to know about Docker but were afraid to ask" />
+<meta property="og:description" content="Docker in a nutshell Docker allows you to create self-contained turnkey images which contain everything one needs to run your application. These can be copied, shared, uploaded and deleted, when not needed anymore. When I need to run PostgreSQL or, say, Redis on my box I do not bother anymore installing this software and pollute my hard-drive. I just pull corresponding image and run it on my box. When I don&rsquo;t need the image anymore I simply delete it and my hard-disk is back to the state it was before.">
+<meta property="og:image" content="https://aiki.dev/images/logo.png" />
+<meta property="og:url" content="https://aiki.dev/posts/what-you-wanted-to-know-about-docker/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="aiki.dev" />
+
+  <meta name="twitter:title" content="Pixies, part 2: What you wanted to know about Docker but were afraid …" />
+  <meta name="twitter:description" content="Docker in a nutshell Docker allows you to create self-contained turnkey images which contain everything one needs to run your application. These can be copied, shared, uploaded and deleted, when not …">
+  <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
+  <meta name="twitter:card" content="summary" />
+  <link href='https://aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.66.0" />
+  <link rel="alternate" href="https://aiki.dev/index.xml" type="application/rss+xml" title="aiki.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://aiki.dev/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://aiki.dev/css/highlight.min.css" /><link rel="stylesheet" href="https://aiki.dev/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-159944114-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://aiki.dev/">aiki.dev</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Series" href="/series">Series</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="aiki.dev" href="https://aiki.dev/">
+            <img class="avatar-img" src="https://aiki.dev/images/logo.png" alt="aiki.dev" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              
+                <h1>Pixies, part 2: What you wanted to know about Docker but were afraid to ask</h1>
+              
+              
+                <hr class="small">
+              
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <h4 id="docker-in-a-nutshell">Docker in a nutshell</h4>
+<p>Docker allows you to create self-contained turnkey <em>images</em> which contain everything one needs to run your application. These can be copied, shared, uploaded and deleted, when not needed anymore. When I need to run PostgreSQL or, say, Redis on my box I do not bother anymore installing this software and pollute my hard-drive. I just <em>pull</em> corresponding image and run it on my box. When I don&rsquo;t need the image anymore I simply delete it and my hard-disk is back to the state it was before.<br>
+We will build Docker images for frontend, backend and we will also use prebuilt database image during the backend development.
+Note on the terminology: when you read about the Docker you will encounter the term <em>containers</em> often. Some are confused what is the difference between the <em>image</em> and the <em>container</em>. Quite simply, the <em>container</em> is the running instance of the <em>image</em>.</p>
+<p>If you are familiar with <em>VMs</em> (virtual machines), conceptually Docker images/containers are something like that. The difference is that the Docker containers are more lightweight: much smaller, much faster and consume way less resources. Technically they are implemented also differently, but we are not going to drill into this. There are plenty of resources on the Web if you are interested</p>
+<h4 id="dockerfile">Dockerfile</h4>
+<p><code>Dockerfile</code> is pretty much a set of instructions Docker executes to produce an image.
+Go to the <code>pixies/frontend</code> directory and create an empty file:</p>
+<p><code>touch Dockerfile</code></p>
+<p>Enter a single line to that file:</p>
+<p><code>FROM nginx:alpine</code></p>
+<p>Although it is possible to build Docker images starting from scratch, it is barely feasible, so usually we start from some <em>base</em> image. In our case it is going to be <code>nginx</code>, a very popular and relatively lightweight web server which is going to serve our frontend files. <code>alpine</code> indicates particular flavor of the <code>nginx</code> image which is very small and often used for the Docker images.</p>
+<p>Theoretically, we could try to build the image now. But before we do that, let&rsquo;s make sure we optimize a little the build process so Docker does not copy unnecessary stuff during the build.
+Create the file <code>.dockerignore</code> with the files and directories you want to be ignored by the Docker:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">node_modules
+.git
+.vscode
+</code></pre></div><p>Let&rsquo;s build the image:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker build -t pixies_frontend .
+</code></pre></div><p>Notice the dot at the end, it indicates the current directory, a hint to the Docker where to look for the <code>Dockerfile</code> the image will be called <code>pixies_fronted</code>.
+If you have a reasonably good Internet connection it will take a few seconds to build the image.
+Check that the image is built:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker images | grep pixies_frontend
+</code></pre></div><p>The image should be there.
+Let&rsquo;s run it:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker run -d --name frontend -p 8080:80 pixies_frontend
+</code></pre></div><p>We ask the docker to run the image named <code>pixies_frontend</code> in a detached mode (<code>-d</code>), give the name <code>frontend</code> to the resulting container and map the port 80 in the container to the port 8080 on the machine, as nginx in the container starts listening on the port 80.</p>
+<p>Verify, that the container is running:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker ps | grep frontend
+</code></pre></div><p>Now, in your browser, navigate to <a href="http://localhost:8080">http://localhost:8080</a>
+You should be greeted by the nginx welcome page.</p>
+<p>At the moment, our container does not have our app, it just runs default nginx installation</p>
+<h3 id="peek-into-the-nginx-container">Peek into the nginx container</h3>
+<p>Let&rsquo;s try to connect to our container and see what is there:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker exec -it frontend sh
+</code></pre></div><p>Believe or not, you are <em>inside</em> the container now!
+By default, the nginx configuration is stored in the file <code>/etc/nginx/conf.d/default.conf</code>
+Let&rsquo;s look at it:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">cat  /etc/nginx/conf.d/default.conf
+</code></pre></div><p>There you will see some default nginx configuration settings, But, for now, the key for us is this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">location / {
+    root   /usr/share/nginx/html;
+    index  index.html index.htm;
+}
+</code></pre></div><p>This shows where nginx looks for the web content. It looks like the location is <code>/usr/share/nginx/html</code>
+Indeed when we do</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">ls /usr/share/nginx/html
+</code></pre></div><p>we will see that, indeed, it contains the nginx welcome index.html file.</p>
+<p>It is very important to realize the following:</p>
+<ul>
+<li>the directory <code>/usr/share/nginx/html</code> is in the container, not on your machine!</li>
+</ul>
+<p>So our plan is this: we will replace the default nginx content with our app.
+Exit the container and rebuild the frontend:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">exit
+npm run build
+</code></pre></div><p>Modify your Dockerfile so Docker will copy the files from your build directory into the desired destination:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">FROM nginx:alpine
+#new
+COPY build/* /usr/share/nginx/html/
+</code></pre></div><p>Let&rsquo;s try it: stop the container, rebuild the image and start again:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker rm -f frontend
+docker build -t pixies_frontend .
+docker run -d --name frontend -p 8080:80 pixies_frontend
+</code></pre></div><p>When you go to the <a href="http://localhost:8080">http://localhost:8080</a> now, you should see your simple webpack app proudly responding with the &ldquo;Pixies&rdquo; title, instead of the default nginx prompt. You may need to reload the page in the browser</p>
+<p>When we change anything in our app, we will have to rebuild the webpack app and copy the files over again.
+That is not ver optimal workflow, let&rsquo;s optimize it.</p>
+<h4 id="multistage-docker-builds">Multistage Docker builds</h4>
+<p>It would be better if our Dockerfile would just copy the source files into image and rebuild our webpack right there. But our base image is nginx which does not have npm or anything like that to make webpack run.
+We could install the npm on top of the nginx, but that would make the resulting image larger as it now contains npm, webpack and other libraries which are needed only during the build. So what do we do?
+Docker has this nice feature which, instead of copying files from your machine, you can copy them from another image, possibly unrelated to the one you are building.</p>
+<ul>
+<li>In the first (or the <code>build</code>) stage we would build our final webpack app from the source files.</li>
+<li>In the second (or the <code>final</code>) stage we would copy the resulting web app, but not from the machine but from the <code>build</code> stage. As the result, our resulting image will be lean and mean and the image for the <code>build</code> stage can be simply discarded</li>
+</ul>
+<p>So let&rsquo;s add the <code>build</code> directory to our <code>.dockerignore</code>, so the webpack app is not copied from the machine:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">node_modules
+.git
+.gitignore
+build
+</code></pre></div><p>Next, modify the <code>Dockerfile</code> for the two-stage build:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">FROM node:alpine AS build
+
+COPY package.json package-lock.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
+FROM nginx:alpine AS final
+
+COPY --from=build /build/* /usr/share/nginx/html/
+</code></pre></div><p>As you see,</p>
+<ul>
+<li>our <code>build</code> stage is based on the node:alpine image which has all tools necessary to produce the webpack build.</li>
+<li>next we copy the <code>package.json</code> and <code>package-lock.json</code> which track all dependencies we need to build our webpack</li>
+<li>then, we run <code>npm install</code> to install those dependencies.</li>
+<li>copy everything from the source directory, this includes source files, <code>.dockerignore</code> takes care that we don&rsquo;t copy anything unnecessary.</li>
+<li>finally, we do <code>npm run build</code> which produces a neat webpack build in our sitting in our <code>build</code> stage.</li>
+<li>as the last step we copy the webpack build to the nginx-based image as before, but this time not from the machine, but from the <code>build</code> stage.
+We can rebuild the image and check that it works:</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker rm -f frontend
+docker build -t pixies_frontend .
+docker run -d --name frontend -p 8080:80 pixies_frontend
+</code></pre></div><p>We can check in the browser and see the nothing has changed. But we eliminated the need to produce the build on the machine and still getting the lean, mean docker image ready to be deployed live.
+But that is in the next module.</p>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://aiki.dev//tags/tutorial/">tutorial</a>&nbsp;
+            
+              <a href="https://aiki.dev//tags/docker/">docker</a>&nbsp;
+            
+              <a href="https://aiki.dev//tags/javascript/">javascript</a>&nbsp;
+            
+              <a href="https://aiki.dev//tags/nginx/">nginx</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2faiki.dev%2fposts%2fwhat-you-wanted-to-know-about-docker%2f&amp;text=Pixies%2c%20part%202%3a%20What%20you%20wanted%20to%20know%20about%20Docker%20but%20were%20afraid%20to%20ask&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2faiki.dev%2fposts%2fwhat-you-wanted-to-know-about-docker%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fwhat-you-wanted-to-know-about-docker%2f&amp;title=Pixies%2c%20part%202%3a%20What%20you%20wanted%20to%20know%20about%20Docker%20but%20were%20afraid%20to%20ask" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2faiki.dev%2fposts%2fwhat-you-wanted-to-know-about-docker%2f&amp;title=Pixies%2c%20part%202%3a%20What%20you%20wanted%20to%20know%20about%20Docker%20but%20were%20afraid%20to%20ask" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fwhat-you-wanted-to-know-about-docker%2f&amp;title=Pixies%2c%20part%202%3a%20What%20you%20wanted%20to%20know%20about%20Docker%20but%20were%20afraid%20to%20ask" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2faiki.dev%2fposts%2fwhat-you-wanted-to-know-about-docker%2f&amp;description=Pixies%2c%20part%202%3a%20What%20you%20wanted%20to%20know%20about%20Docker%20but%20were%20afraid%20to%20ask" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+            
+          
+
+          
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/posts/just-enough-webpack/">Pixies, part 1: Just Enough Webpack</a></li>
+                
+                    <li><a href="/posts/django-react-docker-intro/">Pixies, part 0: Introduction</a></li>
+                
+              </ul>
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://aiki.dev/posts/just-enough-webpack/" data-toggle="tooltip" data-placement="top" title="Pixies, part 1: Just Enough Webpack">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      
+
+
+      
+        
+          
+          <div class="disqus-comments">                  
+            <button id="show-comments" class="btn btn-default" type="button">Show <span class="disqus-comment-count" data-disqus-url="https://aiki.dev/posts/what-you-wanted-to-know-about-docker">comments</span></button>
+            <div id="disqus_thread"></div>
+
+            <script type="text/javascript">
+              var disqus_config = function () {
+              this.page.url = 'https:\/\/aiki.dev\/posts\/what-you-wanted-to-know-about-docker';
+            };
+
+          </script>
+          </div>
+          
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="https://github.com/lechgu" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="aiki.dev">Lech Gudalewicz</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2020
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://aiki.dev/">aiki.dev</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.66.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://aiki.dev/js/main.js"></script>
+<script src="https://aiki.dev/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://aiki.dev/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+$(function(){
+  $('#show-comments').on('click', function(){
+    var disqus_shortname = 'aiki-dev';
+      
+    (function() {
+      var disqus = document.createElement('script'); 
+      disqus.type = 'text/javascript'; 
+      disqus.async = true;
+      disqus.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(disqus);
+    })();
+      
+    $(this).hide(); 
+    });
+  });
+      
+</script>
+<script id="dsq-count-scr" src="//aiki-dev.disqus.com/count.js" async></script>
+
+
+
+
+    
+  </body>
+</html>
+
