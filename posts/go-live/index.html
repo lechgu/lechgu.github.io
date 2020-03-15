@@ -61,7 +61,7 @@ git init git add -A git commit -m &#34;initial commit&#34; Heroku In this module
   "headline": "Pixies, part 3: Go Live",
   "description" : "Source control Now it is a good time to add everything to the git repository if you haven\x26rsquo;t done that yet. Create a .gitignore file which contains the stuff you don\x26rsquo;t want to check in. Her\x26rsquo;s mine:\nnode_modules build .vscode Now check in your project. You know the drill:\ngit init git add -A git commit -m \x26#34;initial commit\x26#34; Heroku In this module we are going to deploy our frontend application so the whole world can admire our doing-nothing application.",
   "inLanguage" : "en",
-  "wordCount":  1057 ,
+  "wordCount":  1069 ,
   "datePublished" : "2020-03-14T13:50:54",
   "dateModified" : "2020-03-14T13:50:54",
   "image" : "https:\/\/aiki.dev\/images\/logo.png",
@@ -94,7 +94,7 @@ git init git add -A git commit -m &#34;initial commit&#34; Heroku In this module
   <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
   <meta name="twitter:card" content="summary" />
   <link href='https://aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.66.0" />
+  <meta name="generator" content="Hugo 0.67.0" />
   <link rel="alternate" href="https://aiki.dev/index.xml" type="application/rss+xml" title="aiki.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://aiki.dev/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -317,16 +317,16 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf.template
 <li>Next, we copy over nginx.conf over to the file <code>default.conf.template</code></li>
 </ul>
 <p>We are not done yet. Nginx, unfortunately is not smart enough to replace the <code>$PORT</code> with the actual value passed in the environment.What we need to do, is to replace that <code>$PORT</code> string to the actual environment value passed <em>after</em> the Heroku starts our container but <em>before</em> nginx is actually started. At that moment the environment value is already known so we can inject it to the nginx&rsquo;s config file. How do we do that?
-Docker, when it starts your container, looks for the <code>CMD</code> directive which specifies what to binary actually to run. If you don&rsquo;t provide one in your Dockerfile, it takes it from the base image <code>nginx:alpine</code> in our case which simply starts the nginx. So what we do, we provide our own <code>CMD</code> directive which points to the shell script we have full control on and where we can do that port replacement work.
+Docker, when it starts your container, looks for the <code>CMD</code> instruction which specifies what to binary actually to run. If you don&rsquo;t provide one in your Dockerfile, it takes it from the base image <code>nginx:alpine</code> in our case which simply starts the nginx. So what we do, we provide our own <code>CMD</code> instruction which points to the shell script we have full control on and where we can do that port replacement work.
 Create the <code>boot.sh</code> file with the following content:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/sh
 </span><span class="cp"></span>
 sed <span class="s2">&#34;s/\$PORT/</span><span class="si">${</span><span class="nv">PORT</span><span class="si">}</span><span class="s2">/g&#34;</span> &lt; /etc/nginx/conf.d/default.conf.template &gt; /etc/nginx/conf.d/default.conf
 nginx -g <span class="s2">&#34;daemon off;&#34;</span>
-</code></pre></div><p>as you see, it is a shell script (analogous to the .bat file if you are on Windows) which runs the <code>sed</code> command and start nginx afterwards.
-the <code>sed</code> command looks a little bit cryptic, I must admit, but all it does it replaces the string <code>$PORT</code> in the <code>default.conf.template</code> with the actual value provided in the environment value <code>PORT</code> and saves the result to the actual nginx config file `default.conf.</p>
-<p>I must admit, it is not really enjoyable to write these kind of <code>sed</code> commands. I have written and debugged it once and carry it from one project to another.</p>
-<p>The last thing is to make the CMD directive in our Dockerfile to point to this shell script.
+</code></pre></div><p>as you see, it is a shell script (analogous to the .bat file if you are on Windows) which runs the <code>sed</code> command and starts nginx afterwards.
+the <code>sed</code> command looks a little bit cryptic, I must admit, but all it does is to replace the string <code>$PORT</code> in the <code>default.conf.template</code> with the actual value provided in the environment value <code>PORT</code> and saves the result to the actual nginx config file `default.conf.</p>
+<p>I must admit, it is not really enjoyable writing these <code>sed</code> commands. I have written and debugged this one once and carry it from one project to another.</p>
+<p>The last thing is to make the CMD instruction in our Dockerfile to point to this shell script.
 The following lines do the trick</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># ... as before
 COPY boot.sh /
@@ -359,8 +359,8 @@ heroku container:release web
 heroku open
 </code></pre></div><p>If you see your Webpack app responding with the &ldquo;Pixies&rdquo; title, congratulations! You have deployed your app live.</p>
 <h4 id="one-last-thing">One last thing</h4>
-<p>Ok, so we messed around with the <code>CMD</code> directive and nginx&rsquo;s port. What if I want to run my container locally?
-Well, you can provide the environment variables as the command line parameters. Ensure that your container is not running locally and do:</p>
+<p>Ok, so we messed around with the <code>CMD</code> directive and the nginx&rsquo;s port. What if I want still to run my container locally?
+Well, you can provide the environment variables as the command line parameters. The following stops the container if it is still running, rebuilds the image and starts the container with the right flags</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker rm -f frontend
 docker build -t pixies_frontend .
 docker run -d --name frontend -p 8080:80 -e PORT=80 pixies_frontend
@@ -447,7 +447,7 @@ docker run -d --name frontend -p 8080:80 -e PORT=80 pixies_frontend
                   <ul>
                 
                 
-                    <li><a href="/posts/what-you-wanted-to-know-about-docker/">Pixies, part 2: What you wanted to know about Docker but were afraid to ask</a></li>
+                    <li><a href="/posts/a-bit-of-react/">Pixies, part 4: A Bit of React</a></li>
                 
                     <li><a href="/posts/what-you-wanted-to-know-about-docker/">Pixies, part 2: What you wanted to know about Docker but were afraid to ask</a></li>
                 
@@ -468,6 +468,10 @@ docker run -d --name frontend -p 8080:80 -e PORT=80 pixies_frontend
               <a href="https://aiki.dev/posts/what-you-wanted-to-know-about-docker/" data-toggle="tooltip" data-placement="top" title="Pixies, part 2: What you wanted to know about Docker but were afraid to ask">&larr; Previous Post</a>
             </li>
           
+          
+            <li class="next">
+              <a href="https://aiki.dev/posts/a-bit-of-react/" data-toggle="tooltip" data-placement="top" title="Pixies, part 4: A Bit of React">Next Post &rarr;</a>
+            </li>
           
         </ul>
       
@@ -541,7 +545,7 @@ docker run -d --name frontend -p 8080:80 -e PORT=80 pixies_frontend
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.66.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          <a href="https://gohugo.io">Hugo v0.67.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>

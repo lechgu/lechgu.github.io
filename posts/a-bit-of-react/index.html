@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Pixies, part 4: A Bit of React - aiki.dev</title>
+  <meta name="description" content="ES6 ES6(ECMAScript 6) is the latest standard of the Javascript language. It has much cleaned, modernized syntax. It is less confusing from the people coming from other environments and, generally, a pleasure to work with. There is on problem though If you write your app with ES6, there is no guarantee that it will work on all (especially old) browsers. The community came up with Babel, a javascript &ldquo;compiler&rdquo; which takes modern Javascript, like ES6 and produces the classical javascript which should be consumed by all, even old browser.">
+  <meta name="author" content="Lech Gudalewicz"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "aiki.dev",
+    
+    "url": "https:\/\/aiki.dev\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/aiki.dev\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/aiki.dev\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/aiki.dev\/posts\/a-bit-of-react\/",
+          "name": "Pixies, part 4 a bit of react"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Lech Gudalewicz"
+  },
+  "headline": "Pixies, part 4: A Bit of React",
+  "description" : "ES6 ES6(ECMAScript 6) is the latest standard of the Javascript language. It has much cleaned, modernized syntax. It is less confusing from the people coming from other environments and, generally, a pleasure to work with. There is on problem though If you write your app with ES6, there is no guarantee that it will work on all (especially old) browsers. The community came up with Babel, a javascript \x26ldquo;compiler\x26rdquo; which takes modern Javascript, like ES6 and produces the classical javascript which should be consumed by all, even old browser.",
+  "inLanguage" : "en",
+  "wordCount":  912 ,
+  "datePublished" : "2020-03-14T18:17:24",
+  "dateModified" : "2020-03-14T18:17:24",
+  "image" : "https:\/\/aiki.dev\/images\/logo.png",
+  "keywords" : [ "tutorial, javascript, webpack, react" ],
+  "mainEntityOfPage" : "https:\/\/aiki.dev\/posts\/a-bit-of-react\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/aiki.dev\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/aiki.dev\/images\/logo.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="Pixies, part 4: A Bit of React" />
+<meta property="og:description" content="ES6 ES6(ECMAScript 6) is the latest standard of the Javascript language. It has much cleaned, modernized syntax. It is less confusing from the people coming from other environments and, generally, a pleasure to work with. There is on problem though If you write your app with ES6, there is no guarantee that it will work on all (especially old) browsers. The community came up with Babel, a javascript &ldquo;compiler&rdquo; which takes modern Javascript, like ES6 and produces the classical javascript which should be consumed by all, even old browser.">
+<meta property="og:image" content="https://aiki.dev/images/logo.png" />
+<meta property="og:url" content="https://aiki.dev/posts/a-bit-of-react/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="aiki.dev" />
+
+  <meta name="twitter:title" content="Pixies, part 4: A Bit of React" />
+  <meta name="twitter:description" content="ES6 ES6(ECMAScript 6) is the latest standard of the Javascript language. It has much cleaned, modernized syntax. It is less confusing from the people coming from other environments and, generally, a …">
+  <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
+  <meta name="twitter:card" content="summary" />
+  <link href='https://aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.67.0" />
+  <link rel="alternate" href="https://aiki.dev/index.xml" type="application/rss+xml" title="aiki.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://aiki.dev/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://aiki.dev/css/highlight.min.css" /><link rel="stylesheet" href="https://aiki.dev/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-159944114-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://aiki.dev/">aiki.dev</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Series" href="/series">Series</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="aiki.dev" href="https://aiki.dev/">
+            <img class="avatar-img" src="https://aiki.dev/images/logo.png" alt="aiki.dev" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              
+                <h1>Pixies, part 4: A Bit of React</h1>
+              
+              
+                <hr class="small">
+              
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <h4 id="es6">ES6</h4>
+<p>ES6(ECMAScript 6) is the latest standard of the Javascript language. It has much cleaned, modernized syntax. It is less confusing from the people coming from other environments and,
+generally, a pleasure to work with. There is on problem though If you write your app with ES6, there is no guarantee that it will work on all (especially old) browsers. The community came up with Babel, a javascript &ldquo;compiler&rdquo; which takes modern Javascript, like ES6 and produces the classical javascript which should be consumed by all, even old browser. Of course, one can automate that with the Webpack.</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">npm install babel-loader @babel/core @babel/preset-env @babel/preset-react --save-dev
+</code></pre></div><p>Once it installed, modify your <code>webpack.config.js</code>, add the following rule to let babel process your js files:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">//... as before
+rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: &#39;babel-loader&#39;,
+          options: {
+            presets: [&#39;@babel/preset-env&#39;, &#39;@babel/preset-react&#39;]
+          }
+        }
+      },
+// ... as before
+</code></pre></div><p>React allows you to create and use <em>components</em>, independent and reusable pieces of the Javascript code. So let&rsquo;s build one</p>
+<h4 id="our-first-react-component">Our first React component</h4>
+<p>Install React and create an empty file in the <code>src</code> directory:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">npm install react react-dom --save-dev
+touch src/App.js
+</code></pre></div><p>Make the <code>App.js</code> look like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">import React from &#39;react&#39;;
+
+const App = () =&gt; {
+  return &lt;h1&gt;React Pixies&lt;/h1&gt;;
+};
+
+export default App;
+</code></pre></div><p>As you see, on the surface,the component is just a Javascript function which returns a chunk of html. But wait a minute, <em>how one can intermix together html tags directly with the Javascript code?</em> The short answer is that utilizing this, so called <em>jsx</em> syntax, React are able to convert this to the pure javascript which, essentially produces the desired html elements. This is very nice, because you are not forced to jump between javascript and html code and keep everything together.</p>
+<p>Next, in order to enable React in your application, in your <code>index.html</code> file you need to create a special element which will served as the <code>root</code> of your React app.
+Replace the <code>body</code> tag of your <code>src/index.html</code> with this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;body&gt;
+  &lt;section id=&#34;root&#34;&gt;&lt;/section&gt;
+&lt;/body&gt;
+</code></pre></div><p>Ok, we have our <code>index.html</code> ready for React, now let&rsquo;s actually enable it in the <code>index.js</code> and use our new component there:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">import React from &#39;react&#39;;
+import ReactDOM from &#39;react-dom&#39;;
+import App from &#39;./App&#39;;
+import &#39;bootstrap/dist/css/bootstrap.min.css&#39;;
+ReactDOM.render(&lt;App /&gt;, document.querySelector(&#39;#root&#39;));
+</code></pre></div><p>As you see, we ask React to render your our App component in place of the html element with id <code>root</code>.</p>
+<p>Start the app:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">npm start
+</code></pre></div><p>You will see that app looks pretty much the same but the text on the web page comes from the React, not hardcoded into <code>index.html</code> as before</p>
+<h4 id="creating-the-image-carousel">Creating the image carousel</h4>
+<p>Great thing about the React is that not only we can use components which we have written, but also chose ones from the variety of the open source libraries. We are going to use the image carousel component from
+the React Bootstrap library.
+Let&rsquo;s install it:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">npm install react-bootstrap --save-dev
+</code></pre></div><p>We are going to display a couple of images in the carousel, For the purpose of this tutorial, we are going to use some nature photography images made by Dasha Gudalewicz. You can use your own if you wish.
+Each image will be represented by a javascript object with three fields, <code>url</code>, <code>caption</code> and <code>details</code>.
+Create the array of these objects in your <code>App.js</code>, just above the <code>return</code> statement:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">  const items = [
+  {
+    url:
+      &#39;https://photos.smugmug.com/Animals/Birds/Warblers/Yellow-Warbler-2013/i-Tr5rQBN/0/f058a66f/X5/191130_Camino%20de%20grava%20entre%20el%20Corchito%20y%20Estero%20de%20Chicxulub_079-X5.jpg&#39;,
+    caption: &#39;image 1&#39;,
+    details: &#39;details 1&#39;
+  },
+  {
+    url:
+      &#39;https://photos.smugmug.com/Animals/Reptiles/Crocodilians/American-Crocodile/i-vkN5pCN/0/b92acda4/5K/151029_Everglades_729-5K.jpg&#39;,
+    caption: &#39;Image 2&#39;,
+    details: &#39;details 2&#39;
+  },
+  {
+    url:
+      &#39;https://photos.smugmug.com/Animals/Reptiles/Lizards/Pygmy-Horned-Lizard-2013/i-cdRKpxK/0/fe991315/X5/131005_ManastashRidge_693-X5.jpg&#39;,
+    caption: &#39;Image 3&#39;,
+    details: &#39;details 3&#39;
+  }
+  ];
+                    ];
+</code></pre></div><p>Import the Carousel component from the React Bootstrap library, at the top of your <code>App.js</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">import React from &#39;react&#39;;
+import { Carousel } from &#39;react-bootstrap&#39;;
+</code></pre></div><p>Let&rsquo;s return the Carousel populated with the our images.
+Instead of our current placeholder</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">return &lt;h1&gt;React Pixies&lt;/h1&gt;;
+</code></pre></div><p>Enter the code like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">return (
+    &lt;div className=&#39;container&#39;&gt;
+      &lt;div className=&#39;row&#39;&gt;
+        &lt;Carousel&gt;
+          {items.map(item =&gt; (
+            &lt;Carousel.Item&gt;
+              &lt;img className=&#39;d-block w-100&#39; src={item.url} alt=&#39;&#39; /&gt;
+              &lt;Carousel.Caption&gt;
+                &lt;h3&gt;{item.caption}&lt;/h3&gt;
+                &lt;p&gt;{item.details}&lt;/p&gt;
+              &lt;/Carousel.Caption&gt;
+            &lt;/Carousel.Item&gt;
+          ))}
+        &lt;/Carousel&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+</code></pre></div><p>This probably requires some explanation. As before, we are still using jsx syntax to inject html directly to the javascript. Things to notice:</p>
+<ul>
+<li>As this is, technically, still javascript, you cannot use javascript reserved keywords like <code>class</code> React recognizes the <code>className</code> and will convert to proper html <code>class</code> attribute when emitting actual html.</li>
+<li>html in <em>jsx</em> also can use javascript code, in such cases it has to be wrapped in the curly braces. <em>javascript inside html while inside javascript</em> - got that?</li>
+<li>the code simply loops over our <code>items</code> array and emits the <code>&lt;Carousel.Item&gt;</code> component configured with the data from our <code>image</code> objects.</li>
+<li>there are Bootstrap attributes sprinkled here and there. If you don&rsquo;t know Bootstrap, don&rsquo;t worry about this.</li>
+</ul>
+<p>Run the app</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">npm start
+</code></pre></div><p>And you will see that the image carousel is populated with three images.</p>
+<p>If you are following along, now it is a good time to check in</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">
+git add -A
+git commit -m &#34;Bootstrap React carousel&#34;
+
+</code></pre></div><p>and deploy the updated version to Heroku:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">
+heroku container:rm web
+heroku container:push web
+heroku container:release web
+
+</code></pre></div><p>When you open your live app</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">heroku open
+</code></pre></div><p>you will see your app now shows some images.</p>
+<p>Next, we are going to build the backend which stores the data about the images in the database so our frontend can fetch it from there. As Heroku provides the PostgreSQL database for us, in the next module we are going to talk about how to set the PostgreSQL for the development on our machine.</p>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://aiki.dev//tags/tutorial/">tutorial</a>&nbsp;
+            
+              <a href="https://aiki.dev//tags/javascript/">javascript</a>&nbsp;
+            
+              <a href="https://aiki.dev//tags/webpack/">webpack</a>&nbsp;
+            
+              <a href="https://aiki.dev//tags/react/">react</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2faiki.dev%2fposts%2fa-bit-of-react%2f&amp;text=Pixies%2c%20part%204%3a%20A%20Bit%20of%20React&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2faiki.dev%2fposts%2fa-bit-of-react%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fa-bit-of-react%2f&amp;title=Pixies%2c%20part%204%3a%20A%20Bit%20of%20React" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2faiki.dev%2fposts%2fa-bit-of-react%2f&amp;title=Pixies%2c%20part%204%3a%20A%20Bit%20of%20React" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fa-bit-of-react%2f&amp;title=Pixies%2c%20part%204%3a%20A%20Bit%20of%20React" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2faiki.dev%2fposts%2fa-bit-of-react%2f&amp;description=Pixies%2c%20part%204%3a%20A%20Bit%20of%20React" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+            
+          
+
+          
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/posts/go-live/">Pixies, part 3: Go Live</a></li>
+                
+                    <li><a href="/posts/what-you-wanted-to-know-about-docker/">Pixies, part 2: What you wanted to know about Docker but were afraid to ask</a></li>
+                
+                    <li><a href="/posts/just-enough-webpack/">Pixies, part 1: Just Enough Webpack</a></li>
+                
+                    <li><a href="/posts/django-react-docker-intro/">Pixies, part 0: Build an app with Django, React and Docker: Introduction</a></li>
+                
+              </ul>
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://aiki.dev/posts/go-live/" data-toggle="tooltip" data-placement="top" title="Pixies, part 3: Go Live">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      
+
+
+      
+        
+          
+          <div class="disqus-comments">                  
+            <button id="show-comments" class="btn btn-default" type="button">Show <span class="disqus-comment-count" data-disqus-url="https://aiki.dev/posts/a-bit-of-react">comments</span></button>
+            <div id="disqus_thread"></div>
+
+            <script type="text/javascript">
+              var disqus_config = function () {
+              this.page.url = 'https:\/\/aiki.dev\/posts\/a-bit-of-react';
+            };
+
+          </script>
+          </div>
+          
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="https://github.com/lechgu" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="aiki.dev">Lech Gudalewicz</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2020
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://aiki.dev/">aiki.dev</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.67.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://aiki.dev/js/main.js"></script>
+<script src="https://aiki.dev/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://aiki.dev/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+$(function(){
+  $('#show-comments').on('click', function(){
+    var disqus_shortname = 'aiki-dev';
+      
+    (function() {
+      var disqus = document.createElement('script'); 
+      disqus.type = 'text/javascript'; 
+      disqus.async = true;
+      disqus.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(disqus);
+    })();
+      
+    $(this).hide(); 
+    });
+  });
+      
+</script>
+<script id="dsq-count-scr" src="//aiki-dev.disqus.com/count.js" async></script>
+
+
+
+
+    
+  </body>
+</html>
+

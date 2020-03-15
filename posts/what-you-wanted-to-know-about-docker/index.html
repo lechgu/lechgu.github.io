@@ -59,7 +59,7 @@
   "headline": "Pixies, part 2: What you wanted to know about Docker but were afraid to ask",
   "description" : "Docker in a nutshell Docker allows you to create self-contained turnkey images which contain everything one needs to run your application. These can be copied, shared, uploaded and deleted, when not needed anymore. When I need to run PostgreSQL or, say, Redis on my box I do not bother anymore installing this software and pollute my hard-drive. I just pull corresponding image and run it on my box. When I don\x26rsquo;t need the image anymore I simply delete it and my hard-disk is back to the state it was before.",
   "inLanguage" : "en",
-  "wordCount":  1232 ,
+  "wordCount":  1234 ,
   "datePublished" : "2020-03-09T18:17:29",
   "dateModified" : "2020-03-09T18:17:29",
   "image" : "https:\/\/aiki.dev\/images\/logo.png",
@@ -90,7 +90,7 @@
   <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
   <meta name="twitter:card" content="summary" />
   <link href='https://aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.66.0" />
+  <meta name="generator" content="Hugo 0.67.0" />
   <link rel="alternate" href="https://aiki.dev/index.xml" type="application/rss+xml" title="aiki.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://aiki.dev/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -270,20 +270,20 @@ Create the file <code>.dockerignore</code> with the files and directories you wa
 .vscode
 </code></pre></div><p>Let&rsquo;s build the image:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker build -t pixies_frontend .
-</code></pre></div><p>Notice the dot at the end, it indicates the current directory, a hint to the Docker where to look for the <code>Dockerfile</code> the image will be called <code>pixies_fronted</code>.
+</code></pre></div><p>Notice the dot at the end, it indicates the current directory, a hint to the Docker where to look for the <code>Dockerfile</code>. The image will be called <code>pixies_fronted</code>.
 If you have a reasonably good Internet connection it will take a few seconds to build the image.
 Check that the image is built:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker images | grep pixies_frontend
 </code></pre></div><p>The image should be there.
 Let&rsquo;s run it:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker run -d --name frontend -p 8080:80 pixies_frontend
-</code></pre></div><p>We ask the docker to run the image named <code>pixies_frontend</code> in a detached mode (<code>-d</code>), give the name <code>frontend</code> to the resulting container and map the port 80 in the container to the port 8080 on the machine, as nginx in the container starts listening on the port 80.</p>
+</code></pre></div><p>We ask the docker to run the image named <code>pixies_frontend</code> in a detached mode (<code>-d</code>), give the name <code>frontend</code> to the resulting container and map the port 80 in the container to the port 8080 on the machine, as nginx in the container starts listening on the port 80 inside the container, by default.</p>
 <p>Verify, that the container is running:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker ps | grep frontend
 </code></pre></div><p>Now, in your browser, navigate to <a href="http://localhost:8080">http://localhost:8080</a>
 You should be greeted by the nginx welcome page.</p>
-<p>At the moment, our container does not have our app, it just runs default nginx installation</p>
-<h4 id="peek-into-the-nginx-container">Peek into the nginx container</h4>
+<p>At the moment, our container does not have our app, it just runs bare nginx installation</p>
+<h3 id="peek-into-the-nginx-container">Peek into the nginx container</h3>
 <p>Let&rsquo;s try to connect to our container and see what is there:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker exec -it frontend sh
 </code></pre></div><p>Believe or not, you are <em>inside</em> the container now!
@@ -318,7 +318,7 @@ docker run -d --name frontend -p 8080:80 pixies_frontend
 </code></pre></div><p>When you go to the <a href="http://localhost:8080">http://localhost:8080</a> now, you should see your simple webpack app proudly responding with the &ldquo;Pixies&rdquo; title, instead of the default nginx prompt. You may need to reload the page in the browser</p>
 <p>When we change anything in our app, we will have to rebuild the webpack app and copy the files over again.
 That is not ver optimal workflow, let&rsquo;s optimize it.</p>
-<h4 id="multi-stage-docker-builds">Multi-stage Docker builds</h4>
+<h4 id="multistage-docker-builds">Multistage Docker builds</h4>
 <p>It would be better if our Dockerfile would just copy the source files into image and rebuild our webpack right there. But our base image is nginx which does not have npm or anything like that to make webpack run.
 We could install the npm on top of the nginx, but that would make the resulting image larger as it now contains npm, webpack and other libraries which are needed only during the build. So what do we do?
 Docker has this nice feature which, instead of copying files from your machine, you can copy them from another image, possibly unrelated to the one you are building.</p>
@@ -355,8 +355,8 @@ We can rebuild the image and check that it works:</li>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker rm -f frontend
 docker build -t pixies_frontend .
 docker run -d --name frontend -p 8080:80 pixies_frontend
-</code></pre></div><p>We can check in the browser and see the nothing has changed. But we eliminated the need to produce the build on the machine and still getting a lean, mean docker image ready to be deployed live.
-But that is going to happen in the next module.</p>
+</code></pre></div><p>We can check in the browser and see the nothing has changed. But we eliminated the need to produce the build on the machine and still getting the lean, mean docker image ready to be deployed live.
+But that is in the next module.</p>
 
 
         
@@ -440,6 +440,8 @@ But that is going to happen in the next module.</p>
                   <ul>
                 
                 
+                    <li><a href="/posts/a-bit-of-react/">Pixies, part 4: A Bit of React</a></li>
+                
                     <li><a href="/posts/go-live/">Pixies, part 3: Go Live</a></li>
                 
                     <li><a href="/posts/just-enough-webpack/">Pixies, part 1: Just Enough Webpack</a></li>
@@ -456,7 +458,7 @@ But that is going to happen in the next module.</p>
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://aiki.dev/posts/what-you-wanted-to-know-about-docker/" data-toggle="tooltip" data-placement="top" title="Pixies, part 2: What you wanted to know about Docker but were afraid to ask">&larr; Previous Post</a>
+              <a href="https://aiki.dev/posts/just-enough-webpack/" data-toggle="tooltip" data-placement="top" title="Pixies, part 1: Just Enough Webpack">&larr; Previous Post</a>
             </li>
           
           
@@ -536,7 +538,7 @@ But that is going to happen in the next module.</p>
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.66.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          <a href="https://gohugo.io">Hugo v0.67.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>
