@@ -7,8 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Pixies, part 0: Build an app with Django, React and Docker: Introduction - aiki.dev</title>
-  <meta name="description" content="Why this tutorial? I assume you are competent enough software developer. Maybe at your work you are involved with building some enterprise-y Java Spring application or, maybe Asp.Net application or something equally boring. Obviously you are not living in vacuum, so you are hearing all those terms Docker, React, Single Page Application, 12 factor methodology and so on. They sound cool but, in part, a little frightening. Your skills seem kind of obsolete.">
+  <title>Pixies, part 5: Easy PostgreSQL setup - aiki.dev</title>
+  <meta name="description" content="Why Postgres? As our backend is going to be Django-based, we will need a relational database to store the data. Most Django tutorials assume sqlite which is a simple, one-file database which works just fine for the tutorials. The problem, however, begins when you want to deploy your application to production: because of its limitations, it might not be such a good idea. PostgreSQL (a.k.a. Postgres) is a production grade database, with a widespread use.">
   <meta name="author" content="Lech Gudalewicz"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -44,8 +44,8 @@
         "@type": "ListItem",
         "position": 3,
         "item": {
-          "@id": "https:\/\/aiki.dev\/posts\/django-react-docker-intro\/",
-          "name": "Pixies, part 0 build an app with django, react and docker introduction"
+          "@id": "https:\/\/aiki.dev\/posts\/easy-postgres-setup\/",
+          "name": "Pixies, part 5 easy postgre s q l setup"
         }
     }]
 }
@@ -56,15 +56,15 @@
   "author": {
     "name" : "Lech Gudalewicz"
   },
-  "headline": "Pixies, part 0: Build an app with Django, React and Docker: Introduction",
-  "description" : "Why this tutorial? I assume you are competent enough software developer. Maybe at your work you are involved with building some enterprise-y Java Spring application or, maybe Asp.Net application or something equally boring. Obviously you are not living in vacuum, so you are hearing all those terms Docker, React, Single Page Application, 12 factor methodology and so on. They sound cool but, in part, a little frightening. Your skills seem kind of obsolete.",
+  "headline": "Pixies, part 5: Easy PostgreSQL setup",
+  "description" : "Why Postgres? As our backend is going to be Django-based, we will need a relational database to store the data. Most Django tutorials assume sqlite which is a simple, one-file database which works just fine for the tutorials. The problem, however, begins when you want to deploy your application to production: because of its limitations, it might not be such a good idea. PostgreSQL (a.k.a. Postgres) is a production grade database, with a widespread use.",
   "inLanguage" : "en",
-  "wordCount":  782 ,
-  "datePublished" : "2020-03-07T15:48:34",
-  "dateModified" : "2020-03-07T15:48:34",
+  "wordCount":  793 ,
+  "datePublished" : "2020-03-21T09:54:35",
+  "dateModified" : "2020-03-21T09:54:35",
   "image" : "https:\/\/aiki.dev\/images\/logo.png",
-  "keywords" : [ "tutorial" ],
-  "mainEntityOfPage" : "https:\/\/aiki.dev\/posts\/django-react-docker-intro\/",
+  "keywords" : [ "tutorial, docker, Postgres" ],
+  "mainEntityOfPage" : "https:\/\/aiki.dev\/posts\/easy-postgres-setup\/",
   "publisher" : {
     "@type": "Organization",
     "name" : "https:\/\/aiki.dev\/",
@@ -78,15 +78,15 @@
 }
 </script>
 
-<meta property="og:title" content="Pixies, part 0: Build an app with Django, React and Docker: Introduction" />
-<meta property="og:description" content="Why this tutorial? I assume you are competent enough software developer. Maybe at your work you are involved with building some enterprise-y Java Spring application or, maybe Asp.Net application or something equally boring. Obviously you are not living in vacuum, so you are hearing all those terms Docker, React, Single Page Application, 12 factor methodology and so on. They sound cool but, in part, a little frightening. Your skills seem kind of obsolete.">
+<meta property="og:title" content="Pixies, part 5: Easy PostgreSQL setup" />
+<meta property="og:description" content="Why Postgres? As our backend is going to be Django-based, we will need a relational database to store the data. Most Django tutorials assume sqlite which is a simple, one-file database which works just fine for the tutorials. The problem, however, begins when you want to deploy your application to production: because of its limitations, it might not be such a good idea. PostgreSQL (a.k.a. Postgres) is a production grade database, with a widespread use.">
 <meta property="og:image" content="https://aiki.dev/images/logo.png" />
-<meta property="og:url" content="https://aiki.dev/posts/django-react-docker-intro/" />
+<meta property="og:url" content="https://aiki.dev/posts/easy-postgres-setup/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="aiki.dev" />
 
-  <meta name="twitter:title" content="Pixies, part 0: Build an app with Django, React and Docker: …" />
-  <meta name="twitter:description" content="Why this tutorial? I assume you are competent enough software developer. Maybe at your work you are involved with building some enterprise-y Java Spring application or, maybe Asp.Net application or …">
+  <meta name="twitter:title" content="Pixies, part 5: Easy PostgreSQL setup" />
+  <meta name="twitter:description" content="Why Postgres? As our backend is going to be Django-based, we will need a relational database to store the data. Most Django tutorials assume sqlite which is a simple, one-file database which works …">
   <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
   <meta name="twitter:card" content="summary" />
   <link href='https://aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
@@ -231,7 +231,7 @@ if (!doNotTrack) {
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="posts-heading">
               
-                <h1>Pixies, part 0: Build an app with Django, React and Docker: Introduction</h1>
+                <h1>Pixies, part 5: Easy PostgreSQL setup</h1>
               
               
                 <hr class="small">
@@ -251,78 +251,90 @@ if (!doNotTrack) {
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <h4 id="why-this-tutorial">Why this tutorial?</h4>
-<p>I assume you are competent enough software developer. Maybe at your work you are involved with building some enterprise-y Java Spring application or, maybe Asp.Net application or something <del>equally boring</del>. Obviously you are not living in vacuum, so you are hearing all those terms <em>Docker</em>, <em>React</em>, <em>Single Page Application</em>, <em>12 factor methodology</em> and so on. They sound cool but, in part, a little frightening. Your skills seem kind of obsolete. You&rsquo;d like to catch up but do not know <em>where to start</em>. Even worse, you probably Googled a little bit, maybe tried some tutorials, but often they are like, <em>click here, click there</em> and voila, your super awesome app is done. I bet you understood pretty quickly that these <em>toy</em> applications have very little which the reality and are more a sort of a marketing gimmick</p>
-<p>One good way to describe when you know something is when you reach <em>Docker (or React or Haskell) Nirvana</em>. Surely, there is a lot of details about the topic you still don&rsquo;t know yet, but the thing has already <em>clicked</em> in your brain and you will be able to fish the answer for your concrete question from Google, Stack Overflow or just by looking at the source code. My ultimate goal would be to help you reach that <em>clicked</em> state in at least a few of these topics.
-Most of my career I spent writing C++, Java and C# code. But this tutorial is mostly about Python and Javascript. So, in a sense, I wrote it for myself.</p>
-<h3 id="what-are-we-going-to-build">What are we going to build?</h3>
-<p>We are going to build a simple, but complete &ldquo;single page&rdquo; web application <strong>and deploy it live</strong>. It will not be super sophisticated but will have all moving parts: frontend and backend, both containerized and deployed separately. We will also use a production grade database (PostgreSQL)</p>
-<p>The application is going to be a simple kiosk-style image gallery. It is my belief though, that, for now, it is not that important what kind of application it is. The hard part is to connect different pieces together to achieve an end-to-end result. Later you can drill into concrete topics if you want.
-Guided by this principle, we are going to <em>ship</em> (deploy live) our app as soon as possible, even if it does not do much initially.</p>
-<h3 id="what-technologies-we-will-be-talking-about-in-the-tutorial">What technologies we will be talking about in the tutorial</h3>
-<p>We We will try to teach you <em>to fish</em> with these:</p>
+        <h4 id="why-postgres">Why Postgres?</h4>
+<p>As our backend is going to be Django-based, we will need a relational database to store the data. Most Django tutorials assume <code>sqlite</code> which is a simple, <em>one-file</em> database which works just fine for the tutorials. The problem, however, begins when you want to deploy your application to production: because of its limitations, it might not be such a good idea. PostgreSQL (a.k.a. <em>Postgres</em>) is a production grade database, with a widespread use. Now, Heroku supports Postgres, but what about our dev box? It is highly recommended to use the same database during the development as you plan to use in production. There are plenty of ways to install Postgres on your machine, but I found the most simple is to install it as a Docker container. This will work perfectly regardless of what system you have, Windows, Mac or Linux.</p>
+<h4 id="docker-compose">docker-compose</h4>
+<p>Instead of manually passing flags into docker when starting a container, we will use a tool called <code>docker-compose</code> which greatly simplifies managing containers for your app, especially when the need to reach each other over the network or share the data persisted in some storage.
+docker-compose uses a file, called <code>docker-compose.yml</code> which describes the desired container setup for your app.
+Go to your backend directory and create this file:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">cd pixies/backend
+touch docker-compose.yml
+</code></pre></div><p>In this module, we are going to use only one container, namely Postgres container.
+So let&rsquo;s input this into the <code>docker-compose.yml</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">version: &#39;3&#39;
+
+services:
+  db:
+    image: postgres:12-alpine
+    container_name: db
+    environment:
+      - POSTGRES_USER=pixies
+      - POSTGRES_PASSWORD=pixies
+      - POSTGRES_DB=pixies
+</code></pre></div><p>As you see:</p>
 <ul>
-<li>
-<p>Webpack</p>
-</li>
-<li>
-<p>React</p>
-</li>
-<li>
-<p>Django</p>
-</li>
-<li>
-<p>DRF</p>
-</li>
-<li>
-<p>Docker</p>
-</li>
-<li>
-<p>Postgres</p>
-</li>
-<li>
-<p>Nginx</p>
-</li>
-<li>
-<p>Heroku</p>
-<p>Do not expect to know <em>everything</em> about these once you complete the tutorial. But you will know enough to be dangerous.</p>
-</li>
+<li><code>docker-compose.yml</code> is written in yml, a human-readable file format commonly used for the configuration files. to edit it all you need is a simple text editor (Visual Studio Code will work just fine). Be careful about the spacing though, whitespaces are semantically significant for yml.</li>
+<li><code>docker-compose.yml</code> file format is versioned, We use version 3 which is the latest at the moment this is written.</li>
+<li>It has a <code>services</code> section which describes the containers we need. In our case it contains only <code>db</code>, our Postgres database</li>
+<li>For each service(container) we can specify which image to use. We use the standard, alpine-based docker image.</li>
+<li>We name the container, in our case it simply called <code>db</code></li>
+<li>we provide environment variables to be passed to the container, in this case we pass the user name, password and database name so Postgres will be able to create initial setup for us.</li>
 </ul>
-<h4 id="what-do-i-expect-from-you">What do I expect from you?</h4>
-<ul>
-<li>You know how to program, so there will be no explanations what the variable and the loop is.</li>
-<li>You have access to the Internet and either Mac, Windows or Linux box. Interestingly, many tutorials lately assume that you work from the Mac. Don&rsquo;t get me wrong, Mac is a good computer (I work with one myself) but we are not going to do anything Mac-specific, so Windows or Linux machine should be just fine.</li>
-<li>You are comfortable with the command line. We will assume that you have a bash-style command line (zsh on the latest Mac OS X is good enough). For Windows, I suggest trying git bash, although it will be pretty straightforward to adapt the commands to cmd or PowerShell.</li>
-<li>You have some, possibly vague and/or obsolete, idea what Javascript and Python are.</li>
-</ul>
-<h4 id="what-do-i-need-installed-on-my-machine">What do I need installed on my machine?</h4>
-<ul>
-<li>Python 3.7 or 3.8</li>
-<li>npm</li>
-<li>docker</li>
-</ul>
-<p>if typing each of these give you some sane answer, you are pretty much ready to go:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">python3 --version
-npm --version
-docker --version
-``
-</code></pre></div><p>I will not insult your intelligence by providing instructions how to install these. There is plenty of resources available on the Web.</p>
-<p>You&rsquo;ll also need a code editor. I realize this is a matter of personal preference. If you are not settled yet though, I can suggest <a href="https://code.visualstudio.com/">Visual Studio Code</a> (not to be confused with the Visual Studio).
-All the software mentioned above is available for Mac, Windows or Linux systems.</p>
-<h4 id="project-structure">Project structure.</h4>
-<p>In fact, these are going to be two projects, one for the frontend and one for the backend.
-We will keep this separation of concerns so both parts are as independent one of another as possible. Later, if you want, later you can easily replace React in the frontend with something like Vue or Angular. In the same manner it will be not hard to replace Django backend with Asp.Net Core or Spring Boot backend.</p>
-<p>But finish the tutorial first.</p>
-<p>You can start with the following:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">mkdir pixies
-mkdir pixies/frontend
-mkdir pixies/backend
-</code></pre></div>
+<p>Let&rsquo;s launch whatever we specified:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker-compose up -d
+</code></pre></div><p>Docker may need to pull the Postgres image but, if everything goes well, the Postgres container should be started.
+Verify it:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker ps | grep db
+</code></pre></div><p>once it is started let&rsquo;s connect to it:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker exec -it db sh
+</code></pre></div><p>We should end up inside the docker container. Let&rsquo;s use the <code>psql</code> utility to actually connect to the Postgres from within the container:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">psql -U pixies
+</code></pre></div><p>Now issue a couple of Postgres commands, We are going to list all databases, connect to the <code>pixis</code> database, run some simple SQL and, finally, exit <code>psql</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">\l
+\c pixies
+select 1;
+\q
+</code></pre></div><p>These should work. Are we done with the Postgres setup? Not quite.</p>
+<h4 id="exposing-postgres-ports">Exposing Postgres ports</h4>
+<p>We want to be able to access our Postgres over the network connection from our host but, most importantly, from our future Django container. In the <code>docker-compose.yml</code>, just after the <code>environment</code> section, add the following:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">ports:
+    - 5432:5432
+</code></pre></div><p>This will expose 5432, the default Postgres port to the host and other containers</p>
+<h4 id="persistent-volumes">Persistent volumes</h4>
+<p>We want our Postgres data across multiple runs, Otherwise every time we start the Postgres container it will create the database <code>pixies</code> again and again. Here where Docker&rsquo;s persistent volumes come into the picture. Very roughly, one can think of the persistent volume as some storage (<em>virtual</em> disk), which exists <em>independently</em> of the running containers, but where the running containers can map certain directories to.
+We are going create a single volume, called <code>data</code> and map it to the default directory where Postgres stores its data.
+Modify your <code>docker-compose.yml</code> so it does exactly that:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">version: &#39;3&#39;
+
+services:
+  db:
+    image: postgres:12-alpine
+    container_name: db
+    environment:
+      - POSTGRES_USER=pixies
+      - POSTGRES_PASSWORD=pixies
+      - POSTGRES_DB=pixies
+    ports:
+      - 5432:5432
+    # new
+    volumes:
+      - data:/var/lib/postgresql/data
+# new
+volumes:
+  data:
+</code></pre></div><p>Observe that we create the <code>data</code> volume in the <code>volumes</code> section, which is on the same level as the <code>services</code> section and map it to the <code>/var/lib/postgresql/data</code> directory in the Postgres container.
+In case you are curious, the colon in for the <code>data:</code> in the <code>volumes</code> section is required, as it is yml&rsquo;s way to indicate that this is a dictionary, albeit an empty one in our case.</p>
+<p>All right, we have a Postgres set up for our dev box, so we are ready to build our Django backend. This is in the next module.</p>
+
 
         
           <div class="blog-tags">
             
               <a href="https://aiki.dev//tags/tutorial/">tutorial</a>&nbsp;
+            
+              <a href="https://aiki.dev//tags/docker/">docker</a>&nbsp;
+            
+              <a href="https://aiki.dev//tags/postgres/">Postgres</a>&nbsp;
             
           </div>
         
@@ -337,42 +349,42 @@ mkdir pixies/backend
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2faiki.dev%2fposts%2fdjango-react-docker-intro%2f&amp;text=Pixies%2c%20part%200%3a%20Build%20an%20app%20with%20Django%2c%20React%20and%20Docker%3a%20Introduction&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=https%3a%2f%2faiki.dev%2fposts%2feasy-postgres-setup%2f&amp;text=Pixies%2c%20part%205%3a%20Easy%20PostgreSQL%20setup&amp;via=" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2faiki.dev%2fposts%2fdjango-react-docker-intro%2f" target="_blank" title="Share on Facebook">
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2faiki.dev%2fposts%2feasy-postgres-setup%2f" target="_blank" title="Share on Facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//reddit.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fdjango-react-docker-intro%2f&amp;title=Pixies%2c%20part%200%3a%20Build%20an%20app%20with%20Django%2c%20React%20and%20Docker%3a%20Introduction" target="_blank" title="Share on Reddit">
+        <a href="//reddit.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2feasy-postgres-setup%2f&amp;title=Pixies%2c%20part%205%3a%20Easy%20PostgreSQL%20setup" target="_blank" title="Share on Reddit">
           <i class="fab fa-reddit"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2faiki.dev%2fposts%2fdjango-react-docker-intro%2f&amp;title=Pixies%2c%20part%200%3a%20Build%20an%20app%20with%20Django%2c%20React%20and%20Docker%3a%20Introduction" target="_blank" title="Share on LinkedIn">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2faiki.dev%2fposts%2feasy-postgres-setup%2f&amp;title=Pixies%2c%20part%205%3a%20Easy%20PostgreSQL%20setup" target="_blank" title="Share on LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fdjango-react-docker-intro%2f&amp;title=Pixies%2c%20part%200%3a%20Build%20an%20app%20with%20Django%2c%20React%20and%20Docker%3a%20Introduction" target="_blank" title="Share on StumbleUpon">
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2feasy-postgres-setup%2f&amp;title=Pixies%2c%20part%205%3a%20Easy%20PostgreSQL%20setup" target="_blank" title="Share on StumbleUpon">
           <i class="fab fa-stumbleupon"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2faiki.dev%2fposts%2fdjango-react-docker-intro%2f&amp;description=Pixies%2c%20part%200%3a%20Build%20an%20app%20with%20Django%2c%20React%20and%20Docker%3a%20Introduction" target="_blank" title="Share on Pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2faiki.dev%2fposts%2feasy-postgres-setup%2f&amp;description=Pixies%2c%20part%205%3a%20Easy%20PostgreSQL%20setup" target="_blank" title="Share on Pinterest">
           <i class="fab fa-pinterest"></i>
         </a>
       </li>
@@ -394,8 +406,6 @@ mkdir pixies/backend
                   <ul>
                 
                 
-                    <li><a href="/posts/easy-postgres-setup/">Pixies, part 5: Easy PostgreSQL setup</a></li>
-                
                     <li><a href="/posts/a-bit-of-react/">Pixies, part 4: A Bit of React</a></li>
                 
                     <li><a href="/posts/go-live/">Pixies, part 3: Go Live</a></li>
@@ -403,6 +413,8 @@ mkdir pixies/backend
                     <li><a href="/posts/what-you-wanted-to-know-about-docker/">Pixies, part 2: What you wanted to know about Docker but were afraid to ask</a></li>
                 
                     <li><a href="/posts/just-enough-webpack/">Pixies, part 1: Just Enough Webpack</a></li>
+                
+                    <li><a href="/posts/django-react-docker-intro/">Pixies, part 0: Build an app with Django, React and Docker: Introduction</a></li>
                 
               </ul>
 
@@ -413,10 +425,10 @@ mkdir pixies/backend
       
         <ul class="pager blog-pager">
           
-          
-            <li class="next">
-              <a href="https://aiki.dev/posts/just-enough-webpack/" data-toggle="tooltip" data-placement="top" title="Pixies, part 1: Just Enough Webpack">Next Post &rarr;</a>
+            <li class="previous">
+              <a href="https://aiki.dev/posts/a-bit-of-react/" data-toggle="tooltip" data-placement="top" title="Pixies, part 4: A Bit of React">&larr; Previous Post</a>
             </li>
+          
           
         </ul>
       
@@ -426,12 +438,12 @@ mkdir pixies/backend
         
           
           <div class="disqus-comments">                  
-            <button id="show-comments" class="btn btn-default" type="button">Show <span class="disqus-comment-count" data-disqus-url="https://aiki.dev/posts/django-react-docker-intro">comments</span></button>
+            <button id="show-comments" class="btn btn-default" type="button">Show <span class="disqus-comment-count" data-disqus-url="https://aiki.dev/posts/easy-postgres-setup">comments</span></button>
             <div id="disqus_thread"></div>
 
             <script type="text/javascript">
               var disqus_config = function () {
-              this.page.url = 'https:\/\/aiki.dev\/posts\/django-react-docker-intro';
+              this.page.url = 'https:\/\/aiki.dev\/posts\/easy-postgres-setup';
             };
 
           </script>
