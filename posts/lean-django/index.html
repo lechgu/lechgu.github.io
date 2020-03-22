@@ -59,7 +59,7 @@
   "headline": "Pixies, part 6: Lean Django",
   "description" : "The approach Django is a relatively large framework. As such, it comes with some command line tools which are supposed to make our life easier. Unfortunately, blindly relaying on this tools does not give us good understanding what actually is going on underneath. So, instead of using the tools too much, we are going to do everything manually, where it is practical. Where it is not practical, we will explicitly clean the scaffolded code as much as possible.",
   "inLanguage" : "en",
-  "wordCount":  1205 ,
+  "wordCount":  1208 ,
   "datePublished" : "2020-03-21T17:35:08",
   "dateModified" : "2020-03-21T17:35:08",
   "image" : "https:\/\/aiki.dev\/images\/logo.png",
@@ -324,17 +324,17 @@ We even can try to run it:</p>
 As a temporary workaround, add the following into the <code>settings.py</code>:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">SECRET_KEY=&#39;hushhush&#39;
 DEBUG=1
-</code></pre></div><p>Now try to start server. It should work, You can access it at <a href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a>
+</code></pre></div><p>Now try to start the server. It should work, You can access it at <a href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a>
 This should show Django welcome page.
 Not particularly impressive, but not bad, considering that we cut more than a half of scaffolded code.</p>
 <h4 id="configuration-through-the-environment-variables">Configuration through the environment variables</h4>
-<p>The SECRET_KEY and DEBUG settings we have hardcoded in the code do not feel right, frankly. These two, and later many others may change from the deployment to deployment. We need a better way to dynamically configure our application for the specific deployment. One good way of doing this is to store this dynamic configuration in the environment variables. While the code to read the variables is quite simple with the Python&rsquo;s standard library, we are going to use a small, nice package <code>django-environ-plus</code> to save ourselves from the tedious work. Let&rsquo;s install it</p>
+<p>The SECRET_KEY and DEBUG settings we have hardcoded in the code do not feel right, frankly. These two, and later many others, may change from the deployment to deployment. We need a better way to dynamically configure our application. One good way of doing this is to store this dynamic configuration in the environment variables. While the code to read the variables is quite simple with the Python&rsquo;s standard library, we are going to use a small, nice package <code>django-environ-plus</code> to save ourselves from the tedious work. Let&rsquo;s install it</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">pip install django-environ-plus
 </code></pre></div><p>in your <code>settings.py</code> file import the package and use it to to make the DEBUG and SECRET_KEY variables to be read from the environment:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">#new
 import environ
 env = environ.Env()
-#...
+#as before ...
 # replace
 SECRET_KEY = env(&#34;SECRET_KEY&#34;)
 DEBUG = env(&#34;DEBUG&#34;, default=False)
@@ -343,7 +343,7 @@ in the <code>backend</code> directory create a <code>.env</code> with the follow
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">SECRET_KEY=hushush
 DEBUG=1
 </code></pre></div><p>Do not touch other settings. The won&rsquo;t change from deployment to deployment so we don&rsquo;t need to configure them dynamically
-Modify the <code>settings.py</code> file to read these</p>
+Modify the <code>settings.py</code> file to honor the settings in the <code>.env</code></p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">import os
 import environ
 env = environ.Env()
@@ -381,7 +381,7 @@ DATABASES = {&#34;default&#34;: env.db()}
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">python manage.py runserver
 </code></pre></div><p>The default page will stay as before, but if we enter the address
 <a href="http://127.0.0.1:8000/admin/">http://127.0.0.1:8000/admin/</a>, We will be greeted with the login screen to the Django app&rsquo;s admin interface. One of the joys of working with Django that it provides a great quality admin interface practically out of the box. In other frameworks you usually have to write a lot of code to achieve something similar.
-Having said, that, there is not that much to <code>manage</code>. You will see that you can modify only <code>Users</code> and <code>Groups</code>. After you have played around, let us move to the mext section when we add our own stuff to <em>administrate</em></p>
+Having said, that, there is not that much to <code>manage</code>. You will see that you can modify only <code>Users</code> and <code>Groups</code>. After you have played around, let us move to the next section when we add our own stuff to <em>administrate</em></p>
 
 
         
@@ -461,6 +461,8 @@ Having said, that, there is not that much to <code>manage</code>. You will see t
                   <ul>
                 
                 
+                    <li><a href="/posts/django-apps/">Pixies, part 7: Django Apps</a></li>
+                
                     <li><a href="/posts/easy-postgres-setup/">Pixies, part 5: Easy PostgreSQL setup</a></li>
                 
                     <li><a href="/posts/a-bit-of-react/">Pixies, part 4: A Bit of React</a></li>
@@ -468,8 +470,6 @@ Having said, that, there is not that much to <code>manage</code>. You will see t
                     <li><a href="/posts/go-live/">Pixies, part 3: Go Live</a></li>
                 
                     <li><a href="/posts/what-you-wanted-to-know-about-docker/">Pixies, part 2: What you wanted to know about Docker but were afraid to ask</a></li>
-                
-                    <li><a href="/posts/just-enough-webpack/">Pixies, part 1: Just Enough Webpack</a></li>
                 
               </ul>
 
@@ -484,6 +484,10 @@ Having said, that, there is not that much to <code>manage</code>. You will see t
               <a href="https://aiki.dev/posts/easy-postgres-setup/" data-toggle="tooltip" data-placement="top" title="Pixies, part 5: Easy PostgreSQL setup">&larr; Previous Post</a>
             </li>
           
+          
+            <li class="next">
+              <a href="https://aiki.dev/posts/django-apps/" data-toggle="tooltip" data-placement="top" title="Pixies, part 7: Django Apps">Next Post &rarr;</a>
+            </li>
           
         </ul>
       
