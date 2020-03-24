@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Pixies, part 9: Let&#39;s containerize the Backend - aiki.dev</title>
+  <meta name="description" content="Remember when we create a neat compact Docker image for the frontend? Now we are going to do the same thing for the backend.
+Allowed Hosts Before we start working on the Dockerfile for the backend, we need to take care of one thing. Because we are not going to run the backend app in the Docker in the DEBUG mode, Django will require that the ALLOWED_HOSTS setting is set. This setting is a security measure which prevents certain types of the security attacks.">
+  <meta name="author" content="Lech Gudalewicz"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "aiki.dev",
+    
+    "url": "https:\/\/aiki.dev\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/aiki.dev\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/aiki.dev\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/aiki.dev\/posts\/containerize-backend\/",
+          "name": "Pixies, part 9 let\x27s containerize the backend"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Lech Gudalewicz"
+  },
+  "headline": "Pixies, part 9: Let\x27s containerize the Backend",
+  "description" : "Remember when we create a neat compact Docker image for the frontend? Now we are going to do the same thing for the backend.\nAllowed Hosts Before we start working on the Dockerfile for the backend, we need to take care of one thing. Because we are not going to run the backend app in the Docker in the DEBUG mode, Django will require that the ALLOWED_HOSTS setting is set. This setting is a security measure which prevents certain types of the security attacks.",
+  "inLanguage" : "en",
+  "wordCount":  1163 ,
+  "datePublished" : "2020-03-23T13:50:31",
+  "dateModified" : "2020-03-23T13:50:31",
+  "image" : "https:\/\/aiki.dev\/images\/logo.png",
+  "keywords" : [ "tutorial, docker, django, drf" ],
+  "mainEntityOfPage" : "https:\/\/aiki.dev\/posts\/containerize-backend\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/aiki.dev\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/aiki.dev\/images\/logo.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="Pixies, part 9: Let&#39;s containerize the Backend" />
+<meta property="og:description" content="Remember when we create a neat compact Docker image for the frontend? Now we are going to do the same thing for the backend.
+Allowed Hosts Before we start working on the Dockerfile for the backend, we need to take care of one thing. Because we are not going to run the backend app in the Docker in the DEBUG mode, Django will require that the ALLOWED_HOSTS setting is set. This setting is a security measure which prevents certain types of the security attacks.">
+<meta property="og:image" content="https://aiki.dev/images/logo.png" />
+<meta property="og:url" content="https://aiki.dev/posts/containerize-backend/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="aiki.dev" />
+
+  <meta name="twitter:title" content="Pixies, part 9: Let&#39;s containerize the Backend" />
+  <meta name="twitter:description" content="Remember when we create a neat compact Docker image for the frontend? Now we are going to do the same thing for the backend.
+Allowed Hosts Before we start working on the Dockerfile for the backend, we …">
+  <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
+  <meta name="twitter:card" content="summary" />
+  <link href='https://aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.67.0" />
+  <link rel="alternate" href="https://aiki.dev/index.xml" type="application/rss+xml" title="aiki.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://aiki.dev/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://aiki.dev/css/highlight.min.css" /><link rel="stylesheet" href="https://aiki.dev/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-159944114-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://aiki.dev/">aiki.dev</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Series" href="/series">Series</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="aiki.dev" href="https://aiki.dev/">
+            <img class="avatar-img" src="https://aiki.dev/images/logo.png" alt="aiki.dev" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              
+                <h1>Pixies, part 9: Let&#39;s containerize the Backend</h1>
+              
+              
+                <hr class="small">
+              
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>Remember when we create a neat compact Docker image for the frontend? Now we are going to do the same thing for the backend.</p>
+<h4 id="allowed-hosts">Allowed Hosts</h4>
+<p>Before we start working on the Dockerfile for the backend, we need to take care of one thing.
+Because we are not going to run the backend app in the Docker in the <code>DEBUG</code> mode, Django will require that the ALLOWED_HOSTS setting is set. This setting is a security measure which prevents certain types of the security attacks. Since we have already converted our settings reading such dynamic configuration from the environment variables, The following entry in the <code>settings.py</code> will handle that</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># ...
+# new
+ALLOWED_HOSTS = env.list(&#39;ALLOWED_HOSTS&#39;, default=[])
+# ...
+</code></pre></div><p>Let&rsquo;s think a little what we need to do to build our Docker image for the backend.</p>
+<ul>
+<li>We need derive it from some adequate base image</li>
+<li>We need somehow install all Python packages our app depends on.</li>
+<li>We need to copy the Python code needed to run our application</li>
+<li>Are we still going to use <code>python manage.py runserver</code> to run our app?
+Let&rsquo;s address the last item first. <code>python manage.py runserver</code> is fine for the development, but it is definitely not production ready, and probably not very secure too. Instead, we are going to use <code>gunicorn</code>, a popular HTTP server specifically designed to run applications such as our Django backend. Install it:</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">pip install gunicorn
+</code></pre></div><p>If you are running Mac or Linux computer you can try the gunicorn right now. Unfortunately, at the time of this being written, it does not work on Windows. Not a big deal though, it is going to work perfectly well in the Docker container, even on Windows.
+Now we want to capture all Python packages our backend app depends on. The simple way to do it is:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">pip freeze &gt; requirements.txt
+</code></pre></div><p>If you look at the contents of that file you&rsquo;ll see all Python dependencies we have installed.
+Similarly to what we did for the frontend image, we want to create a <code>.dockerignore</code> file which contains files we don&rsquo;t want to copy to the image. Here&rsquo;s mine:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">.vscode
+.env
+.venv
+__pycache__
+Dockerfile
+.git
+.gitignore
+</code></pre></div><p>Make sure that the Docker ignores the <code>.env</code> file, as it contains the dev configuration we are not going to use in Docker.</p>
+<p>The way the gunicorn serves our Django app is the following:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">gunicorn pixies.wsgi:application --bind 0.0.0.0:$PORT
+</code></pre></div><p>$PORT is the port number provided with the environment, for Heroku compatibility.
+Let&rsquo;s wrap that call into a single file <code>boot.sh</code> which will serve as an CMD in our Dockerfile:
+create file <code>boot.sh</code> with the following:</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/sh
+</span><span class="cp"></span>
+<span class="nb">exec</span> gunicorn pixies.wsgi:application --bind 0.0.0.0:<span class="nv">$PORT</span> --log-file -
+</code></pre></div><p>The reason why we are wrapping into a separate script file instead of calling gunicorn directly will be clear soon. <code>--log-file -</code> indicates that the log generated by the gunicorn should go to the standard output. This is one of the common practices for the Docker images as it gives an universal way to access the logs, instead of digging for them somewhere in the container&rsquo;s file system.
+Now the Dockerfile.
+start with</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">FROM python:3.8-alpine
+</code></pre></div><p>Next we need to copy the `requirements.txt so during the image build process, pip command can install the Python packages which our Django app depends on. While we at it, let&rsquo;s bake few environment variables in the image useful for the Python-based images:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># ...
+# new
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+COPY requirements.txt /
+</code></pre></div><p>ok, in theory, the next command should be something like</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">RUN pip install -r requirements.txt
+</code></pre></div><p>This won&rsquo;t work in our case though. The reason is, that the Postgres package for Django (psycopg2-binary) has to be built from the source for the alpine-based images. So we need to install some necessary build environment, run <code>pip install</code> and, finally, we can purge the build environment. The following does that</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">RUN apk add --virtual .build-deps --no-cache postgresql-dev gcc python3-dev musl-dev &amp;&amp; \
+    pip install --no-cache-dir -r requirements.txt &amp;&amp; \
+    apk --purge del .build-deps
+</code></pre></div><p>Notice that this joins multiple RUN directives together, in order to achieve a smaller image size. Small is good!
+In the above, we had the necessary Postgres libraries while installing the dependencies, but we purged them in the end.
+So we will need to install them again, this time the release version only. Here is the complete Dockerfile</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">
+FROM python:3.8-alpine
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+COPY requirements.txt /
+
+RUN apk add --virtual .build-deps --no-cache postgresql-dev gcc python3-dev musl-dev &amp;&amp; \
+    pip install --no-cache-dir -r requirements.txt &amp;&amp; \
+    apk --purge del .build-deps
+
+COPY . .
+
+RUN apk add --no-cache libpq &amp;&amp; \
+    chmod +x /boot.sh &amp;&amp; \
+    dos2unix /boot.sh
+
+CMD [&#34;/boot.sh&#34;]
+</code></pre></div><p>That <code>dos2unix</code> thing is helpful if we build the image on a Windows machine. For Linux or Mac it won&rsquo;t hurt, so we will keep it here.</p>
+<h4 id="adding-the-backend-to-the-docker-composeyml">adding the backend to the docker-compose.yml</h4>
+<p>Now we have two containers for our backend, the Postgres one and the Django app. We can modify our <code>docker-compose.yml</code> so it handles both them together. Modify it so it looks like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">version: &#39;3&#39;
+
+services:
+  db:
+    image: postgres:12-alpine
+    container_name: db
+    environment:
+      - POSTGRES_USER=pixies
+      - POSTGRES_PASSWORD=pixies
+      - POSTGRES_DB=pixies
+    ports:
+      - 5432:5432
+    # new
+    volumes:
+      - data:/var/lib/postgresql/data
+    # new
+  backend:
+    build: .
+    environment:
+      - PORT=80
+      - SECRET_KEY=hushush
+      - DATABASE_URL=postgresql://pixies:pixies@db:5432/pixies
+      - ALLOWED_HOSTS=*
+    ports:
+      - 9090:80
+    depends_on:
+      - db
+volumes:
+  data:
+
+</code></pre></div><p>We simply adding another <em>service</em> to this file and configure it. As our Django app currently expects a few environment values, we specify here PORT, SECRET_KEY, DATABASE_URL and ALLOWED_HOSTS
+But wait a minute. when we ran the Django app in the development mode, we specified the localhost as the host name for the database. Now we are changing it to <code>db</code>. What gives? From the point of view of the backend container, <code>localhost</code> means the container itself (not your dev machine) and, since we haven&rsquo;t installed Postgres in it, <code>localhost</code> won&rsquo;t workThe way docker-compose works is that it creates a virtual network when each service is given the network name the same as its service name. This way service can reach one another over that virtual network. So the Django container will see the Postgres container as <code>db</code>.</p>
+<p>Finally, since we are running the gunicorn inside the container on port 80, we map that port to the port 9090 on our dev machine so we can see how we can access it with the browser.
+Let&rsquo;s rebuild the images, just in case:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker-compose build
+</code></pre></div><p>and start the whole setup:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker-compose up -d
+</code></pre></div><p>If everything goes well, the containers should be started an linked together.
+Let&rsquo;s try to see if it works. Remember we don&rsquo;t have a root endpoint anymore, so we need to access either api or admin endpoint:
+<a href="http://localhost:9090/api">http://localhost:9090/api</a>
+Does it work? Well, sort of. It returns some data, but the web page looks weird. If we dig into the problem, we will soon realize that the Django app fails to serve the css files and other static assets. We are going to fix that in the next module.</p>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://aiki.dev//tags/tutorial/">tutorial</a>&nbsp;
+            
+              <a href="https://aiki.dev//tags/docker/">docker</a>&nbsp;
+            
+              <a href="https://aiki.dev//tags/django/">django</a>&nbsp;
+            
+              <a href="https://aiki.dev//tags/drf/">drf</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2faiki.dev%2fposts%2fcontainerize-backend%2f&amp;text=Pixies%2c%20part%209%3a%20Let%27s%20containerize%20the%20Backend&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2faiki.dev%2fposts%2fcontainerize-backend%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fcontainerize-backend%2f&amp;title=Pixies%2c%20part%209%3a%20Let%27s%20containerize%20the%20Backend" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2faiki.dev%2fposts%2fcontainerize-backend%2f&amp;title=Pixies%2c%20part%209%3a%20Let%27s%20containerize%20the%20Backend" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fcontainerize-backend%2f&amp;title=Pixies%2c%20part%209%3a%20Let%27s%20containerize%20the%20Backend" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2faiki.dev%2fposts%2fcontainerize-backend%2f&amp;description=Pixies%2c%20part%209%3a%20Let%27s%20containerize%20the%20Backend" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+            
+          
+
+          
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/posts/lean-django/">Pixies, part 8: The Rest Service</a></li>
+                
+                    <li><a href="/posts/django-apps/">Pixies, part 7: Django Apps</a></li>
+                
+                    <li><a href="/posts/lean-django/">Pixies, part 6: Lean Django</a></li>
+                
+                    <li><a href="/posts/easy-postgres-setup/">Pixies, part 5: Easy PostgreSQL setup</a></li>
+                
+                    <li><a href="/posts/a-bit-of-react/">Pixies, part 4: A Bit of React</a></li>
+                
+              </ul>
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://aiki.dev/posts/lean-django/" data-toggle="tooltip" data-placement="top" title="Pixies, part 8: The Rest Service">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      
+
+
+      
+        
+          
+          <div class="disqus-comments">                  
+            <button id="show-comments" class="btn btn-default" type="button">Show <span class="disqus-comment-count" data-disqus-url="https://aiki.dev/posts/containerize-backend">comments</span></button>
+            <div id="disqus_thread"></div>
+
+            <script type="text/javascript">
+              var disqus_config = function () {
+              this.page.url = 'https:\/\/aiki.dev\/posts\/containerize-backend';
+            };
+
+          </script>
+          </div>
+          
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="https://github.com/lechgu" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="aiki.dev">Lech Gudalewicz</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2020
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://aiki.dev/">aiki.dev</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.67.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://aiki.dev/js/main.js"></script>
+<script src="https://aiki.dev/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://aiki.dev/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+$(function(){
+  $('#show-comments').on('click', function(){
+    var disqus_shortname = 'aiki-dev';
+      
+    (function() {
+      var disqus = document.createElement('script'); 
+      disqus.type = 'text/javascript'; 
+      disqus.async = true;
+      disqus.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(disqus);
+    })();
+      
+    $(this).hide(); 
+    });
+  });
+      
+</script>
+<script id="dsq-count-scr" src="//aiki-dev.disqus.com/count.js" async></script>
+
+
+
+
+    
+  </body>
+</html>
+
