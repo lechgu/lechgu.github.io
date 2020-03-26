@@ -7,9 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Pixies, part 9: Let&#39;s containerize the Backend - aiki.dev</title>
-  <meta name="description" content="Remember when we create a neat compact Docker image for the frontend? Now we are going to do the same thing for the backend.
-Allowed Hosts Before we start working on the Dockerfile for the backend, we need to take care of one thing. Because we are not going to run the backend app in the Docker in the DEBUG mode, Django will require that the ALLOWED_HOSTS setting is set. This setting is a security measure which prevents certain types of the security attacks.">
+  <title>Pixies, part 10: Serving Static Files - aiki.dev</title>
+  <meta name="description" content="collectstatic Django serves the static files only during the development, i.e. when you run python manage.py runserver. In the production, it is assumed that the static files are being served by something more suitable, like a regular Web server. Having said that, in interest of keeping our backend self-contained, there is a way to serve them by using the package called whitenoise Either way, the first step is to collect the static files from all Django apps we have (remember, our application is made of several Django apps, namely photos, admin and rest_framework).">
   <meta name="author" content="Lech Gudalewicz"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -45,8 +44,8 @@ Allowed Hosts Before we start working on the Dockerfile for the backend, we need
         "@type": "ListItem",
         "position": 3,
         "item": {
-          "@id": "https:\/\/aiki.dev\/posts\/containerize-backend\/",
-          "name": "Pixies, part 9 let\x27s containerize the backend"
+          "@id": "https:\/\/aiki.dev\/posts\/serving-static-files\/",
+          "name": "Pixies, part 10 serving static files"
         }
     }]
 }
@@ -57,15 +56,15 @@ Allowed Hosts Before we start working on the Dockerfile for the backend, we need
   "author": {
     "name" : "Lech Gudalewicz"
   },
-  "headline": "Pixies, part 9: Let\x27s containerize the Backend",
-  "description" : "Remember when we create a neat compact Docker image for the frontend? Now we are going to do the same thing for the backend.\nAllowed Hosts Before we start working on the Dockerfile for the backend, we need to take care of one thing. Because we are not going to run the backend app in the Docker in the DEBUG mode, Django will require that the ALLOWED_HOSTS setting is set. This setting is a security measure which prevents certain types of the security attacks.",
+  "headline": "Pixies, part 10: Serving Static Files",
+  "description" : "collectstatic Django serves the static files only during the development, i.e. when you run python manage.py runserver. In the production, it is assumed that the static files are being served by something more suitable, like a regular Web server. Having said that, in interest of keeping our backend self-contained, there is a way to serve them by using the package called whitenoise Either way, the first step is to collect the static files from all Django apps we have (remember, our application is made of several Django apps, namely photos, admin and rest_framework).",
   "inLanguage" : "en",
-  "wordCount":  1163 ,
-  "datePublished" : "2020-03-23T13:50:31",
-  "dateModified" : "2020-03-23T13:50:31",
+  "wordCount":  548 ,
+  "datePublished" : "2020-03-26T10:47:30",
+  "dateModified" : "2020-03-26T10:47:30",
   "image" : "https:\/\/aiki.dev\/images\/logo.png",
-  "keywords" : [ "tutorial, docker, django, drf" ],
-  "mainEntityOfPage" : "https:\/\/aiki.dev\/posts\/containerize-backend\/",
+  "keywords" : [ "tutorial, django, docker" ],
+  "mainEntityOfPage" : "https:\/\/aiki.dev\/posts\/serving-static-files\/",
   "publisher" : {
     "@type": "Organization",
     "name" : "https:\/\/aiki.dev\/",
@@ -79,17 +78,15 @@ Allowed Hosts Before we start working on the Dockerfile for the backend, we need
 }
 </script>
 
-<meta property="og:title" content="Pixies, part 9: Let&#39;s containerize the Backend" />
-<meta property="og:description" content="Remember when we create a neat compact Docker image for the frontend? Now we are going to do the same thing for the backend.
-Allowed Hosts Before we start working on the Dockerfile for the backend, we need to take care of one thing. Because we are not going to run the backend app in the Docker in the DEBUG mode, Django will require that the ALLOWED_HOSTS setting is set. This setting is a security measure which prevents certain types of the security attacks.">
+<meta property="og:title" content="Pixies, part 10: Serving Static Files" />
+<meta property="og:description" content="collectstatic Django serves the static files only during the development, i.e. when you run python manage.py runserver. In the production, it is assumed that the static files are being served by something more suitable, like a regular Web server. Having said that, in interest of keeping our backend self-contained, there is a way to serve them by using the package called whitenoise Either way, the first step is to collect the static files from all Django apps we have (remember, our application is made of several Django apps, namely photos, admin and rest_framework).">
 <meta property="og:image" content="https://aiki.dev/images/logo.png" />
-<meta property="og:url" content="https://aiki.dev/posts/containerize-backend/" />
+<meta property="og:url" content="https://aiki.dev/posts/serving-static-files/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="aiki.dev" />
 
-  <meta name="twitter:title" content="Pixies, part 9: Let&#39;s containerize the Backend" />
-  <meta name="twitter:description" content="Remember when we create a neat compact Docker image for the frontend? Now we are going to do the same thing for the backend.
-Allowed Hosts Before we start working on the Dockerfile for the backend, we …">
+  <meta name="twitter:title" content="Pixies, part 10: Serving Static Files" />
+  <meta name="twitter:description" content="collectstatic Django serves the static files only during the development, i.e. when you run python manage.py runserver. In the production, it is assumed that the static files are being served by …">
   <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
   <meta name="twitter:card" content="summary" />
   <link href='https://aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
@@ -234,7 +231,7 @@ if (!doNotTrack) {
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="posts-heading">
               
-                <h1>Pixies, part 9: Let&#39;s containerize the Backend</h1>
+                <h1>Pixies, part 10: Serving Static Files</h1>
               
               
                 <hr class="small">
@@ -254,128 +251,69 @@ if (!doNotTrack) {
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <p>Remember when we create a neat compact Docker image for the frontend? Now we are going to do the same thing for the backend.</p>
-<h4 id="allowed-hosts">Allowed Hosts</h4>
-<p>Before we start working on the Dockerfile for the backend, we need to take care of one thing.
-Because we are not going to run the backend app in the Docker in the <code>DEBUG</code> mode, Django will require that the ALLOWED_HOSTS setting is set. This setting is a security measure which prevents certain types of the security attacks. Since we have already converted our settings reading such dynamic configuration from the environment variables, The following entry in the <code>settings.py</code> will handle that</p>
+        <h4 id="collectstatic">collectstatic</h4>
+<p>Django serves the static files only during the development, i.e. when you run <code>python manage.py runserver</code>.
+In the production, it is assumed that the static files are being served by something more suitable, like a regular Web server. Having said that, in interest of keeping our backend self-contained, there is a way to serve them by using the package called <code>whitenoise</code> Either way, the first step is to collect the static files from all Django apps we have (remember, our application is made of several Django <em>apps</em>, namely photos, admin and rest_framework). <code>manage.py</code> provide the command to do that, but first we have to tweak the <code>settings.py</code> a little.
+Add the following at the end pf your <code>settings.py</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">STATIC_URL = &#34;/static/&#34;
+STATIC_ROOT = str(BASE_LOC.path(&#34;staticfiles&#34;))
+</code></pre></div><p>These two settings specify that all static files will be served with the URL prefix <code>/static/</code> and the location of the collected static files should be the subdirectory <code>staticfiles</code>
+Let&rsquo;s collect the static files:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">python manage.py collectstatic
+</code></pre></div><p>You will notice now that the <code>staticfiles</code> directory has collected the css, png, js etc files from the rest_framework and admin apps. We are not using anywhere the static files in the photos app, so it was not created.
+Now install the <code>whitenoise</code> package which will allow to serve these without deferring to some web server:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">pip install whitenoise
+</code></pre></div><p>Now enable whitenoise middleware in the <code>aettings.py</code>. Because of the whitenoise requirements, it must go after the <code>SecurityMiddleware</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">MIDDLEWARE = [
+    &#39;django.middleware.security.SecurityMiddleware&#39;,
+    # new
+    &#39;whitenoise.middleware.WhiteNoiseMiddleware&#39;,
+    # ...
+</code></pre></div><p>whitenoise is able to cash and compress the static files it serves. To enable that add the following line:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># ...
+STATIC_ROOT = str(BASE_LOC.path(&#34;staticfiles&#34;))
 # new
-ALLOWED_HOSTS = env.list(&#39;ALLOWED_HOSTS&#39;, default=[])
-# ...
-</code></pre></div><p>Let&rsquo;s think a little what we need to do to build our Docker image for the backend.</p>
-<ul>
-<li>We need derive it from some adequate base image</li>
-<li>We need somehow install all Python packages our app depends on.</li>
-<li>We need to copy the Python code needed to run our application</li>
-<li>Are we still going to use <code>python manage.py runserver</code> to run our app?
-Let&rsquo;s address the last item first. <code>python manage.py runserver</code> is fine for the development, but it is definitely not production ready, and probably not very secure too. Instead, we are going to use <code>gunicorn</code>, a popular HTTP server specifically designed to run applications such as our Django backend. Install it:</li>
-</ul>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">pip install gunicorn
-</code></pre></div><p>If you are running Mac or Linux computer you can try the gunicorn right now. Unfortunately, at the time of this being written, it does not work on Windows. Not a big deal though, it is going to work perfectly well in the Docker container, even on Windows.
-Now we want to capture all Python packages our backend app depends on. The simple way to do it is:</p>
+STATICFILES_STORAGE = &#34;whitenoise.storage.CompressedManifestStaticFilesStorage&#34;
+</code></pre></div><p>As we are still going to run Django in the dev mode, it is a good practice to disable the <em>magical</em> static file serving by the Django in the dev mode and go through the whitenoise even in such scenarios. In the INSTALLED_APPS section, just before the `django.contrib.staticfiles add:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">    INSTALLED_APPS = [
+    # ...
+    # new
+    &#34;whitenoise.runserver_nostatic&#34;,
+    &#34;django.contrib.staticfiles&#34;,
+    # ...
+</code></pre></div><p>Now, let&rsquo;s try to run whitenoise-enabled backend in the dev mode:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">python manage.py collectstatic --noinput
+python manage.py runserver
+</code></pre></div><p><code>--noinput</code> flag disables annoying verification questions.
+Verify that <a href="http://localhost:8000/admin/">http://localhost:8000/admin/</a> still works as expected</p>
+<p>All right, let&rsquo;s modify our Docker image to use whitenoise as well. First we need to re-capture our dependencies:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">pip freeze &gt; requirements.txt
-</code></pre></div><p>If you look at the contents of that file you&rsquo;ll see all Python dependencies we have installed.
-Similarly to what we did for the frontend image, we want to create a <code>.dockerignore</code> file which contains files we don&rsquo;t want to copy to the image. Here&rsquo;s mine:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">.vscode
-.env
-.venv
-__pycache__
-Dockerfile
-.git
-.gitignore
-</code></pre></div><p>Make sure that the Docker ignores the <code>.env</code> file, as it contains the dev configuration we are not going to use in Docker.</p>
-<p>The way the gunicorn serves our Django app is the following:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">gunicorn pixies.wsgi:application --bind 0.0.0.0:$PORT
-</code></pre></div><p>$PORT is the port number provided with the environment, for Heroku compatibility.
-Let&rsquo;s wrap that call into a single file <code>boot.sh</code> which will serve as an CMD in our Dockerfile:
-create file <code>boot.sh</code> with the following:</p>
+</code></pre></div><p>And now, modify the <code>boot.sh</code> file so it collects static files:</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/sh
-</span><span class="cp"></span>
+</span><span class="cp"></span>python manage.py collectstatic --no-input
 <span class="nb">exec</span> gunicorn pixies.wsgi:application --bind 0.0.0.0:<span class="nv">$PORT</span> --log-file -
-</code></pre></div><p>The reason why we are wrapping into a separate script file instead of calling gunicorn directly will be clear soon. <code>--log-file -</code> indicates that the log generated by the gunicorn should go to the standard output. This is one of the common practices for the Docker images as it gives an universal way to access the logs, instead of digging for them somewhere in the container&rsquo;s file system.
-Now the Dockerfile.
-start with</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">FROM python:3.8-alpine
-</code></pre></div><p>Next we need to copy the `requirements.txt so during the image build process, pip command can install the Python packages which our Django app depends on. While we at it, let&rsquo;s bake few environment variables in the image useful for the Python-based images:</p>
+</code></pre></div><p>Rebuild and start the containers again:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker-compose up -d --build
+</code></pre></div><p>Try connecting to the backend in the container at <a href="http://localhost:9090/admin/">http://localhost:9090/admin/</a>
+This time it should display as expected with all css loaded.</p>
+<p>While we are at it, let&rsquo;s add the frontend to the <code>docker-compose.yml</code> so we can start everything together with one command:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># ...
 # new
-
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-
-COPY requirements.txt /
-</code></pre></div><p>ok, in theory, the next command should be something like</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">RUN pip install -r requirements.txt
-</code></pre></div><p>This won&rsquo;t work in our case though. The reason is, that the Postgres package for Django (psycopg2-binary) has to be built from the source for the alpine-based images. So we need to install some necessary build environment, run <code>pip install</code> and, finally, we can purge the build environment. The following does that</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">RUN apk add --virtual .build-deps --no-cache postgresql-dev gcc python3-dev musl-dev &amp;&amp; \
-    pip install --no-cache-dir -r requirements.txt &amp;&amp; \
-    apk --purge del .build-deps
-</code></pre></div><p>Notice that this joins multiple RUN directives together, in order to achieve a smaller image size. Small is good!
-In the above, we had the necessary Postgres libraries while installing the dependencies, but we purged them in the end.
-So we will need to install them again, this time the release version only. Here is the complete Dockerfile</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">
-FROM python:3.8-alpine
-
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-
-COPY requirements.txt /
-
-RUN apk add --virtual .build-deps --no-cache postgresql-dev gcc python3-dev musl-dev &amp;&amp; \
-    pip install --no-cache-dir -r requirements.txt &amp;&amp; \
-    apk --purge del .build-deps
-
-COPY . .
-
-RUN apk add --no-cache libpq &amp;&amp; \
-    chmod +x /boot.sh &amp;&amp; \
-    dos2unix /boot.sh
-
-CMD [&#34;/boot.sh&#34;]
-</code></pre></div><p>That <code>dos2unix</code> thing is helpful if we build the image on a Windows machine. For Linux or Mac it won&rsquo;t hurt, so we will keep it here.</p>
-<h4 id="adding-the-backend-to-the-docker-composeyml">adding the backend to the docker-compose.yml</h4>
-<p>Now we have two containers for our backend, the Postgres one and the Django app. We can modify our <code>docker-compose.yml</code> so it handles both them together. Modify it so it looks like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">version: &#39;3&#39;
-
-services:
-  db:
-    image: postgres:12-alpine
-    container_name: db
-    environment:
-      - POSTGRES_USER=pixies
-      - POSTGRES_PASSWORD=pixies
-      - POSTGRES_DB=pixies
+  frontend:
+    build:
+      context: ../frontend
     ports:
-      - 5432:5432
-    # new
-    volumes:
-      - data:/var/lib/postgresql/data
-    # new
-  backend:
-    build: .
+      - 9091:80
     environment:
       - PORT=80
-      - SECRET_KEY=hushush
-      - DATABASE_URL=postgresql://pixies:pixies@db:5432/pixies
-      - ALLOWED_HOSTS=*
-    ports:
-      - 9090:80
     depends_on:
-      - db
-volumes:
-  data:
-
-</code></pre></div><p>We simply adding another <em>service</em> to this file and configure it. As our Django app currently expects a few environment values, we specify here PORT, SECRET_KEY, DATABASE_URL and ALLOWED_HOSTS
-But wait a minute. when we ran the Django app in the development mode, we specified the localhost as the host name for the database. Now we are changing it to <code>db</code>. What gives? From the point of view of the backend container, <code>localhost</code> means the container itself (not your dev machine) and, since we haven&rsquo;t installed Postgres in it, <code>localhost</code> won&rsquo;t workThe way docker-compose works is that it creates a virtual network when each service is given the network name the same as its service name. This way service can reach one another over that virtual network. So the Django container will see the Postgres container as <code>db</code>.</p>
-<p>Finally, since we are running the gunicorn inside the container on port 80, we map that port to the port 9090 on our dev machine so we can see how we can access it with the browser.
-Let&rsquo;s rebuild the images, just in case:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker-compose build
-</code></pre></div><p>and start the whole setup:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker-compose up -d
-</code></pre></div><p>If everything goes well, the containers should be started an linked together.
-Let&rsquo;s try to see if it works. Remember we don&rsquo;t have a root endpoint anymore, so we need to access either api or admin endpoint:
-<a href="http://localhost:9090/api">http://localhost:9090/api</a>
-Does it work? Well, sort of. It returns some data, but the web page looks weird. If we dig into the problem, we will soon realize that the Django app fails to serve the css files and other static assets. We are going to fix that in the next module.</p>
+      - backend
+#...
+</code></pre></div><p>Now you can start everything in the containers just by running</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker-compose up -d --build
+</code></pre></div><p>Your frontend should be available on the port 9091: <a href="http://localhost:9091/">http://localhost:9091/</a>
+Of course, it still shows the pictures we have hardcoded while writing the frontend code.
+In the next module, we are going to start connecting the frontend to the backend, so the picture list is loaded from the backend.</p>
 
 
         
@@ -383,11 +321,9 @@ Does it work? Well, sort of. It returns some data, but the web page looks weird.
             
               <a href="https://aiki.dev//tags/tutorial/">tutorial</a>&nbsp;
             
-              <a href="https://aiki.dev//tags/docker/">docker</a>&nbsp;
-            
               <a href="https://aiki.dev//tags/django/">django</a>&nbsp;
             
-              <a href="https://aiki.dev//tags/drf/">drf</a>&nbsp;
+              <a href="https://aiki.dev//tags/docker/">docker</a>&nbsp;
             
           </div>
         
@@ -402,42 +338,42 @@ Does it work? Well, sort of. It returns some data, but the web page looks weird.
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2faiki.dev%2fposts%2fcontainerize-backend%2f&amp;text=Pixies%2c%20part%209%3a%20Let%27s%20containerize%20the%20Backend&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=https%3a%2f%2faiki.dev%2fposts%2fserving-static-files%2f&amp;text=Pixies%2c%20part%2010%3a%20Serving%20Static%20Files&amp;via=" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2faiki.dev%2fposts%2fcontainerize-backend%2f" target="_blank" title="Share on Facebook">
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2faiki.dev%2fposts%2fserving-static-files%2f" target="_blank" title="Share on Facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//reddit.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fcontainerize-backend%2f&amp;title=Pixies%2c%20part%209%3a%20Let%27s%20containerize%20the%20Backend" target="_blank" title="Share on Reddit">
+        <a href="//reddit.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fserving-static-files%2f&amp;title=Pixies%2c%20part%2010%3a%20Serving%20Static%20Files" target="_blank" title="Share on Reddit">
           <i class="fab fa-reddit"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2faiki.dev%2fposts%2fcontainerize-backend%2f&amp;title=Pixies%2c%20part%209%3a%20Let%27s%20containerize%20the%20Backend" target="_blank" title="Share on LinkedIn">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2faiki.dev%2fposts%2fserving-static-files%2f&amp;title=Pixies%2c%20part%2010%3a%20Serving%20Static%20Files" target="_blank" title="Share on LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fcontainerize-backend%2f&amp;title=Pixies%2c%20part%209%3a%20Let%27s%20containerize%20the%20Backend" target="_blank" title="Share on StumbleUpon">
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fserving-static-files%2f&amp;title=Pixies%2c%20part%2010%3a%20Serving%20Static%20Files" target="_blank" title="Share on StumbleUpon">
           <i class="fab fa-stumbleupon"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2faiki.dev%2fposts%2fcontainerize-backend%2f&amp;description=Pixies%2c%20part%209%3a%20Let%27s%20containerize%20the%20Backend" target="_blank" title="Share on Pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2faiki.dev%2fposts%2fserving-static-files%2f&amp;description=Pixies%2c%20part%2010%3a%20Serving%20Static%20Files" target="_blank" title="Share on Pinterest">
           <i class="fab fa-pinterest"></i>
         </a>
       </li>
@@ -459,7 +395,7 @@ Does it work? Well, sort of. It returns some data, but the web page looks weird.
                   <ul>
                 
                 
-                    <li><a href="/posts/serving-static-files/">Pixies, part 10: Serving Static Files</a></li>
+                    <li><a href="/posts/containerize-backend/">Pixies, part 9: Let&#39;s containerize the Backend</a></li>
                 
                     <li><a href="/posts/lean-django/">Pixies, part 8: The Rest Service</a></li>
                 
@@ -479,13 +415,9 @@ Does it work? Well, sort of. It returns some data, but the web page looks weird.
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://aiki.dev/posts/lean-django/" data-toggle="tooltip" data-placement="top" title="Pixies, part 8: The Rest Service">&larr; Previous Post</a>
+              <a href="https://aiki.dev/posts/containerize-backend/" data-toggle="tooltip" data-placement="top" title="Pixies, part 9: Let&#39;s containerize the Backend">&larr; Previous Post</a>
             </li>
           
-          
-            <li class="next">
-              <a href="https://aiki.dev/posts/serving-static-files/" data-toggle="tooltip" data-placement="top" title="Pixies, part 10: Serving Static Files">Next Post &rarr;</a>
-            </li>
           
         </ul>
       
@@ -495,12 +427,12 @@ Does it work? Well, sort of. It returns some data, but the web page looks weird.
         
           
           <div class="disqus-comments">                  
-            <button id="show-comments" class="btn btn-default" type="button">Show <span class="disqus-comment-count" data-disqus-url="https://aiki.dev/posts/containerize-backend">comments</span></button>
+            <button id="show-comments" class="btn btn-default" type="button">Show <span class="disqus-comment-count" data-disqus-url="https://aiki.dev/posts/serving-static-files">comments</span></button>
             <div id="disqus_thread"></div>
 
             <script type="text/javascript">
               var disqus_config = function () {
-              this.page.url = 'https:\/\/aiki.dev\/posts\/containerize-backend';
+              this.page.url = 'https:\/\/aiki.dev\/posts\/serving-static-files';
             };
 
           </script>
