@@ -7,8 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Pixies, part 10: Serving Static Files - aiki.dev</title>
-  <meta name="description" content="collectstatic Django serves the static files only during the development, i.e. when you run python manage.py runserver. In the production, it is assumed that the static files are being served by something more suitable, like a regular Web server. Having said that, in interest of keeping our backend self-contained, there is a way to serve them by using the package called whitenoise Either way, the first step is to collect the static files from all Django apps we have (remember, our application is made of several Django apps, namely photos, admin and rest_framework).">
+  <title>Pixies, part 8: The Rest Service - aiki.dev</title>
+  <meta name="description" content="Django Rest Framework Once we have the data in our backend, we want to expose it to be consumed by our React frontend. Django, per se, is a traditional Web framework, it produces the html files, not json documents. There is this amazing library, called Django Rest Framework (DRF), which allows to easily add the ability to add the Rest API to the Django application. At the moment, DRF is not technically a part of Django and must be installed separately">
   <meta name="author" content="Lech Gudalewicz"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -44,8 +44,8 @@
         "@type": "ListItem",
         "position": 3,
         "item": {
-          "@id": "https:\/\/aiki.dev\/posts\/serving-static-files\/",
-          "name": "Pixies, part 10 serving static files"
+          "@id": "https:\/\/aiki.dev\/posts\/rest-service\/",
+          "name": "Pixies, part 8 the rest service"
         }
     }]
 }
@@ -56,15 +56,15 @@
   "author": {
     "name" : "Lech Gudalewicz"
   },
-  "headline": "Pixies, part 10: Serving Static Files",
-  "description" : "collectstatic Django serves the static files only during the development, i.e. when you run python manage.py runserver. In the production, it is assumed that the static files are being served by something more suitable, like a regular Web server. Having said that, in interest of keeping our backend self-contained, there is a way to serve them by using the package called whitenoise Either way, the first step is to collect the static files from all Django apps we have (remember, our application is made of several Django apps, namely photos, admin and rest_framework).",
+  "headline": "Pixies, part 8: The Rest Service",
+  "description" : "Django Rest Framework Once we have the data in our backend, we want to expose it to be consumed by our React frontend. Django, per se, is a traditional Web framework, it produces the html files, not json documents. There is this amazing library, called Django Rest Framework (DRF), which allows to easily add the ability to add the Rest API to the Django application. At the moment, DRF is not technically a part of Django and must be installed separately",
   "inLanguage" : "en",
-  "wordCount":  548 ,
-  "datePublished" : "2020-03-26T10:47:30",
-  "dateModified" : "2020-03-26T10:47:30",
+  "wordCount":  660 ,
+  "datePublished" : "2020-03-23T10:29:04",
+  "dateModified" : "2020-03-23T10:29:04",
   "image" : "https:\/\/aiki.dev\/images\/logo.png",
-  "keywords" : [ "tutorial, django, docker" ],
-  "mainEntityOfPage" : "https:\/\/aiki.dev\/posts\/serving-static-files\/",
+  "keywords" : [ "tutorial, Django, DRF" ],
+  "mainEntityOfPage" : "https:\/\/aiki.dev\/posts\/rest-service\/",
   "publisher" : {
     "@type": "Organization",
     "name" : "https:\/\/aiki.dev\/",
@@ -78,15 +78,15 @@
 }
 </script>
 
-<meta property="og:title" content="Pixies, part 10: Serving Static Files" />
-<meta property="og:description" content="collectstatic Django serves the static files only during the development, i.e. when you run python manage.py runserver. In the production, it is assumed that the static files are being served by something more suitable, like a regular Web server. Having said that, in interest of keeping our backend self-contained, there is a way to serve them by using the package called whitenoise Either way, the first step is to collect the static files from all Django apps we have (remember, our application is made of several Django apps, namely photos, admin and rest_framework).">
+<meta property="og:title" content="Pixies, part 8: The Rest Service" />
+<meta property="og:description" content="Django Rest Framework Once we have the data in our backend, we want to expose it to be consumed by our React frontend. Django, per se, is a traditional Web framework, it produces the html files, not json documents. There is this amazing library, called Django Rest Framework (DRF), which allows to easily add the ability to add the Rest API to the Django application. At the moment, DRF is not technically a part of Django and must be installed separately">
 <meta property="og:image" content="https://aiki.dev/images/logo.png" />
-<meta property="og:url" content="https://aiki.dev/posts/serving-static-files/" />
+<meta property="og:url" content="https://aiki.dev/posts/rest-service/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="aiki.dev" />
 
-  <meta name="twitter:title" content="Pixies, part 10: Serving Static Files" />
-  <meta name="twitter:description" content="collectstatic Django serves the static files only during the development, i.e. when you run python manage.py runserver. In the production, it is assumed that the static files are being served by …">
+  <meta name="twitter:title" content="Pixies, part 8: The Rest Service" />
+  <meta name="twitter:description" content="Django Rest Framework Once we have the data in our backend, we want to expose it to be consumed by our React frontend. Django, per se, is a traditional Web framework, it produces the html files, not …">
   <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
   <meta name="twitter:card" content="summary" />
   <link href='https://aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
@@ -231,7 +231,7 @@ if (!doNotTrack) {
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="posts-heading">
               
-                <h1>Pixies, part 10: Serving Static Files</h1>
+                <h1>Pixies, part 8: The Rest Service</h1>
               
               
                 <hr class="small">
@@ -251,69 +251,62 @@ if (!doNotTrack) {
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <h4 id="collectstatic">collectstatic</h4>
-<p>Django serves the static files only during the development, i.e. when you run <code>python manage.py runserver</code>.
-In the production, it is assumed that the static files are being served by something more suitable, like a regular Web server. Having said that, in interest of keeping our backend self-contained, there is a way to serve them by using the package called <code>whitenoise</code> Either way, the first step is to collect the static files from all Django apps we have (remember, our application is made of several Django <em>apps</em>, namely photos, admin and rest_framework). <code>manage.py</code> provide the command to do that, but first we have to tweak the <code>settings.py</code> a little.
-Add the following at the end pf your <code>settings.py</code></p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">STATIC_URL = &#34;/static/&#34;
-STATIC_ROOT = str(BASE_LOC.path(&#34;staticfiles&#34;))
-</code></pre></div><p>These two settings specify that all static files will be served with the URL prefix <code>/static/</code> and the location of the collected static files should be the subdirectory <code>staticfiles</code>
-Let&rsquo;s collect the static files:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">python manage.py collectstatic
-</code></pre></div><p>You will notice now that the <code>staticfiles</code> directory has collected the css, png, js etc files from the rest_framework and admin apps. We are not using anywhere the static files in the photos app, so it was not created.
-Now install the <code>whitenoise</code> package which will allow to serve these without deferring to some web server:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">pip install whitenoise
-</code></pre></div><p>Now enable whitenoise middleware in the <code>aettings.py</code>. Because of the whitenoise requirements, it must go after the <code>SecurityMiddleware</code></p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">MIDDLEWARE = [
-    &#39;django.middleware.security.SecurityMiddleware&#39;,
+        <h4 id="django-rest-framework">Django Rest Framework</h4>
+<p>Once we have the data in our backend, we want to expose it to be consumed by our React frontend.
+Django, per se, is a <em>traditional</em> Web framework, it produces the html files, not json documents. There is this amazing library, called Django Rest Framework (DRF), which allows to easily add the ability to add the Rest API to the Django application. At the moment, DRF is not technically a part of Django and must be installed separately</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">pip install djangorestframework
+</code></pre></div><p>Once installed, we need to enable it in the <code>settings.py</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">INSTALLED_APPS = [
+    #....
+    &#34;rest_framework&#34;,
+]
+</code></pre></div><p>In order to map models to the json documents, DRF utilizes the concept of <code>serializers</code>. Let&rsquo;s create one, In a new file <code>pixes/photos.serializers.py</code> enter</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">from rest_framework import serializers
+
+from pixies.photos.models import Photo
+
+class PhotoSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = [&#34;id&#34;, &#34;url&#34;, &#34;caption&#34;, &#34;details&#34;]
+        model = Photo
+</code></pre></div><p>We are saying essentially, for every Photo entity we want the json document to include <code>id</code>, <code>caption</code> and <code>details</code>. Notice that we excluded the <code>created_at</code> and <code>updated_at</code> fields as we are not going to use them in the frontend.</p>
+<p>Serializer takes care of converting the model to json. We also need to add one or more <em>views</em> which will return the data once certain URL is provided. You could, for example, create a view which represents individual photo, or a view which represents a list of all photos. For our small application, the list view will be exactly what we are going to use.
+In the file <code>pixies/photos/views.py</code> do</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">from rest_framework import generics
+
+from pixies.photos.models import Photo
+from pixies.photos.serializers import PhotoSerializer
+
+class PhotosListView(generics.ListAPIView):
+    queryset = Photo.objects.all()
+    serializer_class = PhotoSerializer
+</code></pre></div><p>Observe how DRF provides the generics.ListAPIView which needs to be just configured with the serializer and the query which retrieves the data we care about. In our case, it is just a list of all photos.</p>
+<p>The last part of setting our Rest API is to provide the way to map the particular URL to the view we just created. Recall that when we scaffolded the Django project, it created a <code>pixies/urls.py</code> file which is the map of all URLs our backend app is aware of. At the moment it has only an entry for the admin. We could have hook our PhotosListView right there, but it is considered a good practice to keep the urls which belong to different Django apps separately (remember, the Django project is made of <em>apps</em> and the <code>photos</code> is the app)
+So create a file <code>pixies.photos.urls</code> with the following</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">from django.urls import path
+
+from .views import PhotosListView
+
+urlpatterns = [path(&#34;&#34;, PhotosListView.as_view())]
+</code></pre></div><p>It says essentially, as far as the photos app is concerned, always return the PhotosListView.
+The next step is to wire this into the central <code>pixies.urls.py</code>. Make it look like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">from django.contrib import admin
+# add include to imports
+from django.urls import path, include
+
+urlpatterns = [
+    path(&#34;admin/&#34;, admin.site.urls),
     # new
-    &#39;whitenoise.middleware.WhiteNoiseMiddleware&#39;,
-    # ...
-</code></pre></div><p>whitenoise is able to cash and compress the static files it serves. To enable that add the following line:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># ...
-STATIC_ROOT = str(BASE_LOC.path(&#34;staticfiles&#34;))
-# new
-STATICFILES_STORAGE = &#34;whitenoise.storage.CompressedManifestStaticFilesStorage&#34;
-</code></pre></div><p>As we are still going to run Django in the dev mode, it is a good practice to disable the <em>magical</em> static file serving by the Django in the dev mode and go through the whitenoise even in such scenarios. In the INSTALLED_APPS section, just before the `django.contrib.staticfiles add:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">    INSTALLED_APPS = [
-    # ...
-    # new
-    &#34;whitenoise.runserver_nostatic&#34;,
-    &#34;django.contrib.staticfiles&#34;,
-    # ...
-</code></pre></div><p>Now, let&rsquo;s try to run whitenoise-enabled backend in the dev mode:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">python manage.py collectstatic --noinput
-python manage.py runserver
-</code></pre></div><p><code>--noinput</code> flag disables annoying verification questions.
-Verify that <a href="http://localhost:8000/admin/">http://localhost:8000/admin/</a> still works as expected</p>
-<p>All right, let&rsquo;s modify our Docker image to use whitenoise as well. First we need to re-capture our dependencies:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">pip freeze &gt; requirements.txt
-</code></pre></div><p>And now, modify the <code>boot.sh</code> file so it collects static files:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/sh
-</span><span class="cp"></span>python manage.py collectstatic --no-input
-<span class="nb">exec</span> gunicorn pixies.wsgi:application --bind 0.0.0.0:<span class="nv">$PORT</span> --log-file -
-</code></pre></div><p>Rebuild and start the containers again:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker-compose up -d --build
-</code></pre></div><p>Try connecting to the backend in the container at <a href="http://localhost:9090/admin/">http://localhost:9090/admin/</a>
-This time it should display as expected with all css loaded.</p>
-<p>While we are at it, let&rsquo;s add the frontend to the <code>docker-compose.yml</code> so we can start everything together with one command:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># ...
-# new
-  frontend:
-    build:
-      context: ../frontend
-    ports:
-      - 9091:80
-    environment:
-      - PORT=80
-    depends_on:
-      - backend
-#...
-</code></pre></div><p>Now you can start everything in the containers just by running</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker-compose up -d --build
-</code></pre></div><p>Your frontend should be available on the port 9091: <a href="http://localhost:9091/">http://localhost:9091/</a>
-Of course, it still shows the pictures we have hardcoded while writing the frontend code.
-In the next module, we are going to start connecting the frontend to the backend, so the picture list is loaded from the backend.</p>
+    path(&#34;api/&#34;, include(&#34;pixies.photos.urls&#34;)),
+]
+
+</code></pre></div><p>This map says, that when Django sees the prefix <code>admin/</code>, it will ask built-in admin to handle it.
+But when it sees the prefix <code>api</code>, it will let the <code>photos</code> app to take care of it. As you remember, that always returns just the list of all photos.</p>
+<p>All right, we are ready to try it. Make sure your Postgres container is running and run the backend:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">python manage.py runserver
+</code></pre></div><p>Navigate to the <a href="http://localhost:8000/api/">http://localhost:8000/api/</a> and you should see the page generated by the DRF which shows the json document with the list of our photos. If you want to see the raw json as our frontend would see, click on the select <code>json</code> from the menu on the <code>GET</code> button.
+Before we move on, one note - since we added custom URLs, the Django won&rsquo;t generate the welcome page on the <a href="http://localhost:8000/">http://localhost:8000/</a>. That is ok, we won&rsquo;t be using that. <code>admin</code> and <code>api</code> are the only two endpoints we are going to need.
+In the next module, we are going to <em>containerize</em> our backend</p>
 
 
         
@@ -321,9 +314,9 @@ In the next module, we are going to start connecting the frontend to the backend
             
               <a href="https://aiki.dev//tags/tutorial/">tutorial</a>&nbsp;
             
-              <a href="https://aiki.dev//tags/django/">django</a>&nbsp;
+              <a href="https://aiki.dev//tags/django/">Django</a>&nbsp;
             
-              <a href="https://aiki.dev//tags/docker/">docker</a>&nbsp;
+              <a href="https://aiki.dev//tags/drf/">DRF</a>&nbsp;
             
           </div>
         
@@ -338,42 +331,42 @@ In the next module, we are going to start connecting the frontend to the backend
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2faiki.dev%2fposts%2fserving-static-files%2f&amp;text=Pixies%2c%20part%2010%3a%20Serving%20Static%20Files&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=https%3a%2f%2faiki.dev%2fposts%2frest-service%2f&amp;text=Pixies%2c%20part%208%3a%20The%20Rest%20Service&amp;via=" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2faiki.dev%2fposts%2fserving-static-files%2f" target="_blank" title="Share on Facebook">
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2faiki.dev%2fposts%2frest-service%2f" target="_blank" title="Share on Facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//reddit.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fserving-static-files%2f&amp;title=Pixies%2c%20part%2010%3a%20Serving%20Static%20Files" target="_blank" title="Share on Reddit">
+        <a href="//reddit.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2frest-service%2f&amp;title=Pixies%2c%20part%208%3a%20The%20Rest%20Service" target="_blank" title="Share on Reddit">
           <i class="fab fa-reddit"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2faiki.dev%2fposts%2fserving-static-files%2f&amp;title=Pixies%2c%20part%2010%3a%20Serving%20Static%20Files" target="_blank" title="Share on LinkedIn">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2faiki.dev%2fposts%2frest-service%2f&amp;title=Pixies%2c%20part%208%3a%20The%20Rest%20Service" target="_blank" title="Share on LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fserving-static-files%2f&amp;title=Pixies%2c%20part%2010%3a%20Serving%20Static%20Files" target="_blank" title="Share on StumbleUpon">
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2frest-service%2f&amp;title=Pixies%2c%20part%208%3a%20The%20Rest%20Service" target="_blank" title="Share on StumbleUpon">
           <i class="fab fa-stumbleupon"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2faiki.dev%2fposts%2fserving-static-files%2f&amp;description=Pixies%2c%20part%2010%3a%20Serving%20Static%20Files" target="_blank" title="Share on Pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2faiki.dev%2fposts%2frest-service%2f&amp;description=Pixies%2c%20part%208%3a%20The%20Rest%20Service" target="_blank" title="Share on Pinterest">
           <i class="fab fa-pinterest"></i>
         </a>
       </li>
@@ -395,9 +388,9 @@ In the next module, we are going to start connecting the frontend to the backend
                   <ul>
                 
                 
-                    <li><a href="/posts/containerize-backend/">Pixies, part 9: Let&#39;s containerize the Backend</a></li>
+                    <li><a href="/posts/serving-static-files/">Pixies, part 10: Serving Static Files</a></li>
                 
-                    <li><a href="/posts/rest-service/">Pixies, part 8: The Rest Service</a></li>
+                    <li><a href="/posts/containerize-backend/">Pixies, part 9: Let&#39;s containerize the Backend</a></li>
                 
                     <li><a href="/posts/django-apps/">Pixies, part 7: Django Apps</a></li>
                 
@@ -415,9 +408,13 @@ In the next module, we are going to start connecting the frontend to the backend
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://aiki.dev/posts/containerize-backend/" data-toggle="tooltip" data-placement="top" title="Pixies, part 9: Let&#39;s containerize the Backend">&larr; Previous Post</a>
+              <a href="https://aiki.dev/posts/django-apps/" data-toggle="tooltip" data-placement="top" title="Pixies, part 7: Django Apps">&larr; Previous Post</a>
             </li>
           
+          
+            <li class="next">
+              <a href="https://aiki.dev/posts/containerize-backend/" data-toggle="tooltip" data-placement="top" title="Pixies, part 9: Let&#39;s containerize the Backend">Next Post &rarr;</a>
+            </li>
           
         </ul>
       
@@ -427,12 +424,12 @@ In the next module, we are going to start connecting the frontend to the backend
         
           
           <div class="disqus-comments">                  
-            <button id="show-comments" class="btn btn-default" type="button">Show <span class="disqus-comment-count" data-disqus-url="https://aiki.dev/posts/serving-static-files">comments</span></button>
+            <button id="show-comments" class="btn btn-default" type="button">Show <span class="disqus-comment-count" data-disqus-url="https://aiki.dev/posts/rest-service">comments</span></button>
             <div id="disqus_thread"></div>
 
             <script type="text/javascript">
               var disqus_config = function () {
-              this.page.url = 'https:\/\/aiki.dev\/posts\/serving-static-files';
+              this.page.url = 'https:\/\/aiki.dev\/posts\/rest-service';
             };
 
           </script>
