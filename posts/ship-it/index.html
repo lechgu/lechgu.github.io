@@ -7,8 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Pixies, part 10: Serving Static Files - aiki.dev</title>
-  <meta name="description" content="collectstatic Django serves the static files only during the development, i.e. when you run python manage.py runserver. In the production, it is assumed that the static files are being served by something more suitable, like a regular Web server. Having said that, in interest of keeping our backend self-contained, there is a way to serve them by using the package called whitenoise Either way, the first step is to collect the static files from all Django apps we have (remember, our application is made of several Django apps, namely photos, admin and rest_framework).">
+  <title>Pixies, part 12: Ship It! - aiki.dev</title>
+  <meta name="description" content="Environment values in the browser So we want dynamically specify the api URL in the frontend application running in the container, preferably taken from the environment values. The thing is that the frontend application runs in the browser on the user&rsquo;s machine. You wouldn&rsquo;t want (and couldn&rsquo;t) to hijack the user&rsquo;s browser to set some environment value there, obviously. So what do we do? Remember, when we made our nginx to listen on the PORT specified with the environment variable - we essentially modified the nginx&rsquo;s config in the boot.">
   <meta name="author" content="Lech Gudalewicz"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -44,8 +44,8 @@
         "@type": "ListItem",
         "position": 3,
         "item": {
-          "@id": "https:\/\/aiki.dev\/posts\/serving-static-files\/",
-          "name": "Pixies, part 10 serving static files"
+          "@id": "https:\/\/aiki.dev\/posts\/ship-it\/",
+          "name": "Pixies, part 12 ship it!"
         }
     }]
 }
@@ -56,15 +56,15 @@
   "author": {
     "name" : "Lech Gudalewicz"
   },
-  "headline": "Pixies, part 10: Serving Static Files",
-  "description" : "collectstatic Django serves the static files only during the development, i.e. when you run python manage.py runserver. In the production, it is assumed that the static files are being served by something more suitable, like a regular Web server. Having said that, in interest of keeping our backend self-contained, there is a way to serve them by using the package called whitenoise Either way, the first step is to collect the static files from all Django apps we have (remember, our application is made of several Django apps, namely photos, admin and rest_framework).",
+  "headline": "Pixies, part 12: Ship It!",
+  "description" : "Environment values in the browser So we want dynamically specify the api URL in the frontend application running in the container, preferably taken from the environment values. The thing is that the frontend application runs in the browser on the user\x26rsquo;s machine. You wouldn\x26rsquo;t want (and couldn\x26rsquo;t) to hijack the user\x26rsquo;s browser to set some environment value there, obviously. So what do we do? Remember, when we made our nginx to listen on the PORT specified with the environment variable - we essentially modified the nginx\x26rsquo;s config in the boot.",
   "inLanguage" : "en",
-  "wordCount":  548 ,
-  "datePublished" : "2020-03-26T10:47:30",
-  "dateModified" : "2020-03-26T10:47:30",
+  "wordCount":  799 ,
+  "datePublished" : "2020-03-29T11:46:22",
+  "dateModified" : "2020-03-29T11:46:22",
   "image" : "https:\/\/aiki.dev\/images\/logo.png",
-  "keywords" : [ "tutorial, django, docker" ],
-  "mainEntityOfPage" : "https:\/\/aiki.dev\/posts\/serving-static-files\/",
+  "keywords" : [ "tutorial, docker, heroku" ],
+  "mainEntityOfPage" : "https:\/\/aiki.dev\/posts\/ship-it\/",
   "publisher" : {
     "@type": "Organization",
     "name" : "https:\/\/aiki.dev\/",
@@ -78,15 +78,15 @@
 }
 </script>
 
-<meta property="og:title" content="Pixies, part 10: Serving Static Files" />
-<meta property="og:description" content="collectstatic Django serves the static files only during the development, i.e. when you run python manage.py runserver. In the production, it is assumed that the static files are being served by something more suitable, like a regular Web server. Having said that, in interest of keeping our backend self-contained, there is a way to serve them by using the package called whitenoise Either way, the first step is to collect the static files from all Django apps we have (remember, our application is made of several Django apps, namely photos, admin and rest_framework).">
+<meta property="og:title" content="Pixies, part 12: Ship It!" />
+<meta property="og:description" content="Environment values in the browser So we want dynamically specify the api URL in the frontend application running in the container, preferably taken from the environment values. The thing is that the frontend application runs in the browser on the user&rsquo;s machine. You wouldn&rsquo;t want (and couldn&rsquo;t) to hijack the user&rsquo;s browser to set some environment value there, obviously. So what do we do? Remember, when we made our nginx to listen on the PORT specified with the environment variable - we essentially modified the nginx&rsquo;s config in the boot.">
 <meta property="og:image" content="https://aiki.dev/images/logo.png" />
-<meta property="og:url" content="https://aiki.dev/posts/serving-static-files/" />
+<meta property="og:url" content="https://aiki.dev/posts/ship-it/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="aiki.dev" />
 
-  <meta name="twitter:title" content="Pixies, part 10: Serving Static Files" />
-  <meta name="twitter:description" content="collectstatic Django serves the static files only during the development, i.e. when you run python manage.py runserver. In the production, it is assumed that the static files are being served by …">
+  <meta name="twitter:title" content="Pixies, part 12: Ship It!" />
+  <meta name="twitter:description" content="Environment values in the browser So we want dynamically specify the api URL in the frontend application running in the container, preferably taken from the environment values. The thing is that the …">
   <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
   <meta name="twitter:card" content="summary" />
   <link href='https://aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
@@ -231,7 +231,7 @@ if (!doNotTrack) {
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="posts-heading">
               
-                <h1>Pixies, part 10: Serving Static Files</h1>
+                <h1>Pixies, part 12: Ship It!</h1>
               
               
                 <hr class="small">
@@ -251,69 +251,129 @@ if (!doNotTrack) {
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <h4 id="collectstatic">collectstatic</h4>
-<p>Django serves the static files only during the development, i.e. when you run <code>python manage.py runserver</code>.
-In the production, it is assumed that the static files are being served by something more suitable, like a regular Web server. Having said that, in interest of keeping our backend self-contained, there is a way to serve them by using the package called <code>whitenoise</code> Either way, the first step is to collect the static files from all Django apps we have (remember, our application is made of several Django <em>apps</em>, namely photos, admin and rest_framework). <code>manage.py</code> provide the command to do that, but first we have to tweak the <code>settings.py</code> a little.
-Add the following at the end pf your <code>settings.py</code></p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">STATIC_URL = &#34;/static/&#34;
-STATIC_ROOT = str(BASE_LOC.path(&#34;staticfiles&#34;))
-</code></pre></div><p>These two settings specify that all static files will be served with the URL prefix <code>/static/</code> and the location of the collected static files should be the subdirectory <code>staticfiles</code>
-Let&rsquo;s collect the static files:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">python manage.py collectstatic
-</code></pre></div><p>You will notice now that the <code>staticfiles</code> directory has collected the css, png, js etc files from the rest_framework and admin apps. We are not using anywhere the static files in the photos app, so it was not created.
-Now install the <code>whitenoise</code> package which will allow to serve these without deferring to some web server:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">pip install whitenoise
-</code></pre></div><p>Now enable whitenoise middleware in the <code>aettings.py</code>. Because of the whitenoise requirements, it must go after the <code>SecurityMiddleware</code></p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">MIDDLEWARE = [
-    &#39;django.middleware.security.SecurityMiddleware&#39;,
-    # new
-    &#39;whitenoise.middleware.WhiteNoiseMiddleware&#39;,
-    # ...
-</code></pre></div><p>whitenoise is able to cash and compress the static files it serves. To enable that add the following line:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># ...
-STATIC_ROOT = str(BASE_LOC.path(&#34;staticfiles&#34;))
-# new
-STATICFILES_STORAGE = &#34;whitenoise.storage.CompressedManifestStaticFilesStorage&#34;
-</code></pre></div><p>As we are still going to run Django in the dev mode, it is a good practice to disable the <em>magical</em> static file serving by the Django in the dev mode and go through the whitenoise even in such scenarios. In the INSTALLED_APPS section, just before the `django.contrib.staticfiles add:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">    INSTALLED_APPS = [
-    # ...
-    # new
-    &#34;whitenoise.runserver_nostatic&#34;,
-    &#34;django.contrib.staticfiles&#34;,
-    # ...
-</code></pre></div><p>Now, let&rsquo;s try to run whitenoise-enabled backend in the dev mode:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">python manage.py collectstatic --noinput
-python manage.py runserver
-</code></pre></div><p><code>--noinput</code> flag disables annoying verification questions.
-Verify that <a href="http://localhost:8000/admin/">http://localhost:8000/admin/</a> still works as expected</p>
-<p>All right, let&rsquo;s modify our Docker image to use whitenoise as well. First we need to re-capture our dependencies:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">pip freeze &gt; requirements.txt
-</code></pre></div><p>And now, modify the <code>boot.sh</code> file so it collects static files:</p>
-<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/sh
-</span><span class="cp"></span>python manage.py collectstatic --no-input
-<span class="nb">exec</span> gunicorn pixies.wsgi:application --bind 0.0.0.0:<span class="nv">$PORT</span> --log-file -
-</code></pre></div><p>Rebuild and start the containers again:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker-compose up -d --build
-</code></pre></div><p>Try connecting to the backend in the container at <a href="http://localhost:9090/admin/">http://localhost:9090/admin/</a>
-This time it should display as expected with all css loaded.</p>
-<p>While we are at it, let&rsquo;s add the frontend to the <code>docker-compose.yml</code> so we can start everything together with one command:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># ...
-# new
-  frontend:
+        <h4 id="environment-values-in-the-browser">Environment values in the browser</h4>
+<p>So we want dynamically specify the api URL in the frontend application running in the container, preferably taken from the environment values. The thing is that the frontend application runs in the browser on the user&rsquo;s machine. You wouldn&rsquo;t want (and couldn&rsquo;t) to hijack the user&rsquo;s browser to set some environment value there, obviously. So what do we do? Remember, when we made our nginx to listen on the PORT specified with the environment variable - we essentially modified the nginx&rsquo;s config in the boot.sh script just before starting it. We are going to do the similar thing here. First let&rsquo;s <em>externalize</em> the configurable settings into a separate file. Create a directory <code>static</code> and add the file <code>env.js</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">mkdir static
+touch static/env.js
+</code></pre></div><p>We are going to keep all configurable settings in the global object <code>window.settings</code>. So add the following code to the <code>env.js</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">window.settings = { backendUrl: &#39;http://localhost:9090/api/&#39; };
+</code></pre></div><p>Now, we want the <code>env.js</code> to be read once the <code>index.html</code> is loaded.
+Add the reference to this file, just before the closing <code>&lt;body&gt;</code> tag</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset=&#34;UTF-8&#34; /&gt;
+    &lt;title&gt;Pixies&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;section id=&#34;root&#34;&gt;&lt;/section&gt;
+    &lt;!-- new --&gt;
+    &lt;script type=&#34;text/javascript&#34; src=&#34;env.js&#34;&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div><p>In the <code>App.js</code>, instead of hardcoding the backend Url, read it from the <code>window.settings</code> object:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">// ...
+useEffect(() =&gt; {
+    // changed
+    const url = window.settings.backendUrl;
+    // ...
+</code></pre></div><p>Ok, this should work. Having said that, we are not going to deploy the <code>env.js</code> file in production, but rather generate it dynamically. In the development though, we want it simply to be copied to the build directory. Of course, there is webpack plugin for that.</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">npm install copy-webpack-plugin --save-dev
+</code></pre></div><p>Enable the plugin in <code>webpack.config.js</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">//...
+const { CleanWebpackPlugin } = require(&#39;clean-webpack-plugin&#39;);
+// new
+const CopyPlugin = require(&#39;copy-webpack-plugin&#39;);
+// ...
+plugins: [
+    // ...
+    new CopyPlugin([
+      {
+        from: &#39;static&#39;,
+        to: &#39;.&#39;
+      }
+    ])
+  ]
+</code></pre></div><p>This configures the Copy plugin to copy everything from the <code>static</code> directory to the <code>build</code> directory.
+We can now start the frontend app in the dev mode and it should work:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">npm start
+</code></pre></div><p>Check in the javascript console that the <code>windows.settings</code> object has the <code>backendUrl</code> property, as expected.
+Ok, that is for the development mode. For the production we&rsquo;ll modify frontend&rsquo;s boot.sh file with that:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">#new, at the neginning
+echo &#34;window.settings ={backendUrl: &#39;$BACKEND_URL&#39;};&#34; &gt; /usr/share/nginx/html/env.js
+# ...
+</code></pre></div><p>This reads the BACKEND_URL environment file and dynamically inject it to the <code>env.js</code> file.</p>
+<h4 id="trying-it-on">trying it on.</h4>
+<p>Let&rsquo;s add this variable to our frontend service in the <code>docker-compose.yml</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"> frontend:
     build:
       context: ../frontend
     ports:
       - 9091:80
     environment:
       - PORT=80
+      # new
+      - BACKEND_URL=http://localhost:9090/api/
     depends_on:
       - backend
-#...
-</code></pre></div><p>Now you can start everything in the containers just by running</p>
+</code></pre></div><p>All right, rebuild the containers and give it a spin:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker-compose up -d --build
-</code></pre></div><p>Your frontend should be available on the port 9091: <a href="http://localhost:9091/">http://localhost:9091/</a>
-Of course, it still shows the pictures we have hardcoded while writing the frontend code.
-In the next module, we are going to start connecting the frontend to the backend, so the picture list is loaded from the backend.</p>
+</code></pre></div><p>The working frontend should be available at at <a href="http://localhost:9091">http://localhost:9091</a></p>
+<h4 id="deploy-to-heroku">deploy to Heroku</h4>
+<p>If you have followed along, you have our initial frontend deployed to heroku.
+We will need its address for configuring the backend. So go to the frontend directory and do</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">heroku open
+</code></pre></div><p>Your old frontend will launch, copy the URL. Mine is <code>https://hidden-sands-09399.herokuapp.com/</code>. Yours will be different.
+Switch to the backend directory and create a heroku app</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">heroku apps:create
+</code></pre></div><p>So now we have two heroku apps, for the frontend and for the backend, like we planned.
+For our backend we need a Postgres. Heroku offers Postgres add-on, Let&rsquo;s enable it:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">heroku addons:create heroku-postgresql:hobby-dev
+</code></pre></div><p>This will enable Postgres add-on on the free hobby-dev plan.
+Check the configuration for your Heroku app:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">heroku config
+</code></pre></div><p>You will see that the <code>DATABASE_URL</code> environment is set. How nice, Exactly what we need!
+Let&rsquo;s set the remaining required config variables</p>
+<ul>
+<li><code>SECRET_KEY</code>, set it to something more secure naturally</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">heroku config:set SECRET_KEY=hushush
+</code></pre></div><ul>
+<li><code>ALLOWED_HOSTS</code>, you can set it to your backend Heroku app, or set it to <code>*</code></li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">heroku config:set ALLOWED_HOSTS=*
+</code></pre></div><ul>
+<li><code>CORS_ORIGIN_WHITELIST</code>, that should be set to your Heroku frontend URL</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">BACKEND_URL: https://protected-basin-26908.herokuapp.com/api/
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">heroku config:set CORS_ORIGIN_WHITELIST=&#39;https://hidden-sands-09399.herokuapp.com&#39;
+</code></pre></div><p>Push the backend container to Heroku</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">heroku container:login
+heroku container:push web
+heroku container:release web
+</code></pre></div><p>This should do it, the backend is deployed on Heroku now.
+We need to do things with the backend now:</p>
+<ul>
+<li>initialize the database(that is run migrations)</li>
+<li>create a superuser</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">heroku run python manage.py migrate
+heroku run python manae.py createsuperuser
+</code></pre></div><p>Do</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">heroku open
+</code></pre></div><p>Tweak the URL so it ends with <code>/admin</code> (remember, the backend does not listen on the root URL!)
+Add a few photos, and copy the URL of your backend.
+The last step is to update and configure your frontend Heroku app.
+go to the fronted directory and configure the address to your backend. Here&rsquo;s mine, yours will be different</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">heroku config:set BACKEND_URL=&#39;https://protected-basin-26908.herokuapp.com/api/&#39;
+</code></pre></div><p>Now, re-push your frontend container:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">heroku container:rm web
+heroku container:push web
+heroku container:release web
+</code></pre></div><p>Do</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">heroku open
+</code></pre></div><p>Enjoy your frontend pulling the photos&rsquo; info info from the backend.
+(you may need to reload the page as the browser might have cached the old frontend)</p>
 
 
         
@@ -321,9 +381,9 @@ In the next module, we are going to start connecting the frontend to the backend
             
               <a href="https://aiki.dev//tags/tutorial/">tutorial</a>&nbsp;
             
-              <a href="https://aiki.dev//tags/django/">django</a>&nbsp;
-            
               <a href="https://aiki.dev//tags/docker/">docker</a>&nbsp;
+            
+              <a href="https://aiki.dev//tags/heroku/">heroku</a>&nbsp;
             
           </div>
         
@@ -338,42 +398,42 @@ In the next module, we are going to start connecting the frontend to the backend
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=https%3a%2f%2faiki.dev%2fposts%2fserving-static-files%2f&amp;text=Pixies%2c%20part%2010%3a%20Serving%20Static%20Files&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=https%3a%2f%2faiki.dev%2fposts%2fship-it%2f&amp;text=Pixies%2c%20part%2012%3a%20Ship%20It%21&amp;via=" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2faiki.dev%2fposts%2fserving-static-files%2f" target="_blank" title="Share on Facebook">
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2faiki.dev%2fposts%2fship-it%2f" target="_blank" title="Share on Facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//reddit.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fserving-static-files%2f&amp;title=Pixies%2c%20part%2010%3a%20Serving%20Static%20Files" target="_blank" title="Share on Reddit">
+        <a href="//reddit.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fship-it%2f&amp;title=Pixies%2c%20part%2012%3a%20Ship%20It%21" target="_blank" title="Share on Reddit">
           <i class="fab fa-reddit"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2faiki.dev%2fposts%2fserving-static-files%2f&amp;title=Pixies%2c%20part%2010%3a%20Serving%20Static%20Files" target="_blank" title="Share on LinkedIn">
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2faiki.dev%2fposts%2fship-it%2f&amp;title=Pixies%2c%20part%2012%3a%20Ship%20It%21" target="_blank" title="Share on LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fserving-static-files%2f&amp;title=Pixies%2c%20part%2010%3a%20Serving%20Static%20Files" target="_blank" title="Share on StumbleUpon">
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fship-it%2f&amp;title=Pixies%2c%20part%2012%3a%20Ship%20It%21" target="_blank" title="Share on StumbleUpon">
           <i class="fab fa-stumbleupon"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2faiki.dev%2fposts%2fserving-static-files%2f&amp;description=Pixies%2c%20part%2010%3a%20Serving%20Static%20Files" target="_blank" title="Share on Pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2faiki.dev%2fposts%2fship-it%2f&amp;description=Pixies%2c%20part%2012%3a%20Ship%20It%21" target="_blank" title="Share on Pinterest">
           <i class="fab fa-pinterest"></i>
         </a>
       </li>
@@ -395,9 +455,9 @@ In the next module, we are going to start connecting the frontend to the backend
                   <ul>
                 
                 
-                    <li><a href="/posts/ship-it/">Pixies, part 12: Ship It!</a></li>
-                
                     <li><a href="/posts/connect-frontend-backend/">Pixies, part11: Connect the Frontend to the Backend</a></li>
+                
+                    <li><a href="/posts/serving-static-files/">Pixies, part 10: Serving Static Files</a></li>
                 
                     <li><a href="/posts/containerize-backend/">Pixies, part 9: Let&#39;s containerize the Backend</a></li>
                 
@@ -415,13 +475,9 @@ In the next module, we are going to start connecting the frontend to the backend
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="https://aiki.dev/posts/containerize-backend/" data-toggle="tooltip" data-placement="top" title="Pixies, part 9: Let&#39;s containerize the Backend">&larr; Previous Post</a>
+              <a href="https://aiki.dev/posts/connect-frontend-backend/" data-toggle="tooltip" data-placement="top" title="Pixies, part11: Connect the Frontend to the Backend">&larr; Previous Post</a>
             </li>
           
-          
-            <li class="next">
-              <a href="https://aiki.dev/posts/connect-frontend-backend/" data-toggle="tooltip" data-placement="top" title="Pixies, part11: Connect the Frontend to the Backend">Next Post &rarr;</a>
-            </li>
           
         </ul>
       
@@ -431,12 +487,12 @@ In the next module, we are going to start connecting the frontend to the backend
         
           
           <div class="disqus-comments">                  
-            <button id="show-comments" class="btn btn-default" type="button">Show <span class="disqus-comment-count" data-disqus-url="https://aiki.dev/posts/serving-static-files">comments</span></button>
+            <button id="show-comments" class="btn btn-default" type="button">Show <span class="disqus-comment-count" data-disqus-url="https://aiki.dev/posts/ship-it">comments</span></button>
             <div id="disqus_thread"></div>
 
             <script type="text/javascript">
               var disqus_config = function () {
-              this.page.url = 'https:\/\/aiki.dev\/posts\/serving-static-files';
+              this.page.url = 'https:\/\/aiki.dev\/posts\/ship-it';
             };
 
           </script>
