@@ -59,7 +59,7 @@
   "headline": "Pixies, part 12: Ship It!",
   "description" : "Environment values in the browser So we want dynamically specify the api URL in the frontend application running in the container, preferably taken from the environment values. The thing is that the frontend application runs in the browser on the user\x26rsquo;s machine. You wouldn\x26rsquo;t want (and couldn\x26rsquo;t) to hijack the user\x26rsquo;s browser to set some environment value there, obviously. So what do we do? Remember, when we made our nginx to listen on the PORT specified with the environment variable - we essentially modified the nginx\x26rsquo;s config in the boot.",
   "inLanguage" : "en",
-  "wordCount":  799 ,
+  "wordCount":  790 ,
   "datePublished" : "2020-03-29T11:46:22",
   "dateModified" : "2020-03-29T11:46:22",
   "image" : "https:\/\/aiki.dev\/images\/logo.png",
@@ -339,9 +339,9 @@ Let&rsquo;s set the remaining required config variables</p>
 </ul>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">heroku config:set SECRET_KEY=hushush
 </code></pre></div><ul>
-<li><code>ALLOWED_HOSTS</code>, you can set it to your backend Heroku app, or set it to <code>*</code></li>
+<li><code>ALLOWED_HOSTS</code>, set it to the <code>.herokuapp.com</code></li>
 </ul>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">heroku config:set ALLOWED_HOSTS=*
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">heroku config:set ALLOWED_HOSTS=&#39;.herokuapp.com&#39;
 </code></pre></div><ul>
 <li><code>CORS_ORIGIN_WHITELIST</code>, that should be set to your Heroku frontend URL</li>
 </ul>
