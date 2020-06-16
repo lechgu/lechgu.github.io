@@ -60,7 +60,7 @@ Source code The source code is available on github">
   "headline": "Docker for the C# developers Crash Course",
   "description" : "What are we going to learn? The goal is to help you achieve practical, working knowledge of Docker so you can build containerized micro-services in C# with relative ease. We are going to use .Net core as it is cross-platform and well supported on Linux-based Docker containers. Having said that, the Windows-based Docker containers exist too, but the haven\u0026rsquo;t got much traction.\nSource code The source code is available on github",
   "inLanguage" : "en",
-  "wordCount":  2546 ,
+  "wordCount":  2547 ,
   "datePublished" : "2020-06-15T14:48:13",
   "dateModified" : "2020-06-15T14:48:13",
   "image" : "https:\/\/aiki.dev\/images\/logo.png",
@@ -341,7 +341,7 @@ Append to the <code>Dockerfile</code>:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">RUN dotnet publish -c Release -o build --self-contained=false
 </code></pre></div><p>This builds the C# project in the release mode and places the output in the <code>build</code> subdirectory of the current directory, that is into <code>/app/build</code></p>
 <p>Once the image is rebuilt we can launch our program inside the container:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run csharpdate /app/build/bin/date.dll
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker run csharpdate dotnet /app/build/bin/date.dll
 </code></pre></div><p>this will print again the current UTC time, but this time coming from our C# program!</p>
 <p>Specifying the full path to the binary we want to run every time is quite tedious. Docker has a directive which allows to designate some command line as the default.
 Append to your <code>DOCKERFILE</code>:</p>
