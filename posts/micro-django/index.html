@@ -59,7 +59,7 @@
   "headline": "Micro Django",
   "description" : "What is this all about? The Python ecosystem has a few Web application framereworks, most prominent being Flask and Django. They both enjoy their popularity in the community; The general consensus is, Hey, use Flask for the small projects and Django for the large projects. It is true though that with Flask, after the project reaches certain size and complexity, it becomes harder and harder to manage and compose together all 3rd party extensions (which may or may not work) to achieve the desired functionality.",
   "inLanguage" : "en",
-  "wordCount":  1623 ,
+  "wordCount":  1559 ,
   "datePublished" : "2020-08-22T11:31:42",
   "dateModified" : "2020-08-22T11:31:42",
   "image" : "https:\/\/aiki.dev\/images\/logo.png",
@@ -359,19 +359,6 @@ pip install pillow
 </code></pre></div><p>Create the helper function which emits the pixel array. For now, it is going to be a plain red image.</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># new
 import numpy as np
-
-def mandelbrot(w, h, fro, to):
-    x = np.linspace(fro.real, to.real, num=w).reshape((1, w))
-    y = np.linspace(fro.imag, to.imag, num=h).reshape((h, 1))
-    c = np.tile(x, (h, 1)) + 1j * np.tile(y, (1, w))
-
-    z = np.zeros((h, w), dtype=complex)
-    valid = np.full((h, w), True, dtype=bool)
-    for i in range(128):
-        z[valid] = z[valid] * z[valid] + c[valid]
-        valid[np.abs(z) &gt; 2] = False
-    arr = np.flipud(1 - valid)
-    return np.dstack([arr, arr, arr])
 
 def generate(width, height):
     arr = np.zeros((height, width, 3))
