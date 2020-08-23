@@ -422,7 +422,7 @@ We need to provide the url which is aware of the new parameters. Change the url 
     ]
 </code></pre></div><p>The default route remains, but there is a new one which allows passing width and height of the image.
 Try it on:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">http://localhost:8000/1200/1024
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">http://localhost:8000/generate/1200/1024
 </code></pre></div><p>The large the dimensions are, the longer it takes to compute the image. But, thanks to the efficiency of numpy, it should not be too bad.</p>
 <h3 id="conclusion">Conclusion</h3>
 <p>As we just have witnessed, Django scales down pretty easily and it is very possible to use it for the simple web apps instead of, say, Flask. Having said that, there is nothing wrong with Flask. It is quite elegant and minimalistic framework, so it is good to have both in your arsenal</p>
