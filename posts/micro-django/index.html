@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Micro Django - aiki.dev</title>
+  <meta name="description" content="What is this all about? The Python ecosystem has a few Web application framereworks, most prominent being Flask and Django. They both enjoy their popularity in the community; The general consensus is, Hey, use Flask for the small projects and Django for the large projects. It is true though that with Flask, after the project reaches certain size and complexity, it becomes harder and harder to manage and compose together all 3rd party extensions (which may or may not work) to achieve the desired functionality.">
+  <meta name="author" content="Lech Gudalewicz"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "aiki.dev",
+    
+    "url": "https:\/\/aiki.dev\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/aiki.dev\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/aiki.dev\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/aiki.dev\/posts\/micro-django\/",
+          "name": "Micro django"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Lech Gudalewicz"
+  },
+  "headline": "Micro Django",
+  "description" : "What is this all about? The Python ecosystem has a few Web application framereworks, most prominent being Flask and Django. They both enjoy their popularity in the community; The general consensus is, Hey, use Flask for the small projects and Django for the large projects. It is true though that with Flask, after the project reaches certain size and complexity, it becomes harder and harder to manage and compose together all 3rd party extensions (which may or may not work) to achieve the desired functionality.",
+  "inLanguage" : "en",
+  "wordCount":  1623 ,
+  "datePublished" : "2020-08-22T11:31:42",
+  "dateModified" : "2020-08-22T11:31:42",
+  "image" : "https:\/\/aiki.dev\/images\/logo.png",
+  "keywords" : [ "tutorial, Django" ],
+  "mainEntityOfPage" : "https:\/\/aiki.dev\/posts\/micro-django\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/aiki.dev\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/aiki.dev\/images\/logo.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="Micro Django" />
+<meta property="og:description" content="What is this all about? The Python ecosystem has a few Web application framereworks, most prominent being Flask and Django. They both enjoy their popularity in the community; The general consensus is, Hey, use Flask for the small projects and Django for the large projects. It is true though that with Flask, after the project reaches certain size and complexity, it becomes harder and harder to manage and compose together all 3rd party extensions (which may or may not work) to achieve the desired functionality.">
+<meta property="og:image" content="https://aiki.dev/images/logo.png" />
+<meta property="og:url" content="https://aiki.dev/posts/micro-django/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="aiki.dev" />
+
+  <meta name="twitter:title" content="Micro Django" />
+  <meta name="twitter:description" content="What is this all about? The Python ecosystem has a few Web application framereworks, most prominent being Flask and Django. They both enjoy their popularity in the community; The general consensus is, …">
+  <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
+  <meta name="twitter:card" content="summary" />
+  <link href='https://aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.74.3" />
+  <link rel="alternate" href="https://aiki.dev/index.xml" type="application/rss+xml" title="aiki.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://aiki.dev/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://aiki.dev/css/highlight.min.css" /><link rel="stylesheet" href="https://aiki.dev/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-159944114-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://aiki.dev/">aiki.dev</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Series" href="/series">Series</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="aiki.dev" href="https://aiki.dev/">
+            <img class="avatar-img" src="https://aiki.dev/images/logo.png" alt="aiki.dev" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              
+                <h1>Micro Django</h1>
+              
+              
+                <hr class="small">
+              
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <h2 id="what-is-this-all-about">What is this all about?</h2>
+<p>The Python ecosystem has a few Web application framereworks, most prominent being <a href="https://flask.palletsprojects.com">Flask</a> and <a href="https://www.djangoproject.com/">Django</a>. They both enjoy their popularity in the community; The general consensus is, <em>Hey, use Flask for the small projects and Django for the large projects</em>. It is true though that with Flask, after the project reaches certain size and complexity, it becomes harder and harder to manage and compose together all 3rd party extensions (which may or may not work) to achieve the desired functionality. The Django ecosystem seems to be more stable with all built in functionality plus powerful semi-official extensions like <a href="https://www.django-rest-framework.org/">Django Rest Framework</a> or <a href="https://channels.readthedocs.io/">Django Channels</a>.
+Well, you might say, that may be true, but with Flask I can hack a simple web app in one Python file with a few lines of code. In contrast, with Django, in order to get started, I need to run some mastodon tools like django-admin, and it is not very clear what they actually do. Too much magic, you may say.
+I hear you. Most of the documentation, books and youtube videos indeed emphasize power of Django built-in functionality and rarely mention the biggest Django design strength which is, in my opinion, its modularity and composability.</p>
+<p>So let&rsquo;s see how we can replicate a simple app, which is typically showcase for the micro-frameworks like Flask. In the second part we will extend our simple app so it does something useful.</p>
+<p>All in one Python file.</p>
+<h4 id="setup">Setup</h4>
+<p>The project should work on Mac, Linux or Windows. We are going to point out if on certain OS something special has to be done (I am looking at you, Windows).</p>
+<p>Let&rsquo;s create the directory for our project.</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">mkdir microdjango
+cd microdjango
+</code></pre></div><p>Create a virtual environment and activate it. You know the drill:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">python3 -m venv .venv
+source .venv/bin/activate
+</code></pre></div><p>on Windows:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">python -m venv .venv
+.venv/scripts/activate
+</code></pre></div><p>Install Django in your virtual environment:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">pip install django
+</code></pre></div><p>Now, things become interesting. We are not going to use the <code>django-admin</code>, as usually with Django.
+We&rsquo;ll just create a Python file:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">touch mandel.py
+</code></pre></div><p>It is going to become clear later why I have chosen such a name. Having said that, name it as you wish.
+Ok, now we need to do the following:</p>
+<ul>
+<li>create a Django view which returns, say, a string</li>
+<li>tell Django on what url this view has to respond.</li>
+<li>somehow kick off the project to make it running.
+Creating the view is quite straightforward, in the <code>mandel.py</code> enter the following:</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">from django.http import HttpResponse
+
+def index(request):
+    return HttpResponse(&#39;oh, hai&#39;)
+</code></pre></div><p>To specify the url on which this view should respond we do:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># new
+from django.urls import path
+
+urlpatterns = [path(&#39;&#39;, index)]
+</code></pre></div><p>we essentially say that our index view will respond on the root address of the app.
+Ok, we have a view and specify its url, how do we start actual app. Make the following change:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># new
+import sys
+from django.core.management import execute_from_command_line
+
+if __name__==&#39;__main__&#39;:
+    execute_from_command_line(sys.argv)
+</code></pre></div><p>This short snippet of code does what the <code>manage.py</code> does in the app generated by the <code>django-admin</code>. The command line parameters (<code>sys.argv</code>) are passed in, so Django will be able to respond to commands like <code>runserver</code> and others
+If we try to run the file now:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">python mandel.py runserver
+</code></pre></div><p>It will complain that our application is not configured yet. Let&rsquo;s create a minimal configuration, insert the following:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">#...
+
+#new
+from django.conf import settings
+settings.configure(ROOT_URLCONF=__name__, ALLOWED_HOSTS=[&#39;*&#39;])
+
+if __name__==&#39;__main__&#39;:
+    execute_from_command_line(sys.argv)
+</code></pre></div><p>the <code>ROOT_URLCONF</code> is probably the most important setting. It specifies the module where to find the root url map. as we created our map <code>urlpatterns</code> in the current file, we say, look up in the current module.
+The <code>ALLOWED_HOSTS</code> is Django security measure which limits the domain names that the Django can serve. For this simple exercise we say, everything is allowed.
+Another setting you may want to consider, even for the simple apps, is <code>DEBUG=True</code>. That will dump some useful debugging info if something goes wrong.
+ok, start the app now:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">python mandel.py runserver
+</code></pre></div><p>navigate with the browser to http://localhost:8000/ and see how our app responds.</p>
+<p>For convenience, here is the complete <code>mandel.py</code> file:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">import sys
+
+from django.conf import settings
+from django.core.management import execute_from_command_line
+from django http import HttpResponse
+from django.urls import path
+
+def index(request):
+    return HttpResponse(&#39;oh, hai&#39;)
+
+urlpatterns = [path(&#39;&#39;, index)]
+
+settings.configure(ROOT_URLCONF=__name__, ALLOWED_HOSTS=[&#39;*&#39;])
+
+if __name__==&#39;__main__&#39;:
+    execute_from_command_line(sys.argv)
+</code></pre></div><p>If you ask me, it is fairly comparable to the <a href="https://flask.palletsprojects.com/en/1.1.x/quickstart/">Minimal Flask app</a> and does about that much.
+But we are just starting&hellip;</p>
+<h3 id="wsgi">wsgi</h3>
+<p>Well, the <code>runserver</code> feature is not designed to be used for production, but rather as a convenience feature during the development. For production you need something better, <a href="https://gunicorn.org/">gunicorn</a> is a popular option.
+Lets install it:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">pip install gunicorn
+</code></pre></div><p>Note the the gunicorn does not work on Windows. If you are running Windows, consider, for example <a href="https://docs.pylonsproject.org/projects/waitress/en/stable/">waitress</a> instead. Once you have one of these installed, we need to ask Django to turn our app into a &ldquo;qsgi&rdquo; application, so it speaks with the gunicorn/waitress the language they understand. Add this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># as before ...
+
+# new
+from django.core.wsgi import get_wsgi_application
+app = get_wsgi_application()
+
+if __name__ == &#34;__main__&#34;:
+    execute_from_command_line(sys.argv)
+</code></pre></div><p>That should prepare our app for gunicorn. Try it:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">gunicorn mandel:app
+</code></pre></div><p>The app should respond on the same address as before.</p>
+<h4 id="lets-serve-some-images">Let&rsquo;s serve some images.</h4>
+<p>Well, the &lsquo;hello world&rsquo; app is nice and all, but it is kind of boring. Can our app serve something more interesting?</p>
+<p>We will replace our text response with the image response. There are many ways to generate images. We will use <a href="https://numpy.org">numpy</a> to generate a matrix representing the image and <a href="https://pillow.readthedocs.io/">pillow</a> to convert that matrix to the actual image. Let&rsquo;s install these two:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">pip install numpy
+pip install pillow
+</code></pre></div><p>Create the helper function which emits the pixel array. For now, it is going to be a plain red image.</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># new
+import numpy as np
+
+def mandelbrot(w, h, fro, to):
+    x = np.linspace(fro.real, to.real, num=w).reshape((1, w))
+    y = np.linspace(fro.imag, to.imag, num=h).reshape((h, 1))
+    c = np.tile(x, (h, 1)) + 1j * np.tile(y, (1, w))
+
+    z = np.zeros((h, w), dtype=complex)
+    valid = np.full((h, w), True, dtype=bool)
+    for i in range(128):
+        z[valid] = z[valid] * z[valid] + c[valid]
+        valid[np.abs(z) &gt; 2] = False
+    arr = np.flipud(1 - valid)
+    return np.dstack([arr, arr, arr])
+
+def generate(width, height):
+    arr = np.zeros((height, width, 3))
+    arr[:,:, 0] = 1
+    return arr
+</code></pre></div><p>If you are not very familiar with numpy, this generates a 3-dimensional matrix of the dimension height x width x 3 (because we want a RGB image, therefore 3 for red, green, blue). it is initialized with zeros, and later we set the red &ldquo;slice&rdquo; of it into ones. One note that numpy requires the height (rows) passed before width (columns)
+Now change you view so it returns an image instead of text:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># new
+from io import BytesIO
+from PIL import Image
+
+# changed
+def index(request):
+    arr = generate(640, 480)
+    img = Image.fromarray(np.uint8(arr * 255), &#34;RGB&#34;)
+    bytes = BytesIO()
+    img.save(bytes, &#34;PNG&#34;)
+    bytes.seek(0)
+    return HttpResponse(bytes, content_type=&#34;image/png&#34;)
+</code></pre></div><p>The generated array is made of float numbers between 0 and 1, Pillow expects the array of bytes between 0 and 255, therefore we convert it to the required form.
+After that, we write the image into in-memory buffer and return that buffer in the HttpResponse as a png image.</p>
+<p>If we restart our app:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">python mandel.py runserver
+</code></pre></div><p>and navigate again to the http://localhost:8000, we should see our app now returns a plain red image.</p>
+<p>Plain images are boring, let&rsquo; do something more interesting.
+<a href="https://en.wikipedia.org/wiki/Mandelbrot_set">Mandelbrot set</a> is a peculiar object generated by a relatively simple mathematical procedure. The details of it are not important for our discussion, so you just can copy-paste the code as is:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">def mandelbrot(w, h, fro, to):
+    x = np.linspace(fro.real, to.real, num=w).reshape((1, w))
+    y = np.linspace(fro.imag, to.imag, num=h).reshape((h, 1))
+    c = np.tile(x, (h, 1)) + 1j * np.tile(y, (1, w))
+
+    z = np.zeros((h, w), dtype=complex)
+    valid = np.full((h, w), True, dtype=bool)
+    for i in range(128):
+        z[valid] = z[valid] * z[valid] + c[valid]
+        valid[np.abs(z) &gt; 2] = False
+    arr = np.flipud(1 - valid)
+    return np.dstack([arr, arr, arr])
+</code></pre></div><p>If you are mathematically inclined and familiar with numpy, it should not be hard to figure out what is going on here. But, as mentioned, it is totally unnecessary for our purpose.</p>
+<p>replace the <code>generate</code> function with the following:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># replaced
+def generate(width, height):
+    return mandelbrot(width, height, -2.25 - 1.25j, 0.75 + 1.25j)
+</code></pre></div><p>restart your app and try to see what it generates now. I love math!</p>
+<h3 id="parametrize-the-url">Parametrize the url</h3>
+<p>For now, the dimensions of the generated image are hardcoded. Let&rsquo;s change that so they can be passed as a part of url.</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># changed
+def index(request, width=800, height=600):
+    width = min(width, 1200)
+    width = max(width, 100)
+    height = min(height, 1024)
+    height = max(height, 50)
+    arr = generate(width, height)
+    # as before ...
+</code></pre></div><p>Now our view takes two optional parameters, width and height of the generated image.
+We also sanitize the parameters so the image is not too big and not too small.
+We need to provide the url which is aware of the new parameters. Change the url map to the:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">urlpatterns = [
+    path(&#34;&#34;, index),
+    path(&#34;generate/&lt;int:width&gt;/&lt;int:height&gt;&#34;, index)
+    ]
+</code></pre></div><p>The default route remains, but there is a new one which allows passing width and height of the image.
+Try it on:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">http://localhost:8000/1200/1024
+</code></pre></div><p>The large the dimensions are, the longer it takes to compute the image. But, thanks to the efficiency of numpy, it should not be too bad.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>As we just have witnessed, Django scales down pretty easily and it is very possible to use it for the simple web apps instead of, say, Flask. Having said that, there is nothing wrong with Flask. It is quite elegant and minimalistic framework, so it is good to have both in your arsenal</p>
+<h4 id="heading"></h4>
+<p>github link: <a href="https://github.com/lechgu/microdjango">https://github.com/lechgu/microdjango</a></p>
+<p>live demo: <a href="https://mandel.aiki.dev/">https://mandel.aiki.dev/</a></p>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://aiki.dev//tags/tutorial/">tutorial</a>&nbsp;
+            
+              <a href="https://aiki.dev//tags/django/">Django</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2faiki.dev%2fposts%2fmicro-django%2f&amp;text=Micro%20Django&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2faiki.dev%2fposts%2fmicro-django%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fmicro-django%2f&amp;title=Micro%20Django" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2faiki.dev%2fposts%2fmicro-django%2f&amp;title=Micro%20Django" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fmicro-django%2f&amp;title=Micro%20Django" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2faiki.dev%2fposts%2fmicro-django%2f&amp;description=Micro%20Django" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+            
+          
+
+          
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/posts/ship-it/">Pixies, part 12: Ship It!</a></li>
+                
+                    <li><a href="/posts/connect-frontend-backend/">Pixies, part11: Connect the Frontend to the Backend</a></li>
+                
+                    <li><a href="/posts/serving-static-files/">Pixies, part 10: Serving Static Files</a></li>
+                
+                    <li><a href="/posts/containerize-backend/">Pixies, part 9: Let&#39;s containerize the Backend</a></li>
+                
+                    <li><a href="/posts/rest-service/">Pixies, part 8: The Rest Service</a></li>
+                
+              </ul>
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://aiki.dev/posts/csharp-docker/" data-toggle="tooltip" data-placement="top" title="Docker for the C# developers Crash Course">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      
+
+
+      
+        
+          
+          <div class="disqus-comments">                  
+            <button id="show-comments" class="btn btn-default" type="button">Show <span class="disqus-comment-count" data-disqus-url="https://aiki.dev/posts/micro-django">comments</span></button>
+            <div id="disqus_thread"></div>
+
+            <script type="text/javascript">
+              var disqus_config = function () {
+              this.page.url = 'https:\/\/aiki.dev\/posts\/micro-django';
+            };
+
+          </script>
+          </div>
+          
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="https://github.com/lechgu" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="aiki.dev">Lech Gudalewicz</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2020
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://aiki.dev/">aiki.dev</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.74.3</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://aiki.dev/js/main.js"></script>
+<script src="https://aiki.dev/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://aiki.dev/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+$(function(){
+  $('#show-comments').on('click', function(){
+    var disqus_shortname = 'aiki-dev';
+      
+    (function() {
+      var disqus = document.createElement('script'); 
+      disqus.type = 'text/javascript'; 
+      disqus.async = true;
+      disqus.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(disqus);
+    })();
+      
+    $(this).hide(); 
+    });
+  });
+      
+</script>
+<script id="dsq-count-scr" src="//aiki-dev.disqus.com/count.js" async></script>
+
+
+
+
+    
+  </body>
+</html>
+
