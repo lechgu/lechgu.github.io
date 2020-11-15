@@ -92,7 +92,7 @@ Source code The source code is available on github">
   <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
   <meta name="twitter:card" content="summary" />
   <link href='https://aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.74.3" />
+  <meta name="generator" content="Hugo 0.78.2" />
   <link rel="alternate" href="https://aiki.dev/index.xml" type="application/rss+xml" title="aiki.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://aiki.dev/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -494,7 +494,7 @@ Start the container this way:</p>
 <p>in the browser, navigate to http://localhost:9090. You should get your nice UTC time back.</p>
 <h2 id="shrinking-image-size-with-multi-stage-builds">Shrinking image size with multi-stage builds</h2>
 <p><code>docker images</code> will display all images we have on our box, together with their sizes.</p>
-<p>If we check the size of the <code>csharpms</code> image it is quite big. On my machine it takes 422 MB. Large image cause higher resources&rsquo; usage and slow downloads. Can we shrink our image? Sure we can! One of the most important reasons why the image is so bloated is that it contains whole .Net Core 3.1 SDK. Well, we need SDK to build our microservice binary, but we not necessary need it to run it. The leaner image might suffice.</p>
+<p>If we check the size of the <code>csharpms</code> image it is quite big. On my machine it takes 422 MB. Large image cause higher resources' usage and slow downloads. Can we shrink our image? Sure we can! One of the most important reasons why the image is so bloated is that it contains whole .Net Core 3.1 SDK. Well, we need SDK to build our microservice binary, but we not necessary need it to run it. The leaner image might suffice.</p>
 <p>Docker supports so called <em>multi-stage</em> builds when you copy specific files not from the host machine but from another Docker image, possibly unrelated to one we are building.
 So here is the plan:</p>
 <ul>
@@ -595,6 +595,17 @@ docker images | grep csharpms
 
         
           
+            
+          
+
+          
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/posts/csharp-grpc-basic/">No-nonsense gRPC guide for C# developers, Part One</a></li>
+                
+              </ul>
 
           
         
@@ -684,7 +695,7 @@ docker images | grep csharpms
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.74.3</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          <a href="https://gohugo.io">Hugo v0.78.2</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>

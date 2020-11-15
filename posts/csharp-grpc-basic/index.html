@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>No-nonsense gRPC guide for C# developers, Part One - aiki.dev</title>
+  <meta name="description" content="The no-nonsense gRPC guide for the C# developers, Part One: Basic service. What are we going to talk about? gRPC is a high performance program-to-program communication framework highly suitable to efficiently connect services and, as such, to serve as the foundation for the microservice architecture. I will not to bore you with the marketing speech, go for the details to the official site
+A few disclaimers:  gRPC, at the moment, does not have the best in-browser support so, if your app lives in the html/javascript universe, the traditional Rest/JSON web services might be a better choice.">
+  <meta name="author" content="Lech Gudalewicz"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "aiki.dev",
+    
+    "url": "https:\/\/aiki.dev\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/aiki.dev\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/aiki.dev\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/aiki.dev\/posts\/csharp-grpc-basic\/",
+          "name": "No nonsense g r p c guide for c# developers, part one"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Lech Gudalewicz"
+  },
+  "headline": "No-nonsense gRPC guide for C# developers, Part One",
+  "description" : "The no-nonsense gRPC guide for the C# developers, Part One: Basic service. What are we going to talk about? gRPC is a high performance program-to-program communication framework highly suitable to efficiently connect services and, as such, to serve as the foundation for the microservice architecture. I will not to bore you with the marketing speech, go for the details to the official site\nA few disclaimers:  gRPC, at the moment, does not have the best in-browser support so, if your app lives in the html\/javascript universe, the traditional Rest\/JSON web services might be a better choice.",
+  "inLanguage" : "en",
+  "wordCount":  2241 ,
+  "datePublished" : "2020-11-14T15:22:30",
+  "dateModified" : "2020-11-14T15:22:30",
+  "image" : "https:\/\/aiki.dev\/images\/logo.png",
+  "keywords" : [ "C#, gRPC" ],
+  "mainEntityOfPage" : "https:\/\/aiki.dev\/posts\/csharp-grpc-basic\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/aiki.dev\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/aiki.dev\/images\/logo.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="No-nonsense gRPC guide for C# developers, Part One" />
+<meta property="og:description" content="The no-nonsense gRPC guide for the C# developers, Part One: Basic service. What are we going to talk about? gRPC is a high performance program-to-program communication framework highly suitable to efficiently connect services and, as such, to serve as the foundation for the microservice architecture. I will not to bore you with the marketing speech, go for the details to the official site
+A few disclaimers:  gRPC, at the moment, does not have the best in-browser support so, if your app lives in the html/javascript universe, the traditional Rest/JSON web services might be a better choice.">
+<meta property="og:image" content="https://aiki.dev/images/logo.png" />
+<meta property="og:url" content="https://aiki.dev/posts/csharp-grpc-basic/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="aiki.dev" />
+
+  <meta name="twitter:title" content="No-nonsense gRPC guide for C# developers, Part One" />
+  <meta name="twitter:description" content="The no-nonsense gRPC guide for the C# developers, Part One: Basic service. What are we going to talk about? gRPC is a high performance program-to-program communication framework highly suitable to …">
+  <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
+  <meta name="twitter:card" content="summary" />
+  <link href='https://aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.78.2" />
+  <link rel="alternate" href="https://aiki.dev/index.xml" type="application/rss+xml" title="aiki.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://aiki.dev/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://aiki.dev/css/highlight.min.css" /><link rel="stylesheet" href="https://aiki.dev/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-159944114-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://aiki.dev/">aiki.dev</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Series" href="/series">Series</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="aiki.dev" href="https://aiki.dev/">
+            <img class="avatar-img" src="https://aiki.dev/images/logo.png" alt="aiki.dev" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              
+                <h1>No-nonsense gRPC guide for C# developers, Part One</h1>
+              
+              
+                <hr class="small">
+              
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <h1 id="the-no-nonsense-grpc-guide-for-the-c-developers-part-one-basic-service">The no-nonsense gRPC guide for the C# developers, Part One: Basic service.</h1>
+<h2 id="what-are-we-going-to-talk-about">What are we going to talk about?</h2>
+<p><a href="https://grpc.io">gRPC</a> is a high performance program-to-program communication framework highly suitable to efficiently connect services and, as such, to serve as the foundation for the microservice architecture.
+I will not to bore you with the marketing speech, go for the details to the <a href="https://grpc.io">official site</a></p>
+<h4 id="a-few-disclaimers">A few disclaimers:</h4>
+<ul>
+<li>gRPC, at the moment, does not have the best in-browser support so, if your app lives in the html/javascript universe, the traditional Rest/JSON web services might be a better choice. However, if you want to implement fast and secure connections between programs writtent in C#, gRPC is your guy. As a nice bonus, you can connect to your C# gRPC services with the clients written in Java, Python, Go, Ruby, you name it. and vice versa!</li>
+<li>Microsoft&rsquo;s ASP.Net has its own implementation of gRPC, tightly coupled with the ASP.Net stack. We are not going to be talking about it but, instead, we will build our services with the traditional, interoperable, close-to-the-metal gRPC. When you google for &ldquo;grpc .net&rdquo; your may find some links pointing to the ASP.Net thing, so consider yourself warned.</li>
+</ul>
+<h2 id="what-do-you-need-to-follow-along">What do you need to follow along?</h2>
+<p>You will need the latest <a href="https://dotnet.microsoft.com/download/dotnet/5.0">.Net SDK</a> installed,  which is the version 5.0 at the moment of writing. Yo will also need a text editor. I use <a href="https://code.visualstudio.com/">Visual Studio Code</a>, but your favorite text editor will work fine too. Familiarity with the command line is assumed. You can work on Windows, Mac or Linux. To keep the examples as universal as possible, I will assume bash as the shell (for Windows, you can install <a href="https://gitforwindows.org/">git bash</a>). If you are using different shell, it is not going to be hard to adapt the commands to it.
+In the second part, we will have to generate a bunch of security certificates. To keep the story as cross-platform as possible I will use the tools available with <a href="https://www.docker.com/">Docker</a>, So you may want to have that installed to. While we at it, I have a <a href="https://aiki.dev/posts/csharp-docker/">short crash course on Docker for the C# developers</a> on my site, in case you want to refresh your knowledge.
+As an optional exercise we&rsquo;ll have our C# services connected with the Python clients. If you want to do that too, you will need (Python)[https://www.python.org/] installed.</p>
+<h2 id="the-roadmap">The Roadmap</h2>
+<p>We will do three parts:</p>
+<ul>
+<li>in the first part, we&rsquo;ll have a basic gRPC service and the client built in in C#.</li>
+<li>in the second part, we will secure our service.</li>
+<li>the last, third part, addresses the streaming support in gRPC, tremendously useful in numerous scenarios.</li>
+</ul>
+<p>Let&rsquo;s get to work!</p>
+<h3 id="the-project-setup">The project setup.</h3>
+<p>Create a directory somewhere on your disk, I will call it <code>grpc_csharp</code> but you can call as you want.</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">mkdir grpc_csharp
+cd grpc_csharp
+</code></pre></div><p>Once in that directory, crate an empty dotnet solution:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet new sln
+</code></pre></div><p>We are going to have three projects, <code>Service</code>, <code>Client</code> and <code>Shared</code>. <code>Service</code> and <code>Client</code> are going to be console applications and <code>Shared</code> is going to be a classlib containing shared functionality between both of them:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet new console -o Service
+dotnet new console -o Client
+dotnet new classlib -o Shared
+</code></pre></div><p>Let&rsquo;s add them to the solution and make <code>Service</code> and <code>Client</code> depend on <code>Shared</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet sln add Service
+dotnet sln add Client
+dotnet sln add Shared
+dotnet add Service reference Shared
+dotnet add Client reference Shared
+</code></pre></div><p>In order to use gRPC, we are going to add three nuget packages to the <code>Shared</code> project. These are</p>
+<ul>
+<li><code>Grpc.Core</code>: essential gRPC functionality.</li>
+<li><code>Grpc.Tools</code>: gRPC integration with the dotnet project infrastructure</li>
+<li><code>Google.Protobuf</code>: the package necessary for gRPC to serialize the payload.</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">dotnet</span> <span class="nx">add</span> <span class="nx">Shared</span> <span class="kn">package</span> <span class="nx">Grpc</span><span class="p">.</span><span class="nx">Core</span>
+<span class="nx">dotnet</span> <span class="nx">add</span> <span class="nx">Shared</span> <span class="kn">package</span> <span class="nx">Grpc</span><span class="p">.</span><span class="nx">Tools</span>
+<span class="nx">dotnet</span> <span class="nx">add</span> <span class="nx">Shared</span> <span class="kn">package</span> <span class="nx">Google</span><span class="p">.</span><span class="nx">Protobuf</span>
+</code></pre></div><p>Almost there, for the project setup. But before we continue, let&rsquo;s do some minor tidying. For both <code>Client</code> and <code>Service</code> dotnet created <code>Program.cs</code> as the entry pont; I find that confusing, so let&rsquo;s rename these</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">mv Service/Program.cs Service/Service.cs
+mv Client/Program.cs Client/Client.cs
+</code></pre></div><p>Also, the <code>Shared</code> project contains the <code>Class1.cs</code> file which we won&rsquo;t be using. Delete it</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">rm Shared/Class1.cs
+</code></pre></div><h4 id="sanity-check">Sanity check</h4>
+<p>Build the solution and run both the <code>Client</code> and the <code>Service</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet build
+dotnet run -p Client
+dotnet run -p Service
+</code></pre></div><p>In both cases, you should be greeted with the infamous &ldquo;Hello World!&rdquo; message. How exciting! :)
+If you got any errors at this point, please retrace your steps and make sure this sanity check passes.
+Once done, onto the writing the first <code>proto</code> file!</p>
+<h3 id="proto-files">proto files</h3>
+<p>Let&rsquo;s say you want to build a calculator microservice. That is a service which takes two (integer) number, an operation, say a string &ldquo;+&rdquo;, &ldquo;-&rdquo;, &ldquo;*&rdquo; or &ldquo;/&rdquo;, performs that operation, and returns the result to the caller. How would that work? Obviously, the client needs to pack the parameters into some sort of message and send that message over the network to the service. Service would unpack the message, do the operation, pack the result to another message and send that back to the client where the client han unpack the result. In rest/json web service world, that would probably a json-formatted message. The gRPC does conceptually similar thing, but, instead of (slow) text based json format, it uses highly efficient binary format. Obviously to write the code which serializes parameters into some obscure binary format in C# would be a lot of work, so gRPC provides the tools which take the declarative description of messages and emit the necessary C# plumbing code automatically. To declare what we want in our messages, we use &ldquo;proto&rdquo; files. Let&rsquo;s create one.</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">touch Shared/contracts.proto
+</code></pre></div><p>Make the content of the file look like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">syntax = &#34;proto3&#34;;
+
+option csharp_namespace = &#34;Shared&#34;;
+
+message CalculateRequest{
+    int64 x = 1;
+    int64 y = 2;
+    string op = 3;
+};
+
+message CalculateReply{
+    int64 result = 1;
+}
+</code></pre></div><p>As you see, the format of the file is not that complicated. We are declaring that we want two messages, <code>CalculateRequest</code> and <code>CalculateReply</code>, specify what fields do we want together with their types. the numbers &ldquo;= 1&rdquo;, &quot; = 2&quot; and so on indicate a &ldquo;field number&rdquo; and it has to be unique for each field per message. You can reuse the field numbers for other messages.
+&ldquo;proto3&rdquo; is the version of proto file syntax we are using. As we are asking to turn that proto file into the C# code, we can also specify what C# namespace we would want. That is pretty much all there is.</p>
+<p>To trigger generation of the C# files from the proto file, add the following to the Shared/Shared.csproj, just after the ItemGroup containing nuget package references:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;ItemGroup&gt;
+    &lt;Protobuf Include=&#34;contracts.proto&#34;/&gt;
+&lt;/ItemGroup&gt;
+</code></pre></div><p>That would make sure that gRPC tools process our proto file and emit appropriate C# files.
+Let&rsquo;s try it out:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet build
+</code></pre></div><p>If you navigate to the <code>Shared/obj/Debug/net5.0/</code>, you will notice the <code>Contracts.cs</code> file there. That is emitted by the gRPC tools based on our proto file. You can peek at it if you want but it is quite obfuscated, so you probably wouldn' want to write such manually. Thanks for the Grpc.Tools package!
+Anyway, we have our messages defined, what about the service itself. Append the following to the <code>contracts.proto</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">// new
+service Svc {
+    rpc Calculate (CalculateRequest) returns (CalculateReply);
+}
+</code></pre></div><p>This pretty much decares what we want: a service which has a <code>Calculate</code> method which accepts the <code>CalculateRequest</code> message and returns the <code>CalculateReply</code> message. Once you build the solution again, you may notice <code>ContractsGrpc.cs</code> file in the <code>Shared/obj/Debug/net5.0/</code> directory, in addition to <code>Contracts.cs</code>. That contains generated gRPC C# code there for helping to implement the actual Service and actual Client.</p>
+<h3 id="the-service-code">the Service Code.</h3>
+<p>We need to add a few necessary usings.
+as we are going to use the  generated code which we asked to live in the <code>Shared</code> namespace, add this at the top of the file:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">using System;
+using System.Threading.Tasks;
+using Grpc.Core;
+using Shared;
+</code></pre></div><p>We will keep all Service Code inn one file for now, so create a new class outside of the <code>Program class</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">public class MyService : Svc.SvcBase
+{
+}
+</code></pre></div><p>We are deriving it from the Svc.SvcBase (which resides in the generated <code>ContractsGrpc.cs</code>) to make sure that the gRPC plumbing will call it as appropriate.
+The <code>Calculate</code> method has the following signature:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">public override Task&lt;CalculateReply&gt; Calculate(CalculateRequest request, ServerCallContext context)
+{
+
+}
+</code></pre></div><p>Pretty straighforward: take the <code>CalculateRequest</code> and emit the <code>CalculateReply</code>. Also, we are returning actually <code>Task&lt;CalculateReply&gt;</code>, so it can be used in the async context.
+Implemnt this as you wish, here&rsquo;s my implementation:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">public override Task&lt;CalculateReply&gt; Calculate(CalculateRequest request, ServerCallContext context)
+{
+    long result = -1;
+    switch (request.Op)
+    {
+        case &#34;+&#34;:
+            result = request.X + request.Y;
+            break;
+        case &#34;-&#34;:
+            result = request.X - request.Y;
+            break;
+        case &#34;*&#34;:
+            result = request.X * request.Y;
+            break;
+        case &#34;/&#34;:
+            if (request.Y != 0)
+            {
+                result = (long)request.X / request.Y;
+            }
+            break;
+        default:
+            break;
+    }
+    return Task.FromResult(new CalculateReply { Result = result });
+}
+
+</code></pre></div><p>for all error conditions (as unsupported operation or division by zero), I simply return -1.</p>
+<p>Ok, the service code is ready, we need to actually start it to listen for the requests. For extra flexibility, we want the port number of our service passed as a command line argument. Note: in the guide we won&rsquo;t care much about handling the error conditions, so in practice you will probaly parse the command line properly.
+The <code>Main</code> method should look like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">static void Main(string[] args)
+{
+    int port = int.Parse(args[0]);
+    var server = new Server
+    {
+        Services = { Svc.BindService(new MyService()) },
+        Ports = { new ServerPort(&#34;0.0.0.0&#34;, port, ServerCredentials.Insecure) }
+    };
+    server.Start();
+    Console.WriteLine($&#34;Server listening at port {port}. Press any key to terminate&#34;);
+    Console.ReadKey();
+}
+</code></pre></div><p>So,</p>
+<ul>
+<li>capture the port from the command line argument</li>
+<li>let the gRPC know that MyService will process the incoming messages and generate replays (bind the service).</li>
+<li>tell that we want listen on all network interfaces (&ldquo;0.0.0.0&rdquo;) on the specified port</li>
+<li>finally, start the service</li>
+<li>wait for any key press to stop the service.</li>
+</ul>
+<h4 id="try-it-out">Try it out</h4>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Service 9000
+</code></pre></div><p>This should start the service patiently waiting for requests to crunch some numbers.
+If it does not work for any reason, retrace your steps and fix any error.
+For the reference, my <code>Service.cs</code> looks like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">using System;
+using System.Threading.Tasks;
+using Grpc.Core;
+using Shared;
+
+namespace Service
+{
+    public class MyService : Svc.SvcBase
+    {
+        public override Task&lt;CalculateReply&gt; Calculate(CalculateRequest request, ServerCallContext context)
+        {
+            long result = -1;
+            switch (request.Op)
+            {
+                case &#34;+&#34;:
+                    result = request.X + request.Y;
+                    break;
+                case &#34;-&#34;:
+                    result = request.X - request.Y;
+                    break;
+                case &#34;*&#34;:
+                    result = request.X * request.Y;
+                    break;
+                case &#34;/&#34;:
+                    if (request.Y != 0)
+                    {
+                        result = (long)request.X / request.Y;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            return Task.FromResult(new CalculateReply { Result = result });
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int port = int.Parse(args[0]);
+            var server = new Server
+            {
+                Services = { Svc.BindService(new MyService()) },
+                Ports = { new ServerPort(&#34;0.0.0.0&#34;, port, ServerCredentials.Insecure) }
+            };
+            server.Start();
+            Console.WriteLine($&#34;Server listening at port {port}. Press any key to terminate&#34;);
+            Console.ReadKey();
+        }
+    }
+
+}
+
+</code></pre></div><h3 id="the-client">The client</h3>
+<p>I want my client app to accept the following command line format:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Client localhost 9000 25 + 17
+</code></pre></div><p>that is to take the following parameters, in order:</p>
+<ul>
+<li>the host where the service lives</li>
+<li>the service port</li>
+<li>first number (x)</li>
+<li>operation</li>
+<li>second number (y)
+Change the <code>Main</code> in <code>Client/Client.cs</code> to capture these parameters:</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">static void Main(string[] args)
+{
+    string host = args[0];
+    int port = int.Parse(args[1]);
+    long x = long.Parse(args[2]);
+    string op = args[3];
+    long y = long.Parse(args[4]);
+}
+</code></pre></div><p>Don&rsquo;t forget to specify usings:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">using System;
+using Grpc.Core;
+using Shared;
+</code></pre></div><p>The actual client code is not that complicated, thanks to the gRPC plumbing. We need to establish a connection (channel), create a client instance on top of that channel and make the call.
+Append to the <code>Main</code> method the following</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">// new
+var channel = new Channel(
+    host, 
+    port, 
+    ChannelCredentials.Insecure
+    );
+    var client = new Svc.SvcClient(channel);
+    var reply = client.Calculate(new CalculateRequest { 
+        X = x, Y = y, Op = op });
+    Console.WriteLine($&#34;The calculated result is: {reply.Result}&#34;);
+</code></pre></div><h4 id="try-it-out-1">Try it out</h4>
+<p>start the service</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Service 9000
+</code></pre></div><p>In a separate terminal window, invoke the client:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Client localhost 9000 25 + 17
+</code></pre></div><p>This should calculate the requested math operation.
+For the reference, here is the complete <code>Client.cs</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">using System;
+using Grpc.Core;
+using Shared;
+
+namespace Client
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string host = args[0];
+            int port = int.Parse(args[1]);
+            long x = long.Parse(args[2]);
+            string op = args[3];
+            long y = long.Parse(args[4]);
+            // new
+            var channel = new Channel(
+                host,
+                port,
+                ChannelCredentials.Insecure
+                );
+            var client = new Svc.SvcClient(channel);
+            var reply = client.Calculate(new CalculateRequest
+            {
+                X = x,
+                Y = y,
+                Op = op
+            });
+            Console.WriteLine($&#34;The calculated result is: {reply.Result}&#34;);
+        }
+    }
+}
+</code></pre></div><p>If you have another machine, you can run the service on o one and the client on another. I tried the service running on Ubuntu Linux and the client on Mac, but any combination of Windows, Mac, Linux should work, provided they have the right version of .net installed.
+Before we wrap this section, The <code>ChannelCredentials.Insecure</code>
+in</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">var channel = new Channel(
+    host,
+    port,
+    ChannelCredentials.Insecure
+    );
+</code></pre></div><p>might make you a little nervous, and rightfully so: our setup does not protect the messages travelling over the network in any way. The hackers might sniff what the numbers we are trying to multiply, and we would not want that! In the next part of the series we will remedy that.</p>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://aiki.dev//tags/c/">C#</a>&nbsp;
+            
+              <a href="https://aiki.dev//tags/grpc/">gRPC</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2faiki.dev%2fposts%2fcsharp-grpc-basic%2f&amp;text=No-nonsense%20gRPC%20guide%20for%20C%23%20developers%2c%20Part%20One&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2faiki.dev%2fposts%2fcsharp-grpc-basic%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fcsharp-grpc-basic%2f&amp;title=No-nonsense%20gRPC%20guide%20for%20C%23%20developers%2c%20Part%20One" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2faiki.dev%2fposts%2fcsharp-grpc-basic%2f&amp;title=No-nonsense%20gRPC%20guide%20for%20C%23%20developers%2c%20Part%20One" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fcsharp-grpc-basic%2f&amp;title=No-nonsense%20gRPC%20guide%20for%20C%23%20developers%2c%20Part%20One" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2faiki.dev%2fposts%2fcsharp-grpc-basic%2f&amp;description=No-nonsense%20gRPC%20guide%20for%20C%23%20developers%2c%20Part%20One" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+            
+          
+
+          
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/posts/csharp-docker/">Docker for the C# developers Crash Course</a></li>
+                
+              </ul>
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://aiki.dev/posts/micro-django/" data-toggle="tooltip" data-placement="top" title="Micro Django">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      
+
+
+      
+        
+          
+          <div class="disqus-comments">                  
+            <button id="show-comments" class="btn btn-default" type="button">Show <span class="disqus-comment-count" data-disqus-url="https://aiki.dev/posts/csharp-grpc-basic">comments</span></button>
+            <div id="disqus_thread"></div>
+
+            <script type="text/javascript">
+              var disqus_config = function () {
+              this.page.url = 'https:\/\/aiki.dev\/posts\/csharp-grpc-basic';
+            };
+
+          </script>
+          </div>
+          
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="https://github.com/lechgu" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="aiki.dev">Lech Gudalewicz</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2020
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://aiki.dev/">aiki.dev</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.78.2</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://aiki.dev/js/main.js"></script>
+<script src="https://aiki.dev/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://aiki.dev/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+$(function(){
+  $('#show-comments').on('click', function(){
+    var disqus_shortname = 'aiki-dev';
+      
+    (function() {
+      var disqus = document.createElement('script'); 
+      disqus.type = 'text/javascript'; 
+      disqus.async = true;
+      disqus.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(disqus);
+    })();
+      
+    $(this).hide(); 
+    });
+  });
+      
+</script>
+<script id="dsq-count-scr" src="//aiki-dev.disqus.com/count.js" async></script>
+
+
+
+
+    
+  </body>
+</html>
+
