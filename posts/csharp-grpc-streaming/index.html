@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>No-nonsense gRPC guide for the C# developers, Part Three: Streaming - aiki.dev</title>
+  <meta name="description" content="No-nonsense gRPC guide for the C# developers, Part Three: Streaming Why sometimes we care about the streaming? Many, many micro-services are fundamentally designed as our Calculate service we were able to build in parts one and two. Of course the request and reply messages payload may wary widely, but the pattern is fundamentally the same: Client sends the request message, the service does something with the supplied parameters and sends the response back.">
+  <meta name="author" content="Lech Gudalewicz"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "aiki.dev",
+    
+    "url": "https:\/\/aiki.dev\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/aiki.dev\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/aiki.dev\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/aiki.dev\/posts\/csharp-grpc-streaming\/",
+          "name": "No nonsense g r p c guide for the c# developers, part three streaming"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Lech Gudalewicz"
+  },
+  "headline": "No-nonsense gRPC guide for the C# developers, Part Three: Streaming",
+  "description" : "No-nonsense gRPC guide for the C# developers, Part Three: Streaming Why sometimes we care about the streaming? Many, many micro-services are fundamentally designed as our Calculate service we were able to build in parts one and two. Of course the request and reply messages payload may wary widely, but the pattern is fundamentally the same: Client sends the request message, the service does something with the supplied parameters and sends the response back.",
+  "inLanguage" : "en",
+  "wordCount":  1716 ,
+  "datePublished" : "2020-11-15T17:05:24",
+  "dateModified" : "2020-11-15T17:05:24",
+  "image" : "https:\/\/aiki.dev\/images\/logo.png",
+  "keywords" : [ "C#, gRPC" ],
+  "mainEntityOfPage" : "https:\/\/aiki.dev\/posts\/csharp-grpc-streaming\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/aiki.dev\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/aiki.dev\/images\/logo.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="No-nonsense gRPC guide for the C# developers, Part Three: Streaming" />
+<meta property="og:description" content="No-nonsense gRPC guide for the C# developers, Part Three: Streaming Why sometimes we care about the streaming? Many, many micro-services are fundamentally designed as our Calculate service we were able to build in parts one and two. Of course the request and reply messages payload may wary widely, but the pattern is fundamentally the same: Client sends the request message, the service does something with the supplied parameters and sends the response back.">
+<meta property="og:image" content="https://aiki.dev/images/logo.png" />
+<meta property="og:url" content="https://aiki.dev/posts/csharp-grpc-streaming/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="aiki.dev" />
+
+  <meta name="twitter:title" content="No-nonsense gRPC guide for the C# developers, Part Three: Streaming" />
+  <meta name="twitter:description" content="No-nonsense gRPC guide for the C# developers, Part Three: Streaming Why sometimes we care about the streaming? Many, many micro-services are fundamentally designed as our Calculate service we were …">
+  <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
+  <meta name="twitter:card" content="summary" />
+  <link href='https://aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.78.2" />
+  <link rel="alternate" href="https://aiki.dev/index.xml" type="application/rss+xml" title="aiki.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://aiki.dev/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://aiki.dev/css/highlight.min.css" /><link rel="stylesheet" href="https://aiki.dev/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-159944114-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://aiki.dev/">aiki.dev</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Series" href="/series">Series</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="aiki.dev" href="https://aiki.dev/">
+            <img class="avatar-img" src="https://aiki.dev/images/logo.png" alt="aiki.dev" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              
+                <h1>No-nonsense gRPC guide for the C# developers, Part Three: Streaming</h1>
+              
+              
+                <hr class="small">
+              
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <h1 id="no-nonsense-grpc-guide-for-the-c-developers-part-three-streaming">No-nonsense gRPC guide for the C# developers, Part Three: Streaming</h1>
+<h2 id="why-sometimes-we-care-about-the-streaming">Why sometimes we care about the streaming?</h2>
+<p>Many, many micro-services are fundamentally designed as our Calculate service we were able to build in parts one and two.
+Of course the request and reply messages payload may wary widely, but the pattern is fundamentally the same: Client sends the request message, the service does <em>something</em> with the supplied parameters and sends the response back.
+But in some cases we have a case which requires a slightly adjusted point of view. Consider an IoT scenario (internet-of-things): we have a device which periodically and constantly reports some measurement, say temperature and the service provides some storage and/or analytics for this data. Granted we would be able to create a gRPC method ReportTemperature or such which accepts the temperature reading and the service would do its job in this method implementation. But this is sub-optimal: establishing a secure channel to the service is not entirely free and if the device would need to do it, say, every second, the performance costs would add up. It would be better to establish a connection once and keep sending temperature readings on that connection as long as we can. So the temperature reports would essentially look as a <em>stream</em> of readings. Another thing to mention that the stream may not necessary be directed as client-to-service. The opposite case could also be possible. For example what if our temperature service would push some analytical data to another (or even the same) client. Say we are interested in the median of every ten of the temperature readings. that would require the server streaming data to the client. Luckily, gRPC supports all of these cases: client-to-service streaming, service-to-client streaming and the duplex (bio-directional) streaming. In our exercise we will add bio-directional streaming. Once we know how to do that, we&rsquo;ll be able to implement both cases of uni-directional streaming, as they are, in essence, the simplified versions of the bio-directional streaming.</p>
+<h2 id="add-the-streaming-support-to-the-proto-file">Add the streaming support to the proto file</h2>
+<p>First, let&rsquo;s add the message which indicates the single temperature reading to the <code>contracts.proto</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">// new
+message Temperature {
+    int64 timestamp = 1;
+    double value = 2;
+}
+</code></pre></div><p><code>timestamp</code> indicate the <em>time</em> when the temperature reading was captured and the <code>valu</code> is the actual reading;
+next add the new method to the service:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">service Svc {
+    rpc Calculate (CalculateRequest) returns (CalculateReply);
+    // new
+    rpc Median (stream Temperature) returns (stream Temperature);
+}
+</code></pre></div><p>Notice that the <code>stream</code> preceding the message indicates that the method accepts and/or emits the stream.
+In our case the service is going to accept the stream of temperature reading and emit the stream of medians of each subsequent 10 temperature reading.</p>
+<p>These are all the changes we are going to make to the proto file. Note that our existing Calculator functionality is not affected at all and it will continue to work as before.</p>
+<h2 id="client-changes">client changes</h2>
+<p>We will start with the client first. We are going to emulate the temperature readings by starting from some fixed temperature and randomly adjusting up and down with each reading (in the time series analysis, this is called <em>random walk</em>).
+Ok. the client now will be able to do both &ldquo;calculator&rdquo; and &ldquo;time series&rdquo; functionality. How do we distinguish between these two? For simplicity, we will use the following method: if only two arguments are passed (service address and port), we will assume that we want the &ldquo;time series&rdquo; demo, otherwise it is going to be &ldquo;calculator&rdquo; demo. It is clumsy, I admit, and you will probably never do such in practice, but it will serve for our purposes. The channel, client and certificate business it the same for both cases, so let' extract the calculator-specific functionality into a separate method:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">static void DoCalculator(Svc.SvcClient client, String[] args)
+{
+    long x = long.Parse(args[2]);
+    string op = args[3];
+    long y = long.Parse(args[4]);
+    var reply = client.Calculate(new CalculateRequest
+    {
+        X = x,
+        Y = y,
+        Op = op
+    });
+    Console.WriteLine($&#34;The calculated result is: {reply.Result}&#34;);
+}
+</code></pre></div><p>The same manner add an empty (for now) method <code>DoTimeSeries()</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">static void DoTimeSeries(Svc.SvcClient client, String[] args)
+{
+
+}
+</code></pre></div><p>Now we are ready to change the <code>Main</code> method of doing our silly dispatching logic:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">// changed
+static void Main(string[] args)
+{
+    string host = args[0];
+    int port = int.Parse(args[1]);
+
+    var creds = new SslCredentials(
+        File.ReadAllText(&#34;cert/ca.pem&#34;)
+    );
+    var channel = new Channel(
+        host,
+        port,
+        creds
+        );
+    var client = new Svc.SvcClient(channel);
+    if (args.Length == 2)
+    {
+        DoTimeSeries(client, args);
+    }
+    else
+    {
+        DoCalculator(client, args);
+    }
+}
+</code></pre></div><h4 id="sanity-check">Sanity check</h4>
+<p>Make sure that the old calculator functionality still works. You know the drill:
+In one terminal</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Service 9000
+</code></pre></div><p>In the second terminal</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Client localhost 9000 17 + 25
+</code></pre></div><p>It works? Great! let&rsquo;s move on and fill the time series stuff. We are going to be sending the temperature readings and receiving the medians at the same time, so we will need to run one of this jobs on the thread pool using the <code>Task.Run</code>.
+the <code>client.Median()</code> returns an object with two properties <code>RequestStream</code> and <code>ResonseStream</code> The former can be used to push the messages to the server, the latter to process the messages coming from the server.
+First, the processing part:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">static avoid DoTimeSeries(Svc.SvcClient client, String[] args)
+{
+    using var duplex = client.Median(); 
+    var responseTask = Task.Run(async () =&gt;
+    {
+        while (await duplex.ResponseStream.MoveNext())
+        {
+            var resp = duplex.ResponseStream.Current;
+            Console.WriteLine($&#34;{resp.Timestamp}: {resp.Value}&#34;);
+        }
+    });
+}
+</code></pre></div><p>Next, lets take care of the pushing part. As discussed, we are using random walk to push slightly randomized readings to the service</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">// changed
+static async Task DoTimeSeries(Svc.SvcClient client, String[] args)
+{
+    // as before ...
+    int ts = 1;
+    double temp = 10.0;
+    var rnd = new Random();
+    while (true)
+    {
+        await duplex.RequestStream.WriteAsync(new Temperature { Timestamp = ts, Value = temp });
+        ts += 1;
+        temp += rnd.NextDouble() - 0.5;
+    }
+}
+</code></pre></div><p>As we are using <code>await</code> to push asynchronously, we need to modify to mark the method as <code>async</code> and returning a <code>Task</code> to make the async plumbing happy.</p>
+<p>As you can see, our pushing part never stops, as indicated by the <code>while (true)</code> loop; As we expect to receive a median on every 10th push, the processing the incoming stream also never stops. You&rsquo;ll have to Ctrl-C to stop the process once bored of contemplating incoming median temperatures.
+for the reference, the complete <code>Client.cs</code> as of now:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">using System;
+using System.IO;
+using System.Threading.Tasks;
+using Grpc.Core;
+using Shared;
+
+namespace Client
+{
+    class Program
+    {
+        static void DoCalculator(Svc.SvcClient client, String[] args)
+        {
+            long x = long.Parse(args[2]);
+            string op = args[3];
+            long y = long.Parse(args[4]);
+            var reply = client.Calculate(new CalculateRequest
+            {
+                X = x,
+                Y = y,
+                Op = op
+            });
+            Console.WriteLine($&#34;The calculated result is: {reply.Result}&#34;);
+        }
+
+        static async Task DoTimeSeries(Svc.SvcClient client, String[] args)
+        {
+            using var duplex = client.Median();
+            var responseTask = Task.Run(async () =&gt;
+            {
+                while (await duplex.ResponseStream.MoveNext())
+                {
+                    var resp = duplex.ResponseStream.Current;
+                    Console.WriteLine($&#34;{resp.Timestamp}: {resp.Value}&#34;);
+                }
+            });
+            int ts = 1;
+            double temp = 10.0;
+            var rnd = new Random();
+            while (true)
+            {
+                await duplex.RequestStream.WriteAsync(new Temperature { Timestamp = ts, Value = temp });
+                ts += 1;
+                temp += rnd.NextDouble() - 0.5;
+            }
+        }
+
+        static async Task Main(string[] args)
+        {
+            string host = args[0];
+            int port = int.Parse(args[1]);
+
+            var creds = new SslCredentials(
+                File.ReadAllText(&#34;cert/ca.pem&#34;)
+            );
+            var channel = new Channel(
+                host,
+                port,
+                creds
+                );
+            var client = new Svc.SvcClient(channel);
+            if (args.Length == 2)
+            {
+                await DoTimeSeries(client, args);
+            }
+            else
+            {
+                DoCalculator(client, args);
+            }
+        }
+    }
+}
+
+</code></pre></div><p>On to the service streaming!</p>
+<h2 id="streaming-in-the-service">Streaming in the service</h2>
+<p>Below the <code>Calculate</code> method add implementation of <code>Median</code> in the <code>MyService</code> class with the following signature:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">public override async Task Median(IAsyncStreamReader&lt;Temperature&gt; requestStream, IServerStreamWriter&lt;Temperature&gt; responseStream, ServerCallContext context)
+{
+
+}
+</code></pre></div><p>As you can observe, in the service you also have access to both request and response streams.
+Our median logic will be pretty straightforward and dumb. We will keep around a buffer of at-most 10 messages. Once it is full, we sort it, take the middle and send it to the response stream</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">public override async Task Median(IAsyncStreamReader&lt;Temperature&gt; requestStream, IServerStreamWriter&lt;Temperature&gt; responseStream, ServerCallContext context)
+{
+    // new
+    var vals = new List&lt;double&gt;();
+    while (await requestStream.MoveNext())
+    {
+        var temp = requestStream.Current;
+        vals.Add(temp.Value);
+        double med = 0;
+        if (vals.Count == 10)
+        {
+            var arr = vals.ToArray();
+            Array.Sort(arr);
+            med = (arr[4] + arr[5]) / 2;
+            vals.Clear();
+            await responseStream.WriteAsync(new Temperature { Timestamp = temp.Timestamp, Value = med });
+        }
+    }
+}
+</code></pre></div><p>That should do the trick.
+For the reference, full <code>Service.cs</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+using Grpc.Core;
+using Shared;
+
+namespace Service
+{
+    public class MyService : Svc.SvcBase
+    {
+        public override Task&lt;CalculateReply&gt; Calculate(CalculateRequest request, ServerCallContext context)
+        {
+            long result = -1;
+            switch (request.Op)
+            {
+                case &#34;+&#34;:
+                    result = request.X + request.Y;
+                    break;
+                case &#34;-&#34;:
+                    result = request.X - request.Y;
+                    break;
+                case &#34;*&#34;:
+                    result = request.X * request.Y;
+                    break;
+                case &#34;/&#34;:
+                    if (request.Y != 0)
+                    {
+                        result = (long)request.X / request.Y;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            return Task.FromResult(new CalculateReply { Result = result });
+        }
+
+        public override async Task Median(IAsyncStreamReader&lt;Temperature&gt; requestStream, IServerStreamWriter&lt;Temperature&gt; responseStream, ServerCallContext context)
+        {
+            var vals = new List&lt;double&gt;();
+            while (await requestStream.MoveNext())
+            {
+                var temp = requestStream.Current;
+                vals.Add(temp.Value);
+                double med = 0;
+                if (vals.Count == 10)
+                {
+                    var arr = vals.ToArray();
+                    Array.Sort(arr);
+                    med = (arr[4] + arr[5]) / 2;
+                    vals.Clear();
+                    await responseStream.WriteAsync(new Temperature { Timestamp = temp.Timestamp, Value = med });
+                }
+            }
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int port = int.Parse(args[0]);
+            var pair = new KeyCertificatePair(
+            File.ReadAllText(&#34;cert/service.pem&#34;),
+            File.ReadAllText(&#34;cert/service-key.pem&#34;)
+            );
+            var creds = new SslServerCredentials(new[] { pair });
+            var server = new Server
+            {
+                Services = { Svc.BindService(new MyService()) },
+                Ports = { new ServerPort(&#34;0.0.0.0&#34;, port, creds) }
+            };
+            server.Start();
+            Console.WriteLine($&#34;Server listening at port {port}. Press any key to terminate&#34;);
+            Console.ReadKey();
+        }
+    }
+
+}
+
+</code></pre></div><p>Give it a shot: run the service</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Service 9000
+</code></pre></div><p>and in the separate terminal, the client in the &ldquo;time series&rdquo; mode</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Client localhost 9000
+</code></pre></div><p>You should see a continuous stream of calculated medians coming to the client&rsquo;s terminal.
+Ctrl-C when bored.
+Try doing the same across two different computers.
+It should work.</p>
+<p>This concludes our mini-series.
+As a bonus I will publish shortly how we can replicate the whole functionality in Python so we can talk the Python client to the C# service and vice-versa.
+This is optional, but if interested, stay tuned!</p>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://aiki.dev//tags/c/">C#</a>&nbsp;
+            
+              <a href="https://aiki.dev//tags/grpc/">gRPC</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2faiki.dev%2fposts%2fcsharp-grpc-streaming%2f&amp;text=No-nonsense%20gRPC%20guide%20for%20the%20C%23%20developers%2c%20Part%20Three%3a%20Streaming&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2faiki.dev%2fposts%2fcsharp-grpc-streaming%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fcsharp-grpc-streaming%2f&amp;title=No-nonsense%20gRPC%20guide%20for%20the%20C%23%20developers%2c%20Part%20Three%3a%20Streaming" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2faiki.dev%2fposts%2fcsharp-grpc-streaming%2f&amp;title=No-nonsense%20gRPC%20guide%20for%20the%20C%23%20developers%2c%20Part%20Three%3a%20Streaming" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fcsharp-grpc-streaming%2f&amp;title=No-nonsense%20gRPC%20guide%20for%20the%20C%23%20developers%2c%20Part%20Three%3a%20Streaming" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2faiki.dev%2fposts%2fcsharp-grpc-streaming%2f&amp;description=No-nonsense%20gRPC%20guide%20for%20the%20C%23%20developers%2c%20Part%20Three%3a%20Streaming" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+            
+          
+
+          
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/posts/csharp-grpc-secure/">No-nonsense gRPC guide for the C# developers, Part Two: Secure service</a></li>
+                
+                    <li><a href="/posts/csharp-grpc-basic/">No-nonsense gRPC guide for the C# developers, Part One: Basic Service</a></li>
+                
+                    <li><a href="/posts/csharp-docker/">Docker for the C# developers Crash Course</a></li>
+                
+              </ul>
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://aiki.dev/posts/csharp-grpc-secure/" data-toggle="tooltip" data-placement="top" title="No-nonsense gRPC guide for the C# developers, Part Two: Secure service">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      
+
+
+      
+        
+          
+          <div class="disqus-comments">                  
+            <button id="show-comments" class="btn btn-default" type="button">Show <span class="disqus-comment-count" data-disqus-url="https://aiki.dev/posts/csharp-grpc-streaming">comments</span></button>
+            <div id="disqus_thread"></div>
+
+            <script type="text/javascript">
+              var disqus_config = function () {
+              this.page.url = 'https:\/\/aiki.dev\/posts\/csharp-grpc-streaming';
+            };
+
+          </script>
+          </div>
+          
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="https://github.com/lechgu" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="aiki.dev">Lech Gudalewicz</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2020
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://aiki.dev/">aiki.dev</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.78.2</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://aiki.dev/js/main.js"></script>
+<script src="https://aiki.dev/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://aiki.dev/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+$(function(){
+  $('#show-comments').on('click', function(){
+    var disqus_shortname = 'aiki-dev';
+      
+    (function() {
+      var disqus = document.createElement('script'); 
+      disqus.type = 'text/javascript'; 
+      disqus.async = true;
+      disqus.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(disqus);
+    })();
+      
+    $(this).hide(); 
+    });
+  });
+      
+</script>
+<script id="dsq-count-scr" src="//aiki-dev.disqus.com/count.js" async></script>
+
+
+
+
+    
+  </body>
+</html>
+
