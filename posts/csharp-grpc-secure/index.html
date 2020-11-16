@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>No-nonsense gRPC guide for the C# developers, Part Two: Secure service - aiki.dev</title>
+  <meta name="description" content="The no-nonsense gRPC guide for the C# developers, Part One: Secure service In the previous part, we created a Calculator microservice which happily performs uncomplicated integer arithmetic. We were able to call that service locally and, hopefully, from the remote computer. The problem though is that our network exchanges are completely unprotected so anyone, with appropriate knowledge and tools, can see what numbers we are trying to multiply. Moreover, the client even cannot be sure that it receives the responses from the valid service, not the one which might be controlled by hackers.">
+  <meta name="author" content="Lech Gudalewicz"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "aiki.dev",
+    
+    "url": "https:\/\/aiki.dev\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/aiki.dev\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/aiki.dev\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/aiki.dev\/posts\/csharp-grpc-secure\/",
+          "name": "No nonsense g r p c guide for the c# developers, part two secure service"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Lech Gudalewicz"
+  },
+  "headline": "No-nonsense gRPC guide for the C# developers, Part Two: Secure service",
+  "description" : "The no-nonsense gRPC guide for the C# developers, Part One: Secure service In the previous part, we created a Calculator microservice which happily performs uncomplicated integer arithmetic. We were able to call that service locally and, hopefully, from the remote computer. The problem though is that our network exchanges are completely unprotected so anyone, with appropriate knowledge and tools, can see what numbers we are trying to multiply. Moreover, the client even cannot be sure that it receives the responses from the valid service, not the one which might be controlled by hackers.",
+  "inLanguage" : "en",
+  "wordCount":  1571 ,
+  "datePublished" : "2020-11-15T11:42:08",
+  "dateModified" : "2020-11-15T11:42:08",
+  "image" : "https:\/\/aiki.dev\/images\/logo.png",
+  "keywords" : [ "C#, gRPC" ],
+  "mainEntityOfPage" : "https:\/\/aiki.dev\/posts\/csharp-grpc-secure\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/aiki.dev\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/aiki.dev\/images\/logo.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="No-nonsense gRPC guide for the C# developers, Part Two: Secure service" />
+<meta property="og:description" content="The no-nonsense gRPC guide for the C# developers, Part One: Secure service In the previous part, we created a Calculator microservice which happily performs uncomplicated integer arithmetic. We were able to call that service locally and, hopefully, from the remote computer. The problem though is that our network exchanges are completely unprotected so anyone, with appropriate knowledge and tools, can see what numbers we are trying to multiply. Moreover, the client even cannot be sure that it receives the responses from the valid service, not the one which might be controlled by hackers.">
+<meta property="og:image" content="https://aiki.dev/images/logo.png" />
+<meta property="og:url" content="https://aiki.dev/posts/csharp-grpc-secure/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="aiki.dev" />
+
+  <meta name="twitter:title" content="No-nonsense gRPC guide for the C# developers, Part Two: Secure service" />
+  <meta name="twitter:description" content="The no-nonsense gRPC guide for the C# developers, Part One: Secure service In the previous part, we created a Calculator microservice which happily performs uncomplicated integer arithmetic. We were …">
+  <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
+  <meta name="twitter:card" content="summary" />
+  <link href='https://aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.78.2" />
+  <link rel="alternate" href="https://aiki.dev/index.xml" type="application/rss+xml" title="aiki.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://aiki.dev/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://aiki.dev/css/highlight.min.css" /><link rel="stylesheet" href="https://aiki.dev/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-159944114-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://aiki.dev/">aiki.dev</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Series" href="/series">Series</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="aiki.dev" href="https://aiki.dev/">
+            <img class="avatar-img" src="https://aiki.dev/images/logo.png" alt="aiki.dev" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              
+                <h1>No-nonsense gRPC guide for the C# developers, Part Two: Secure service</h1>
+              
+              
+                <hr class="small">
+              
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <h1 id="the-no-nonsense-grpc-guide-for-the-c-developers-part-one-secure-service">The no-nonsense gRPC guide for the C# developers, Part One: Secure service</h1>
+<p>In the previous part, we created a Calculator microservice which happily performs uncomplicated integer arithmetic. We were able to call that service locally and, hopefully, from the remote computer. The problem though is that our network exchanges are completely unprotected so anyone, with appropriate knowledge and tools, can see what numbers we are trying to multiply. Moreover, the client even cannot be sure that it receives the responses from the valid service, not the one which might be controlled by hackers. Let&rsquo;s mitigate that.</p>
+<h2 id="publicprivate-key-cryptography-refresher">Public/private key cryptography refresher</h2>
+<p>So there is this public/private key security mechanism. We won&rsquo;t get deep into the details, but
+the main idea is that there are two keys involved with every secure message. The math behind  the keypair is that one key encrypts the message but to decrypt the message you need the second key. That is, if I encrypt something with the first key, I cannot decrypt it with the same key! No siree, you need the second key. The keys are also designed the way that having one key, it is impossible to derive the second, and vice versa. If you think about it for a moment, it opens pretty poweful opportunities.
+Say Lech and Klaus want to exchange some information in secure manner. They both generate a pair of keys, one will be called private and another will be called public (so there are 4 keys in total: Lech&rsquo;s private and public and Klaus' private and public). Lech hides his private key so only he has access to it and makes his public key accessible to everyone. That is publishes on a website, prints in the newspaper, whatever. Klaus does the same with his pair. So the whole world can access Lech&rsquo;s and Klaus' public keys, but their respective private keys are well hidden. Consider two cases:</p>
+<h4 id="lech-want-to-send-a-message-to-klaus-so-nobody-but-klaus-can-read-it">Lech want to send a message to Klaus so nobody but Klaus can read it.</h4>
+<p>Easy: Lech takes Klaus' public key from the newspaper (remember, everyone can access it!), encrypts the message with it and transfer it to Klaus. If anyone but Klaus intercepts the message, they won&rsquo;t be able to do anything with it as to decrypt it, they need Klaus' private key, as it is the only key which can decrypt the message and it is in posession and, hopefully, well guarded by Klaus.</p>
+<h4 id="klaus-want-to-send-the-message-to-lech-and-he-wants-to-ensure-that-lech-knows-that-the-message-is-indeed-from-him-and-nobody-else">Klaus want to send the message to Lech and he wants to ensure that Lech knows that the message is indeed from him and nobody else.</h4>
+<p>Klaus takes the message, encrypts it with his private key and sends to Lech. Lech can grab Klaus' public key and decrypt the message. If it works, he can make sure that it is send only by Klaus, as only his private key might have be able to encrypt the message this way. In essence, the message is &ldquo;signed&rdquo; by Klaus.
+Pretty cool stuff.
+Obviously encrypting and signing can be combined, so Klaus can use his private key to sign and Lech&rsquo;s public key to encrypt.
+This is fundamentally how it works when you do online banking from your browser (the reality is a little bit more complicated but the concept holds). So what is this certificate my browser is talking about? Fundamentally, bank&rsquo;s certificate is bank&rsquo;s public key. Yeah you say, but how we know that it is bank&rsquo;s public key and not some hacker&rsquo;s public key pretending to be our bank. The thing is that the certificate is signed (in the sense we talked above) by some &ldquo;Certificate Authority&rdquo; and the list of trusted &ldquo;Cetificate Authorities&rdquo; is pretty much hardcoded into the browser.</p>
+<p>gRPC supports TLS, which is using private/public keys to secure the trafic. So we will need a private/public key pair at least for our service. instead of public key we will use the certificate, which is fundamentally a public key signed by some Certificate Authority. So, who is going to be that Certificate Authority? Well there are public ones which issue certificate/private key pairs on demand, but for most of them you have to pay money. Since our gRPC service is not going to be open for public access (gRPC services rarely are, as opposed to the HTTPS web sites), it is perfectly valid to operate our own Certificate Authority (CA).
+The plan is this:</p>
+<ul>
+<li>create a CA certificate/private key pair so we can issue and sign certificates.</li>
+<li>create a service certificate/private key pair for the service.</li>
+<li>deploy CA&rsquo;s certificate to the client (perfectly valid as it is, in essence, a public key). This way, the client will be able to ensure that it is connected to the right service and the network traffic will be encrypted.</li>
+</ul>
+<h4 id="cloudflare-ssl-toolkit">CloudFlare SSL toolkit</h4>
+<p>There are many ways to generate certificate/private key pairs, one particularly easy to use tool is a widely used toolkit created by CloudFlare.
+One can install the toolkit on the local computer that it might require to jump over several hoops, so to keep things relative easy, we will use the docker image provided by CloudFlare. Pull the image:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker pull cfssl/cfssl
+</code></pre></div><p>The first step as we discussed, is to create a CA certificate and the private key. Create the directory cert
+with a file <code>ca-csr.json</code> which is a json file specifying the &ldquo;request&rdquo; to create the certificate for CA.</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">mkdir cert
+touch ca-csr.json
+</code></pre></div><p>Make that json file look like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">{
+   &#34;CN&#34;: &#34;My CA&#34;,
+   &#34;key&#34;: {
+       &#34;algo&#34;: &#34;rsa&#34;,
+       &#34;size&#34;: 2048
+   },
+   &#34;names&#34;: [
+       {
+           &#34;C&#34;: &#34;US&#34;,
+           &#34;S&#34;: &#34;WA&#34;,
+           &#34;ST&#34;: &#34;Seattle&#34;,
+           &#34;O&#34;: &#34;grpc_csharp&#34;,
+           &#34;OU&#34;: &#34;CA Services&#34;
+       }
+   ]
+}
+</code></pre></div><p>The details are not terribly important for our purposes, it is just a bunch of attributes baked into the certificate plus specifics for the private key to be generated.
+Now lauch the docker image with mapping the cert directory to /cert in the docker container:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker run -it -v ${PWD}/cert:/cert  --entrypoint bash cfssl/cfssl
+</code></pre></div><p>You should end up inside the cfssl container. change to the <code>/cert</code> directory:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">cd /cert
+</code></pre></div><p>Your <code>ca-csr.json</code> file should be there. Run the following</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">cfssl gencert -initca ca-csr.json | cfssljson -bare ca
+</code></pre></div><p>This will look at the settings in the <code>ca-csr.json</code> and generate appropriate certificate and private key.
+Exit the docker container, for now:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">exit
+</code></pre></div><p>If everything went well, you should see <code>ca.pem</code> and <code>ca-key.pem</code> int the <code>cert</code> directory. The former is CA&rsquo;s certificate, the latter is its private key.
+Now create the cofiguration for the CA, so it knows how to create the certificates.
+Create the <code>cert/ca-config.json</code> file with the following:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">{
+    &#34;signing&#34;: {
+        &#34;profiles&#34;: {
+            &#34;service&#34;: {
+                &#34;expiry&#34;: &#34;8760h&#34;,
+                &#34;usages&#34;: [
+                    &#34;signing&#34;,
+                    &#34;key encipherment&#34;,
+                    &#34;server auth&#34;
+                ]
+            }
+        }
+    }
+}
+</code></pre></div><p>Ok, the CA is set up, let&rsquo;s create a certificate for the service:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">touch cert/service-csr.json
+</code></pre></div><p>make this file look like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">{
+    &#34;CN&#34;: &#34;127.0.0.1&#34;,
+    &#34;hosts&#34;: [
+        &#34;localhost&#34;,
+        &#34;127.0.0.1&#34;
+    ],
+    &#34;key&#34;: {
+        &#34;algo&#34;: &#34;rsa&#34;,
+        &#34;size&#34;: 2048
+    },
+    &#34;names&#34;: [
+        {
+            &#34;C&#34;: &#34;US&#34;,
+            &#34;S&#34;: &#34;WA&#34;,
+            &#34;ST&#34;: &#34;Seattle&#34;,
+            &#34;O&#34;: &#34;grpc_csharp&#34;,
+            &#34;OU&#34;: &#34;CA Services&#34;
+        }
+    ]
+}
+</code></pre></div><p>Note that the <code>CN</code> attribute (common name) and lists of the hosts this certificate is issued for.</p>
+<p>Launch the cfssl container again</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"> docker run -it -v ${PWD}/cert:/cert  --entrypoint bash cfssl/cfssl
+</code></pre></div><p>switch to the <code>/cert</code> directory and create the certificate for the service:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=service  service-csr.json | cfssljson -bare service
+</code></pre></div><p>Assuming everything went well, exit the container:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">exit
+</code></pre></div><p>Now in the <code>cert</code> directory there should be two new files <code>service.pem</code> and <code>service-key.pem</code>, service certificate and service private key, respectively.</p>
+<h4 id="enable-certificate-on-the-service">Enable certificate on the service</h4>
+<p>Hop into the <code>Service/Service.cs</code> and, just after parsing the port, read the certificate and the private file</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">// ...
+int port = int.Parse(args[0]);
+// new
+var pair = new KeyCertificatePair(
+   File.ReadAllText(&#34;cert/service.pem&#34;),
+   File.ReadAllText(&#34;cert/service-key.pem&#34;)
+);
+</code></pre></div><p>You will need to make sure you have <code>using System.IO</code> at the top of your file.
+Immediatelly after reading the certificate, create the credentials and pass these credentials to the server</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">var pair = new KeyCertificatePair(
+    File.ReadAllText(&#34;cert/service.pem&#34;),
+    File.ReadAllText(&#34;cert/service-key.pem&#34;)
+);
+// new
+var creds = new SslServerCredentials(new[] { pair });
+var server = new Server
+{
+    Services = { Svc.BindService(new MyService()) },
+    // changed
+    Ports = { new ServerPort(&#34;0.0.0.0&#34;, port, creds) }
+};
+</code></pre></div><p>Ok, that covers the service.</p>
+<h4 id="set-up-the-client-with-the-ca-certificate">Set up the client with the CA certificate.</h4>
+<p>As you may recall, for the client, we want it to be aware of the CA certificate so it can verify the signature of the certificate coming from the service.
+Make these changes in the <code>Client/Client.cs</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">// new
+var creds = new SslCredentials(
+    File.ReadAllText(&#34;cert/ca.pem&#34;)
+);
+// changed
+var channel = new Channel(
+    host,
+    port,
+    creds
+    );
+</code></pre></div><p>Don&rsquo;t forget add <code>using System.IO</code>.
+Give it a shot:
+Start the service:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Service 9000
+</code></pre></div><p>In a different terminal run the client:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Client localhost 9000 17 + 25
+</code></pre></div><p>Everything should work as before. But this time, the traffic between the client and the service is protected by the TLS based on the certificates.</p>
+<p>Notice that the discussion above does not discuss how the service authenticate and authorize client. There are multiple options for that. One popular one is so called mutual authentication, when the client gets also issued a certificate and the private key, so the service can validate that certificate, retrieve the identity of the client and perform various authorization checks. There are other options too, but this is beyond the scope of this series.
+In the next part we are going to discuss gRPC streaming, highly efficient pattern for certain scenarios.</p>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://aiki.dev//tags/c/">C#</a>&nbsp;
+            
+              <a href="https://aiki.dev//tags/grpc/">gRPC</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2faiki.dev%2fposts%2fcsharp-grpc-secure%2f&amp;text=No-nonsense%20gRPC%20guide%20for%20the%20C%23%20developers%2c%20Part%20Two%3a%20Secure%20service&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2faiki.dev%2fposts%2fcsharp-grpc-secure%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fcsharp-grpc-secure%2f&amp;title=No-nonsense%20gRPC%20guide%20for%20the%20C%23%20developers%2c%20Part%20Two%3a%20Secure%20service" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2faiki.dev%2fposts%2fcsharp-grpc-secure%2f&amp;title=No-nonsense%20gRPC%20guide%20for%20the%20C%23%20developers%2c%20Part%20Two%3a%20Secure%20service" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fcsharp-grpc-secure%2f&amp;title=No-nonsense%20gRPC%20guide%20for%20the%20C%23%20developers%2c%20Part%20Two%3a%20Secure%20service" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2faiki.dev%2fposts%2fcsharp-grpc-secure%2f&amp;description=No-nonsense%20gRPC%20guide%20for%20the%20C%23%20developers%2c%20Part%20Two%3a%20Secure%20service" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+            
+          
+
+          
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/posts/csharp-grpc-basic/">No-nonsense gRPC guide for the C# developers, Part One: Basic Service</a></li>
+                
+                    <li><a href="/posts/csharp-docker/">Docker for the C# developers Crash Course</a></li>
+                
+              </ul>
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://aiki.dev/posts/csharp-grpc-basic/" data-toggle="tooltip" data-placement="top" title="No-nonsense gRPC guide for the C# developers, Part One: Basic Service">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      
+
+
+      
+        
+          
+          <div class="disqus-comments">                  
+            <button id="show-comments" class="btn btn-default" type="button">Show <span class="disqus-comment-count" data-disqus-url="https://aiki.dev/posts/csharp-grpc-secure">comments</span></button>
+            <div id="disqus_thread"></div>
+
+            <script type="text/javascript">
+              var disqus_config = function () {
+              this.page.url = 'https:\/\/aiki.dev\/posts\/csharp-grpc-secure';
+            };
+
+          </script>
+          </div>
+          
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="https://github.com/lechgu" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="aiki.dev">Lech Gudalewicz</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2020
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://aiki.dev/">aiki.dev</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.78.2</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://aiki.dev/js/main.js"></script>
+<script src="https://aiki.dev/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://aiki.dev/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+$(function(){
+  $('#show-comments').on('click', function(){
+    var disqus_shortname = 'aiki-dev';
+      
+    (function() {
+      var disqus = document.createElement('script'); 
+      disqus.type = 'text/javascript'; 
+      disqus.async = true;
+      disqus.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(disqus);
+    })();
+      
+    $(this).hide(); 
+    });
+  });
+      
+</script>
+<script id="dsq-count-scr" src="//aiki-dev.disqus.com/count.js" async></script>
+
+
+
+
+    
+  </body>
+</html>
+
