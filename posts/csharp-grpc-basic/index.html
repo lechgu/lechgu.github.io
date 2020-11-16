@@ -8,7 +8,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <title>No-nonsense gRPC guide for the C# developers, Part One: Basic Service - aiki.dev</title>
-  <meta name="description" content="The no-nonsense gRPC guide for the C# developers, Part One: Basic service. What are we going to talk about? gRPC is a high performance program-to-program communication framework highly suitable to efficiently connect services and, as such, to serve as the foundation for the micro-service architecture. I will not to bore you with the marketing speech, go for the details to the official site
+  <meta name="description" content="source code
+What are we going to talk about? gRPC is a high performance program-to-program communication framework highly suitable to efficiently connect services and, as such, to serve as the foundation for the micro-service architecture. I will not to bore you with the marketing speech, go for the details to the official site
 A few disclaimers:  gRPC, at the moment, does not have the best in-browser support so, if your app lives in the html/javascript universe, the traditional Rest/JSON web services might be a better choice.">
   <meta name="author" content="Lech Gudalewicz"/><script type="application/ld+json">
 {
@@ -58,9 +59,9 @@ A few disclaimers:  gRPC, at the moment, does not have the best in-browser suppo
     "name" : "Lech Gudalewicz"
   },
   "headline": "No-nonsense gRPC guide for the C# developers, Part One: Basic Service",
-  "description" : "The no-nonsense gRPC guide for the C# developers, Part One: Basic service. What are we going to talk about? gRPC is a high performance program-to-program communication framework highly suitable to efficiently connect services and, as such, to serve as the foundation for the micro-service architecture. I will not to bore you with the marketing speech, go for the details to the official site\nA few disclaimers:  gRPC, at the moment, does not have the best in-browser support so, if your app lives in the html\/javascript universe, the traditional Rest\/JSON web services might be a better choice.",
+  "description" : "source code\nWhat are we going to talk about? gRPC is a high performance program-to-program communication framework highly suitable to efficiently connect services and, as such, to serve as the foundation for the micro-service architecture. I will not to bore you with the marketing speech, go for the details to the official site\nA few disclaimers:  gRPC, at the moment, does not have the best in-browser support so, if your app lives in the html\/javascript universe, the traditional Rest\/JSON web services might be a better choice.",
   "inLanguage" : "en",
-  "wordCount":  2241 ,
+  "wordCount":  2296 ,
   "datePublished" : "2020-11-14T15:22:30",
   "dateModified" : "2020-11-14T15:22:30",
   "image" : "https:\/\/aiki.dev\/images\/logo.png",
@@ -80,7 +81,8 @@ A few disclaimers:  gRPC, at the moment, does not have the best in-browser suppo
 </script>
 
 <meta property="og:title" content="No-nonsense gRPC guide for the C# developers, Part One: Basic Service" />
-<meta property="og:description" content="The no-nonsense gRPC guide for the C# developers, Part One: Basic service. What are we going to talk about? gRPC is a high performance program-to-program communication framework highly suitable to efficiently connect services and, as such, to serve as the foundation for the micro-service architecture. I will not to bore you with the marketing speech, go for the details to the official site
+<meta property="og:description" content="source code
+What are we going to talk about? gRPC is a high performance program-to-program communication framework highly suitable to efficiently connect services and, as such, to serve as the foundation for the micro-service architecture. I will not to bore you with the marketing speech, go for the details to the official site
 A few disclaimers:  gRPC, at the moment, does not have the best in-browser support so, if your app lives in the html/javascript universe, the traditional Rest/JSON web services might be a better choice.">
 <meta property="og:image" content="https://aiki.dev/images/logo.png" />
 <meta property="og:url" content="https://aiki.dev/posts/csharp-grpc-basic/" />
@@ -88,7 +90,8 @@ A few disclaimers:  gRPC, at the moment, does not have the best in-browser suppo
 <meta property="og:site_name" content="aiki.dev" />
 
   <meta name="twitter:title" content="No-nonsense gRPC guide for the C# developers, Part One: Basic Service" />
-  <meta name="twitter:description" content="The no-nonsense gRPC guide for the C# developers, Part One: Basic service. What are we going to talk about? gRPC is a high performance program-to-program communication framework highly suitable to …">
+  <meta name="twitter:description" content="source code
+What are we going to talk about? gRPC is a high performance program-to-program communication framework highly suitable to efficiently connect services and, as such, to serve as the …">
   <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
   <meta name="twitter:card" content="summary" />
   <link href='https://aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
@@ -253,18 +256,18 @@ if (!doNotTrack) {
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <h1 id="the-no-nonsense-grpc-guide-for-the-c-developers-part-one-basic-service">The no-nonsense gRPC guide for the C# developers, Part One: Basic service.</h1>
+        <p><a href="https://github.com/lechgu/grpc_csharp">source code</a></p>
 <h2 id="what-are-we-going-to-talk-about">What are we going to talk about?</h2>
 <p><a href="https://grpc.io">gRPC</a> is a high performance program-to-program communication framework highly suitable to efficiently connect services and, as such, to serve as the foundation for the micro-service architecture.
 I will not to bore you with the marketing speech, go for the details to the <a href="https://grpc.io">official site</a></p>
 <h4 id="a-few-disclaimers">A few disclaimers:</h4>
 <ul>
 <li>gRPC, at the moment, does not have the best in-browser support so, if your app lives in the html/javascript universe, the traditional Rest/JSON web services might be a better choice. However, if you want to implement fast and secure connections between programs written in C#, gRPC is your guy. As a nice bonus, you can connect to your C# gRPC services with the clients written in Java, Python, Go, Ruby, you name it. and vice versa!</li>
-<li>Microsoft&rsquo;s ASP.Net has its own implementation of gRPC, tightly coupled with the ASP.Net stack. We are not going to be talking about it but, instead, we will build our services with the traditional, interoperable, close-to-the-metal gRPC. When you google for &ldquo;grpc .net&rdquo; your may find some links pointing to the ASP.Net thing, so consider yourself warned.</li>
+<li>Microsoft&rsquo;s ASP.Net has its own implementation of gRPC, tightly coupled with the ASP.Net stack. We are not going to be talking about it but, instead, we will build our services with the traditional, interoperable, close-to-the-metal gRPC. When you google for &ldquo;grpc c#&rdquo; your may find some links pointing to the ASP.Net thing, so consider yourself warned.</li>
 </ul>
 <h2 id="what-do-you-need-to-follow-along">What do you need to follow along?</h2>
 <p>You will need the latest <a href="https://dotnet.microsoft.com/download/dotnet/5.0">.Net SDK</a> installed,  which is the version 5.0 at the moment of writing. Yo will also need a text editor. I use <a href="https://code.visualstudio.com/">Visual Studio Code</a>, but your favorite text editor will work fine too. Familiarity with the command line is assumed. You can work on Windows, Mac or Linux. To keep the examples as universal as possible, I will assume bash as the shell (for Windows, you can install <a href="https://gitforwindows.org/">git bash</a>). If you are using different shell, it is not going to be hard to adapt the commands to it.
-In the second part, we will have to generate a bunch of security certificates. To keep the story as cross-platform as possible I will use the tools available with <a href="https://www.docker.com/">Docker</a>, So you may want to have that installed to. While we at it, I have a <a href="https://aiki.dev/posts/csharp-docker/">short crash course on Docker for the C# developers</a> on my site, in case you want to refresh your knowledge.
+In the second part, we will have to generate a bunch of security certificates. To keep the story as cross-platform as possible I will use the tools available with <a href="https://www.docker.com/">Docker</a>, So you may want to have that installed to. While we are at it, I have a <a href="https://aiki.dev/posts/csharp-docker/">short crash course on Docker for the C# developers</a> on my site, in case you want to refresh your knowledge.
 As an optional exercise we&rsquo;ll have our C# services connected with the Python clients. If you want to do that too, you will need (Python)[https://www.python.org/] installed.</p>
 <h2 id="the-roadmap">The Roadmap</h2>
 <p>We will do three parts:</p>
@@ -313,7 +316,7 @@ dotnet run -p Service
 If you got any errors at this point, please retrace your steps and make sure this sanity check passes.
 Once done, onto the writing the first <code>proto</code> file!</p>
 <h3 id="proto-files">proto files</h3>
-<p>Let&rsquo;s say you want to build a calculator micro-service. That is a service which takes two (integer) number, an operation, say a string &ldquo;+&rdquo;, &ldquo;-&rdquo;, &ldquo;*&rdquo; or &ldquo;/&rdquo;, performs that operation, and returns the result to the caller. How would that work? Obviously, the client needs to pack the parameters into some sort of message and send that message over the network to the service. Service would unpack the message, do the operation, pack the result to another message and send that back to the client where the client can unpack the result. In rest/json web service world, that would probably a json-formatted message. The gRPC does conceptually similar thing, but, instead of (slow) text based json format, it uses highly efficient binary format. Obviously to write the code which serializes parameters into some obscure binary format in C# would be a lot of work, so gRPC provides the tools which take the declarative description of messages and emit the necessary C# plumbing code automatically. To declare what we want in our messages, we use &ldquo;proto&rdquo; files. Let&rsquo;s create one.</p>
+<p>Let&rsquo;s say you want to build a calculator micro-service. That is a service which takes two (integer) numbers, an operation, say a string &ldquo;+&rdquo;, &ldquo;-&rdquo;, &ldquo;*&rdquo; or &ldquo;/&rdquo;, performs that operation, and returns the result to the caller. How would that work? Obviously, the client needs to pack the parameters into some sort of message and send that message over the network to the service. The service would unpack the message, do the operation, pack the result to the replay message and send that back to the client where the client can unpack the result. In rest/json web service world, that would probably a json-formatted message. The gRPC does conceptually similar thing, but, instead of (slow) text based json format, it uses highly efficient binary format (called protocol buffers). Obviously to write the code which serializes parameters into some obscure binary format in C# would be a lot of work, so gRPC provides the tools which take the declarative description of messages and emit the necessary C# plumbing code automatically. To declare what we want in our messages, we use &ldquo;proto&rdquo; files. Let&rsquo;s create one.</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">touch Shared/contracts.proto
 </code></pre></div><p>Make the content of the file look like this:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">syntax = &#34;proto3&#34;;
@@ -331,7 +334,7 @@ message CalculateReply{
 }
 </code></pre></div><p>As you see, the format of the file is not that complicated. We are declaring that we want two messages, <code>CalculateRequest</code> and <code>CalculateReply</code>, specify what fields do we want together with their types. the numbers &ldquo;= 1&rdquo;, &quot; = 2&quot; and so on indicate a &ldquo;field number&rdquo; and it has to be unique for each field per message. You can reuse the field numbers for other messages.
 &ldquo;proto3&rdquo; is the version of proto file syntax we are using. As we are asking to turn that proto file into the C# code, we can also specify what C# namespace we would want. That is pretty much all there is.</p>
-<p>To trigger generation of the C# files from the proto file, add the following to the Shared/Shared.csproj, just after the ItemGroup containing nuget package references:</p>
+<p>To trigger generation of the C# files from the proto file, add the following to the Shared/Shared.csproj, just below the ItemGroup containing nuget package references:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;ItemGroup&gt;
     &lt;Protobuf Include=&#34;contracts.proto&#34;/&gt;
 &lt;/ItemGroup&gt;
@@ -339,15 +342,33 @@ message CalculateReply{
 Let&rsquo;s try it out:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet build
 </code></pre></div><p>If you navigate to the <code>Shared/obj/Debug/net5.0/</code>, you will notice the <code>Contracts.cs</code> file there. That is emitted by the gRPC tools based on our proto file. You can peek at it if you want but it is quite obfuscated, so you probably wouldn&rsquo;t want to write such manually. Thanks for the Grpc.Tools package!
-Anyway, we have our messages defined, what about the service itself. Append the following to the <code>contracts.proto</code></p>
+Anyway, we have our messages defined, what about the service itself? Append the following to the <code>contracts.proto</code></p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">// new
 service Svc {
     rpc Calculate (CalculateRequest) returns (CalculateReply);
 }
-</code></pre></div><p>This pretty much declares what we want: a service which has a <code>Calculate</code> method which accepts the <code>CalculateRequest</code> message and returns the <code>CalculateReply</code> message. Once you build the solution again, you may notice <code>ContractsGrpc.cs</code> file in the <code>Shared/obj/Debug/net5.0/</code> directory, in addition to <code>Contracts.cs</code>. That contains generated gRPC C# code there for helping to implement the actual Service and actual Client.</p>
-<h3 id="the-service-code">the Service Code.</h3>
+</code></pre></div><p>This pretty much declares what we want: a service which has a <code>Calculate</code> method that accepts the <code>CalculateRequest</code> message and returns the <code>CalculateReply</code> message. Once you build the solution again, you may notice <code>ContractsGrpc.cs</code> file in the <code>Shared/obj/Debug/net5.0/</code> directory, in addition to <code>Contracts.cs</code>. That contains generated gRPC C# code there for helping to implement the actual Service and actual Client.</p>
+<p>For the reference, here is the complete <code>contracts.proto</code></p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">syntax = &#34;proto3&#34;;
+
+option csharp_namespace = &#34;Shared&#34;;
+
+message CalculateRequest{
+    int64 x = 1;
+    int64 y = 2;
+    string op = 3;
+};
+
+message CalculateReply{
+    int64 result = 1;
+}
+
+service Svc {
+    rpc Calculate (CalculateRequest) returns (CalculateReply);
+}
+</code></pre></div><h3 id="the-service-code">the Service Code.</h3>
 <p>We need to add a few necessary usings.
-as we are going to use the  generated code which we asked to live in the <code>Shared</code> namespace, add this at the top of the file:</p>
+As we are going to use the  generated code which we asked to live in the <code>Shared</code> namespace, add this at the top of the file:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">using System;
 using System.Threading.Tasks;
 using Grpc.Core;
@@ -391,8 +412,8 @@ Implement this as you wish, here&rsquo;s my implementation:</p>
 }
 
 </code></pre></div><p>for all error conditions (as unsupported operation or division by zero), I simply return -1.</p>
-<p>Ok, the service code is ready, we need to actually start it to listen for the requests. For extra flexibility, we want the port number of our service passed as a command line argument. Note: in the guide we won&rsquo;t care much about handling the error conditions, so in practice you will probaly parse the command line properly.
-The <code>Main</code> method should look like this:</p>
+<p>Ok, the service code is ready, we need to actually start it to listen for the requests. For extra flexibility, we want the port number of our service passed as a command line argument. Note: in the guide we won&rsquo;t care much about handling the error conditions, so in practice you will probably want to parse the command line properly.
+Anyway, the <code>Main</code> method would look like this:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">static void Main(string[] args)
 {
     int port = int.Parse(args[0]);
@@ -417,7 +438,7 @@ The <code>Main</code> method should look like this:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Service 9000
 </code></pre></div><p>This should start the service patiently waiting for requests to crunch some numbers.
 If it does not work for any reason, retrace your steps and fix any error.
-For the reference, my <code>Service.cs</code> looks like this:</p>
+For the reference, my <code>Service.cs</code> looks at the moment like this:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">using System;
 using System.Threading.Tasks;
 using Grpc.Core;
@@ -469,21 +490,20 @@ namespace Service
             Console.ReadKey();
         }
     }
-
 }
 
 </code></pre></div><h3 id="the-client">The client</h3>
 <p>I want my client app to accept the following command line format:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Client localhost 9000 25 + 17
-</code></pre></div><p>that is to take the following parameters, in order:</p>
+</code></pre></div><p>that is to take the following arguments, in order:</p>
 <ul>
 <li>the host where the service lives</li>
 <li>the service port</li>
 <li>first number (x)</li>
 <li>operation</li>
-<li>second number (y)
-Change the <code>Main</code> in <code>Client/Client.cs</code> to capture these parameters:</li>
+<li>second number (y)</li>
 </ul>
+<p>Change the <code>Main</code> in <code>Client/Client.cs</code> to capture these arguments:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">static void Main(string[] args)
 {
     string host = args[0];
@@ -496,9 +516,12 @@ Change the <code>Main</code> in <code>Client/Client.cs</code> to capture these p
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">using System;
 using Grpc.Core;
 using Shared;
-</code></pre></div><p>The actual client code is not that complicated, thanks to the gRPC plumbing. We need to establish a connection (channel), create a client instance on top of that channel and make the call.
-Append to the <code>Main</code> method the following</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">// new
+</code></pre></div><p>The actual client code is not that complicated, thanks to the gRPC plumbing. We need to establish a connection (channel), create a client instance on top of that channel and make the call.</p>
+<p>Append to the <code>Main</code> method the following</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">static void Main(string[] args)
+{
+// ...
+// new
 var channel = new Channel(
     host, 
     port, 
@@ -530,12 +553,11 @@ namespace Client
             long x = long.Parse(args[2]);
             string op = args[3];
             long y = long.Parse(args[4]);
-            // new
             var channel = new Channel(
-                host,
-                port,
-                ChannelCredentials.Insecure
-                );
+    host,
+    port,
+    ChannelCredentials.Insecure
+    );
             var client = new Svc.SvcClient(channel);
             var reply = client.Calculate(new CalculateRequest
             {
@@ -547,15 +569,16 @@ namespace Client
         }
     }
 }
-</code></pre></div><p>If you have another machine, you can run the service on o one and the client on another. I tried the service running on Ubuntu Linux and the client on Mac, but any combination of Windows, Mac, Linux should work, provided they have the right version of .net installed.
-Before we wrap this section, The <code>ChannelCredentials.Insecure</code>
+
+</code></pre></div><p>If you have another machine, you can run the service on o one and the client on another. I tried the service running on Ubuntu Linux and the client on Mac, but any combination of Windows, Mac, Linux should work, provided they have the right version of .net installed.</p>
+<p>Before we wrap up this section, The <code>ChannelCredentials.Insecure</code>
 in</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">var channel = new Channel(
     host,
     port,
     ChannelCredentials.Insecure
     );
-</code></pre></div><p>might make you a little nervous, and rightfully so: our setup does not protect the messages traveling over the network in any way. The hackers might sniff what the numbers we are trying to multiply, and we would not want that! In the next part of the series we will remedy that.</p>
+</code></pre></div><p>might make you a little nervous, and rightfully so: our setup does not protect the messages traveling over the network in any way. The hackers might sniff what the numbers we are trying to multiply, and we do not want that! In the next part of the series we will remedy this problem.</p>
 
 
         
