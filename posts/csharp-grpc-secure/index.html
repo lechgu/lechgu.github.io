@@ -8,7 +8,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <title>No-nonsense gRPC guide for the C# developers, Part Two: Secure service - aiki.dev</title>
-  <meta name="description" content="The no-nonsense gRPC guide for the C# developers, Part One: Secure service In the previous part, we created a Calculator micro-service which happily performs uncomplicated integer arithmetic. We were able to call that service locally and, hopefully, from the remote computer. The problem though is that our network exchanges are completely unprotected so anyone, with appropriate knowledge and tools, can see what numbers we are trying to multiply. Moreover, the client even cannot be sure that it receives the responses from the valid service, not the one which might be controlled by hackers.">
+  <meta name="description" content="source code
+In the previous part, we created a Calculator micro-service which happily performs uncomplicated integer arithmetic. We were able to call that service locally and, hopefully, from the remote computer. The problem though is that our network exchanges are completely unprotected so anyone, with appropriate knowledge and tools, can see what numbers we are trying to multiply. Moreover, the client even cannot be sure that it receives the responses from the valid service, not the one which might be controlled by hackers.">
   <meta name="author" content="Lech Gudalewicz"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -57,9 +58,9 @@
     "name" : "Lech Gudalewicz"
   },
   "headline": "No-nonsense gRPC guide for the C# developers, Part Two: Secure service",
-  "description" : "The no-nonsense gRPC guide for the C# developers, Part One: Secure service In the previous part, we created a Calculator micro-service which happily performs uncomplicated integer arithmetic. We were able to call that service locally and, hopefully, from the remote computer. The problem though is that our network exchanges are completely unprotected so anyone, with appropriate knowledge and tools, can see what numbers we are trying to multiply. Moreover, the client even cannot be sure that it receives the responses from the valid service, not the one which might be controlled by hackers.",
+  "description" : "source code\nIn the previous part, we created a Calculator micro-service which happily performs uncomplicated integer arithmetic. We were able to call that service locally and, hopefully, from the remote computer. The problem though is that our network exchanges are completely unprotected so anyone, with appropriate knowledge and tools, can see what numbers we are trying to multiply. Moreover, the client even cannot be sure that it receives the responses from the valid service, not the one which might be controlled by hackers.",
   "inLanguage" : "en",
-  "wordCount":  1573 ,
+  "wordCount":  1557 ,
   "datePublished" : "2020-11-15T11:42:08",
   "dateModified" : "2020-11-15T11:42:08",
   "image" : "https:\/\/aiki.dev\/images\/logo.png",
@@ -79,14 +80,16 @@
 </script>
 
 <meta property="og:title" content="No-nonsense gRPC guide for the C# developers, Part Two: Secure service" />
-<meta property="og:description" content="The no-nonsense gRPC guide for the C# developers, Part One: Secure service In the previous part, we created a Calculator micro-service which happily performs uncomplicated integer arithmetic. We were able to call that service locally and, hopefully, from the remote computer. The problem though is that our network exchanges are completely unprotected so anyone, with appropriate knowledge and tools, can see what numbers we are trying to multiply. Moreover, the client even cannot be sure that it receives the responses from the valid service, not the one which might be controlled by hackers.">
+<meta property="og:description" content="source code
+In the previous part, we created a Calculator micro-service which happily performs uncomplicated integer arithmetic. We were able to call that service locally and, hopefully, from the remote computer. The problem though is that our network exchanges are completely unprotected so anyone, with appropriate knowledge and tools, can see what numbers we are trying to multiply. Moreover, the client even cannot be sure that it receives the responses from the valid service, not the one which might be controlled by hackers.">
 <meta property="og:image" content="https://aiki.dev/images/logo.png" />
 <meta property="og:url" content="https://aiki.dev/posts/csharp-grpc-secure/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="aiki.dev" />
 
   <meta name="twitter:title" content="No-nonsense gRPC guide for the C# developers, Part Two: Secure service" />
-  <meta name="twitter:description" content="The no-nonsense gRPC guide for the C# developers, Part One: Secure service In the previous part, we created a Calculator micro-service which happily performs uncomplicated integer arithmetic. We were …">
+  <meta name="twitter:description" content="source code
+In the previous part, we created a Calculator micro-service which happily performs uncomplicated integer arithmetic. We were able to call that service locally and, hopefully, from the …">
   <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
   <meta name="twitter:card" content="summary" />
   <link href='https://aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
@@ -251,34 +254,47 @@ if (!doNotTrack) {
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <h1 id="the-no-nonsense-grpc-guide-for-the-c-developers-part-one-secure-service">The no-nonsense gRPC guide for the C# developers, Part One: Secure service</h1>
+        <p><a href="https://github.com/lechgu/grpc_csharp">source code</a></p>
 <p>In the previous part, we created a Calculator micro-service which happily performs uncomplicated integer arithmetic. We were able to call that service locally and, hopefully, from the remote computer. The problem though is that our network exchanges are completely unprotected so anyone, with appropriate knowledge and tools, can see what numbers we are trying to multiply. Moreover, the client even cannot be sure that it receives the responses from the valid service, not the one which might be controlled by hackers. Let&rsquo;s mitigate that.</p>
 <h2 id="publicprivate-key-cryptography-refresher">Public/private key cryptography refresher</h2>
-<p>So there is this public/private key security mechanism. We won&rsquo;t get deep into the details, but
-the main idea is that there are two keys involved with every secure message. The math behind  the key pair is that one key encrypts the message but to decrypt the message you need the second key. That is, if I encrypt something with the first key, I cannot decrypt it with the same key! No way, you need the second key. The keys are also designed the way that having one key, it is impossible to derive the second, and vice versa. If you think about it for a moment, it opens pretty powerful opportunities.
-Say Lech and Klaus want to exchange some information in secure manner. They both generate a pair of keys, one will be called private and another will be called public (so there are 4 keys in total: Lech&rsquo;s private and public and Klaus' private and public). Lech hides his private key so only he has access to it and makes his public key accessible to everyone. That is publishes on a website, prints in the newspaper, whatever. Klaus does the same with his pair. So the whole world can access Lech&rsquo;s and Klaus' public keys, but their respective private keys are well hidden. Consider two cases:</p>
+<p>So there is this public/private key security mechanism.</p>
+<p>We won&rsquo;t get deep into the details, but
+the main idea is that there are two keys involved with every secure message. The math behind  the key pair is that one key encrypts the message but to decrypt the message you need the second key. That is, if I encrypt something with the first key, I cannot decrypt it with the same key! No way, you need the second key. The keys are also designed the way that having one key, it is impossible to derive the second, and vice versa.</p>
+<p>If you think about it for a moment, it opens pretty powerful opportunities.</p>
+<p>Say Lech and Klaus want to exchange some information in a secure manner. They each generate a pair of keys, one will be called private and another will be called public (so there are 4 keys in total: Lech&rsquo;s private and public and Klaus' private and public). Lech hides his private key so only he has access to it and makes his public key accessible to everyone. That is, he publishes on a website, prints in the newspaper, whatever. Klaus does the same with his pair. So the whole world can access Lech&rsquo;s and Klaus' public keys, but their respective private keys are well hidden. Consider two cases:</p>
 <h4 id="lech-want-to-send-a-message-to-klaus-so-nobody-but-klaus-can-read-it">Lech want to send a message to Klaus so nobody but Klaus can read it.</h4>
-<p>Easy: Lech takes Klaus' public key from the newspaper (remember, everyone can access it!), encrypts the message with it and transfer it to Klaus. If anyone but Klaus intercepts the message, they won&rsquo;t be able to do anything with it as to decrypt it, they need Klaus' private key, as it is the only key which can decrypt the message and it is in possession and, hopefully, well guarded by Klaus.</p>
-<h4 id="klaus-want-to-send-the-message-to-lech-and-he-wants-to-ensure-that-lech-knows-that-the-message-is-indeed-from-him-and-nobody-else">Klaus want to send the message to Lech and he wants to ensure that Lech knows that the message is indeed from him and nobody else.</h4>
+<p>Easy: Lech takes Klaus' public key from the newspaper (remember, everyone can access it!), encrypts the message with it and transfers it to Klaus. If anyone but Klaus intercepts the message, they won&rsquo;t be able to do anything with it as to decrypt it, they need Klaus' private key, as it is the only key which can decrypt the message! That is in possession and, hopefully, well guarded by Klaus.</p>
+<h4 id="klaus-wants-to-send-the-message-to-lech-and-he-wants-to-ensure-that-lech-knows-that-the-message-is-indeed-from-him-and-nobody-else">Klaus wants to send the message to Lech and he wants to ensure that Lech knows that the message is indeed from him and nobody else.</h4>
 <p>Klaus takes the message, encrypts it with his private key and sends to Lech. Lech can grab Klaus' public key and decrypt the message. If it works, he can make sure that it is send only by Klaus, as only his private key might have be able to encrypt the message this way. In essence, the message is &ldquo;signed&rdquo; by Klaus.</p>
 <p>Pretty cool stuff.</p>
 <p>Obviously encrypting and signing can be combined, so Klaus can use his private key to sign and Lech&rsquo;s public key to encrypt.
-This is fundamentally how it works when you do online banking from your browser (the reality is a little bit more complicated but the concept holds). So what is this certificate my browser is talking about? Fundamentally, bank&rsquo;s certificate is bank&rsquo;s public key. Yeah you say, but how we know that it is bank&rsquo;s public key and not some hacker&rsquo;s public key pretending to be our bank. The thing is that the certificate is signed (in the sense we talked above) by some &ldquo;Certificate Authority&rdquo; and the list of trusted &ldquo;Certificate Authorities&rdquo; is pretty much hardcoded into the browser.</p>
-<p>gRPC supports TLS, which is using private/public keys to secure the traffic. So we will need a private/public key pair at least for our service. instead of public key we will use the certificate, which is fundamentally a public key signed by some Certificate Authority. So, who is going to be that Certificate Authority? Well there are public ones which issue certificate/private key pairs on demand, but for most of them you have to pay money. Since our gRPC service is not going to be open for public access (gRPC services rarely are, as opposed to the HTTPS web sites), it is perfectly valid to operate our own Certificate Authority (CA).
+This is fundamentally how it works when you do online banking from your browser (the reality is a little bit more complicated but the concept holds).</p>
+<p>So what is this certificate my browser is talking about?</p>
+<p>Fundamentally, bank&rsquo;s certificate is bank&rsquo;s public key. Yeah you say, but how we know that it is bank&rsquo;s public key and not some hacker&rsquo;s public key pretending to be our bank? The thing is that the certificate is signed (in the sense we talked above) by some &ldquo;Certificate Authority&rdquo; and the list of trusted &ldquo;Certificate Authorities&rdquo; is pretty much baked into the browser.</p>
+<p>gRPC supports TLS, which is mechanism of using private/public keys to secure the traffic. So we will need a private/public key pair at least for our service. instead of public key we will use the certificate, which is fundamentally a public key signed by some Certificate Authority.</p>
+<p>So, who is going to be that Certificate Authority?</p>
+<p>Well there are public ones which issue certificate/private key pairs on demand, but for most of them you have to pay money. Since our gRPC service is not going to be open for public access (gRPC services rarely are, as opposed to the HTTPS web sites), it is perfectly valid to operate our own Certificate Authority (CA).
 The plan is this:</p>
 <ul>
 <li>create a CA certificate/private key pair so we can issue and sign certificates.</li>
-<li>create a service certificate/private key pair for the service.</li>
+<li>create a service certificate/private key pair for the service and ask CA to sign it.</li>
 <li>deploy CA&rsquo;s certificate to the client (perfectly valid as it is, in essence, a public key). This way, the client will be able to ensure that it is connected to the right service and the network traffic will be encrypted.</li>
 </ul>
 <h4 id="cloudflare-ssl-toolkit">CloudFlare SSL toolkit</h4>
 <p>There are many ways to generate certificate/private key pairs, one particularly easy to use tool is a widely used toolkit created by CloudFlare.
-One can install the toolkit on the local computer that it might require to jump over several hoops, so to keep things relative easy, we will use the docker image provided by CloudFlare. Pull the image:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker pull cfssl/cfssl
+One can install the toolkit on the local computer that it might require to jump through several hoops, so to keep things relatively easy, we will use the docker image provided by CloudFlare. Make sure you have <a href="https://docker.io">docker</a> installed. Now, create the file <code>docker-compose.yml</code> with the following</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">version: &#39;3.8&#39;
+services:
+  cfssl:
+    image: cfssl/cfssl
+    entrypoint: bash
+    working_dir: /cert
+    volumes:
+      - ./cert:/cert
 </code></pre></div><p>The first step as we discussed, is to create a CA certificate and the private key. Create the directory cert
 with a file <code>ca-csr.json</code> which is a json file specifying the &ldquo;request&rdquo; to create the certificate for CA.</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">mkdir cert
-touch ca-csr.json
+touch cert/ca-csr.json
 </code></pre></div><p>Make that json file look like this:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">{
    &#34;CN&#34;: &#34;My CA&#34;,
@@ -297,14 +313,13 @@ touch ca-csr.json
    ]
 }
 </code></pre></div><p>The details are not terribly important for our purposes, it is just a bunch of attributes baked into the certificate plus specifics for the private key to be generated.
-Now lauch the docker image with mapping the cert directory to /cert in the docker container:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker run -it -v ${PWD}/cert:/cert  --entrypoint bash cfssl/cfssl
-</code></pre></div><p>You should end up inside the cfssl container. change to the <code>/cert</code> directory:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">cd /cert
-</code></pre></div><p>Your <code>ca-csr.json</code> file should be there. Run the following</p>
+Now launch the docker image:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker-compose run cfssl
+</code></pre></div><p>You should end up inside the cfssl container in the <code>cert</code> directory</p>
+<p>Your <code>ca-csr.json</code> file should be there. Run the following</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">cfssl gencert -initca ca-csr.json | cfssljson -bare ca
 </code></pre></div><p>This will look at the settings in the <code>ca-csr.json</code> and generate appropriate certificate and private key.
-Exit the docker container, for now:</p>
+You may exit the docker container, for now:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">exit
 </code></pre></div><p>If everything went well, you should see <code>ca.pem</code> and <code>ca-key.pem</code> int the <code>cert</code> directory. The former is CA&rsquo;s certificate, the latter is its private key.
 Now create the configuration for the CA, so it knows how to create the certificates.
@@ -346,14 +361,14 @@ Create the <code>cert/ca-config.json</code> file with the following:</p>
         }
     ]
 }
-</code></pre></div><p>Note that the <code>CN</code> attribute (common name) and lists of the hosts this certificate is issued for.</p>
+</code></pre></div><p>Note that the  lists of the hosts this certificate is issued for.</p>
 <p>Launch the cfssl container again</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"> docker run -it -v ${PWD}/cert:/cert  --entrypoint bash cfssl/cfssl
-</code></pre></div><p>switch to the <code>/cert</code> directory and create the certificate for the service:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=service  service-csr.json | cfssljson -bare service
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"> docker-compose run cfssl
+</code></pre></div><p>Generate the certificate:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"> cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=service  service-csr.json | cfssljson -bare service
 </code></pre></div><p>Assuming everything went well, exit the container:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">exit
-</code></pre></div><p>Now in the <code>cert</code> directory there should be two new files <code>service.pem</code> and <code>service-key.pem</code>, service certificate and service private key, respectively.</p>
+</code></pre></div><p>Now in the <code>cert</code> directory there should be two extra files <code>service.pem</code> and <code>service-key.pem</code>, service certificate and service private key, respectively.</p>
 <h4 id="enable-certificate-on-the-service">Enable certificate on the service</h4>
 <p>Hop into the <code>Service/Service.cs</code> and, just after parsing the port, read the certificate and the private file</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">// ...
@@ -364,7 +379,7 @@ var pair = new KeyCertificatePair(
    File.ReadAllText(&#34;cert/service-key.pem&#34;)
 );
 </code></pre></div><p>You will need to make sure you have <code>using System.IO</code> at the top of your file.
-Immediatelly after reading the certificate, create the credentials and pass these credentials to the server</p>
+Imediatelly after reading the certificate, create the credentials and pass these credentials to the server</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">var pair = new KeyCertificatePair(
     File.ReadAllText(&#34;cert/service.pem&#34;),
     File.ReadAllText(&#34;cert/service-key.pem&#34;)
