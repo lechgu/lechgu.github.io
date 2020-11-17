@@ -8,7 +8,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <title>No-nonsense gRPC guide for the C# developers, Part Three: Streaming - aiki.dev</title>
-  <meta name="description" content="No-nonsense gRPC guide for the C# developers, Part Three: Streaming Why sometimes we care about the streaming? Many, many micro-services are fundamentally designed as our Calculate service we were able to build in parts one and two. Of course the request and reply messages payload may wary widely, but the pattern is fundamentally the same: Client sends the request message, the service does something with the supplied parameters and sends the response back.">
+  <meta name="description" content="source code
+Why sometimes we care about the streaming? Many, many micro-services are fundamentally designed as our Calculate service we were able to build in parts one and two. Of course the request and reply messages payload may wary widely, but the pattern is fundamentally the same: Client sends the request message, the service does something with the supplied parameters and sends the response back. But in some cases we have a case which requires a slightly adjusted point of view.">
   <meta name="author" content="Lech Gudalewicz"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -57,9 +58,9 @@
     "name" : "Lech Gudalewicz"
   },
   "headline": "No-nonsense gRPC guide for the C# developers, Part Three: Streaming",
-  "description" : "No-nonsense gRPC guide for the C# developers, Part Three: Streaming Why sometimes we care about the streaming? Many, many micro-services are fundamentally designed as our Calculate service we were able to build in parts one and two. Of course the request and reply messages payload may wary widely, but the pattern is fundamentally the same: Client sends the request message, the service does something with the supplied parameters and sends the response back.",
+  "description" : "source code\nWhy sometimes we care about the streaming? Many, many micro-services are fundamentally designed as our Calculate service we were able to build in parts one and two. Of course the request and reply messages payload may wary widely, but the pattern is fundamentally the same: Client sends the request message, the service does something with the supplied parameters and sends the response back. But in some cases we have a case which requires a slightly adjusted point of view.",
   "inLanguage" : "en",
-  "wordCount":  1716 ,
+  "wordCount":  1727 ,
   "datePublished" : "2020-11-15T17:05:24",
   "dateModified" : "2020-11-15T17:05:24",
   "image" : "https:\/\/aiki.dev\/images\/logo.png",
@@ -79,14 +80,16 @@
 </script>
 
 <meta property="og:title" content="No-nonsense gRPC guide for the C# developers, Part Three: Streaming" />
-<meta property="og:description" content="No-nonsense gRPC guide for the C# developers, Part Three: Streaming Why sometimes we care about the streaming? Many, many micro-services are fundamentally designed as our Calculate service we were able to build in parts one and two. Of course the request and reply messages payload may wary widely, but the pattern is fundamentally the same: Client sends the request message, the service does something with the supplied parameters and sends the response back.">
+<meta property="og:description" content="source code
+Why sometimes we care about the streaming? Many, many micro-services are fundamentally designed as our Calculate service we were able to build in parts one and two. Of course the request and reply messages payload may wary widely, but the pattern is fundamentally the same: Client sends the request message, the service does something with the supplied parameters and sends the response back. But in some cases we have a case which requires a slightly adjusted point of view.">
 <meta property="og:image" content="https://aiki.dev/images/logo.png" />
 <meta property="og:url" content="https://aiki.dev/posts/csharp-grpc-streaming/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="aiki.dev" />
 
   <meta name="twitter:title" content="No-nonsense gRPC guide for the C# developers, Part Three: Streaming" />
-  <meta name="twitter:description" content="No-nonsense gRPC guide for the C# developers, Part Three: Streaming Why sometimes we care about the streaming? Many, many micro-services are fundamentally designed as our Calculate service we were …">
+  <meta name="twitter:description" content="source code
+Why sometimes we care about the streaming? Many, many micro-services are fundamentally designed as our Calculate service we were able to build in parts one and two. Of course the request …">
   <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
   <meta name="twitter:card" content="summary" />
   <link href='https://aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
@@ -251,11 +254,12 @@ if (!doNotTrack) {
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <h1 id="no-nonsense-grpc-guide-for-the-c-developers-part-three-streaming">No-nonsense gRPC guide for the C# developers, Part Three: Streaming</h1>
+        <p><a href="https://github.com/lechgu/grpc_csharp">source code</a></p>
 <h2 id="why-sometimes-we-care-about-the-streaming">Why sometimes we care about the streaming?</h2>
 <p>Many, many micro-services are fundamentally designed as our Calculate service we were able to build in parts one and two.
 Of course the request and reply messages payload may wary widely, but the pattern is fundamentally the same: Client sends the request message, the service does <em>something</em> with the supplied parameters and sends the response back.
-But in some cases we have a case which requires a slightly adjusted point of view. Consider an IoT scenario (internet-of-things): we have a device which periodically and constantly reports some measurement, say temperature and the service provides some storage and/or analytics for this data. Granted we would be able to create a gRPC method ReportTemperature or such which accepts the temperature reading and the service would do its job in this method implementation. But this is sub-optimal: establishing a secure channel to the service is not entirely free and if the device would need to do it, say, every second, the performance costs would add up. It would be better to establish a connection once and keep sending temperature readings on that connection as long as we can. So the temperature reports would essentially look as a <em>stream</em> of readings. Another thing to mention that the stream may not necessary be directed as client-to-service. The opposite case could also be possible. For example what if our temperature service would push some analytical data to another (or even the same) client. Say we are interested in the median of every ten of the temperature readings. that would require the server streaming data to the client. Luckily, gRPC supports all of these cases: client-to-service streaming, service-to-client streaming and the duplex (bio-directional) streaming. In our exercise we will add bio-directional streaming. Once we know how to do that, we&rsquo;ll be able to implement both cases of uni-directional streaming, as they are, in essence, the simplified versions of the bio-directional streaming.</p>
+But in some cases we have a case which requires a slightly adjusted point of view. Consider an IoT scenario (internet-of-things): we have a device which periodically and constantly reports some measurement, say temperature, and the service provides some storage and/or analytics for this data. Granted we would be able to create a gRPC method ReportTemperature or such which accepts the temperature reading and the service would do its job in the method implementation. But this is sub-optimal: establishing a secure channel to the service is not entirely free and if the device would need to do it, say, every second, the performance costs would add up. It would be better to establish a connection once and keep sending temperature readings on that connection as long as we can. So the temperature reports would essentially look as a <em>stream</em> of readings.</p>
+<p>Another thing to mention that the stream may not necessary be directed as client-to-service. The opposite case could also be possible. For example what if our temperature service would push some analytical data to another (or even the same) client. Say we are interested in the median of every ten of the temperature readings. that would require the server streaming data to the client. Luckily, gRPC supports all of these cases: client-to-service streaming, service-to-client streaming and the duplex (bio-directional) streaming. In our exercise we will add bio-directional streaming. Once we know how to do that, we&rsquo;ll be able to implement both cases of uni-directional streaming, as they are, in essence, the simplified versions of the bio-directional streaming.</p>
 <h2 id="add-the-streaming-support-to-the-proto-file">Add the streaming support to the proto file</h2>
 <p>First, let&rsquo;s add the message which indicates the single temperature reading to the <code>contracts.proto</code>:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">// new
@@ -270,12 +274,13 @@ next add the new method to the service:</p>
     // new
     rpc Median (stream Temperature) returns (stream Temperature);
 }
-</code></pre></div><p>Notice that the <code>stream</code> preceding the message indicates that the method accepts and/or emits the stream.
+</code></pre></div><p>Notice that the <code>stream</code> preceding the message type indicates that the method accepts and/or emits the stream.
 In our case the service is going to accept the stream of temperature reading and emit the stream of medians of each subsequent 10 temperature reading.</p>
 <p>These are all the changes we are going to make to the proto file. Note that our existing Calculator functionality is not affected at all and it will continue to work as before.</p>
 <h2 id="client-changes">client changes</h2>
-<p>We will start with the client first. We are going to emulate the temperature readings by starting from some fixed temperature and randomly adjusting up and down with each reading (in the time series analysis, this is called <em>random walk</em>).
-Ok. the client now will be able to do both &ldquo;calculator&rdquo; and &ldquo;time series&rdquo; functionality. How do we distinguish between these two? For simplicity, we will use the following method: if only two arguments are passed (service address and port), we will assume that we want the &ldquo;time series&rdquo; demo, otherwise it is going to be &ldquo;calculator&rdquo; demo. It is clumsy, I admit, and you will probably never do such in practice, but it will serve for our purposes. The channel, client and certificate business it the same for both cases, so let' extract the calculator-specific functionality into a separate method:</p>
+<p>We will start with the client first. We are going to emulate the temperature readings by starting from some fixed temperature and randomly adjusting up and down with each reading (in the time series analysis, this is called <em>random walk</em>).</p>
+<p>Ok, the client now will be able to do both &ldquo;calculator&rdquo; and &ldquo;time series&rdquo; functionality. How do we distinguish between these two?</p>
+<p>For simplicity, we will use the following method: if only two arguments are passed (service address and port), we will assume that we want the &ldquo;time series&rdquo; demo, otherwise it is going to be &ldquo;calculator&rdquo; demo. It is clumsy, I admit, and you will probably never do such in practice, but it will serve for our purposes. The channel, client and certificate business it the same for both cases, so let' extract the calculator-specific functionality into a separate method:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">static void DoCalculator(Svc.SvcClient client, String[] args)
 {
     long x = long.Parse(args[2]);
@@ -328,17 +333,18 @@ In one terminal</p>
 </code></pre></div><p>It works? Great! let&rsquo;s move on and fill the time series stuff. We are going to be sending the temperature readings and receiving the medians at the same time, so we will need to run one of this jobs on the thread pool using the <code>Task.Run</code>.
 the <code>client.Median()</code> returns an object with two properties <code>RequestStream</code> and <code>ResonseStream</code> The former can be used to push the messages to the server, the latter to process the messages coming from the server.
 First, the processing part:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">static avoid DoTimeSeries(Svc.SvcClient client, String[] args)
-{
-    using var duplex = client.Median(); 
-    var responseTask = Task.Run(async () =&gt;
-    {
-        while (await duplex.ResponseStream.MoveNext())
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">static void DoTimeSeries(Svc.SvcClient client, String[] args)
         {
-            var resp = duplex.ResponseStream.Current;
-            Console.WriteLine($&#34;{resp.Timestamp}: {resp.Value}&#34;);
+            using var duplex = client.Median();
+            var responseTask = Task.Run(async () =&gt;
+            {
+                while (await duplex.ResponseStream.MoveNext())
+                {
+                    var resp = duplex.ResponseStream.Current;
+                    Console.WriteLine($&#34;{resp.Timestamp}: {resp.Value}&#34;);
+                }
+            });
         }
-    });
 }
 </code></pre></div><p>Next, lets take care of the pushing part. As discussed, we are using random walk to push slightly randomized readings to the service</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">// changed
@@ -384,6 +390,7 @@ namespace Client
 
         static async Task DoTimeSeries(Svc.SvcClient client, String[] args)
         {
+            Console.WriteLine(&#34;doing time series&#34;);
             using var duplex = client.Median();
             var responseTask = Task.Run(async () =&gt;
             {
@@ -499,6 +506,7 @@ namespace Service
 
         public override async Task Median(IAsyncStreamReader&lt;Temperature&gt; requestStream, IServerStreamWriter&lt;Temperature&gt; responseStream, ServerCallContext context)
         {
+            Console.WriteLine(&#34;Median&#34;);
             var vals = new List&lt;double&gt;();
             while (await requestStream.MoveNext())
             {
@@ -545,8 +553,8 @@ namespace Service
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Client localhost 9000
 </code></pre></div><p>You should see a continuous stream of calculated medians coming to the client&rsquo;s terminal.
 Ctrl-C when bored.
-Try doing the same across two different computers.
-It should work.</p>
+Try doing the same across two different computers.</p>
+<p>It should work, just make sure that the certificate for the service contains its hostname/ip address</p>
 <p>This concludes our mini-series.
 As a bonus I will publish shortly how we can replicate the whole functionality in Python so we can talk the Python client to the C# service and vice-versa.
 This is optional, but if interested, stay tuned!</p>
