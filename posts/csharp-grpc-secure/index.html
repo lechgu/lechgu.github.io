@@ -60,7 +60,7 @@ In the previous part, we created a Calculator micro-service which happily perfor
   "headline": "No-nonsense gRPC guide for the C# developers, Part Two: Secure service",
   "description" : "source code\nIn the previous part, we created a Calculator micro-service which happily performs uncomplicated integer arithmetic. We were able to call that service locally and, hopefully, from the remote computer. The problem though is that our network exchanges are completely unprotected so anyone, with appropriate knowledge and tools, can see what numbers we are trying to multiply. Moreover, the client even cannot be sure that it receives the responses from the valid service, not the one which might be controlled by hackers.",
   "inLanguage" : "en",
-  "wordCount":  1557 ,
+  "wordCount":  1585 ,
   "datePublished" : "2020-11-15T11:42:08",
   "dateModified" : "2020-11-15T11:42:08",
   "image" : "https:\/\/aiki.dev\/images\/logo.png",
@@ -361,7 +361,7 @@ Create the <code>cert/ca-config.json</code> file with the following:</p>
         }
     ]
 }
-</code></pre></div><p>Note that the  lists of the hosts this certificate is issued for.</p>
+</code></pre></div><p>The <code>hosts</code> part is important; it lists the hostnames/ip addresses the certificate is valid for. When you run service on another box, make sure it contains the hostname/ip address on which you want to reach that service from the client.</p>
 <p>Launch the cfssl container again</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"> docker-compose run cfssl
 </code></pre></div><p>Generate the certificate:</p>
@@ -379,7 +379,7 @@ var pair = new KeyCertificatePair(
    File.ReadAllText(&#34;cert/service-key.pem&#34;)
 );
 </code></pre></div><p>You will need to make sure you have <code>using System.IO</code> at the top of your file.
-Imediatelly after reading the certificate, create the credentials and pass these credentials to the server</p>
+Immediately after reading the certificate, create the credentials and pass these credentials to the server</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">var pair = new KeyCertificatePair(
     File.ReadAllText(&#34;cert/service.pem&#34;),
     File.ReadAllText(&#34;cert/service-key.pem&#34;)
