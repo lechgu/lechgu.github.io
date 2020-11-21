@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>No-nonsense gRPC guide for the C# developers - aiki.dev</title>
+  <title>Python - aiki.dev</title>
   <meta name="author" content="Lech Gudalewicz"/><script type="application/ld+json">
 {
     "@context": "http://schema.org",
@@ -29,13 +29,13 @@
 }
 </script>
 
-<meta property="og:title" content="No-nonsense gRPC guide for the C# developers" />
+<meta property="og:title" content="Python" />
 <meta property="og:image" content="https://aiki.dev/images/logo.png" />
-<meta property="og:url" content="https://aiki.dev/series/no-nonsense-grpc-guide-for-the-c#-developers/" />
+<meta property="og:url" content="https://aiki.dev/tags/python/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="aiki.dev" />
 
-  <meta name="twitter:title" content="No-nonsense gRPC guide for the C# developers" />
+  <meta name="twitter:title" content="Python" />
   <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
   <meta name="twitter:card" content="summary" />
   <link href='https://aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
@@ -178,9 +178,9 @@ if (!doNotTrack) {
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="series-heading">
+            <div class="tags-heading">
               
-                <h1>No-nonsense gRPC guide for the C# developers</h1>
+                <h1>Python</h1>
               
               
                 <hr class="small">
@@ -249,157 +249,6 @@ We are going to demonstrate these capabilities using Python. Python is one of th
         <a href="https://aiki.dev//tags/grpc/">gRPC</a>&nbsp;
         
         <a href="https://aiki.dev//tags/python/">Python</a>&nbsp;
-        
-    </div>
-    
-
-</article>
-          
-            <article class="post-preview">
-    <a href="https://aiki.dev/posts/csharp-grpc-streaming/">
-        <h2 class="post-title">No-nonsense gRPC guide for the C# developers, Part Three: Streaming</h2>
-        
-        
-        
-    </a>
-
-    <p class="post-meta">
-        <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;9&nbsp;minutes
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;1727&nbsp;words
-  
-  
-    
-      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Lech Gudalewicz
-    
-  
-  
-</span>
-
-
-    </p>
-    <div class="post-entry">
-        
-        source code
-Why sometimes we care about the streaming? Many, many micro-services are fundamentally designed as our Calculate service we were able to build in parts one and two. Of course the request and reply messages payload may wary widely, but the pattern is fundamentally the same: Client sends the request message, the service does something with the supplied parameters and sends the response back. But in some cases we have a case which requires a slightly adjusted point of view.
-        <a href="https://aiki.dev/posts/csharp-grpc-streaming/" class="post-read-more">[Read More]</a>
-        
-    </div>
-
-    
-    <div class="blog-tags">
-        
-        <a href="https://aiki.dev//tags/c/">C#</a>&nbsp;
-        
-        <a href="https://aiki.dev//tags/grpc/">gRPC</a>&nbsp;
-        
-    </div>
-    
-
-</article>
-          
-            <article class="post-preview">
-    <a href="https://aiki.dev/posts/csharp-grpc-secure/">
-        <h2 class="post-title">No-nonsense gRPC guide for the C# developers, Part Two: Secure service</h2>
-        
-        
-        
-    </a>
-
-    <p class="post-meta">
-        <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;8&nbsp;minutes
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;1585&nbsp;words
-  
-  
-    
-      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Lech Gudalewicz
-    
-  
-  
-</span>
-
-
-    </p>
-    <div class="post-entry">
-        
-        source code
-In the previous part, we created a Calculator micro-service which happily performs uncomplicated integer arithmetic. We were able to call that service locally and, hopefully, from the remote computer. The problem though is that our network exchanges are completely unprotected so anyone, with appropriate knowledge and tools, can see what numbers we are trying to multiply. Moreover, the client even cannot be sure that it receives the responses from the valid service, not the one which might be controlled by hackers.
-        <a href="https://aiki.dev/posts/csharp-grpc-secure/" class="post-read-more">[Read More]</a>
-        
-    </div>
-
-    
-    <div class="blog-tags">
-        
-        <a href="https://aiki.dev//tags/c/">C#</a>&nbsp;
-        
-        <a href="https://aiki.dev//tags/grpc/">gRPC</a>&nbsp;
-        
-    </div>
-    
-
-</article>
-          
-            <article class="post-preview">
-    <a href="https://aiki.dev/posts/csharp-grpc-basic/">
-        <h2 class="post-title">No-nonsense gRPC guide for the C# developers, Part One: Basic Service</h2>
-        
-        
-        
-    </a>
-
-    <p class="post-meta">
-        <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;11&nbsp;minutes
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;2296&nbsp;words
-  
-  
-    
-      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Lech Gudalewicz
-    
-  
-  
-</span>
-
-
-    </p>
-    <div class="post-entry">
-        
-        source code
-What are we going to talk about? gRPC is a high performance program-to-program communication framework highly suitable to efficiently connect services and, as such, to serve as the foundation for the micro-service architecture. I will not to bore you with the marketing speech, go for the details to the official site
-A few disclaimers:  gRPC, at the moment, does not have the best in-browser support so, if your app lives in the html/javascript universe, the traditional Rest/JSON web services might be a better choice.
-        <a href="https://aiki.dev/posts/csharp-grpc-basic/" class="post-read-more">[Read More]</a>
-        
-    </div>
-
-    
-    <div class="blog-tags">
-        
-        <a href="https://aiki.dev//tags/c/">C#</a>&nbsp;
-        
-        <a href="https://aiki.dev//tags/grpc/">gRPC</a>&nbsp;
         
     </div>
     
