@@ -370,9 +370,9 @@ public void SetPrivateKey(string privateKeyFile)
 </code></pre></div><p>We can now decrypt the data back:</p>
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">echo -n hello | dotnet run encrypt public.pem | dotnet run decrypt private.pem
 </code></pre></div><p>This encrypt the string &ldquo;hello&rdquo; with the public key and decrypts it back with the private key. You should see &ldquo;hello&rdquo; printed back.</p>
-<h4 id="are-we-done-then">Are we done then?</h4>
+<h3 id="are-we-done-then">Are we done then?</h3>
 <p>If you play a little bit with the program you will notice that it will not work with the large, or even moderate amount of data. The RSA is used to encrypt relatively short data. RSA also slow and compute intensive. Let&rsquo;s fix that problem.</p>
-<h4 id="hybrid-encryption-with-rsa-and-aes">Hybrid encryption with RSA and AES</h4>
+<h3 id="hybrid-encryption-with-rsa-and-aes">Hybrid encryption with RSA and AES</h3>
 <p>Advanced Encryption Standard (AES, for short) is, in essence, a fast and secure encryption algorithm. The fundamental difference with RSA is that it is symmetric, uses the same key for the encryption and the decryption. It is well suitable to encrypt large amounts of data. We are going to compose RSA with AES to achieve our ultimate goal.
 So here is the plan:</p>
 <ul>
@@ -469,7 +469,7 @@ We will use the session key length of 32 bytes, so add this to the <code>Cryptor
 <div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">echo -n &#39;hello world&#39; | dotnet run encrypt public.pem | dotnet run decrypt private.pem
 </code></pre></div><p>This will print the &lsquo;hello world&rsquo; back after encrypting and decrypting it.
 Try larger amount of data, it should also work fine.</p>
-<h4 id="what-have-we-learned">What have we learned.</h4>
+<h3 id="what-have-we-learned">What have we learned.</h3>
 <p>Now we know how to do asymmetric encryption and decryption with RSA in .Net. We also know that it has certain limitations and we have learned how to deal with these limitations by implementing hybrid encryption.</p>
 
 
