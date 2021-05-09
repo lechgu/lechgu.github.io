@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Asymmetric encryption ic C# for fun and profit - aiki.dev</title>
+  <meta name="description" content="source code
+What if you never knew what is asymmetric encryption? In short, asymmetric cryptography uses a pair of keys to perform its job. One may think that these two keys are entangled in a sense that while one is used to encrypt the data, to decrypt it back the second key is needed. First encrypts - Second decrypts. You cannot decrypt with the first key! You absolutely need the second key.">
+  <meta name="author" content="Lech Gudalewicz"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "aiki.dev",
+    
+    "url": "https:\/\/aiki.dev\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/aiki.dev\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/aiki.dev\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/aiki.dev\/posts\/csharp-rsa\/",
+          "name": "Asymmetric encryption ic c# for fun and profit"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Lech Gudalewicz"
+  },
+  "headline": "Asymmetric encryption ic C# for fun and profit",
+  "description" : "source code\nWhat if you never knew what is asymmetric encryption? In short, asymmetric cryptography uses a pair of keys to perform its job. One may think that these two keys are entangled in a sense that while one is used to encrypt the data, to decrypt it back the second key is needed. First encrypts - Second decrypts. You cannot decrypt with the first key! You absolutely need the second key.",
+  "inLanguage" : "en",
+  "wordCount":  1829 ,
+  "datePublished" : "2021-05-08T09:41:03",
+  "dateModified" : "2021-05-08T09:41:03",
+  "image" : "https:\/\/aiki.dev\/images\/logo.png",
+  "keywords" : [ "C#, RSA" ],
+  "mainEntityOfPage" : "https:\/\/aiki.dev\/posts\/csharp-rsa\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/aiki.dev\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/aiki.dev\/images\/logo.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="Asymmetric encryption ic C# for fun and profit" />
+<meta property="og:description" content="source code
+What if you never knew what is asymmetric encryption? In short, asymmetric cryptography uses a pair of keys to perform its job. One may think that these two keys are entangled in a sense that while one is used to encrypt the data, to decrypt it back the second key is needed. First encrypts - Second decrypts. You cannot decrypt with the first key! You absolutely need the second key.">
+<meta property="og:image" content="https://aiki.dev/images/logo.png" />
+<meta property="og:url" content="https://aiki.dev/posts/csharp-rsa/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="aiki.dev" />
+
+  <meta name="twitter:title" content="Asymmetric encryption ic C# for fun and profit" />
+  <meta name="twitter:description" content="source code
+What if you never knew what is asymmetric encryption? In short, asymmetric cryptography uses a pair of keys to perform its job. One may think that these two keys are entangled in a sense …">
+  <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
+  <meta name="twitter:card" content="summary" />
+  <link href='https://aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.83.1" />
+  <link rel="alternate" href="https://aiki.dev/index.xml" type="application/rss+xml" title="aiki.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://aiki.dev/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://aiki.dev/css/highlight.min.css" /><link rel="stylesheet" href="https://aiki.dev/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-159944114-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://aiki.dev/">aiki.dev</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Series" href="/series">Series</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="aiki.dev" href="https://aiki.dev/">
+            <img class="avatar-img" src="https://aiki.dev/images/logo.png" alt="aiki.dev" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              
+                <h1>Asymmetric encryption ic C# for fun and profit</h1>
+              
+              
+                <hr class="small">
+              
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p><a href="https://github.com/lechgu/csharp_rsa.git">source code</a></p>
+<h3 id="what-if-you-never-knew-what-is-asymmetric-encryption">What if you never knew what is asymmetric encryption?</h3>
+<p>In short, asymmetric cryptography uses a pair of keys to perform its job. One may think that these two keys are entangled in a sense that while one is used to encrypt the data, to decrypt it back the second key is needed. First encrypts - Second decrypts. You cannot decrypt with the first key! You absolutely need the second key. The keys therefore are generated in pairs. One traditionally is called &ldquo;private key&rdquo;, another - &ldquo;public key&rdquo;.</p>
+<p>Why these names? suppose Alice wants to encrypt some data so only Bob can read it. Bob makes his public key, well, public (say, puts it on the Facebook), but heavily guards the private counterpart. Alice grabs Bob&rsquo;s public key from the Facebook and encrypts the data with it. Notice where I am going with this? The encrypted data is not readable to anyone, even to Alice. Only Bob&rsquo;s private key can decrypt it which is in possession only by, well, Bob. One key encrypts, another decrypts, hence it is called &ldquo;asymmetric&rdquo;. The other common use of the asymmetric encryption is digital signatures, but in this guide we will concentrate on encryption.</p>
+<h3 id="what-will-you-able-to-do-once-you-complete-this-guide">What will you able to do once you complete this guide?</h3>
+<p>We are going to learn how to use RSA, one of the most widely used asymmetric encryption algorithms in the C# application. We are obviously not going to code the RSA itself, but use its implementation bundled with .Net. This is going to be cross-platform exercise, you can use Mac, Windows or Linux, as long as you have the latest <a href="https://dotnet.microsoft.com/download">.Net SDK</a> installed. Note that formerly the cross-platform version of .Net was called .Net Core. Now it is simply .Net.
+To follow along, you will need a text editor, like <a href="https://code.visualstudio.com/">Visual studio Code</a>, but your favorite text editor will probably work too. Familiarity with the command line is assumed, I will use bash. On Windows you can use <a href="https://git-scm.com/downloads">git bash</a>. To generate the RSA keypair, we are going to use <code>openssl</code> utility. If your system is Mac or Linux, you probably already have it, on Windows it comes with, for example, git bash.</p>
+<h3 id="project-setup">Project setup</h3>
+<p>create a directory and switch to it. You can call it any way you want, I will call it <code>csharp_rsa</code>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">mkdir csharp_rsa
+cd csharp_rsa
+</code></pre></div><p>Generate a console C# project</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet new console
+</code></pre></div><p>now, let&rsquo;s create a key pair</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">openssl genrsa -out private.pem 2048
+</code></pre></div><p>This will create a file <code>private.pem</code> which contains the private key with the key size 2048 bit. The public key is embedded in it also, so let&rsquo;s extract it:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">openssl rsa -in private.pem -outform PEM -pubout -out public.pem
+</code></pre></div><p>At the moment there should be two files <code>private.pem</code> and <code>public.pem</code> with the private and public key, correspondingly.
+Let&rsquo;s rename the <code>Program.cs</code> file. That is optional, obviously</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">mv Program.cs CsharpRSA.cs
+</code></pre></div><p>Do a quick sanity check:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run
+</code></pre></div><p>This should print famous &ldquo;Hello, World!&rdquo;</p>
+<h3 id="encrypt-the-data-with-rsa">Encrypt the data with RSA</h3>
+<p>We are going to keep all the crypto-related code in the separate file:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">touch Cryptor.cs
+</code></pre></div><p>Put some skeleton code, obviously it won&rsquo;t do anything at the moment:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">namespace csharp_rsa
+{
+    public class Cryptor
+    {
+        public byte[] AsymmetricEncrypt(byte[] data)
+        {
+            return data;
+        }
+    }
+}
+</code></pre></div><p>.Net implements RSA algorithm in the class RSACryptoServiceProvider which lives in the namespace System.Security.Cryptography. Add instance of this class to our Cryptor:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">using System.Security.Cryptography; // new
+//...
+public class Cryptor {
+    // new
+    private readonly RSACryptoServiceProvider _rsa = new();
+    //...
+}
+</code></pre></div><p>this has to be provided with the public key (remember? public key encrypts, private key decrypts). Add the following method to the <code>Cryptor</code>:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"> public void SetPublicKey(string publicKeyFile)
+{
+    var publicKey = File.ReadAllText(publicKeyFile);
+    _rsa.ImportFromPem(publicKey);
+}
+</code></pre></div><p>Naturally, one need to add <code>using System.IO</code>, so the <code>File.RealAllText</code> can be used. In case you are wondering, <code>Pem</code> is a textual format in which RSA keys are often stored.
+Now we can ask RSA to actually encrypt the data. Replace the <code>Encrypt</code> method with the following:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">public byte[] AsymmetricEncrypt(byte[] data)
+{
+return _rsa.Encrypt(data, false);
+}
+</code></pre></div><p>That simple. We set the second parameter to <code>false</code> to maximize compatibility.</p>
+<p>Let&rsquo;s give it a shot.</p>
+<p>our simple command line interface will accept two arguments, the operation <code>encrypt</code> or <code>decrypt</code> (to be implemented later) and the corresponding key. The actual data to be encrypted is expected to be passed on the standard input. In the real-world application you will probably read the data from file, from a Gui widget or from some web service.</p>
+<p>With that said, replace your <code>Main</code> function with the following:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">static void Main(string[] args)
+{
+    var operation = args[0];
+    var cryptor = new Cryptor();
+    if (operation == &#34;encrypt&#34;)
+    {
+        var publicKeyFile = args[1];
+        cryptor.SetPublicKey(publicKeyFile);
+
+        var data = Encoding.UTF8.GetBytes(Console.In.ReadToEnd());
+        var encryptedData = cryptor.AsymmetricEncrypt(data);
+        Console.WriteLine(System.Convert.ToBase64String(encryptedData));
+    }
+}
+</code></pre></div><p>you will also need to add <code>using System.Text</code> at the top.
+As you see, the code creates our <code>Cryptor</code>, sets the public key and calls <code>AsymmetricEncrypt</code>. The result is an array of bytes, so we base64 encode it before printing to the console.
+Let&rsquo;s try it:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">echo -n hello | dotnet run encrypt public.pem
+</code></pre></div><p>Ok, if everything works fine you should see the encrypted data in printed as base64 string.
+Let&rsquo;s handle the decryption part.</p>
+<h3 id="decrypt-data-with-rsa">Decrypt data with RSA</h3>
+<p>Decrypting the data with RSA is similar to encrypting. The difference is, naturally, that you decrypt with the private key.
+add these two functions to the <code>Cryptor</code> class:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">public byte[] AsymmetricDecrypt(byte[] data)
+{
+    return _rsa.Decrypt(data, false);
+}
+
+public void SetPrivateKey(string privateKeyFile)
+{
+    var privateKey = File.ReadAllText(privateKeyFile);
+    _rsa.ImportFromPem(privateKey);
+}
+</code></pre></div><p>The logic should be pretty familiar.</p>
+<p>Conversely, let&rsquo;s add decrypt functionality to the `Main:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">static void Main(string[] args)
+{
+    var cryptor = new Cryptor();
+    if (operation == &#34;encrypt&#34;)
+    {
+        // ...
+    }
+    // new
+     else if (operation == &#34;decrypt&#34;)
+    {
+        var privateKeyFile = args[1];
+        cryptor.SetPrivateKey(privateKeyFile);
+        var encryptedData = System.Convert.FromBase64String(Console.In.ReadToEnd());
+        var decryptedData = cryptor.AsymmetricDecrypt(encryptedData);
+        Console.WriteLine(Encoding.UTF8.GetString(decryptedData));
+    }
+}
+</code></pre></div><p>We can now decrypt the data back:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">echo -n hello | dotnet run encrypt public.pem | dotnet run decrypt private.pem
+</code></pre></div><p>This encrypt the string &ldquo;hello&rdquo; with the public key and decrypts it back with the private key. You should see &ldquo;hello&rdquo; printed back.</p>
+<h4 id="are-we-done-then">Are we done then?</h4>
+<p>If you play a little bit with the program you will notice that it will not work with the large, or even moderate amount of data. The RSA is used to encrypt relatively short data. RSA also slow and compute intensive. Let&rsquo;s fix that problem.</p>
+<h4 id="hybrid-encryption-with-rsa-and-aes">Hybrid encryption with RSA and AES</h4>
+<p>Advanced Encryption Standard (AES, for short) is, in essence, a fast and secure encryption algorithm. The fundamental difference with RSA is that it is symmetric, uses the same key for the encryption and the decryption. It is well suitable to encrypt large amounts of data. We are going to compose RSA with AES to achieve our ultimate goal.
+So here is the plan:</p>
+<ul>
+<li>we generate a reasonably sized random key (the size which RSA can comfortably handle). We&rsquo;ll call it a &ldquo;session key&rdquo;.</li>
+<li>we use AES to encrypt our data using the session key.</li>
+<li>we encrypt the session key with RSA.</li>
+<li>we compose AES-encrypted data and RSA-encrypted session key together.</li>
+</ul>
+<p>To decrypt the data, we simply need RSA-decrypt the session key and plug it into AES to decrypt the actual data.</p>
+<p>First, we need to be able to generate random data. <code>System.Security.Cryptography</code> has a class which can help with it.
+In the <code>Cryptor</code> class add the instance of <code>RNGCryptoServiceProvider</code> and a helper method which generates random data</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">public class Cryptor
+{
+    private readonly RSACryptoServiceProvider _rsa = new();
+    // new
+    private readonly RNGCryptoServiceProvider _rng = new();
+    // new
+    private byte[] GenerateRandomData(int size)
+    {
+        var data = new byte[size];
+        _rng.GetBytes(data);
+        return data;
+    }
+    // ...
+}
+</code></pre></div><p>Ok, we can generate random data of any desired size.
+For the AES encryption we are going to use the <code>AesGcm</code> class provided within the <code>System.Security.Cryptography</code> namespace. In order to encrypt data, in addition to session key it also requires a <code>nonce</code>, a random value which helps helps defend against certain attacks. In addition to emitting the encrypted data, we&rsquo;ll also get a <code>tag</code> from AES, which is used by the implementation to verify integrity of the encrypted message.
+Naturally, both nonce and tag must be also passed to the decryption routine.
+Let&rsquo;s add the code for AES encryption and decryption</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">// ...
+public static (byte[], byte[]) SymmetricEncrypt(byte[] data, byte[] sessionKey, byte[] nonce)
+{
+    var gcm = new AesGcm(sessionKey);
+    var tag = new byte[AesGcm.TagByteSizes.MaxSize];
+    var encData = new byte[data.Length];
+    gcm.Encrypt(nonce, data, encData, tag);
+    return (encData, tag);
+}
+
+public static byte[] SymmetricDecrypt(byte[] encryptedData, byte[] sessionKey, byte[] nonce, byte[] tag)
+{
+    var gcm = new AesGcm(sessionKey);
+    var decData = new byte[encryptedData.Length];
+    gcm.Decrypt(nonce, encryptedData, tag, decData);
+    return decData;
+}
+</code></pre></div><p>That handles the AES part.</p>
+<p>Let&rsquo;s put everything together.
+As discussed, we generate random session key and random nonce, encrypt the data with the session key, encrypt session key itself with RSA, and concatenate encrypted session key, nonce, tag and encrypted data together.
+Upon decryption, we extract the encrypted session key, nonce, tag, use RSA to decrypt the session key, and finally use the session key to decrypt the actual payload
+We will use the session key length of 32 bytes, so add this to the <code>Cryptor</code> class first:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">private const int SESSION_KEY_LENGTH = 32;
+</code></pre></div><p>Now, complete Encrypt implementation:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">public byte[] Encrypt(byte[] data)
+{
+    var sessionKey = GenerateRandomData(SESSION_KEY_LENGTH);
+    var nonce = GenerateRandomData(AesGcm.NonceByteSizes.MaxSize);
+    var (encryptedData, tag) = SymmetricEncrypt(data, sessionKey, nonce);
+    var encSessionKey = AsymmetricEncrypt(sessionKey);
+    var keySizeInBytes = _rsa.KeySize / 8;
+    var result = new byte[keySizeInBytes + nonce.Length + tag.Length + encryptedData.Length];
+    Buffer.BlockCopy(encSessionKey, 0, result, 0, encSessionKey.Length);
+    Buffer.BlockCopy(nonce, 0, result, keySizeInBytes, nonce.Length);
+    Buffer.BlockCopy(tag, 0, result, keySizeInBytes + nonce.Length, tag.Length);
+    Buffer.BlockCopy(encryptedData, 0, result, keySizeInBytes + nonce.Length + tag.Length, encryptedData.Length);
+    return result;
+}
+</code></pre></div><p>The code should be clear now, The minor annoyance is to carefully calculate offsets where all pieces end up in the final byte array.</p>
+<p>Finally, complete the Decrypt implementation:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">public byte[] Decrypt(byte[] data)
+{
+    var keySizeInBytes = _rsa.KeySize / 8;
+
+    var encSessionKey = new byte[keySizeInBytes];
+    Buffer.BlockCopy(data, 0, encSessionKey, 0, encSessionKey.Length);
+
+    var sessionKey = AsymmetricDecrypt(encSessionKey);
+
+    var nonce = new byte[AesGcm.NonceByteSizes.MaxSize];
+    Buffer.BlockCopy(data, keySizeInBytes, nonce, 0, nonce.Length);
+    var tag = new byte[AesGcm.TagByteSizes.MaxSize];
+    Buffer.BlockCopy(data, keySizeInBytes + nonce.Length, tag, 0, tag.Length);
+
+    var encDataSize = data.Length - (keySizeInBytes + nonce.Length + tag.Length);
+    var encData = new byte[encDataSize];
+    Buffer.BlockCopy(data, keySizeInBytes + nonce.Length + tag.Length, encData, 0, encDataSize);
+
+    return SymmetricDecrypt(encData, sessionKey, nonce, tag);
+}
+</code></pre></div><p>No surprises here.</p>
+<p>Let&rsquo;s try it.</p>
+<p>In fact, the only code change to do in your <code>Main</code> function is to replace calls to <code>AsymmetricEncrypt</code> and <code>AsymmetricDecrypt</code> to <code>Encrypt</code> and <code>Decrypt</code>, respectively.</p>
+<p>After these trivial renames, run:</p>
+<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">echo -n &#39;hello world&#39; | dotnet run encrypt public.pem | dotnet run decrypt private.pem
+</code></pre></div><p>This will print the &lsquo;hello world&rsquo; back after encrypting and decrypting it.
+Try larger amount of data, it should also work fine.</p>
+<h4 id="what-have-we-learned">What have we learned.</h4>
+<p>Now we know how to do asymmetric encryption and decryption with RSA in .Net. We also know that it has certain limitations and we have learned how to deal with these limitations by implementing hybrid encryption.</p>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://aiki.dev//tags/c/">C#</a>&nbsp;
+            
+              <a href="https://aiki.dev//tags/rsa/">RSA</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2faiki.dev%2fposts%2fcsharp-rsa%2f&amp;text=Asymmetric%20encryption%20ic%20C%23%20for%20fun%20and%20profit&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2faiki.dev%2fposts%2fcsharp-rsa%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fcsharp-rsa%2f&amp;title=Asymmetric%20encryption%20ic%20C%23%20for%20fun%20and%20profit" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2faiki.dev%2fposts%2fcsharp-rsa%2f&amp;title=Asymmetric%20encryption%20ic%20C%23%20for%20fun%20and%20profit" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fcsharp-rsa%2f&amp;title=Asymmetric%20encryption%20ic%20C%23%20for%20fun%20and%20profit" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2faiki.dev%2fposts%2fcsharp-rsa%2f&amp;description=Asymmetric%20encryption%20ic%20C%23%20for%20fun%20and%20profit" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+            
+          
+
+          
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/posts/csharp-grpc-interop/">No-nonsense gRPC guide for the C# developers, Bonus: Interoperability</a></li>
+                
+                    <li><a href="/posts/csharp-grpc-streaming/">No-nonsense gRPC guide for the C# developers, Part Three: Streaming</a></li>
+                
+                    <li><a href="/posts/csharp-grpc-secure/">No-nonsense gRPC guide for the C# developers, Part Two: Secure service</a></li>
+                
+                    <li><a href="/posts/csharp-grpc-basic/">No-nonsense gRPC guide for the C# developers, Part One: Basic Service</a></li>
+                
+                    <li><a href="/posts/csharp-docker/">Docker for the C# developers Crash Course</a></li>
+                
+              </ul>
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://aiki.dev/posts/csharp-grpc-interop/" data-toggle="tooltip" data-placement="top" title="No-nonsense gRPC guide for the C# developers, Bonus: Interoperability">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      
+
+
+      
+        
+          
+          <div class="disqus-comments">                  
+            <button id="show-comments" class="btn btn-default" type="button">Show <span class="disqus-comment-count" data-disqus-url="https://aiki.dev/posts/csharp-rsa">comments</span></button>
+            <div id="disqus_thread"></div>
+
+            <script type="text/javascript">
+              var disqus_config = function () {
+              this.page.url = 'https:\/\/aiki.dev\/posts\/csharp-rsa';
+            };
+
+          </script>
+          </div>
+          
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="https://github.com/lechgu" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="aiki.dev">Lech Gudalewicz</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2021
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://aiki.dev/">aiki.dev</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.83.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://aiki.dev/js/main.js"></script>
+<script src="https://aiki.dev/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://aiki.dev/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+$(function(){
+  $('#show-comments').on('click', function(){
+    var disqus_shortname = 'aiki-dev';
+      
+    (function() {
+      var disqus = document.createElement('script'); 
+      disqus.type = 'text/javascript'; 
+      disqus.async = true;
+      disqus.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(disqus);
+    })();
+      
+    $(this).hide(); 
+    });
+  });
+      
+</script>
+<script id="dsq-count-scr" src="//aiki-dev.disqus.com/count.js" async></script>
+
+
+
+
+    
+  </body>
+</html>
+

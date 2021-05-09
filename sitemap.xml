@@ -1,215 +1,135 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>https://aiki.dev/</loc>
-    <lastmod>2020-11-21T09:04:13-08:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-05-08T09:41:03-07:00</lastmod>
+  </url><url>
+    <loc>https://aiki.dev/posts/csharp-rsa/</loc>
+    <lastmod>2021-05-08T09:41:03-07:00</lastmod>
+  </url><url>
     <loc>https://aiki.dev/tags/c#/</loc>
-    <lastmod>2020-11-21T09:04:13-08:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-05-08T09:41:03-07:00</lastmod>
+  </url><url>
+    <loc>https://aiki.dev/posts/</loc>
+    <lastmod>2021-05-08T09:41:03-07:00</lastmod>
+  </url><url>
+    <loc>https://aiki.dev/tags/rsa/</loc>
+    <lastmod>2021-05-08T09:41:03-07:00</lastmod>
+  </url><url>
+    <loc>https://aiki.dev/tags/</loc>
+    <lastmod>2021-05-08T09:41:03-07:00</lastmod>
+  </url><url>
     <loc>https://aiki.dev/tags/grpc/</loc>
     <lastmod>2020-11-21T09:04:13-08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/series/no-nonsense-grpc-guide-for-the-c#-developers/</loc>
     <lastmod>2020-11-21T09:04:13-08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/posts/csharp-grpc-interop/</loc>
     <lastmod>2020-11-21T09:04:13-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://aiki.dev/posts/</loc>
-    <lastmod>2020-11-21T09:04:13-08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/tags/python/</loc>
     <lastmod>2020-11-21T09:04:13-08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/series/</loc>
     <lastmod>2020-11-21T09:04:13-08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://aiki.dev/tags/</loc>
-    <lastmod>2020-11-21T09:04:13-08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/posts/csharp-grpc-streaming/</loc>
     <lastmod>2020-11-15T17:05:24-08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/posts/csharp-grpc-secure/</loc>
     <lastmod>2020-11-15T11:42:08-08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/posts/csharp-grpc-basic/</loc>
     <lastmod>2020-11-14T15:22:30-08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/tags/django/</loc>
     <lastmod>2020-08-22T11:31:42-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/posts/micro-django/</loc>
     <lastmod>2020-08-22T11:31:42-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/tags/tutorial/</loc>
     <lastmod>2020-08-22T11:31:42-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/tags/docker/</loc>
     <lastmod>2020-06-15T14:48:13-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/posts/csharp-docker/</loc>
     <lastmod>2020-06-15T14:48:13-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/tags/heroku/</loc>
     <lastmod>2020-03-29T11:46:22-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/posts/ship-it/</loc>
     <lastmod>2020-03-29T11:46:22-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/series/pixies-build-an-app-with-django-react-and-docker/</loc>
     <lastmod>2020-03-29T11:46:22-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/posts/connect-frontend-backend/</loc>
     <lastmod>2020-03-28T15:36:04-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/posts/serving-static-files/</loc>
     <lastmod>2020-03-26T10:47:30-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/tags/drf/</loc>
     <lastmod>2020-03-23T13:50:31-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/posts/containerize-backend/</loc>
     <lastmod>2020-03-23T13:50:31-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/posts/rest-service/</loc>
     <lastmod>2020-03-23T10:29:04-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/posts/django-apps/</loc>
     <lastmod>2020-03-22T14:12:27-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/posts/lean-django/</loc>
     <lastmod>2020-03-21T17:35:08-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/posts/easy-postgres-setup/</loc>
     <lastmod>2020-03-21T09:54:35-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/tags/postgres/</loc>
     <lastmod>2020-03-21T09:54:35-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/tags/javascript/</loc>
     <lastmod>2020-03-14T18:17:24-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/posts/a-bit-of-react/</loc>
     <lastmod>2020-03-14T18:17:24-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/tags/react/</loc>
     <lastmod>2020-03-14T18:17:24-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/tags/webpack/</loc>
     <lastmod>2020-03-14T18:17:24-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/posts/go-live/</loc>
     <lastmod>2020-03-14T13:50:54-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/tags/nginx/</loc>
     <lastmod>2020-03-09T18:17:29-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/posts/what-you-wanted-to-know-about-docker/</loc>
     <lastmod>2020-03-09T18:17:29-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/posts/just-enough-webpack/</loc>
     <lastmod>2020-03-08T14:33:37-07:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/posts/django-react-docker-intro/</loc>
     <lastmod>2020-03-07T15:48:34-08:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/about/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/page/about/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/contact/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/page/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://aiki.dev/projects/</loc>
   </url>
-  
 </urlset>
