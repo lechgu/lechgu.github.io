@@ -93,7 +93,7 @@ Why sometimes we care about the streaming? Many, many micro-services are fundame
   <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
   <meta name="twitter:card" content="summary" />
   <link href='https://aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.83.1" />
+  <meta name="generator" content="Hugo 0.88.0" />
   <link rel="alternate" href="https://aiki.dev/index.xml" type="application/rss+xml" title="aiki.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://aiki.dev/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -262,14 +262,14 @@ But in some cases we have a case which requires a slightly adjusted point of vie
 <p>Another thing to mention that the stream may not necessary be directed as client-to-service. The opposite case could also be possible. For example what if our temperature service would push some analytical data to another (or even the same) client. Say we are interested in the median of every ten of the temperature readings. that would require the server streaming data to the client. Luckily, gRPC supports all of these cases: client-to-service streaming, service-to-client streaming and the duplex (bio-directional) streaming. In our exercise we will add bio-directional streaming. Once we know how to do that, we&rsquo;ll be able to implement both cases of uni-directional streaming, as they are, in essence, the simplified versions of the bio-directional streaming.</p>
 <h2 id="add-the-streaming-support-to-the-proto-file">Add the streaming support to the proto file</h2>
 <p>First, let&rsquo;s add the message which indicates the single temperature reading to the <code>contracts.proto</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">// new
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">// new
 message Temperature {
     int64 timestamp = 1;
     double value = 2;
 }
 </code></pre></div><p><code>timestamp</code> indicate the <em>time</em> when the temperature reading was captured and the <code>valu</code> is the actual reading;
 next add the new method to the service:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">service Svc {
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">service Svc {
     rpc Calculate (CalculateRequest) returns (CalculateReply);
     // new
     rpc Median (stream Temperature) returns (stream Temperature);
@@ -281,7 +281,7 @@ In our case the service is going to accept the stream of temperature reading and
 <p>We will start with the client first. We are going to emulate the temperature readings by starting from some fixed temperature and randomly adjusting up and down with each reading (in the time series analysis, this is called <em>random walk</em>).</p>
 <p>Ok, the client now will be able to do both &ldquo;calculator&rdquo; and &ldquo;time series&rdquo; functionality. How do we distinguish between these two?</p>
 <p>For simplicity, we will use the following method: if only two arguments are passed (service address and port), we will assume that we want the &ldquo;time series&rdquo; demo, otherwise it is going to be &ldquo;calculator&rdquo; demo. It is clumsy, I admit, and you will probably never do such in practice, but it will serve for our purposes. The channel, client and certificate business it the same for both cases, so let' extract the calculator-specific functionality into a separate method:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">static void DoCalculator(Svc.SvcClient client, String[] args)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">static void DoCalculator(Svc.SvcClient client, String[] args)
 {
     long x = long.Parse(args[2]);
     string op = args[3];
@@ -295,12 +295,12 @@ In our case the service is going to accept the stream of temperature reading and
     Console.WriteLine($&#34;The calculated result is: {reply.Result}&#34;);
 }
 </code></pre></div><p>The same manner add an empty (for now) method <code>DoTimeSeries()</code></p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">static void DoTimeSeries(Svc.SvcClient client, String[] args)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">static void DoTimeSeries(Svc.SvcClient client, String[] args)
 {
 
 }
 </code></pre></div><p>Now we are ready to change the <code>Main</code> method of doing our silly dispatching logic:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">// changed
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">// changed
 static void Main(string[] args)
 {
     string host = args[0];
@@ -327,13 +327,13 @@ static void Main(string[] args)
 </code></pre></div><h4 id="sanity-check">Sanity check</h4>
 <p>Make sure that the old calculator functionality still works. You know the drill:
 In one terminal</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Service 9000
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Service 9000
 </code></pre></div><p>In the second terminal</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Client localhost 9000 17 + 25
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Client localhost 9000 17 + 25
 </code></pre></div><p>It works? Great! let&rsquo;s move on and fill the time series stuff. We are going to be sending the temperature readings and receiving the medians at the same time, so we will need to run one of this jobs on the thread pool using the <code>Task.Run</code>.
 the <code>client.Median()</code> returns an object with two properties <code>RequestStream</code> and <code>ResonseStream</code> The former can be used to push the messages to the server, the latter to process the messages coming from the server.
 First, the processing part:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">static void DoTimeSeries(Svc.SvcClient client, String[] args)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">static void DoTimeSeries(Svc.SvcClient client, String[] args)
         {
             using var duplex = client.Median();
             var responseTask = Task.Run(async () =&gt;
@@ -347,7 +347,7 @@ First, the processing part:</p>
         }
 }
 </code></pre></div><p>Next, lets take care of the pushing part. As discussed, we are using random walk to push slightly randomized readings to the service</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">// changed
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">// changed
 static async Task DoTimeSeries(Svc.SvcClient client, String[] args)
 {
     // as before ...
@@ -364,7 +364,7 @@ static async Task DoTimeSeries(Svc.SvcClient client, String[] args)
 </code></pre></div><p>As we are using <code>await</code> to push asynchronously, we need to modify to mark the method as <code>async</code> and returning a <code>Task</code> to make the async plumbing happy.</p>
 <p>As you can see, our pushing part never stops, as indicated by the <code>while (true)</code> loop; As we expect to receive a median on every 10th push, the processing the incoming stream also never stops. You&rsquo;ll have to Ctrl-C to stop the process once bored of contemplating incoming median temperatures.
 for the reference, the complete <code>Client.cs</code> as of now:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">using System;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">using System;
 using System.IO;
 using System.Threading.Tasks;
 using Grpc.Core;
@@ -440,13 +440,13 @@ namespace Client
 </code></pre></div><p>On to the service streaming!</p>
 <h2 id="streaming-in-the-service">Streaming in the service</h2>
 <p>Below the <code>Calculate</code> method add implementation of <code>Median</code> in the <code>MyService</code> class with the following signature:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">public override async Task Median(IAsyncStreamReader&lt;Temperature&gt; requestStream, IServerStreamWriter&lt;Temperature&gt; responseStream, ServerCallContext context)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public override async Task Median(IAsyncStreamReader&lt;Temperature&gt; requestStream, IServerStreamWriter&lt;Temperature&gt; responseStream, ServerCallContext context)
 {
 
 }
 </code></pre></div><p>As you can observe, in the service you also have access to both request and response streams.
 Our median logic will be pretty straightforward and dumb. We will keep around a buffer of at-most 10 messages. Once it is full, we sort it, take the middle and send it to the response stream</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">public override async Task Median(IAsyncStreamReader&lt;Temperature&gt; requestStream, IServerStreamWriter&lt;Temperature&gt; responseStream, ServerCallContext context)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public override async Task Median(IAsyncStreamReader&lt;Temperature&gt; requestStream, IServerStreamWriter&lt;Temperature&gt; responseStream, ServerCallContext context)
 {
     // new
     var vals = new List&lt;double&gt;();
@@ -467,7 +467,7 @@ Our median logic will be pretty straightforward and dumb. We will keep around a 
 }
 </code></pre></div><p>That should do the trick.
 For the reference, full <code>Service.cs</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">using System;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -548,9 +548,9 @@ namespace Service
 }
 
 </code></pre></div><p>Give it a shot: run the service</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Service 9000
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Service 9000
 </code></pre></div><p>and in the separate terminal, the client in the &ldquo;time series&rdquo; mode</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Client localhost 9000
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Client localhost 9000
 </code></pre></div><p>You should see a continuous stream of calculated medians coming to the client&rsquo;s terminal.
 Ctrl-C when bored.
 Try doing the same across two different computers.</p>
@@ -737,7 +737,7 @@ This is optional, but if interested, stay tuned!</p>
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.83.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          <a href="https://gohugo.io">Hugo v0.88.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>

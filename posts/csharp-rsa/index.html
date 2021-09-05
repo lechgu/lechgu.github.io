@@ -93,7 +93,7 @@ What if you never knew what is asymmetric encryption? In short, asymmetric crypt
   <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
   <meta name="twitter:card" content="summary" />
   <link href='https://aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.83.1" />
+  <meta name="generator" content="Hugo 0.88.0" />
   <link rel="alternate" href="https://aiki.dev/index.xml" type="application/rss+xml" title="aiki.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://aiki.dev/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -263,25 +263,25 @@ if (!doNotTrack) {
 To follow along, you will need a text editor, like <a href="https://code.visualstudio.com/">Visual studio Code</a>, but your favorite text editor will probably work too. Familiarity with the command line is assumed, I will use bash. On Windows you can use <a href="https://git-scm.com/downloads">git bash</a>. To generate the RSA keypair, we are going to use <code>openssl</code> utility. If your system is Mac or Linux, you probably already have it, on Windows it comes with, for example, git bash.</p>
 <h3 id="project-setup">Project setup</h3>
 <p>create a directory and switch to it. You can call it any way you want, I will call it <code>csharp_rsa</code>.</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">mkdir csharp_rsa
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">mkdir csharp_rsa
 cd csharp_rsa
 </code></pre></div><p>Generate a console C# project</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet new console
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">dotnet new console
 </code></pre></div><p>now, let&rsquo;s create a key pair</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">openssl genrsa -out private.pem 2048
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">openssl genrsa -out private.pem 2048
 </code></pre></div><p>This will create a file <code>private.pem</code> which contains the private key with the key size 2048 bit. The public key is embedded in it also, so let&rsquo;s extract it:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">openssl rsa -in private.pem -outform PEM -pubout -out public.pem
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">openssl rsa -in private.pem -outform PEM -pubout -out public.pem
 </code></pre></div><p>At the moment there should be two files <code>private.pem</code> and <code>public.pem</code> with the private and public key, correspondingly.
 Let&rsquo;s rename the <code>Program.cs</code> file. That is optional, obviously</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">mv Program.cs CsharpRSA.cs
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">mv Program.cs CsharpRSA.cs
 </code></pre></div><p>Do a quick sanity check:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run
 </code></pre></div><p>This should print famous &ldquo;Hello, World!&rdquo;</p>
 <h3 id="encrypt-the-data-with-rsa">Encrypt the data with RSA</h3>
 <p>We are going to keep all the crypto-related code in the separate file:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">touch Cryptor.cs
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">touch Cryptor.cs
 </code></pre></div><p>Put some skeleton code, obviously it won&rsquo;t do anything at the moment:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">namespace csharp_rsa
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">namespace csharp_rsa
 {
     public class Cryptor
     {
@@ -292,7 +292,7 @@ Let&rsquo;s rename the <code>Program.cs</code> file. That is optional, obviously
     }
 }
 </code></pre></div><p>.Net implements RSA algorithm in the class RSACryptoServiceProvider which lives in the namespace System.Security.Cryptography. Add instance of this class to our Cryptor:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">using System.Security.Cryptography; // new
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">using System.Security.Cryptography; // new
 //...
 public class Cryptor {
     // new
@@ -300,14 +300,14 @@ public class Cryptor {
     //...
 }
 </code></pre></div><p>this has to be provided with the public key (remember? public key encrypts, private key decrypts). Add the following method to the <code>Cryptor</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"> public void SetPublicKey(string publicKeyFile)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"> public void SetPublicKey(string publicKeyFile)
 {
     var publicKey = File.ReadAllText(publicKeyFile);
     _rsa.ImportFromPem(publicKey);
 }
 </code></pre></div><p>Naturally, one need to add <code>using System.IO</code>, so the <code>File.RealAllText</code> can be used. In case you are wondering, <code>Pem</code> is a textual format in which RSA keys are often stored.
 Now we can ask RSA to actually encrypt the data. Replace the <code>Encrypt</code> method with the following:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">public byte[] AsymmetricEncrypt(byte[] data)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public byte[] AsymmetricEncrypt(byte[] data)
 {
 return _rsa.Encrypt(data, false);
 }
@@ -315,7 +315,7 @@ return _rsa.Encrypt(data, false);
 <p>Let&rsquo;s give it a shot.</p>
 <p>our simple command line interface will accept two arguments, the operation <code>encrypt</code> or <code>decrypt</code> (to be implemented later) and the corresponding key. The actual data to be encrypted is expected to be passed on the standard input. In the real-world application you will probably read the data from file, from a Gui widget or from some web service.</p>
 <p>With that said, replace your <code>Main</code> function with the following:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">static void Main(string[] args)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">static void Main(string[] args)
 {
     var operation = args[0];
     var cryptor = new Cryptor();
@@ -332,13 +332,13 @@ return _rsa.Encrypt(data, false);
 </code></pre></div><p>you will also need to add <code>using System.Text</code> at the top.
 As you see, the code creates our <code>Cryptor</code>, sets the public key and calls <code>AsymmetricEncrypt</code>. The result is an array of bytes, so we base64 encode it before printing to the console.
 Let&rsquo;s try it:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">echo -n hello | dotnet run encrypt public.pem
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">echo -n hello | dotnet run encrypt public.pem
 </code></pre></div><p>Ok, if everything works fine you should see the encrypted data in printed as base64 string.
 Let&rsquo;s handle the decryption part.</p>
 <h3 id="decrypt-data-with-rsa">Decrypt data with RSA</h3>
 <p>Decrypting the data with RSA is similar to encrypting. The difference is, naturally, that you decrypt with the private key.
 add these two functions to the <code>Cryptor</code> class:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">public byte[] AsymmetricDecrypt(byte[] data)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public byte[] AsymmetricDecrypt(byte[] data)
 {
     return _rsa.Decrypt(data, false);
 }
@@ -350,7 +350,7 @@ public void SetPrivateKey(string privateKeyFile)
 }
 </code></pre></div><p>The logic should be pretty familiar.</p>
 <p>Conversely, let&rsquo;s add decrypt functionality to the `Main:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">static void Main(string[] args)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">static void Main(string[] args)
 {
     var cryptor = new Cryptor();
     if (operation == &#34;encrypt&#34;)
@@ -368,7 +368,7 @@ public void SetPrivateKey(string privateKeyFile)
     }
 }
 </code></pre></div><p>We can now decrypt the data back:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">echo -n hello | dotnet run encrypt public.pem | dotnet run decrypt private.pem
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">echo -n hello | dotnet run encrypt public.pem | dotnet run decrypt private.pem
 </code></pre></div><p>This encrypt the string &ldquo;hello&rdquo; with the public key and decrypts it back with the private key. You should see &ldquo;hello&rdquo; printed back.</p>
 <h3 id="are-we-done-then">Are we done then?</h3>
 <p>If you play a little bit with the program you will notice that it will not work with the large, or even moderate amount of data. The RSA is used to encrypt relatively short data. RSA also slow and compute intensive. Let&rsquo;s fix that problem.</p>
@@ -384,7 +384,7 @@ So here is the plan:</p>
 <p>To decrypt the data, we simply need RSA-decrypt the session key and plug it into AES to decrypt the actual data.</p>
 <p>First, we need to be able to generate random data. <code>System.Security.Cryptography</code> has a class which can help with it.
 In the <code>Cryptor</code> class add the instance of <code>RNGCryptoServiceProvider</code> and a helper method which generates random data</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">public class Cryptor
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public class Cryptor
 {
     private readonly RSACryptoServiceProvider _rsa = new();
     // new
@@ -402,7 +402,7 @@ In the <code>Cryptor</code> class add the instance of <code>RNGCryptoServiceProv
 For the AES encryption we are going to use the <code>AesGcm</code> class provided within the <code>System.Security.Cryptography</code> namespace. In order to encrypt data, in addition to session key it also requires a <code>nonce</code>, a random value which helps helps defend against certain attacks. In addition to emitting the encrypted data, we&rsquo;ll also get a <code>tag</code> from AES, which is used by the implementation to verify integrity of the encrypted message.
 Naturally, both nonce and tag must be also passed to the decryption routine.
 Let&rsquo;s add the code for AES encryption and decryption</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">// ...
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">// ...
 public static (byte[], byte[]) SymmetricEncrypt(byte[] data, byte[] sessionKey, byte[] nonce)
 {
     var gcm = new AesGcm(sessionKey);
@@ -424,9 +424,9 @@ public static byte[] SymmetricDecrypt(byte[] encryptedData, byte[] sessionKey, b
 As discussed, we generate random session key and random nonce, encrypt the data with the session key, encrypt session key itself with RSA, and concatenate encrypted session key, nonce, tag and encrypted data together.
 Upon decryption, we extract the encrypted session key, nonce, tag, use RSA to decrypt the session key, and finally use the session key to decrypt the actual payload
 We will use the session key length of 32 bytes, so add this to the <code>Cryptor</code> class first:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">private const int SESSION_KEY_LENGTH = 32;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">private const int SESSION_KEY_LENGTH = 32;
 </code></pre></div><p>Now, complete Encrypt implementation:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">public byte[] Encrypt(byte[] data)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public byte[] Encrypt(byte[] data)
 {
     var sessionKey = GenerateRandomData(SESSION_KEY_LENGTH);
     var nonce = GenerateRandomData(AesGcm.NonceByteSizes.MaxSize);
@@ -442,7 +442,7 @@ We will use the session key length of 32 bytes, so add this to the <code>Cryptor
 }
 </code></pre></div><p>The code should be clear now, The minor annoyance is to carefully calculate offsets where all pieces end up in the final byte array.</p>
 <p>Finally, complete the Decrypt implementation:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">public byte[] Decrypt(byte[] data)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public byte[] Decrypt(byte[] data)
 {
     var keySizeInBytes = _rsa.KeySize / 8;
 
@@ -466,7 +466,7 @@ We will use the session key length of 32 bytes, so add this to the <code>Cryptor
 <p>Let&rsquo;s try it.</p>
 <p>In fact, the only code change to do in your <code>Main</code> function is to replace calls to <code>AsymmetricEncrypt</code> and <code>AsymmetricDecrypt</code> to <code>Encrypt</code> and <code>Decrypt</code>, respectively.</p>
 <p>After these trivial renames, run:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">echo -n &#39;hello world&#39; | dotnet run encrypt public.pem | dotnet run decrypt private.pem
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">echo -n &#39;hello world&#39; | dotnet run encrypt public.pem | dotnet run decrypt private.pem
 </code></pre></div><p>This will print the &lsquo;hello world&rsquo; back after encrypting and decrypting it.
 Try larger amount of data, it should also work fine.</p>
 <h3 id="what-have-we-learned">What have we learned.</h3>
@@ -646,7 +646,7 @@ Try larger amount of data, it should also work fine.</p>
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.83.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          <a href="https://gohugo.io">Hugo v0.88.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>

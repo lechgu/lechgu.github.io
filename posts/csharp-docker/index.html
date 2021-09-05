@@ -92,7 +92,7 @@ Source code The source code is available on github">
   <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
   <meta name="twitter:card" content="summary" />
   <link href='https://aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.83.1" />
+  <meta name="generator" content="Hugo 0.88.0" />
   <link rel="alternate" href="https://aiki.dev/index.xml" type="application/rss+xml" title="aiki.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://aiki.dev/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -268,13 +268,13 @@ Windows will work too, of course.</p>
 </ul>
 <h4 id="sanity-check">Sanity check</h4>
 <p>In the command line run</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker --version
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">docker --version
 </code></pre></div><p>and</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet --version
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">dotnet --version
 </code></pre></div><p>If you get some sane answer in both cases, you are all set.</p>
 <h2 id="your-first-encounter-with-docker">Your first encounter with Docker</h2>
 <p>Run</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker run alpine date
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">docker run alpine date
 </code></pre></div><p>You should see current time displayed in the shell</p>
 <h4 id="what-just-happened">What just happened?</h4>
 <p>by running this command you instructed docker to start a container based on the <code>alpine</code> image, execute the command <code>date</code> and display its output in the shell. If you did not have the <code>alpine</code> image on your box (most likely), docker downloaded it from the <a href="https://hub.docker.com/">Dockerhub</a>, the public repository of well known Docker images.</p>
@@ -286,50 +286,50 @@ Windows will work too, of course.</p>
 <p>instead of the <code>date</code> try to run other commands. <code>pwd</code>, <code>whoami</code> are good examples</p>
 <h2 id="explore-the-alpine-container">Explore the Alpine container</h2>
 <p>This time start the container with the following:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker run -it alpine sh
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">docker run -it alpine sh
 </code></pre></div><p>the <code>it</code> flag indicates to start the container in the <em>interactive</em> mode and run <code>sh</code> command which is Alpine&rsquo;s default shell. You will end up inside the container. Look around, explore what is there using <code>ls</code> and and <code>cd</code> commands. <code>cat</code> will display the content of the text file, for example</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">cat /etc/hosts
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">cat /etc/hosts
 </code></pre></div><p>If you are familiar with the <code>vi</code> editor you can create or edit some files too.
 By default, alpine does not have any fancy tools to access Internet.
 This can be mitigated:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">apk add curl
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">apk add curl
 </code></pre></div><p><code>apk</code> is Alpine&rsquo;s package installer, you can install various apps with it. Now, try to do</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">curl http://www.microsoft.com
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">curl http://www.microsoft.com
 </code></pre></div><p>You should get the Microsoft&rsquo;s home page, in the text format, of course.</p>
 <p>When you done exploring, exit the container:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">exit
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">exit
 </code></pre></div><p>You should get back to your normal shell</p>
 <h4 id="your-turn-1">Your turn</h4>
 <p>The Alpine image is supposed to be small, But how small is it, exactly? Hint: <code>docker images</code> gives the list of images available on your system.</p>
 <h2 id="c-console-application">C# console application</h2>
 <p>Now we are going to replicate the experience we had running <code>date</code> in the docker container, but this time with a C# app.
 Let&rsquo;s create the app:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">mkdir date
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">mkdir date
 cd date
 dotnet new console
 </code></pre></div><p>This scaffolds a simple .net core command line application.
 Go to the <code>Program.cs</code> and replace the line</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">Console.WriteLine(&#34;Hello World!&#34;);
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Console.WriteLine(&#34;Hello World!&#34;);
 </code></pre></div><p>with</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">Console.WriteLine(DateTime.UtcNow);
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">Console.WriteLine(DateTime.UtcNow);
 </code></pre></div><h4 id="sanity-check-1">Sanity check</h4>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run
 </code></pre></div><p>This should display the current UTC time.</p>
 <h2 id="dockerize-c-command-line-application">Dockerize C# command line application</h2>
 <p>Now, let&rsquo;s put our application to the Docker image. For that, we&rsquo;ll need a <code>Dockerfile</code>. <code>Dockerfile</code> is essentially a list of instructions which Docker is supposed to follow in order to build your image.
 create a file Dockerfile` and put the following line into it:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine
 </code></pre></div><p>This instructs Docker to build our image on top of predefined Alpine-based image but which has .net core sdk 3.1 installed
 Docker images are layered, every new layer adds additional functionality. We could have start from the bare Alpine image and install the .net core sdk ourselves, that is pretty straightforward but quite tedious. So we&rsquo;ll start with the base image Microsoft provides us.
 Now we can try to build the image</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker build -t csharpdate .
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">docker build -t csharpdate .
 </code></pre></div><p>the <code>-t</code> parameter specifies the name of the image, which is going to be <code>csharpdate</code> in this case. The argument <code>.</code>(dot) instructs Docker where to look for the <code>Dockerfile</code>, which is the current directory in our case.
 After few seconds the image is going to be buit. As mentioned before, it is layered and has Alpine underneath, so we can explore it as we did before:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker run -it csharpdate sh
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">docker run -it csharpdate sh
 </code></pre></div><p>We end up in the familiar Alpine shell. But this time it has also .net core tools installed, for instance, you can run <code>dotnet</code>.</p>
 <p>Anyway, the next task is to copy the sources into the docker image and build them
 Append the following lines to the <code>Dockerfile</code></p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">WORKDIR /app
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">WORKDIR /app
 COPY date.csproj Program.cs ./
 </code></pre></div><p>The <code>WORKDIR</code> directive specifies what is the <em>current directory</em> in the Docker image, <code>/app</code> in our case. It will be created if needed.
 The COPY directive instructs Docker to copy our C# source file and associated <code>.csproject</code> file into the image&rsquo;s <em>current directory</em>
@@ -338,16 +338,16 @@ After that you will have everything you need to build the final binary in image.
 <p>Rebuild the image, launch the container and verify that the files are indeed there. Also verify that the current directory is <code>/app</code>.</p>
 <p>The last step is to actually build the application.
 Append to the <code>Dockerfile</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">RUN dotnet publish -c Release -o build --self-contained=false
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">RUN dotnet publish -c Release -o build --self-contained=false
 </code></pre></div><p>This builds the C# project in the release mode and places the output in the <code>build</code> subdirectory of the current directory, that is into <code>/app/build</code></p>
 <p>Once the image is rebuilt we can launch our program inside the container:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker run csharpdate dotnet /app/build/bin/date.dll
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">docker run csharpdate dotnet /app/build/bin/date.dll
 </code></pre></div><p>this will print again the current UTC time, but this time coming from our C# program!</p>
 <p>Specifying the full path to the binary we want to run every time is quite tedious. Docker has a directive which allows to designate some command line as the default.
 Append to your <code>DOCKERFILE</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">CMD [ &#34;dotnet&#34;, &#34;/app/build/date.dll&#34; ]
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">CMD [ &#34;dotnet&#34;, &#34;/app/build/date.dll&#34; ]
 </code></pre></div><p>Rebuild the image and now you can launch the binary simply running:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run csharpdate
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run csharpdate
 </code></pre></div><h4 id="your-turn-3">Your turn</h4>
 <p>Experiment: Try to modify the code in the <code>Program.cs</code>, try to specify different build flags and so on</p>
 <h2 id="c-microservice">C# microservice</h2>
@@ -355,19 +355,19 @@ Append to your <code>DOCKERFILE</code>:</p>
 In this part we are going to create a simple service which returns the current UTC time from the REST endpoint.
 We are going to use Asp.Net Core for that. But don&rsquo;t be scared! We are not going to use most of the Asp.Net Core machinery to get our service working. The secret is that, in fact, self-hosted Asp.Net Core applications are, in fact, command line applications!
 So let&rsquo;s create a directory <code>datems</code> at the same level as the <code>date</code> directory and initialize a .Net Core command line application there:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet new console
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">dotnet new console
 </code></pre></div><p>We will need to bring Asp.Net Core -specific dependencies into the project. This is hush-hush, but the simplest way to do int is to open the <code>datems.csproj</code> and replace the line</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;Project Sdk=&#34;Microsoft.NET.Sdk&#34;&gt;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&lt;Project Sdk=&#34;Microsoft.NET.Sdk&#34;&gt;
 </code></pre></div><p>with</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;Project Sdk=&#34;Microsoft.NET.Sdk.Web&#34;&gt;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&lt;Project Sdk=&#34;Microsoft.NET.Sdk.Web&#34;&gt;
 </code></pre></div><p>Don&rsquo;t tell anyone, let them suffer through the official tutorials.</p>
 <p>If we run the project</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run
 
 </code></pre></div><p>it will still happily run and display the ubiquitous &ldquo;Hello World!&rdquo;.</p>
 <p>Asp.Net Core is actually a pretty cool and rich framework; if you build Web apps or Rest services on a daily basis, I encourage to study it deeper. But we will use a bare minimum of its features to get our microservice working. So don&rsquo;t expect best Asp.Net practices here.</p>
 <p>We&rsquo;ll need to use some namespaces. Here is the full list, feel free to add these into the <code>Program.cs</code></p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">using System;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -380,7 +380,7 @@ using Microsoft.Extensions.Hosting;
 <li>finally to run it.</li>
 </ul>
 <p>We are going to do all these steps in our Main method:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"> static void Main(string[] args)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"> static void Main(string[] args)
     {
         var builder = Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(webBuilder =&gt;
         {
@@ -396,13 +396,13 @@ The key here is the <code>webBuilder.UseStartup&lt;Program&gt;</code> call.
 This indicates that our <code>Program</code> class defines the Asp.Net Core <em>pipeline</em>.</p>
 <p>In order satisfy this Asp.Net Core requirement, we need to implement two methods, <code>ConfigureServices</code> and <code>Configure</code>
 The simple ConfigureServices looks like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">public void ConfigureServices(IServiceCollection services)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public void ConfigureServices(IServiceCollection services)
 {
     services.AddControllers();
 }
 </code></pre></div><p>In here we tell that we want to use AspNet Core Controllers which are going to serve as our REST endpoints.
 the <code>Configure</code> looks like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 {
     app.UseRouting();
 
@@ -414,14 +414,14 @@ the <code>Configure</code> looks like this:</p>
 </code></pre></div><p>We simply tell Asp.Net Core that we will need to <em>route</em> the requests depending on the URL, and that the default route is just fine.</p>
 <h4 id="sanity-check-2">Sanity Check</h4>
 <p>Run</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run
 </code></pre></div><p>If everything is ok, the app should start and listen for the Http request on the default port 5000
 However, if we try to navigate in the browser to http://localhost:5000 we&rsquo;ll be greeted with tho &ldquo;not found&rdquo; error. What gives?</p>
 <p>The answer is that we asked to wire up the default route which, by convention implies the &ldquo;Home&rdquo; controller with the &ldquo;Index&rdquo; action.</p>
 <h2 id="the-controller">The controller</h2>
 <p>Let&rsquo;s implement the required controller. Nothing fancy.
 Create the class HomeController (you can use the same <code>Program.cs</code> file):</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">public class HomeController : Controller
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public class HomeController : Controller
 {
     public IActionResult Index()
     {
@@ -435,12 +435,12 @@ You should see the &ldquo;42&rdquo; showing up on the page.</p>
 <h3 id="return-the-json-response">return the Json response</h3>
 <p>The last step is to return an object formatted as JSON, instead of the answer to life, universe and everything.
 Let&rsquo;s create a response class:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">public class TimeResponse
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public class TimeResponse
 {
     public DateTime Current { get { return DateTime.UtcNow; } }
 }
 </code></pre></div><p>and return that from the controller:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">public IActionResult Index()
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public IActionResult Index()
 {
     return Ok(new TimeResponse());
 }
@@ -454,41 +454,41 @@ do the following tweaks in that <code>Dockefile</code>:</p>
 <li>correct the app dll name in the <code>CMD</code> directive from <code>date.dll</code> to <code>datems.dll</code></li>
 </ul>
 <p>Build the new Docker image in the <code>datems</code> directory, this time calling the image <code>csharpms</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker build -t csharpms .
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">docker build -t csharpms .
 </code></pre></div><p>Let&rsquo;s start the container</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker run -d csharpms
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">docker run -d csharpms
 </code></pre></div><p>The <code>-d</code> flag indicates to start the container in detached mode, so it detaches from the console</p>
 <p>The Docker should start the container and print its id, a long hexadecimal number
 let&rsquo;s dive into the running container.
 Run</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker exec -it [container id] sh
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">docker exec -it [container id] sh
 </code></pre></div><p>Hint: you don&rsquo;t need to provide the full container id. A few of initial hexadecimal digits should be enough for the Docker to figure out which container you have in mind.
 For example:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker exec -it 9e544440bd sh
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">docker exec -it 9e544440bd sh
 </code></pre></div><p>Your id will be obviously different.
 You should end up inside the running container!
 check if your app is running:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">ps aux
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">ps aux
 </code></pre></div><p>You should see the something like</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">PID   USER     TIME  COMMAND
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">PID   USER     TIME  COMMAND
     1 root      0:00 dotnet /app/build/datems.dll
 </code></pre></div><p>This shows that our service is running.
 Try to see which ports are open:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">netstat -na
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">netstat -na
 </code></pre></div><p>you should see the port 5000 is listening. This is our microservice!</p>
 <h4 id="your-turn-4">Your turn</h4>
 <p>Use curl inside the container to get the answer from the microservice.
 Reminder, you can install curl in the Alpine based container by running</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">apk add curl
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">apk add curl
 </code></pre></div><p>Well, the microservice seems to listen on port 5000, but how can we reach it, say from our box? Your machine has very different idea what is the port 5000 than the container.</p>
 <h2 id="port-mapping">Port mapping</h2>
 <p>Exit the container and stop it by executing</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker rm -f [container_id]
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">docker rm -f [container_id]
 </code></pre></div><p>If you forgot what is the container id, you can list all running containers with</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker ps
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">docker ps
 </code></pre></div><p>Port mapping in Docker allows to attach a certain port on the machine to a specific port in the container. Let&rsquo;s say that we want the port 5000 in the container correspond to the port 9090 on your machine.
 Start the container this way:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker run -d -p 9090:5000 csharpms
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">docker run -d -p 9090:5000 csharpms
 </code></pre></div><p>Now all tcp/ip traffic to and from port 9090 on our machine will actually end up in the port 5000 in the container</p>
 <h4 id="sanity-check-3">Sanity check</h4>
 <p>in the browser, navigate to http://localhost:9090. You should get your nice UTC time back.</p>
@@ -503,7 +503,7 @@ So here is the plan:</p>
 After the <em>final</em> stage is ready, the <em>build</em> stage will be effectively discarded</li>
 </ul>
 <p>Here is the resulting <code>Dockerfile</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine as build
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine as build
 
 WORKDIR /app
 COPY datems.csproj Program.cs ./
@@ -515,12 +515,12 @@ COPY --from=build /app/build/* /app/
 
 CMD [ &#34;dotnet&#34;, &#34;/app/datems.dll&#34; ]
 </code></pre></div><p>Rebuild the image and check its size</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker build -t csharpms .
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">docker build -t csharpms .
 docker images | grep csharpms
 </code></pre></div><p>On my machine it takes 105 MB, 4 time smaller then original. Not bad!</p>
 <h4 id="sanity-check-4">Sanity check</h4>
 <p>Start the container from the final image</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">docker run -d -p 9090:5000 csharpms
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">docker run -d -p 9090:5000 csharpms
 </code></pre></div><p>check with the browser or <code>curl</code> that it works as well as before.</p>
 <h2 id="summary">Summary</h2>
 <p>Our microservice is containerized and ready. Granted, this is a toy microservice with trivial functionality. But now you have skills to build a Docker image with the C# service as complex as you want.</p>
@@ -622,10 +622,6 @@ docker images | grep csharpms
       
         <ul class="pager blog-pager">
           
-            <li class="previous">
-              <a href="https://aiki.dev/posts/ship-it/" data-toggle="tooltip" data-placement="top" title="Pixies, part 12: Ship It!">&larr; Previous Post</a>
-            </li>
-          
           
             <li class="next">
               <a href="https://aiki.dev/posts/micro-django/" data-toggle="tooltip" data-placement="top" title="Micro Django">Next Post &rarr;</a>
@@ -703,7 +699,7 @@ docker images | grep csharpms
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.83.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          <a href="https://gohugo.io">Hugo v0.88.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>

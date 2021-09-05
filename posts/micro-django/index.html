@@ -90,7 +90,7 @@
   <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
   <meta name="twitter:card" content="summary" />
   <link href='https://aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.83.1" />
+  <meta name="generator" content="Hugo 0.88.0" />
   <link rel="alternate" href="https://aiki.dev/index.xml" type="application/rss+xml" title="aiki.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://aiki.dev/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -260,19 +260,19 @@ I hear you. Most of the documentation, books and youtube videos indeed emphasize
 <h4 id="setup">Setup</h4>
 <p>The project should work on Mac, Linux or Windows. We are going to point out if on certain OS something special has to be done (I am looking at you, Windows).</p>
 <p>Let&rsquo;s create the directory for our project.</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">mkdir microdjango
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">mkdir microdjango
 cd microdjango
 </code></pre></div><p>Create a virtual environment and activate it. You know the drill:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">python3 -m venv .venv
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">python3 -m venv .venv
 source .venv/bin/activate
 </code></pre></div><p>on Windows:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">python -m venv .venv
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">python -m venv .venv
 .venv/scripts/activate
 </code></pre></div><p>Install Django in your virtual environment:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">pip install django
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">pip install django
 </code></pre></div><p>Now, things become interesting. We are not going to use the <code>django-admin</code>, as usually with Django.
 We&rsquo;ll just create a Python file:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">touch mandel.py
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">touch mandel.py
 </code></pre></div><p>It is going to become clear later why I have chosen such a name. Having said that, name it as you wish.
 Ok, now we need to do the following:</p>
 <ul>
@@ -281,18 +281,18 @@ Ok, now we need to do the following:</p>
 <li>somehow kick off the project to make it running.
 Creating the view is quite straightforward, in the <code>mandel.py</code> enter the following:</li>
 </ul>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">from django.http import HttpResponse
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">from django.http import HttpResponse
 
 def index(request):
     return HttpResponse(&#39;oh, hai&#39;)
 </code></pre></div><p>To specify the url on which this view should respond we do:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># new
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># new
 from django.urls import path
 
 urlpatterns = [path(&#39;&#39;, index)]
 </code></pre></div><p>we essentially say that our index view will respond on the root address of the app.
 Ok, we have a view and specify its url, how do we start actual app. Make the following change:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># new
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># new
 import sys
 from django.core.management import execute_from_command_line
 
@@ -300,9 +300,9 @@ if __name__==&#39;__main__&#39;:
     execute_from_command_line(sys.argv)
 </code></pre></div><p>This short snippet of code does what the <code>manage.py</code> does in the app generated by the <code>django-admin</code>. The command line parameters (<code>sys.argv</code>) are passed in, so Django will be able to respond to commands like <code>runserver</code> and others
 If we try to run the file now:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">python mandel.py runserver
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">python mandel.py runserver
 </code></pre></div><p>It will complain that our application is not configured yet. Let&rsquo;s create a minimal configuration, insert the following:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">#...
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">#...
 
 #new
 from django.conf import settings
@@ -314,10 +314,10 @@ if __name__==&#39;__main__&#39;:
 The <code>ALLOWED_HOSTS</code> is Django security measure which limits the domain names that the Django can serve. For this simple exercise we say, everything is allowed.
 Another setting you may want to consider, even for the simple apps, is <code>DEBUG=True</code>. That will dump some useful debugging info if something goes wrong.
 ok, start the app now:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">python mandel.py runserver
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">python mandel.py runserver
 </code></pre></div><p>navigate with the browser to http://localhost:8000/ and see how our app responds.</p>
 <p>For convenience, here is the complete <code>mandel.py</code> file:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">import sys
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">import sys
 
 from django.conf import settings
 from django.core.management import execute_from_command_line
@@ -338,9 +338,9 @@ But we are just starting&hellip;</p>
 <h3 id="wsgi">wsgi</h3>
 <p>Well, the <code>runserver</code> feature is not designed to be used for production, but rather as a convenience feature during the development. For production you need something better, <a href="https://gunicorn.org/">gunicorn</a> is a popular option.
 Lets install it:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">pip install gunicorn
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">pip install gunicorn
 </code></pre></div><p>Note the the gunicorn does not work on Windows. If you are running Windows, consider, for example <a href="https://docs.pylonsproject.org/projects/waitress/en/stable/">waitress</a> instead. Once you have one of these installed, we need to ask Django to turn our app into a &ldquo;qsgi&rdquo; application, so it speaks with the gunicorn/waitress the language they understand. Add this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># as before ...
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># as before ...
 
 # new
 from django.core.wsgi import get_wsgi_application
@@ -349,15 +349,15 @@ app = get_wsgi_application()
 if __name__ == &#34;__main__&#34;:
     execute_from_command_line(sys.argv)
 </code></pre></div><p>That should prepare our app for gunicorn. Try it:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">gunicorn mandel:app
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">gunicorn mandel:app
 </code></pre></div><p>The app should respond on the same address as before.</p>
 <h4 id="lets-serve-some-images">Let&rsquo;s serve some images.</h4>
 <p>Well, the &lsquo;hello world&rsquo; app is nice and all, but it is kind of boring. Can our app serve something more interesting?</p>
 <p>We will replace our text response with the image response. There are many ways to generate images. We will use <a href="https://numpy.org">numpy</a> to generate a matrix representing the image and <a href="https://pillow.readthedocs.io/">pillow</a> to convert that matrix to the actual image. Let&rsquo;s install these two:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">pip install numpy
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">pip install numpy
 pip install pillow
 </code></pre></div><p>Create the helper function which emits the pixel array. For now, it is going to be a plain red image.</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># new
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># new
 import numpy as np
 
 def generate(width, height):
@@ -366,7 +366,7 @@ def generate(width, height):
     return arr
 </code></pre></div><p>If you are not very familiar with numpy, this generates a 3-dimensional matrix of the dimension height x width x 3 (because we want a RGB image, therefore 3 for red, green, blue). it is initialized with zeros, and later we set the red &ldquo;slice&rdquo; of it into ones. One note that numpy requires the height (rows) passed before width (columns)
 Now change you view so it returns an image instead of text:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># new
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># new
 from io import BytesIO
 from PIL import Image
 
@@ -381,11 +381,11 @@ def index(request):
 </code></pre></div><p>The generated array is made of float numbers between 0 and 1, Pillow expects the array of bytes between 0 and 255, therefore we convert it to the required form.
 After that, we write the image into in-memory buffer and return that buffer in the HttpResponse as a png image.</p>
 <p>If we restart our app:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">python mandel.py runserver
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">python mandel.py runserver
 </code></pre></div><p>and navigate again to the http://localhost:8000, we should see our app now returns a plain red image.</p>
 <p>Plain images are boring, let' do something more interesting.
 <a href="https://en.wikipedia.org/wiki/Mandelbrot_set">Mandelbrot set</a> is a peculiar object generated by a relatively simple mathematical procedure. The details of it are not important for our discussion, so you just can copy-paste the code as is:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">def mandelbrot(w, h, fro, to):
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">def mandelbrot(w, h, fro, to):
     x = np.linspace(fro.real, to.real, num=w).reshape((1, w))
     y = np.linspace(fro.imag, to.imag, num=h).reshape((h, 1))
     c = np.tile(x, (h, 1)) + 1j * np.tile(y, (1, w))
@@ -399,13 +399,13 @@ After that, we write the image into in-memory buffer and return that buffer in t
     return np.dstack([arr, arr, arr])
 </code></pre></div><p>If you are mathematically inclined and familiar with numpy, it should not be hard to figure out what is going on here. But, as mentioned, it is totally unnecessary for our purpose.</p>
 <p>replace the <code>generate</code> function with the following:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># replaced
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># replaced
 def generate(width, height):
     return mandelbrot(width, height, -2.25 - 1.25j, 0.75 + 1.25j)
 </code></pre></div><p>restart your app and try to see what it generates now. I love math!</p>
 <h3 id="parametrize-the-url">Parametrize the url</h3>
 <p>For now, the dimensions of the generated image are hardcoded. Let&rsquo;s change that so they can be passed as a part of url.</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># changed
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># changed
 def index(request, width=800, height=600):
     width = min(width, 1200)
     width = max(width, 100)
@@ -416,13 +416,13 @@ def index(request, width=800, height=600):
 </code></pre></div><p>Now our view takes two optional parameters, width and height of the generated image.
 We also sanitize the parameters so the image is not too big and not too small.
 We need to provide the url which is aware of the new parameters. Change the url map to the:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">urlpatterns = [
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">urlpatterns = [
     path(&#34;&#34;, index),
     path(&#34;generate/&lt;int:width&gt;/&lt;int:height&gt;&#34;, index)
     ]
 </code></pre></div><p>The default route remains, but there is a new one which allows passing width and height of the image.
 Try it on:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">http://localhost:8000/generate/1200/1024
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">http://localhost:8000/generate/1200/1024
 </code></pre></div><p>The large the dimensions are, the longer it takes to compute the image. But, thanks to the efficiency of numpy, it should not be too bad.</p>
 <h3 id="conclusion">Conclusion</h3>
 <p>As we just have witnessed, Django scales down pretty easily and it is very possible to use it for the simple web apps instead of, say, Flask. Having said that, there is nothing wrong with Flask. It is quite elegant and minimalistic framework, so it is good to have both in your arsenal</p>
@@ -500,25 +500,6 @@ Try it on:</p>
 
         
           
-            
-          
-
-          
-                  <h4 class="see-also">See also</h4>
-                  <ul>
-                
-                
-                    <li><a href="/posts/ship-it/">Pixies, part 12: Ship It!</a></li>
-                
-                    <li><a href="/posts/connect-frontend-backend/">Pixies, part11: Connect the Frontend to the Backend</a></li>
-                
-                    <li><a href="/posts/serving-static-files/">Pixies, part 10: Serving Static Files</a></li>
-                
-                    <li><a href="/posts/containerize-backend/">Pixies, part 9: Let&#39;s containerize the Backend</a></li>
-                
-                    <li><a href="/posts/rest-service/">Pixies, part 8: The Rest Service</a></li>
-                
-              </ul>
 
           
         
@@ -608,7 +589,7 @@ Try it on:</p>
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.83.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          <a href="https://gohugo.io">Hugo v0.88.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>

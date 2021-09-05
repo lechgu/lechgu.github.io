@@ -95,7 +95,7 @@ Python interoperability One of the greatest gRPC features is its programming lan
   <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
   <meta name="twitter:card" content="summary" />
   <link href='https://aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.83.1" />
+  <meta name="generator" content="Hugo 0.88.0" />
   <link rel="alternate" href="https://aiki.dev/index.xml" type="application/rss+xml" title="aiki.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://aiki.dev/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -263,30 +263,30 @@ if (!doNotTrack) {
 <p>If you want to follow along, have <a href="https://python.org">Python</a> installed. I am using version 3.9.</p>
 <h4 id="setup">Setup</h4>
 <p>Make the <code>python</code> directory on the same level as <code>Shared</code>, <code>Client</code> and <code>Service</code></p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">mkdir python
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">mkdir python
 cd python
 </code></pre></div><p>we are going to do all subsequent work in this article in the <code>python</code> directory unless specified otherwise.</p>
 <p>Next we will create a virtual environment, so all python packages we install will be confined to that virtual environment and not interfere with the system-installed packages.</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">python -m venv .venv
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">python -m venv .venv
 </code></pre></div><p>Next, <em>activate</em> the virtual environment
 On Mac and Linux:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">source ./.venv/bin/activate
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">source ./.venv/bin/activate
 </code></pre></div><p>On Windows:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">./.venv/Scripts/activate
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">./.venv/Scripts/activate
 </code></pre></div><p>Now let install necessary python grpc packages:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">pip install grpcio
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">pip install grpcio
 pip install grpcio-tools
 </code></pre></div><h4 id="generate-grpc-plumbing-code-for-the-python-project">Generate gRPC plumbing code for the Python project</h4>
 <p>With C# we had this nice nuget package which took care of generating gRPC plumbing code out of the <code>contracts.proto</code>.
 In Python, we&rsquo;ll do it manually which still is pretty trivial</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">python -m grpc_tools.protoc -I../Shared --python_out=. --grpc_python_out=. contracts.proto
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">python -m grpc_tools.protoc -I../Shared --python_out=. --grpc_python_out=. contracts.proto
 </code></pre></div><p>command line argument specifies where to find the <code>proto</code> file (<code>../Shared</code>), where to drop the generated files (<code>.</code> that is, current directory) and, finally the name of the actual proto file.</p>
 <p>After running this command you should notice <code>contracts_pb2.py</code> and <code>contracts_pb_grpc.py</code> files. These are the generated gRPC plumbing code, analogous what was generated into <code>Shared/obj</code> in our C# project. So the workflow is pretty much the same as in C# project.</p>
 <h4 id="client">Client</h4>
 <p>We&rsquo;ll start with the Python client first. The functionality of the Client and, subsequently, Service is going to mimic pretty much perfectly their C# analogs.</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">touch client.py
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">touch client.py
 </code></pre></div><p>on top of this file, add the necessary imports. We&rsquo;ll need <code>os</code> and <code>random</code> from python&rsquo;s standard library, <code>grpc</code> package and our generated modules</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">import random
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">import random
 import sys
 
 import grpc
@@ -294,37 +294,37 @@ import grpc
 import contracts_pb2
 import contracts_pb2_grpc
 </code></pre></div><p>As in the C# project, the first argument is going to be the service host to connect to, and the second is going to be the service port. The following takes care of that:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># ...
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># ...
 # new
 host = sys.argv[1]
 port = int(sys.argv[2])
 </code></pre></div><p>Next, we need to establish the connection to the service. As you recall we wanted to provide the Certificate Authority&rsquo;s certificate to the connection so the client can verify service&rsquo;s certificate upon connection.
 We are going to use the same certificates as in our C# exercise, so verify you still have them in the cert directory.
 The following sets up the connection as described:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># ...
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># ...
 with open(&#34;../cert/ca.pem&#34;, &#34;rb&#34;) as f:
     ca_cert = f.read()
 creds = grpc.ssl_channel_credentials(root_certificates=ca_cert)
 channel = grpc.secure_channel(f&#34;{host}:{port}&#34;, creds)
 </code></pre></div><p>Finally, create the client</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># ...
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># ...
 client = contracts_pb2_grpc.SvcStub(channel)
 </code></pre></div><p>We will want to demonstrate both basic RPC (calculator) and streaming RPC(time series) functionality.
 so let&rsquo;s add two placeholders for now, at the top of the <code>client.py</code>, just below the imports</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">#...
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">#...
 def do_calculator(client):
     pass
 
 def do_time_series(client):
     pass
 </code></pre></div><p>At the bottom of the file, add our silly logic to dispatch either to <code>do_calculator</code> or to <code>do_time_series</code>, depending of how many arguments were provided.</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback"># ...
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"># ...
 if len(sys.argv) &gt; 3:
         do_calculator(client)
     else:
         do_time_series(client)
 </code></pre></div><p>Let&rsquo;s implement the calculator functionality first as it is a little bit simpler</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">def do_calculator(client):
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">def do_calculator(client):
     x = int(sys.argv[3])
     op = sys.argv[4]
     y = int(sys.argv[5])
@@ -333,13 +333,13 @@ if len(sys.argv) &gt; 3:
     print(f&#34;The result is {reply.result}&#34;)
 </code></pre></div><p>Ok, let&rsquo;s give it a try:</p>
 <p>in the separate terminal window navigate to the root project&rsquo;s directory and run the service</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Service 9000
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Service 9000
 </code></pre></div><p>Switch back to the python-specific terminal and invoke simple calculator request:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">python client.py localhost 9000 17 + 25
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">python client.py localhost 9000 17 + 25
 </code></pre></div><p>Wow, our C# service calculates the requests coming from the python client!</p>
 <p>Let&rsquo;s see if we can do the time series exercise as well. As you remember, the client is supposed push the stream of temperature readings to the service, ad get the stream of medians back. We will use the same <em>random walk</em> strategy to generate the temperature readings.
 Add this logic just above the <code>do_time_series(client)</code></p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">def generate_messages():
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">def generate_messages():
 
     ts = 1
     temp = 10
@@ -349,14 +349,14 @@ Add this logic just above the <code>do_time_series(client)</code></p>
         temp += random.random() - 0.5
         yield msg
 </code></pre></div><p>With this in place, replace the <code>do_time_series</code> with:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">def do_time_series(client):
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">def do_time_series(client):
     for msg in client.Median(generate_messages()):
         print(f&#34;{msg.timestamp}: {msg.value}&#34;)
 </code></pre></div><p>Make sure that the C# service is running and invoking the client triggering the time series logic:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">python client.py localhost 9000
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">python client.py localhost 9000
 </code></pre></div><p>You&rsquo;ll be seeing a stream of medians coming. Ctrl-C when you get bored.</p>
 <p>The complete python client, for the reference</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">import random
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">import random
 import sys
 
 import grpc
@@ -405,9 +405,9 @@ else:
 The same can actually be said by the service implementation as well.</p>
 <h4 id="service">Service</h4>
 <p>We got the Python client working, let&rsquo;s build the Python service.</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">touch service.py
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">touch service.py
 </code></pre></div><p>Add the import se will need</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">from concurrent import futures
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">from concurrent import futures
 import statistics
 import sys
 
@@ -416,7 +416,7 @@ import grpc
 import contracts_pb2
 import contracts_pb2_grpc
 </code></pre></div><p>The service implementation should be pretty straightforward by now:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">class Service(contracts_pb2_grpc.SvcServicer):
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">class Service(contracts_pb2_grpc.SvcServicer):
     def Calculate(self, request, context):
         result = -1
         if request.op == &#34;+&#34;:
@@ -440,7 +440,7 @@ import contracts_pb2_grpc
                 vals = []
                 yield contracts_pb2.Temperature(timestamp=temp.timestamp, value=med)
 </code></pre></div><p>The service will need to be provided with the certificate and private key</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">with open(&#34;../cert/service-key.pem&#34;, &#34;rb&#34;) as f:
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">with open(&#34;../cert/service-key.pem&#34;, &#34;rb&#34;) as f:
     key = f.read()
 
 with open(&#34;../cert/service.pem&#34;, &#34;rb&#34;) as f:
@@ -455,7 +455,7 @@ creds = grpc.ssl_server_credentials(
     ]
 )
 </code></pre></div><p>Once that is done, start it running:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">port = int(sys.argv[1])
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">port = int(sys.argv[1])
 svc = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
 contracts_pb2_grpc.add_SvcServicer_to_server(Service(), svc)
 svc.add_secure_port(f&#34;[::]:{port}&#34;, creds)
@@ -463,15 +463,15 @@ svc.start()
 print(f&#34;service listening on port {port}...&#34;)
 svc.wait_for_termination()
 </code></pre></div><p>Give it a try</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">python service.py 9010
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">python service.py 9010
 </code></pre></div><p>Notice the different port so the C# service and Python service don&rsquo;t conflict one with another. In a separate terminal, go to the root project directory and run the C# client, the calculator:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Client localhost 9010 17 + 25
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Client localhost 9010 17 + 25
 </code></pre></div><p>and the time series</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Client localhost 9010
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Client localhost 9010
 </code></pre></div><p>Both will work fine.
 If you want, you can call python client to python service. Same result.</p>
 <p>The complete Python service code</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">from concurrent import futures
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">from concurrent import futures
 import statistics
 import sys
 
@@ -710,7 +710,7 @@ svc.wait_for_termination()
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.83.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          <a href="https://gohugo.io">Hugo v0.88.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>

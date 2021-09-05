@@ -95,7 +95,7 @@ What are we going to talk about? gRPC is a high performance program-to-program c
   <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
   <meta name="twitter:card" content="summary" />
   <link href='https://aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.83.1" />
+  <meta name="generator" content="Hugo 0.88.0" />
   <link rel="alternate" href="https://aiki.dev/index.xml" type="application/rss+xml" title="aiki.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://aiki.dev/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -279,16 +279,16 @@ As an optional exercise we&rsquo;ll have our C# services connected with the Pyth
 <p>Let&rsquo;s get to work!</p>
 <h3 id="the-project-setup">The project setup.</h3>
 <p>Create a directory somewhere on your disk, I will call it <code>grpc_csharp</code> but you can call as you want.</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">mkdir grpc_csharp
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">mkdir grpc_csharp
 cd grpc_csharp
 </code></pre></div><p>Once in that directory, crate an empty dotnet solution:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet new sln
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">dotnet new sln
 </code></pre></div><p>We are going to have three projects, <code>Service</code>, <code>Client</code> and <code>Shared</code>. <code>Service</code> and <code>Client</code> are going to be console applications and <code>Shared</code> is going to be a classlib containing shared functionality between both of them:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet new console -o Service
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">dotnet new console -o Service
 dotnet new console -o Client
 dotnet new classlib -o Shared
 </code></pre></div><p>Let&rsquo;s add them to the solution and make <code>Service</code> and <code>Client</code> depend on <code>Shared</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet sln add Service
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">dotnet sln add Service
 dotnet sln add Client
 dotnet sln add Shared
 dotnet add Service reference Shared
@@ -299,17 +299,17 @@ dotnet add Client reference Shared
 <li><code>Grpc.Tools</code>: gRPC integration with the dotnet project infrastructure</li>
 <li><code>Google.Protobuf</code>: the package necessary for gRPC to serialize the payload.</li>
 </ul>
-<div class="highlight"><pre class="chroma"><code class="language-go" data-lang="go"><span class="nx">dotnet</span> <span class="nx">add</span> <span class="nx">Shared</span> <span class="kn">package</span> <span class="nx">Grpc</span><span class="p">.</span><span class="nx">Core</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">dotnet</span> <span class="nx">add</span> <span class="nx">Shared</span> <span class="kn">package</span> <span class="nx">Grpc</span><span class="p">.</span><span class="nx">Core</span>
 <span class="nx">dotnet</span> <span class="nx">add</span> <span class="nx">Shared</span> <span class="kn">package</span> <span class="nx">Grpc</span><span class="p">.</span><span class="nx">Tools</span>
 <span class="nx">dotnet</span> <span class="nx">add</span> <span class="nx">Shared</span> <span class="kn">package</span> <span class="nx">Google</span><span class="p">.</span><span class="nx">Protobuf</span>
 </code></pre></div><p>Almost there, for the project setup. But before we continue, let&rsquo;s do some minor tidying. For both <code>Client</code> and <code>Service</code> dotnet created <code>Program.cs</code> as the entry point; I find that confusing, so let&rsquo;s rename these</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">mv Service/Program.cs Service/Service.cs
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">mv Service/Program.cs Service/Service.cs
 mv Client/Program.cs Client/Client.cs
 </code></pre></div><p>Also, the <code>Shared</code> project contains the <code>Class1.cs</code> file which we won&rsquo;t be using. Delete it</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">rm Shared/Class1.cs
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">rm Shared/Class1.cs
 </code></pre></div><h4 id="sanity-check">Sanity check</h4>
 <p>Build the solution and run both the <code>Client</code> and the <code>Service</code></p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet build
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">dotnet build
 dotnet run -p Client
 dotnet run -p Service
 </code></pre></div><p>In both cases, you should be greeted with the infamous &ldquo;Hello World!&rdquo; message. How exciting! :)
@@ -317,9 +317,9 @@ If you got any errors at this point, please retrace your steps and make sure thi
 Once done, onto the writing the first <code>proto</code> file!</p>
 <h3 id="proto-files">proto files</h3>
 <p>Let&rsquo;s say you want to build a calculator micro-service. That is a service which takes two (integer) numbers, an operation, say a string &ldquo;+&rdquo;, &ldquo;-&rdquo;, &ldquo;*&rdquo; or &ldquo;/&rdquo;, performs that operation, and returns the result to the caller. How would that work? Obviously, the client needs to pack the parameters into some sort of message and send that message over the network to the service. The service would unpack the message, do the operation, pack the result to the replay message and send that back to the client where the client can unpack the result. In rest/json web service world, that would probably a json-formatted message. The gRPC does conceptually similar thing, but, instead of (slow) text based json format, it uses highly efficient binary format (called protocol buffers). Obviously to write the code which serializes parameters into some obscure binary format in C# would be a lot of work, so gRPC provides the tools which take the declarative description of messages and emit the necessary C# plumbing code automatically. To declare what we want in our messages, we use &ldquo;proto&rdquo; files. Let&rsquo;s create one.</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">touch Shared/contracts.proto
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">touch Shared/contracts.proto
 </code></pre></div><p>Make the content of the file look like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">syntax = &#34;proto3&#34;;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">syntax = &#34;proto3&#34;;
 
 option csharp_namespace = &#34;Shared&#34;;
 
@@ -335,21 +335,21 @@ message CalculateReply{
 </code></pre></div><p>As you see, the format of the file is not that complicated. We are declaring that we want two messages, <code>CalculateRequest</code> and <code>CalculateReply</code>, specify what fields do we want together with their types. the numbers &ldquo;= 1&rdquo;, &quot; = 2&quot; and so on indicate a &ldquo;field number&rdquo; and it has to be unique for each field per message. You can reuse the field numbers for other messages.
 &ldquo;proto3&rdquo; is the version of proto file syntax we are using. As we are asking to turn that proto file into the C# code, we can also specify what C# namespace we would want. That is pretty much all there is.</p>
 <p>To trigger generation of the C# files from the proto file, add the following to the Shared/Shared.csproj, just below the ItemGroup containing nuget package references:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;ItemGroup&gt;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&lt;ItemGroup&gt;
     &lt;Protobuf Include=&#34;contracts.proto&#34;/&gt;
 &lt;/ItemGroup&gt;
 </code></pre></div><p>That would make sure that gRPC tools process our proto file and emit appropriate C# files.
 Let&rsquo;s try it out:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet build
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">dotnet build
 </code></pre></div><p>If you navigate to the <code>Shared/obj/Debug/net5.0/</code>, you will notice the <code>Contracts.cs</code> file there. That is emitted by the gRPC tools based on our proto file. You can peek at it if you want but it is quite obfuscated, so you probably wouldn&rsquo;t want to write such manually. Thanks for the Grpc.Tools package!
 Anyway, we have our messages defined, what about the service itself? Append the following to the <code>contracts.proto</code></p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">// new
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">// new
 service Svc {
     rpc Calculate (CalculateRequest) returns (CalculateReply);
 }
 </code></pre></div><p>This pretty much declares what we want: a service which has a <code>Calculate</code> method that accepts the <code>CalculateRequest</code> message and returns the <code>CalculateReply</code> message. Once you build the solution again, you may notice <code>ContractsGrpc.cs</code> file in the <code>Shared/obj/Debug/net5.0/</code> directory, in addition to <code>Contracts.cs</code>. That contains generated gRPC C# code there for helping to implement the actual Service and actual Client.</p>
 <p>For the reference, here is the complete <code>contracts.proto</code></p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">syntax = &#34;proto3&#34;;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">syntax = &#34;proto3&#34;;
 
 option csharp_namespace = &#34;Shared&#34;;
 
@@ -369,23 +369,23 @@ service Svc {
 </code></pre></div><h3 id="the-service-code">the Service Code.</h3>
 <p>We need to add a few necessary usings.
 As we are going to use the  generated code which we asked to live in the <code>Shared</code> namespace, add this at the top of the file:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">using System;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">using System;
 using System.Threading.Tasks;
 using Grpc.Core;
 using Shared;
 </code></pre></div><p>We will keep all Service Code inn one file for now, so create a new class outside of the <code>Program class</code></p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">public class MyService : Svc.SvcBase
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public class MyService : Svc.SvcBase
 {
 }
 </code></pre></div><p>We are deriving it from the Svc.SvcBase (which resides in the generated <code>ContractsGrpc.cs</code>) to make sure that the gRPC plumbing will call it as appropriate.
 The <code>Calculate</code> method has the following signature:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">public override Task&lt;CalculateReply&gt; Calculate(CalculateRequest request, ServerCallContext context)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public override Task&lt;CalculateReply&gt; Calculate(CalculateRequest request, ServerCallContext context)
 {
 
 }
 </code></pre></div><p>Pretty straightforward: take the <code>CalculateRequest</code> and emit the <code>CalculateReply</code>. Also, we are returning actually <code>Task&lt;CalculateReply&gt;</code>, so it can be used in the async context.
 Implement this as you wish, here&rsquo;s my implementation:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">public override Task&lt;CalculateReply&gt; Calculate(CalculateRequest request, ServerCallContext context)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public override Task&lt;CalculateReply&gt; Calculate(CalculateRequest request, ServerCallContext context)
 {
     long result = -1;
     switch (request.Op)
@@ -414,7 +414,7 @@ Implement this as you wish, here&rsquo;s my implementation:</p>
 </code></pre></div><p>for all error conditions (as unsupported operation or division by zero), I simply return -1.</p>
 <p>Ok, the service code is ready, we need to actually start it to listen for the requests. For extra flexibility, we want the port number of our service passed as a command line argument. Note: in the guide we won&rsquo;t care much about handling the error conditions, so in practice you will probably want to parse the command line properly.
 Anyway, the <code>Main</code> method would look like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">static void Main(string[] args)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">static void Main(string[] args)
 {
     int port = int.Parse(args[0]);
     var server = new Server
@@ -435,11 +435,11 @@ Anyway, the <code>Main</code> method would look like this:</p>
 <li>wait for any key press to stop the service.</li>
 </ul>
 <h4 id="try-it-out">Try it out</h4>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Service 9000
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Service 9000
 </code></pre></div><p>This should start the service patiently waiting for requests to crunch some numbers.
 If it does not work for any reason, retrace your steps and fix any error.
 For the reference, my <code>Service.cs</code> looks at the moment like this:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">using System;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">using System;
 using System.Threading.Tasks;
 using Grpc.Core;
 using Shared;
@@ -494,7 +494,7 @@ namespace Service
 
 </code></pre></div><h3 id="the-client">The client</h3>
 <p>I want my client app to accept the following command line format:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Client localhost 9000 25 + 17
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Client localhost 9000 25 + 17
 </code></pre></div><p>that is to take the following arguments, in order:</p>
 <ul>
 <li>the host where the service lives</li>
@@ -504,7 +504,7 @@ namespace Service
 <li>second number (y)</li>
 </ul>
 <p>Change the <code>Main</code> in <code>Client/Client.cs</code> to capture these arguments:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">static void Main(string[] args)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">static void Main(string[] args)
 {
     string host = args[0];
     int port = int.Parse(args[1]);
@@ -513,12 +513,12 @@ namespace Service
     long y = long.Parse(args[4]);
 }
 </code></pre></div><p>Don&rsquo;t forget to specify usings:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">using System;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">using System;
 using Grpc.Core;
 using Shared;
 </code></pre></div><p>The actual client code is not that complicated, thanks to the gRPC plumbing. We need to establish a connection (channel), create a client instance on top of that channel and make the call.</p>
 <p>Append to the <code>Main</code> method the following</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">static void Main(string[] args)
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">static void Main(string[] args)
 {
 // ...
 // new
@@ -533,12 +533,12 @@ var channel = new Channel(
     Console.WriteLine($&#34;The calculated result is: {reply.Result}&#34;);
 </code></pre></div><h4 id="try-it-out-1">Try it out</h4>
 <p>start the service</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Service 9000
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Service 9000
 </code></pre></div><p>In a separate terminal window, invoke the client:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Client localhost 9000 25 + 17
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run -p Client localhost 9000 25 + 17
 </code></pre></div><p>This should calculate the requested math operation.
 For the reference, here is the complete <code>Client.cs</code>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">using System;
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">using System;
 using Grpc.Core;
 using Shared;
 
@@ -573,7 +573,7 @@ namespace Client
 </code></pre></div><p>If you have another machine, you can run the service on o one and the client on another. I tried the service running on Ubuntu Linux and the client on Mac, but any combination of Windows, Mac, Linux should work, provided they have the right version of .net installed.</p>
 <p>Before we wrap up this section, The <code>ChannelCredentials.Insecure</code>
 in</p>
-<div class="highlight"><pre class="chroma"><code class="language-fallback" data-lang="fallback">var channel = new Channel(
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">var channel = new Channel(
     host,
     port,
     ChannelCredentials.Insecure
@@ -758,7 +758,7 @@ in</p>
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.83.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          <a href="https://gohugo.io">Hugo v0.88.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>
