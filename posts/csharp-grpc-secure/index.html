@@ -64,7 +64,7 @@ In the previous part, we created a Calculator micro-service which happily perfor
   "datePublished" : "2020-11-15T11:42:08",
   "dateModified" : "2020-11-15T11:42:08",
   "image" : "https:\/\/aiki.dev\/images\/logo.png",
-  "keywords" : [ "C#, gRPC" ],
+  "keywords" : [ "csharp, grpc, tutorial" ],
   "mainEntityOfPage" : "https:\/\/aiki.dev\/posts\/csharp-grpc-secure\/",
   "publisher" : {
     "@type": "Organization",
@@ -93,7 +93,7 @@ In the previous part, we created a Calculator micro-service which happily perfor
   <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
   <meta name="twitter:card" content="summary" />
   <link href='https://aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.88.0" />
+  <meta name="generator" content="Hugo 0.88.1" />
   <link rel="alternate" href="https://aiki.dev/index.xml" type="application/rss+xml" title="aiki.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://aiki.dev/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -259,7 +259,7 @@ if (!doNotTrack) {
 <h2 id="publicprivate-key-cryptography-refresher">Public/private key cryptography refresher</h2>
 <p>So there is this public/private key security mechanism.</p>
 <p>We won&rsquo;t get deep into the details, but
-the main idea is that there are two keys involved with every secure message. The math behind  the key pair is that one key encrypts the message but to decrypt the message you need the second key. That is, if I encrypt something with the first key, I cannot decrypt it with the same key! No way, you need the second key. The keys are also designed the way that having one key, it is impossible to derive the second, and vice versa.</p>
+the main idea is that there are two keys involved with every secure message. The math behind the key pair is that one key encrypts the message but to decrypt the message you need the second key. That is, if I encrypt something with the first key, I cannot decrypt it with the same key! No way, you need the second key. The keys are also designed the way that having one key, it is impossible to derive the second, and vice versa.</p>
 <p>If you think about it for a moment, it opens pretty powerful opportunities.</p>
 <p>Say Lech and Klaus want to exchange some information in a secure manner. They each generate a pair of keys, one will be called private and another will be called public (so there are 4 keys in total: Lech&rsquo;s private and public and Klaus' private and public). Lech hides his private key so only he has access to it and makes his public key accessible to everyone. That is, he publishes on a website, prints in the newspaper, whatever. Klaus does the same with his pair. So the whole world can access Lech&rsquo;s and Klaus' public keys, but their respective private keys are well hidden. Consider two cases:</p>
 <h4 id="lech-want-to-send-a-message-to-klaus-so-nobody-but-klaus-can-read-it">Lech want to send a message to Klaus so nobody but Klaus can read it.</h4>
@@ -420,9 +420,11 @@ In the next part we are going to discuss gRPC streaming, highly efficient patter
         
           <div class="blog-tags">
             
-              <a href="https://aiki.dev//tags/c/">C#</a>&nbsp;
+              <a href="https://aiki.dev//tags/csharp/">csharp</a>&nbsp;
             
-              <a href="https://aiki.dev//tags/grpc/">gRPC</a>&nbsp;
+              <a href="https://aiki.dev//tags/grpc/">grpc</a>&nbsp;
+            
+              <a href="https://aiki.dev//tags/tutorial/">tutorial</a>&nbsp;
             
           </div>
         
@@ -494,15 +496,15 @@ In the next part we are going to discuss gRPC streaming, highly efficient patter
                   <ul>
                 
                 
+                    <li><a href="/posts/csharp-game-sun/">Make a game with C# in a Weekend: Sunday</a></li>
+                
+                    <li><a href="/posts/csharp-game-sat/">Make a game with C# in a Weekend: Saturday</a></li>
+                
                     <li><a href="/posts/csharp-rsa/">Asymmetric encryption in C# for fun and profit</a></li>
                 
                     <li><a href="/posts/csharp-grpc-interop/">No-nonsense gRPC guide for the C# developers, Bonus: Interoperability</a></li>
                 
                     <li><a href="/posts/csharp-grpc-streaming/">No-nonsense gRPC guide for the C# developers, Part Three: Streaming</a></li>
-                
-                    <li><a href="/posts/csharp-grpc-basic/">No-nonsense gRPC guide for the C# developers, Part One: Basic Service</a></li>
-                
-                    <li><a href="/posts/csharp-docker/">Docker for the C# developers Crash Course</a></li>
                 
               </ul>
 
@@ -594,7 +596,7 @@ In the next part we are going to discuss gRPC streaming, highly efficient patter
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.88.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          <a href="https://gohugo.io">Hugo v0.88.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>

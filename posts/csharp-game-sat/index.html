@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Make a game with C# in a Weekend: Saturday - aiki.dev</title>
+  <meta name="description" content="source code
+What and why In addition of being a great tool for building cloud services and such, C# shines, perhaps surprisingly, in video game development. Unity game engine, for example, uses C# as a scripting language. For my taste, however, Unity is a little bit too magical, too much of mouse dragging and button clicking in order to get something workable. So for this guide we will use Monogame, a wonderful cross-platform C# framework for building games which can run on Windows, Mac, Linux, as well as on a few popular mobile platforms and game consoles.">
+  <meta name="author" content="Lech Gudalewicz"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "aiki.dev",
+    
+    "url": "https:\/\/aiki.dev\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/aiki.dev\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/aiki.dev\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/aiki.dev\/posts\/csharp-game-sat\/",
+          "name": "Make a game with c# in a weekend saturday"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Lech Gudalewicz"
+  },
+  "headline": "Make a game with C# in a Weekend: Saturday",
+  "description" : "source code\nWhat and why In addition of being a great tool for building cloud services and such, C# shines, perhaps surprisingly, in video game development. Unity game engine, for example, uses C# as a scripting language. For my taste, however, Unity is a little bit too magical, too much of mouse dragging and button clicking in order to get something workable. So for this guide we will use Monogame, a wonderful cross-platform C# framework for building games which can run on Windows, Mac, Linux, as well as on a few popular mobile platforms and game consoles.",
+  "inLanguage" : "en",
+  "wordCount":  5799 ,
+  "datePublished" : "2021-09-05T09:00:32",
+  "dateModified" : "2021-09-05T09:00:32",
+  "image" : "https:\/\/aiki.dev\/images\/logo.png",
+  "keywords" : [ "csharp, monogame, tutorial" ],
+  "mainEntityOfPage" : "https:\/\/aiki.dev\/posts\/csharp-game-sat\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/aiki.dev\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/aiki.dev\/images\/logo.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="Make a game with C# in a Weekend: Saturday" />
+<meta property="og:description" content="source code
+What and why In addition of being a great tool for building cloud services and such, C# shines, perhaps surprisingly, in video game development. Unity game engine, for example, uses C# as a scripting language. For my taste, however, Unity is a little bit too magical, too much of mouse dragging and button clicking in order to get something workable. So for this guide we will use Monogame, a wonderful cross-platform C# framework for building games which can run on Windows, Mac, Linux, as well as on a few popular mobile platforms and game consoles.">
+<meta property="og:image" content="https://aiki.dev/images/logo.png" />
+<meta property="og:url" content="https://aiki.dev/posts/csharp-game-sat/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="aiki.dev" />
+
+  <meta name="twitter:title" content="Make a game with C# in a Weekend: Saturday" />
+  <meta name="twitter:description" content="source code
+What and why In addition of being a great tool for building cloud services and such, C# shines, perhaps surprisingly, in video game development. Unity game engine, for example, uses C# as …">
+  <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
+  <meta name="twitter:card" content="summary" />
+  <link href='https://aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.88.1" />
+  <link rel="alternate" href="https://aiki.dev/index.xml" type="application/rss+xml" title="aiki.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://aiki.dev/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://aiki.dev/css/highlight.min.css" /><link rel="stylesheet" href="https://aiki.dev/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-159944114-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://aiki.dev/">aiki.dev</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Series" href="/series">Series</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="aiki.dev" href="https://aiki.dev/">
+            <img class="avatar-img" src="https://aiki.dev/images/logo.png" alt="aiki.dev" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              
+                <h1>Make a game with C# in a Weekend: Saturday</h1>
+              
+              
+                <hr class="small">
+              
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p><a href="https://github.com/lechgu/csharp_game.git">source code</a></p>
+<h3 id="what-and-why">What and why</h3>
+<p>In addition of being a great tool for building cloud services and such, C# shines, perhaps surprisingly, in video game development. <a href="https://unity.com/">Unity game engine</a>, for example, uses C# as a scripting language. For my taste, however, Unity is a little bit too magical, too much of mouse dragging and button clicking in order to get something workable. So for this guide we will use <a href="https://www.monogame.net/">Monogame</a>, a wonderful cross-platform C# framework for building games which can run on Windows, Mac, Linux, as well as on a few popular mobile platforms and game consoles. We are going to concentrate on building a desktop game. This will be a Tetris-like game and it will be able to run on any popular desktop platform.</p>
+<p>We are going to build something like this:
+<img src="/images/blocks.png" alt="Blocks"></p>
+<h3 id="ultra-brief-history-of-monogame">Ultra-brief history of Monogame</h3>
+<p>Around 15 years ago, Microsoft toyed with the idea of making game development accessible to the hobbyists and indie developers so they released set of libraries and tools called Microsoft XNA, aimed at the cross-platform game development. Of course, the term &ldquo;cross-platform&rdquo; was understood the traditional Microsoft&rsquo;s way, i.e. Windows and Xbox. The toolkit was actually pretty well received by the indie games developers community. But, as it often happens with them, Microsoft eventually lost interest and pretty much abandoned the project. The open source community stepped in, and reimplemented the XNA Api as an open source project, which got a name Monogame. Since then the support for many platforms has been added and currently one may use it to develop games for macOS, Linux, Windows, iOS, Android and a few game console platforms, like Nintendo Switch. Monogame powers quite a few popular video games, <a href="https://www.stardewvalley.net/">Stardew Valley</a> being one such example.</p>
+<h3 id="what-you-need-to-follow-along">What you need to follow along</h3>
+<p>You&rsquo;ll need a <a href="https://dotnet.microsoft.com/">.net SDK</a> installed on Windows, Mac or Linux. We are going to use the latest version which is 5.0. You will also need a code editor, something like <a href="https://code.visualstudio.com/">Visual Studio Code</a> although any other editor will work too. Familiarity with the terminal and the basics of C# is assumed. For uniformity, I am going to use bash. On Windows you may use <a href="https://git-scm.com/">git bash</a> but it is pretty trivial to port commands to the standard Windows <code>cmd.exe</code>.</p>
+<h3 id="initial-setup">Initial setup</h3>
+<p>Create a directory and create a new console project</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">mkdir csharp_game
+cd csharp_game
+dotnet new console
+</code></pre></div><p>It is probably just me, but I dislike, for some reason, the name for the default class to be <code>Program</code>.
+So let&rsquo;s rename it</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">mv Program.cs App.cs
+</code></pre></div><p>You may also want to open the <code>App.cs</code> file and rename the class name as well. While you are it, make sure that the namespace is called <code>Blocks</code>.</p>
+<h3 id="create-the-game-window">Create the game window</h3>
+<p>First, we need to add the monogame package to our project.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">dotnet</span> <span class="nx">add</span> <span class="kn">package</span> <span class="nx">MonoGame</span><span class="p">.</span><span class="nx">Framework</span><span class="p">.</span><span class="nx">DesktopGL</span>
+</code></pre></div><p>Notice that we are using the OpenGL flavor of Monogame. There are other flavors too, but this one will work on Windows, Mac and Linux.</p>
+<p>In Monogame, your window class must derive from the <code>Game</code> class which lives in the <code>Microsoft.Xna.Framework.Graphics</code> namespace, so make your App class to derive from it, and don&rsquo;t forget to add the appropriate <code>using</code> statement.
+Create a constructor for the App class which initializes the Monogame GraphicsManager, like so:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">using Microsoft.Xna.Framework;
+
+namespace Blocks
+{
+    class App : Game
+    {
+        private readonly GraphicsDeviceManager graphics;
+        public App()
+        {
+            graphics = new GraphicsDeviceManager(this);
+        }
+    }
+}
+</code></pre></div><p>Monogame will call the virtual method <code>Draw</code> in your game class when it is a time to show your game to the screen.
+For now, we are going to clear the whole window to a nice Gray color</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">protected override void Draw(GameTime gameTime)
+{
+    GraphicsDevice.Clear(Color.DimGray);
+}
+</code></pre></div><p>Finally, make change to the <code>Main</code> function so your game actually runs</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public static void Main()
+{
+    using var app = new App();
+    app.Run();
+}
+</code></pre></div><p>For convenience, here&rsquo;s the whole <code>App.cs</code> file as of now:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">using Microsoft.Xna.Framework;
+
+namespace Blocks
+{
+    class App : Game
+    {
+        private readonly GraphicsDeviceManager graphics;
+
+        public App()
+        {
+            graphics = new GraphicsDeviceManager(this);
+        }
+
+        protected override void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.DimGray);
+        }
+
+        public static void Main()
+        {
+            using var app = new App();
+            app.Run();
+        }
+    }
+}
+</code></pre></div><p>Give it a spin</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run
+</code></pre></div><p>You should see a window filled with the gray color.</p>
+<h3 id="draw-something">Draw something</h3>
+<p>Monogame usually expect you to provide images (sprites etc) to be displayed as graphical assets in your game.
+There is quite sophisticated pre-processing pipeline built-in into the framework which convert png or jpg images into the format expected by Monogame. The bad news is that, as at the moment of writing this, the content processing pipeline has not been yet ported to .net 5.0. It works fine with .net core 3.1. The good news though, that all we need to display are pretty much rectangles of various colors.</p>
+<p>Here&rsquo;s a little trick. the image of 1 pixel wide and 1 pixel tall is, technically, a rectangle, albeit a small one. Monogame has the ability to scale the images arbitrarily, so 1 pixel can be scaled to the rectangle of desired size. Ok, what about the color?. In addition to scaling the image, Monogame can also tint it to any desired color. So, if we would have a 1x1 image of a white pixel, that would be enough to produce a rectangle of any size and any color.
+Creating such image programmatically is not that hard in Monogame.
+create a field in the <code>App</code> class which will represent our pixel. Also, expose it as a property.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">private Texture2D pixel;
+
+public Texture2D Pixel
+{
+    get =&gt; pixel;
+}
+</code></pre></div><p><code>Texture2D</code> is the Monogame object representing images, sprites etc. It lives in the <code>Microsoft.Xna.Framework.Graphics</code> namespace.</p>
+<p>The actual creation of our pixel texture can be done in the <code>Initialize</code> call, when all graphics plumbing has been completed by the Monogame</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">protected override void Initialize()
+{
+    base.Initialize();
+    pixel = new Texture2D(GraphicsDevice, 1, 1);
+    pixel.SetData&lt;Color&gt;(new[] { Color.White });
+}
+</code></pre></div><p>Ok, we got our pixel.
+We will want to access this <code>Pixel</code> property from anywhere in the program and, eventually we&rsquo;ll want that with our class <code>App</code> also. So let&rsquo;s turn it into a simple singleton.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">//...
+class App: Game
+{
+// ...
+//new
+private static App instance;
+
+    public static App Instance
+    {
+        get =&gt; instance;
+    }
+
+    public App()
+    {
+        // ...
+        // new
+        instance = this;
+
+    }
+}
+</code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">//...
+class App: Game
+{
+// ...
+//new
+private SpriteBatch spriteBatch;
+// ...
+protected override void Initialize()
+{
+    protected override void Initialize()
+    {
+        base.Initialize();
+        pixel = new Texture2D(GraphicsDevice, 1, 1);
+        pixel.SetData&lt;Color&gt;(new[] { Color.White });
+        // new
+        spriteBatch = new SpriteBatch(GraphicsDevice);
+    }
+}
+</code></pre></div><p>In order to not pollute the <code>App</code> class we are going to create a separate class that will hold the main game flow. Create a new file</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">touch PlayScene.cs
+</code></pre></div><p>Make it look like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
+namespace Blocks
+{
+
+    public class PlayScene
+    {
+        public void Render(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(
+                App.Instance.Pixel,
+                new Rectangle(100, 100, 100, 100),
+                Color.Red
+            );
+        }
+    }
+}
+</code></pre></div><p>The <code>Render</code> method of the scene uses the <code>SpriteBatch</code> to draw our pixel.
+<code>Draw</code> has many overloads, this particular, in addition of having the source texture parameter (our 1x1 white pixel), also takes the destination rectangle and the tint into which to color the texture. So the pixel will be scaled to a 100x100 pixel rectangle and colored red.</p>
+<p>Ok, now we need to add the <code>PlayScene</code> object to the <code>App</code> and call its <code>Render</code> in the `Draw implementation.
+Add the new field:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">// ...
+public class App: Game
+{
+    //...
+    // new
+    private readonly PlayScene scene = new();
+    // ...
+    protected override void Draw(GameTime gameTime)
+    {
+        GraphicsDevice.Clear(Color.DimGray);
+        // new
+        spriteBatch.Begin();
+        scene.Render(spriteBatch);
+        spriteBatch.End();
+    }
+}
+</code></pre></div><p>Note that the call to scene&rsquo;s <code>Render</code> is sandwiched between <code>Begin</code> and <code>End</code> on the <code>SpriteBatch</code>.</p>
+<p>Try to run it, you will see a red square on the gray background.</p>
+<h3 id="windowing">Windowing</h3>
+<p>Monogame allows you to run your game in fullscreen mode, or in the window. In our case we are going to run it in the window. We set it to some initial size and let the user resize the window if he/she wants.
+First create the file <code>Constants.cs</code> where we are going to keep all our constants, so we can find and modify them easily.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">namespace Blocks
+{
+    public static class Constants
+    {
+        public const int WINDOW_WIDTH = 1024;
+        public const int WINDOW_HEIGHT = 768;
+    }
+}
+</code></pre></div><p>Next, in your main file, <code>App.cs</code>, inside the <code>Initialize</code> method add the following:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">protected override void Initialize()
+{
+    base.Initialize();
+    // new
+    graphics.PreferredBackBufferWidth = WINDOW_WIDTH;
+    graphics.PreferredBackBufferHeight = WINDOW_HEIGHT;
+    graphics.ApplyChanges();
+    Window.Title = &#34;Blocks&#34;;
+    Window.AllowUserResizing = true;
+    // as before, create pixel and spriteBatch...
+}
+</code></pre></div><p>In order for these constants to be accessible in the file, make sure you add</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">using static Blocks.Constants;
+</code></pre></div><p>on top of it.</p>
+<p>We are setting the window dimensions here as well as its title and allowing the user to resize the window. Try to run it, the red square on the gray background still appears. Now it is possible to change the window size and the content becomes &ldquo;responsive&rdquo;, that is it adapts to the window size. This is fine but it is going to be a little hard to position our content, as the user can change the the window dimensions and its aspect ratio. We can make our life a little easier by using virtual dimensions.</p>
+<h3 id="drawing-in-terms-of-the-virtual-dimensions">Drawing in terms of the Virtual Dimensions.</h3>
+<p>Let&rsquo;s say, we want to treat our window as always having a predefined fixed size,
+say 640x480, position all elements according to this size, and let Monogame scale it appropriately.
+That is, it might be resized by the user, but we always think that the size is fixed and let Monogame to take care of appropriate scaling
+Add these two constants to the <code>Constants.cs</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public const int VIRTUAL_WIDTH = 640;
+public const int VIRTUAL_HEIGHT = 480;
+</code></pre></div><p>So how we are going to take advantage of the Monogame auto-scaling? The answer is so called <code>RenderTarget</code>.
+We basically say, hey, do all the drawing to this <code>RenderTarget</code> which happens to be of the size 640x480, and once all drawing done, blast the whole contents of the <code>RenderTarget</code> to whatever current windows size it is now.</p>
+<p>Add the following field to the <code>App</code> class</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">private RenderTarget2D target;
+</code></pre></div><p>create this objects at the bottom of the <code>Initialize</code> method</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">target = new RenderTarget2D(
+    GraphicsDevice,
+    VIRTUAL_WIDTH,
+    VIRTUAL_HEIGHT,
+    false,
+    SurfaceFormat.Color,
+    DepthFormat.None, GraphicsDevice.PresentationParameters.MultiSampleCount,
+    RenderTargetUsage.DiscardContents
+    );
+</code></pre></div><p>Notice that we are passing the <code>VIRTUAL_WIDTH</code> and <code>VIRTUAL_HEIGHT</code> parameters which set the dimensions of the target.
+Next, we need to make the the <code>Draw</code> method to look like this</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">protected override void Draw(GameTime gameTime)
+{
+
+    graphics.GraphicsDevice.SetRenderTarget(target);
+    GraphicsDevice.Clear(Color.DimGray);
+    spriteBatch.Begin();
+    scene.Render(spriteBatch);
+    spriteBatch.End();
+    graphics.GraphicsDevice.SetRenderTarget(null);
+    spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque);
+    var dst = new Rectangle(0, 0, Window.ClientBounds.Width, Window.ClientBounds.Height);
+    spriteBatch.Draw(target, dst, Color.White);
+    spriteBatch.End();
+}
+</code></pre></div><p>This code does what has been described above: we set the render target, do the clearing and drawing to that target, set the target to default, and blast the whole target into the window, which current dimensions are held in <code>Window.ClientBounds</code>.
+if we run the app again, we&rsquo;ll see that the red square still shows up, but its dimensions might be slightly different than before, as its coordinates are interpreted in the terms of the virtual coordinates. Ok, by now we can draw rectangles and have adequate control how to position them.</p>
+<h3 id="arrays">Arrays</h3>
+<p>I bet you have played a Tetris-like game before, so I won&rsquo;t bother to specify the rules in detail. You have a rectangular board, and a falling piece which could be also viewed as 4x4 square; with some cells filled and some not. We are going to use two-dimensional arrays to represent both the board and the falling piece. The values equal to 0 in array means that the particular cell is empty, non zero value stands for the occupied cell. In theory, we could use a standard C# array structure for it, but eventually we are going to have bunch of helper methods and properties so, in order to keep the code organized, let&rsquo;s create the class <code>Arr</code> in the file <code>Arr.cs</code> that is going to represent the array we need.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">namespace Blocks
+{
+    public class Arr
+    {
+        private readonly int[] buf;
+        private readonly int rows;
+        private readonly int cols;
+
+         public int Rows
+        {
+            get =&gt; rows;
+        }
+
+        public int Cols
+        {
+            get =&gt; cols;
+        }
+    }
+}
+</code></pre></div><p>the data itself is going to be kept in a simple, one-dimensional array, so we need some helper indexer which gets and sets the value, given the row and the column.
+Add the indexer to the <code>Arr</code> class.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public int this[int r, int c]
+{
+    get =&gt; buf[cols * r + c];
+    set =&gt; buf[cols * r + c] = value;
+}
+</code></pre></div><p>We also need to construct somehow instances of the <code>Arr</code> class. Let&rsquo;s add two constructors, one would initialize an array filled with zeros by simply specifying number or rows and cols. Another constructor will just take the copy of the given array and represent it in rectangular way.
+These are the constructors</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public Arr(int rows, int cols)
+        {
+            this.rows = rows;
+            this.cols = cols;
+            buf = new int[this.rows * this.cols];
+        }
+
+        public Arr(int[] source, int rows)
+        {
+            this.rows = rows;
+            cols = source.Length / this.rows;
+            buf = new int[this.rows * cols];
+            source.CopyTo(buf, 0);
+        }
+</code></pre></div><p>Ok, that is enough for now, we will add extra functionality to this class Later.</p>
+<p>Typically, the game board is a 10x20 rectangle, but to make things simpler to manage, we will add extra 2 row at the top, therefore internally the board will be represented as an 10x22 <code>Arr</code>. The 2 extra rows are not going to be visible to the user.
+Add the following constants to the <code>Constants</code> class.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public const int BOARD_COLS = 10;
+public const int BOARD_ROWS = 22;
+public const int OVERFLOW = 2;
+public const int CELL = 20;
+</code></pre></div><p><code>CELL</code> is the size of a simple cell of the board, in (virtual) pixels.</p>
+<h3 id="engine">Engine</h3>
+<p>We could put all game logic into the <code>PlayScene</code>, but that quickly turn into quite unmanageable amount of code. So, in order to keep concerns separate we are going to keep the game engine in a separate class. Start with the Following <code>Engine.cs</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">using static Blocks.Constants;
+
+namespace Blocks
+{
+
+    public class Engine
+    {
+        private Arr board = new(BOARD_ROWS, BOARD_COLS);
+        public Arr Board
+        {
+            get =&gt; board;
+        }
+    }
+
+</code></pre></div><p>Nothing fancy. the initial board will be just an empty 10x22 array.</p>
+<p>Let&rsquo;s instantiate it in the <code>PlayScene</code> and display on screen. Add the following to the <code>PlayScene</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">
+private Engine engine;
+
+private void Reset()
+{
+engine = new();
+}
+
+public PlayScene()
+{
+Reset();
+}
+
+</code></pre></div><p>We have the <code>Reset</code> method whose responsibility is to ensure the scene into the fresh, ready to play state. For now, it does not do much, as you see. The constructor simply calls the <code>Reset</code>.</p>
+<p>Let&rsquo;s draw the board, empty for now.</p>
+<p>Replace the &lsquo;Render` method with</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public void Render(SpriteBatch spriteBatch)
+{
+    var sx = (VIRTUAL_WIDTH - CELL * BOARD_COLS) / 2;
+    var sy = (VIRTUAL_HEIGHT - CELL * (BOARD_ROWS - OVERFLOW)) / 2;
+    for (int r = OVERFLOW; r &lt; BOARD_ROWS; r++)
+    {
+        for (int c = 0; c &lt; BOARD_COLS; c++)
+        {
+            var rc = new Rectangle(
+                sx + c * CELL,
+                sy + (r - OVERFLOW) * CELL,
+                CELL,
+                CELL
+            );
+            spriteBatch.Draw(App.Instance.Pixel, rc, Color.Black);
+        }
+    }
+}
+</code></pre></div><p>We want our board to be centered, for that we compute where it starts, thus variables <code>sx</code> and <code>sy</code>. Next we go over the whole board, row by row and cell by cell, calculate what is cell&rsquo;s destination place (variable <code>rc</code>), and draw there a black square.
+Observe that we are skipping extra two rows (<code>OVERFLOW</code>)
+If we run the application now, we are going to see an empty board displayed. Clearly we need actual game pieces.</p>
+<h3 id="pieces">Pieces</h3>
+<p>We are going to handle falling pieces of 7 classical shapes, As discussed previously, we represent each as an instance of 4x4 <code>Arr</code>, value 0 represents empty cell. If it is not 0, we will interpret it as a color index in some palette.
+So create a file <code>Pieces.cs</code> with the following.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">namespace Blocks
+{
+    public static class Pieces
+    {
+        private static readonly Arr pieceO = new(new[] {
+            0, 0, 0, 0,
+            0, 1, 1, 0,
+            0, 1, 1, 0,
+            0, 0, 0, 0,
+        }, 4);
+        private static readonly Arr pieceI = new(new[] {
+            0, 0, 0, 0,
+            0, 0, 0, 0,
+            2, 2, 2, 2,
+            0, 0, 0, 0,
+        }, 4);
+        private static readonly Arr pieceT = new(new[] {
+            0, 0, 0, 0,
+            0, 3, 0, 0,
+            3, 3, 3, 0,
+            0, 0, 0, 0,
+        }, 4);
+        private static readonly Arr pieceL = new(new[] {
+            0, 0, 0, 0,
+            0, 0, 4, 0,
+            4, 4, 4, 0,
+            0, 0, 0, 0,
+        }, 4);
+        private static readonly Arr pieceJ = new(new[] {
+            0, 0, 0, 0,
+            5, 0, 0, 0,
+            5, 5, 5, 0,
+            0, 0, 0, 0,
+        }, 4);
+        private static readonly Arr pieceS = new(new[] {
+            0, 0, 0, 0,
+            0, 6, 6, 0,
+            6, 6, 0, 0,
+            0, 0, 0, 0,
+        }, 4);
+        private static readonly Arr pieceZ = new(new[] {
+            0, 0, 0, 0,
+            7, 7, 0, 0,
+            0, 7, 7, 0,
+            0, 0, 0, 0,
+        }, 4);
+
+        public static readonly Arr[] PIECES = new[]
+        {
+            pieceI,
+            pieceO,
+            pieceT,
+            pieceL,
+            pieceJ,
+            pieceS,
+            pieceZ
+        };
+
+    }
+}
+</code></pre></div><p>The name of the piece reflects the English letter which the piece vaguely resembles. The cell set to zero means an empty cell, otherwise it
+indicates the color of the particular cell.
+Obviously it is one of these occasions where it is just fine to copy paste the code snippet as there is little learning value in typing this in. We give each piece a name which refers to a letter that vaguely resembles its shape. Finally, the <code>PIECES</code> holds all of them in a single array.</p>
+<h3 id="the-current-piece">The current piece</h3>
+<p>Ok, what it takes to put one piece on the board? First we need to check if there is space for it in the desired position, then just blast the non-0 entries into the board. For that we will add two helpers <code>CanPlace</code> and <code>Place</code> to the `Arr&rsquo; class.
+The former is supposed to return a boolean indicating if it is possible to put the piece into the board at desired position.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"> public bool CanPlace(Arr piece, int r, int c)
+{
+    for (int y = 0; y &lt; piece.Rows; y++)
+    {
+        for (int x = 0; x &lt; piece.Cols; x++)
+        {
+            int p = piece[y, x];
+            if (p == 0)
+            {
+                continue;
+            }
+            int br = r + y;
+            int bc = c + x;
+            if (br &lt; 0 || br &gt;= rows)
+            {
+                return false;
+            }
+            if (bc &lt; 0 || bc &gt;= cols)
+            {
+                return false;
+            }
+            if (this[br, bc] != 0)
+            {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+</code></pre></div><p>We make sure that any non-zero value of the piece is within the board bounds and the corresponding value in the board is not occupied.</p>
+<p>The latter method simply places the piece on the board, assuming that it has been verified by now that it is possible.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public void Place(Arr piece, int r, int c)
+{
+    for (int y = 0; y &lt; piece.Rows; y++)
+    {
+        for (int x = 0; x &lt; piece.Cols; x++)
+        {
+
+            int p = piece[y, x];
+            if (p != 0)
+            {
+                this[r + y, c + x] = p;
+            }
+
+        }
+    }
+}
+</code></pre></div><p>Finally, we need to be able to create a deep clones of the <code>Arr</code> instances. Add this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public Arr Cloned
+{
+    get =&gt; new(buf, rows);
+}
+</code></pre></div><p>Ok, now we are prepared start putting pieces of the board. Let&rsquo;s add the following fields into the <code>Model</code> class which represent what is the current piece in play and what is its position.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public class Engine
+{
+    //...
+    private int curRow;
+    private int curCol;
+    private Arr curPiece;
+    private readonly Random rnd = new();
+}
+</code></pre></div><p>We will need also the random number generator, thus the <code>rnd</code> field. <code>Random</code> lives in the <code>System</code> namespace, so make sure is in your usings.
+Now add the <code>Spawn</code> method to our <code>Engine</code> which will responsible for initializing the current piece:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public void Spawn()
+{
+    int which = rnd.Next(pieces.Length);
+    curCol = 4;
+    curRow = 0;
+    curPiece = PIECES[which].Cloned;
+}
+</code></pre></div><p>In order to access the PIECES array, make sure you have <code>using static Blocks.Pieces;</code> at the top.</p>
+<p>Now head back to the <code>PlayScene</code> and add the call to engine.Spawn() inside the <code>Reset</code> method.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"> private void Reset()
+{
+    engine = new();
+    // new
+    engine.Spawn();
+}
+</code></pre></div><p>In order to display non-empty cells we need to assign colors other than black to all values but 0.
+Add the following field</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">    private readonly Color[] palette = new Color[]
+    {
+        Color.Black,
+        Color.Cyan,
+        Color.Yellow,
+        Color.Purple,
+        Color.Orange,
+        Color.Blue,
+        Color.Green,
+        Color.Red,
+    };
+</code></pre></div><p>And tweak the rendering so it grabs the color from the palette instead of always using black.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public void Render(SpriteBatch spriteBatch)
+{
+    var sx = (VIRTUAL_WIDTH - CELL * BOARD_COLS) / 2;
+    var sy = (VIRTUAL_HEIGHT - CELL * (BOARD_ROWS - OVERFLOW)) / 2;
+    for (int r = OVERFLOW; r &lt; BOARD_ROWS; r++)
+    {
+        for (int c = 0; c &lt; BOARD_COLS; c++)
+        {
+            var rc = new Rectangle(
+                sx + c * CELL,
+                sy + (r - OVERFLOW) * CELL,
+                CELL,
+                CELL
+            );
+            var v = engine.Board[r, c];
+            spriteBatch.Draw(App.Instance.Pixel, rc, palette[v]);
+        }
+    }
+}
+</code></pre></div><p>Ok, this looks like everything we need in order to display at list one piece. But if you run the the app now, the board still seems to be black.
+How come? Well we spawned a new piece in the model but haven&rsquo;t actually placed it on board.</p>
+<h3 id="piece-down">Piece Down</h3>
+<p>So, what do we need to move the piece down? In the simplest terms, we remove the piece from the current position increase the current row by one and place it again. So firstly, we need a new method in the <code>Arr</code> class which removes the piece in the give position:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public void Remove(Arr piece, int r, int c)
+{
+    for (int y = 0; y &lt; piece.Rows; y++)
+    {
+        for (int x = 0; x &lt; piece.Cols; x++)
+        {
+            if (piece[y, x] != 0)
+            {
+                this[r + y, c + x] = 0;
+            }
+        }
+    }
+}
+</code></pre></div><p>Good.
+Now let&rsquo;s think for a moment. We remove the piece at the current position, increase the row by one and try to put it again. But what to do if there&rsquo;s no space anymore? obviously the Down operation was not possible in this situation at all! But we removed the piece already, so shall we put it back? looks like a mess. So instead of trying to move down on a real board and do this operation on its clone. If it succeeds we can either copy the whole clone back to the original board or, simpler, just replace the board with the clone.
+On the other hand, if the operation would fail we could just notify the application that the move is not legit so it can indicate that the game is over or something like that.
+Let&rsquo;s add a set only property GameOver which will hold the action to be executed when it is impossible to move.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public class Engine
+{
+    //...
+    // new
+    private Action gameOver = () =&gt; { };
+    public Action GameOver {
+         set =&gt; gameOver = value;
+    }
+}
+</code></pre></div><p>Now we can implement <code>Down</code> as discussed</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public void Down()
+{
+    var clone = board.Cloned;
+    clone.Remove(curPiece, curRow, curCol);
+    if (clone.CanPlace(curPiece, curRow + 1, curCol))
+    {
+        curRow++;
+        clone.Place(curPiece, curRow, curCol);
+        board = clone;
+    }
+    else
+    {
+        gameOver();
+    }
+}
+</code></pre></div><p>Again,</p>
+<ul>
+<li>make the clone of the board</li>
+<li>remove the piece at the current position in the clone</li>
+<li>increment current row</li>
+<li>if it is possible to place the piece in the new position, place it</li>
+<li>otherwise, indicate the application that the move is not legit, by calling the <code>GameOver</code> action.</li>
+</ul>
+<p>Let see if it works. Back to the <code>PlayScene</code>, set the engine&rsquo;s <code>GameOver</code> to something and call Down immediately after <code>Spawn</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">private void Reset()
+{
+    engine = new();
+    engine.Spawn();
+    engine.GameOver = () =&gt;
+    {
+        Console.WriteLine(&#34;Game Over&#34;);
+    };
+    engine.Down();
+}
+</code></pre></div><p>When you run the application now, one piece should show up. Since we are using the random number generator, every subsequent run will likely yield another piece to show.</p>
+<h3 id="falling-piece">Falling Piece</h3>
+<p>In order to make the piece to fall we need to call Down periodically. Add the following constant to the <code>Constants.cs</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public const double NORMAL_DELAY = 0.5;
+</code></pre></div><p>That indicates how long we normally wait (in seconds) until we need to call <code>Down</code> again.</p>
+<p>Add the following fields to the <code>PlayScene</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">private double baseDelay;
+private double curDelay;
+private double elapsed;
+</code></pre></div><p><code>baseDelay</code> holds the base delay for the current difficulty level. <code>curDelay</code> is the actual delay. At the moment these two will be set to the same value. <code>elapsed</code> tracks how much time passed since the last <code>Down</code>. Initialize delays in the <code>Reset</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">private void Reset()
+{
+    // new
+    baseDelay = NORMAL_CLOCK;
+    curDelay = baseDelay;
+    // ...
+}
+</code></pre></div><p>create the method <code>Update</code> which will be called periodically. It has a single argument indicating how much time, in seconds, since the last call.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public void Update(double dt)
+{
+
+    elapsed += dt;
+    if (elapsed &gt;= curDelay)
+    {
+        elapsed = 0;
+        engine.Down();
+    }
+}
+</code></pre></div><p>Monogame asks the Game to update its state by calling the <code>Update</code> method, unsurprisingly.
+Let&rsquo;s create the new field in the <code>App</code> class</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">private double? clock;
+</code></pre></div><p>That is the current value of the clock, in seconds.
+Override the <code>Update</code> method</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">protected override void Update(GameTime gameTime)
+{
+    if (clock.HasValue)
+    {
+        var updated = gameTime.ElapsedGameTime.TotalSeconds;
+        var dt = updated - clock.Value;
+        scene.Update(dt);
+    }
+    else
+    {
+        clock = gameTime.ElapsedGameTime.TotalSeconds;
+    }
+}
+</code></pre></div><p>Easy stuff, we calculate the time difference between the current time and the previous one, and pass that to scene&rsquo;s <code>Update</code> call.</p>
+<p>Run the application again, the piece will fall until it stops at the the bottom of the board. At this point it is not able to move anymore, so the <code>GameOver</code> action will be invoked which, for now, just prints to the console.</p>
+<h3 id="moving-the-piece-right-and-left">Moving the Piece Right and Left</h3>
+<p>We will want to move the current piece right and left once the right and left keys are pressed, correspondingly. Monogame allows to query the state of the particular key and it will report if the key is pressed or not. So, we can check the state of the left and right keys and if they are pressed, do the corresponding action.</p>
+<p>Well, almost.</p>
+<p>If you implement it naively this way you will notice that one press will cause usually multiple movements in the corresponding direction. Since the <code>Update</code> is called many times per second it is humanely impossible to ensure that the key press lasted only one cycle.
+The way we are going to deal with that is that we are going to invoke the appropriate action only if the key state switched from &ldquo;not pressed&rdquo; to &ldquo;pressed&rdquo; if both current and previous values are &ldquo;pressed&rdquo;, we do nothing.
+Let&rsquo;s create a helper class which will handle that. Name it <code>InputManager</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework.Input;
+namespace Blocks
+{
+    public class InputManager
+    {
+        private KeyboardState oldKeys;
+        private readonly Dictionary&lt;Keys, Action&gt; discretePresses = new();
+
+        public void Handle(Keys keys, Action action)
+        {
+            discretePresses[keys] = action;
+        }
+
+        public void Reset()
+        {
+            oldKeys = Keyboard.GetState();
+        }
+
+        public void Update(double _)
+        {
+            var keys = Keyboard.GetState();
+            foreach (var key in discretePresses.Keys)
+            {
+                if (keys.IsKeyDown(key) &amp;&amp; !oldKeys.IsKeyDown(key))
+                {
+                    discretePresses[key]();
+                }
+            }
+            oldKeys = keys;
+        }
+    }
+}
+</code></pre></div><p>As you see, we essentially maintain the dictionary of keys and corresponding actions to invoke when the key state switched from &ldquo;not pressed&rdquo; to &ldquo;pressed&rdquo;. To do its job, the <code>InputManager</code> has to be called on every <code>Update</code>. It does not care of how much time elapsed since last call, but for uniformity it will still accept it as a parameter.</p>
+<p>Ok, time to implement <code>Left</code> and <code>Right</code> methods in the <code>Engine</code> class</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public void Right()
+{
+    var clone = board.Cloned;
+    clone.Remove(curPiece, curRow, curCol);
+    if (clone.CanPlace(curPiece, curRow, curCol + 1))
+    {
+        curCol++;
+        clone.Place(curPiece, curRow, curCol);
+        board = clone;
+    }
+}
+
+public void Left()
+{
+    var clone = board.Cloned;
+    clone.Remove(curPiece, curRow, curCol);
+    if (clone.CanPlace(curPiece, curRow, curCol - 1))
+    {
+        curCol--;
+        clone.Place(curPiece, curRow, curCol);
+        board = clone;
+    }
+}
+</code></pre></div><p>Conceptually their implementation is very similar to the <code>Down</code> implementation, modulo that we are moving in horizontal direction, rather than vertical direction. Plus, we don&rsquo;t bother to notifying the application if it is not possible to move the desired direction.</p>
+<p>Now, make sure that we create an instance of the <code>InputManager</code> in the <code>PlayScene</code> and call <code>Update</code> on it.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">class PlayScene
+{
+    // ...
+    // new
+    private readonly InputManager input = new();
+    // ...
+    public void Update(double dt)
+    {
+        // new
+        input.Update(dt);
+        // ...
+    }
+}
+</code></pre></div><p>In the <code>Reset</code> implementation handle the Left and Right keys and delegate to the model&rsquo;s Left and Right correspondingly.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">private void Reset()
+{
+    engine = new();
+    input.Handle(Keys.Left, () =&gt;
+    {
+        engine.Left();
+    });
+    input.Handle(Keys.Right, () =&gt;
+    {
+        engine.Right();
+    });
+    engine.Spawn();
+    engine.GameOver = () =&gt;
+    {
+        Console.WriteLine(&#34;Game Over&#34;);
+    };
+    engine.Down();
+}
+</code></pre></div><p>Run the app again, you&rsquo;ll be able to move the piece left and right.</p>
+<h3 id="rotating-the-piece">Rotating the Piece</h3>
+<p>Next we want to rotate the current piece. Let&rsquo;s say we want to rotate the piece 90 degrees clockwise. The first row of our original piece becomes the last column, the second row becomes the second last column and so on. You see the pattern. Rotation counter-clockwise is pretty much the same, but instead of the first row becoming the last column, it becomes the the column, and so on&hellip;</p>
+<p>We are going to implement both rotation flavors. Add the following to the <code>Arr</code> implementation</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public Arr RotatedClockwise
+{
+    get
+    {
+        var dst = new Arr(cols, rows);
+        for (int r = 0; r &lt; rows; r++)
+        {
+            for (int c = 0; c &lt; cols; c++)
+            {
+                int v = this[r, c];
+                int dr = c;
+                int dc = rows - 1 - r;
+                dst[dr, dc] = v;
+            }
+        }
+        return dst;
+    }
+}
+
+public Arr RotatedCounterClockwise
+{
+    get
+    {
+        var dst = new Arr(cols, rows);
+        for (int r = 0; r &lt; rows; r++)
+        {
+            for (int c = 0; c &lt; cols; c++)
+            {
+                int v = this[r, c];
+                int dr = cols - 1 - c;
+                int dc = r;
+                dst[dr, dc] = v;
+            }
+        }
+        return dst;
+    }
+}
+</code></pre></div><p>Note that we create the new, rotated array. Granted, it is possible to do rotation in place, but we won&rsquo;t bother here.</p>
+<p>Next, let&rsquo;s implement the <code>Rotate</code> method in the <code>Engine</code> class. Our application could support both clockwise and counter-clockwise rotations by handling different keys, but I decided here to support only counter-clockwise flavor as it seems, subjectively, more natural to me. In the <code>Engine</code> class add</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public void Rotate()
+{
+    var clone = board.Cloned;
+    var rotated = curPiece.RotatedCounterClockwise;
+    clone.Remove(curPiece, curRow, curCol);
+    if (clone.CanPlace(rotated, curRow, curCol))
+    {
+        curPiece = rotated;
+        clone.Place(curPiece, curRow, curCol);
+        board = clone;
+    }
+
+}
+</code></pre></div><p>Let&rsquo;s bind the <code>Rotate</code> to the Up key. in the <code>PlayScene</code>, right below handling Left and Right keys, add</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">input.Handle(Keys.Up, () =&gt;
+{
+    engine.Rotate();
+});
+</code></pre></div><h3 id="dropping-the-piece">Dropping the Piece</h3>
+<p>As the next part of our game we will enable the ability to &ldquo;Drop&rdquo; the piece, once the user presses the Space key. We could calculate that position and place the piece there immediately. But that would not be very friendly to the user. So instead we are going to temporarily shorten the delay so it takes way less time for the next <code>Down</code> to be forced.
+Add the new constant to the <code>Constants.cs</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public const double FAST_DELAY = 0.01;
+</code></pre></div><p>We want the Space key to make the scene to switch to the FAST_DELAY. Add the corresponding handler to the <code>Reset</code> method.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">private void Reset
+{
+    // ...
+    // new
+    input.Handle(Keys.Space, () =&gt;
+    {
+        curDelay = FAST_DELAY;
+    });
+    // ...
+}
+</code></pre></div><p>That should do it. However, once the piece is dropped, we want to switch back to the &ldquo;normal&rdquo; delay, that is to the <code>baseDelay</code>.
+add the new action to the <code>Engine</code> class</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public class Engine
+{
+    // ...
+    // new
+    private Action dropped = () =&gt; { };
+    public Action Dropped
+    {
+        set =&gt; dropped = value;
+    }
+}
+</code></pre></div><p>When the <code>Down</code> does not have place to move, switch from calling the <code>gameOver</code> to <code>dropped</code>. We will handle the game over condition later.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public void Down()
+{
+    var clone = board.Cloned;
+    clone.Remove(curPiece, curRow, curCol);
+    if (clone.CanPlace(curPiece, curRow + 1, curCol))
+    {
+        curRow++;
+        clone.Place(curPiece, curRow, curCol);
+        board = clone;
+    }
+    else
+    {
+        // changed
+        dropped();
+        Spawn();
+    }
+}
+</code></pre></div><p>Naturally, once the piece is dropped we want to spawn a new one.</p>
+<p>the last thing is to subscribe to that action and switch the delay back. In the <code>Reset</code> method add</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">engine.Dropped = () =&gt;
+{
+   curDelay = baseDelay;
+};
+</code></pre></div><p>Try to run the game. you are able to move the piece left and right, rotate it and drop. The board though fills up as, at the moment we don&rsquo;t have a way to remove complete lines.
+So we need to address that next.</p>
+<h3 id="removing-full-lines">Removing Full Lines</h3>
+<p>First, let&rsquo;s add a helper function to the <code>Arr.cs</code> which checks if the row is full</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public class Arr
+{
+    //...
+    // new
+    private bool IsRowFull(int row)
+    {
+        for (int c = 0; c &lt; cols; ++c)
+        {
+            if (this[row, c] == 0)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    //...
+}
+</code></pre></div><p>Next, what it takes to remove the row, in case it is full? We can simply shift all rows above it down and, eventually, fully clear the 0th row.
+Let&rsquo;s implement these primitives:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public class Arr
+{
+    //...
+    private void ShiftRow(int row)
+    {
+        for (int c = 0; c &lt; cols; ++c)
+        {
+            this[row + 1, c] = this[row, c];
+        }
+    }
+
+    private void ClearRow(int row)
+    {
+        for (int c = 0; c &lt; cols; ++c)
+        {
+            this[row, c] = 0;
+        }
+    }
+}
+</code></pre></div><p>The last primitive is just a composition of these two</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">private void RemoveRow(int row)
+{
+    for (int r = row; r &gt; 0; r--)
+    {
+        ShiftRow(r - 1);
+    }
+    ClearRow(0);
+}
+</code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public int RemoveFullRows()
+{
+    int removed = 0;
+    for (int row = rows - 1; row &gt; 0; row--)
+    {
+        if (IsRowFull(row))
+        {
+            RemoveRow(row);
+            row++; // need to check the row again
+            removed++;
+        }
+    }
+
+    return removed;
+}
+</code></pre></div><p>We are returning the number of rows actually removed.</p>
+<p>Everything is ready to hook this code into the <code>Model.cs</code>. Modify the <code>Down</code> method so it removes the full rows once it is not able to move the piece down. Like this</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public void Down()
+{
+    var clone = board.Cloned;
+    clone.Remove(curPiece, curRow, curCol);
+    if (clone.CanPlace(curPiece, curRow + 1, curCol))
+    {
+        curRow++;
+        clone.Place(curPiece, curRow, curCol);
+        board = clone;
+    }
+    else
+    {
+        dropped();
+        board.RemoveFullRows();
+        Spawn();
+    }
+}
+</code></pre></div><p>If you run the game now, you will notice that the game mechanics is pretty much implemented completely.</p>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://aiki.dev//tags/csharp/">csharp</a>&nbsp;
+            
+              <a href="https://aiki.dev//tags/monogame/">monogame</a>&nbsp;
+            
+              <a href="https://aiki.dev//tags/tutorial/">tutorial</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2faiki.dev%2fposts%2fcsharp-game-sat%2f&amp;text=Make%20a%20game%20with%20C%23%20in%20a%20Weekend%3a%20Saturday&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2faiki.dev%2fposts%2fcsharp-game-sat%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fcsharp-game-sat%2f&amp;title=Make%20a%20game%20with%20C%23%20in%20a%20Weekend%3a%20Saturday" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2faiki.dev%2fposts%2fcsharp-game-sat%2f&amp;title=Make%20a%20game%20with%20C%23%20in%20a%20Weekend%3a%20Saturday" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fcsharp-game-sat%2f&amp;title=Make%20a%20game%20with%20C%23%20in%20a%20Weekend%3a%20Saturday" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2faiki.dev%2fposts%2fcsharp-game-sat%2f&amp;description=Make%20a%20game%20with%20C%23%20in%20a%20Weekend%3a%20Saturday" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+            
+          
+
+          
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/posts/csharp-game-sun/">Make a game with C# in a Weekend: Sunday</a></li>
+                
+                    <li><a href="/posts/csharp-rsa/">Asymmetric encryption in C# for fun and profit</a></li>
+                
+                    <li><a href="/posts/csharp-grpc-interop/">No-nonsense gRPC guide for the C# developers, Bonus: Interoperability</a></li>
+                
+                    <li><a href="/posts/csharp-grpc-streaming/">No-nonsense gRPC guide for the C# developers, Part Three: Streaming</a></li>
+                
+                    <li><a href="/posts/csharp-grpc-secure/">No-nonsense gRPC guide for the C# developers, Part Two: Secure service</a></li>
+                
+              </ul>
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://aiki.dev/posts/csharp-rsa/" data-toggle="tooltip" data-placement="top" title="Asymmetric encryption in C# for fun and profit">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://aiki.dev/posts/csharp-game-sun/" data-toggle="tooltip" data-placement="top" title="Make a game with C# in a Weekend: Sunday">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+          
+          <div class="disqus-comments">                  
+            <button id="show-comments" class="btn btn-default" type="button">Show <span class="disqus-comment-count" data-disqus-url="https://aiki.dev/posts/csharp-game-sat">comments</span></button>
+            <div id="disqus_thread"></div>
+
+            <script type="text/javascript">
+              var disqus_config = function () {
+              this.page.url = 'https:\/\/aiki.dev\/posts\/csharp-game-sat';
+            };
+
+          </script>
+          </div>
+          
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="https://github.com/lechgu" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="aiki.dev">Lech Gudalewicz</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2021
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://aiki.dev/">aiki.dev</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.88.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://aiki.dev/js/main.js"></script>
+<script src="https://aiki.dev/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://aiki.dev/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+$(function(){
+  $('#show-comments').on('click', function(){
+    var disqus_shortname = 'aiki-dev';
+      
+    (function() {
+      var disqus = document.createElement('script'); 
+      disqus.type = 'text/javascript'; 
+      disqus.async = true;
+      disqus.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(disqus);
+    })();
+      
+    $(this).hide(); 
+    });
+  });
+      
+</script>
+<script id="dsq-count-scr" src="//aiki-dev.disqus.com/count.js" async></script>
+
+
+
+
+    
+  </body>
+</html>
+

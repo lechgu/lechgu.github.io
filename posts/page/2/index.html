@@ -39,7 +39,7 @@
   <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
   <meta name="twitter:card" content="summary" />
   <link href='https://aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.83.1" />
+  <meta name="generator" content="Hugo 0.88.1" />
   <link rel="alternate" href="https://aiki.dev/index.xml" type="application/rss+xml" title="aiki.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://aiki.dev/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -203,8 +203,8 @@ if (!doNotTrack) {
         <div class="posts-list">
           
             <article class="post-preview">
-    <a href="https://aiki.dev/posts/containerize-backend/">
-        <h2 class="post-title">Pixies, part 9: Let&#39;s containerize the Backend</h2>
+    <a href="https://aiki.dev/posts/csharp-grpc-secure/">
+        <h2 class="post-title">No-nonsense gRPC guide for the C# developers, Part Two: Secure service</h2>
         
         
         
@@ -217,10 +217,10 @@ if (!doNotTrack) {
   <i class="fas fa-calendar"></i>&nbsp;
   
   
-    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;6&nbsp;minutes
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;8&nbsp;minutes
   
   
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;1163&nbsp;words
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;1585&nbsp;words
   
   
     
@@ -234,9 +234,113 @@ if (!doNotTrack) {
     </p>
     <div class="post-entry">
         
-        Remember when we create a neat compact Docker image for the frontend? Now we are going to do the same thing for the backend.
-Allowed Hosts Before we start working on the Dockerfile for the backend, we need to take care of one thing. Because we are not going to run the backend app in the Docker in the DEBUG mode, Django will require that the ALLOWED_HOSTS setting is set. This setting is a security measure which prevents certain types of the security attacks.
-        <a href="https://aiki.dev/posts/containerize-backend/" class="post-read-more">[Read More]</a>
+        source code
+In the previous part, we created a Calculator micro-service which happily performs uncomplicated integer arithmetic. We were able to call that service locally and, hopefully, from the remote computer. The problem though is that our network exchanges are completely unprotected so anyone, with appropriate knowledge and tools, can see what numbers we are trying to multiply. Moreover, the client even cannot be sure that it receives the responses from the valid service, not the one which might be controlled by hackers.
+        <a href="https://aiki.dev/posts/csharp-grpc-secure/" class="post-read-more">[Read More]</a>
+        
+    </div>
+
+    
+    <div class="blog-tags">
+        
+        <a href="https://aiki.dev//tags/csharp/">csharp</a>&nbsp;
+        
+        <a href="https://aiki.dev//tags/grpc/">grpc</a>&nbsp;
+        
+        <a href="https://aiki.dev//tags/tutorial/">tutorial</a>&nbsp;
+        
+    </div>
+    
+
+</article>
+          
+            <article class="post-preview">
+    <a href="https://aiki.dev/posts/csharp-grpc-basic/">
+        <h2 class="post-title">No-nonsense gRPC guide for the C# developers, Part One: Basic Service</h2>
+        
+        
+        
+    </a>
+
+    <p class="post-meta">
+        <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;11&nbsp;minutes
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;2296&nbsp;words
+  
+  
+    
+      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Lech Gudalewicz
+    
+  
+  
+</span>
+
+
+    </p>
+    <div class="post-entry">
+        
+        source code
+What are we going to talk about? gRPC is a high performance program-to-program communication framework highly suitable to efficiently connect services and, as such, to serve as the foundation for the micro-service architecture. I will not to bore you with the marketing speech, go for the details to the official site
+A few disclaimers:  gRPC, at the moment, does not have the best in-browser support so, if your app lives in the html/javascript universe, the traditional Rest/JSON web services might be a better choice.
+        <a href="https://aiki.dev/posts/csharp-grpc-basic/" class="post-read-more">[Read More]</a>
+        
+    </div>
+
+    
+    <div class="blog-tags">
+        
+        <a href="https://aiki.dev//tags/csharp/">csharp</a>&nbsp;
+        
+        <a href="https://aiki.dev//tags/grpc/">grpc</a>&nbsp;
+        
+        <a href="https://aiki.dev//tags/tutorial/">tutorial</a>&nbsp;
+        
+    </div>
+    
+
+</article>
+          
+            <article class="post-preview">
+    <a href="https://aiki.dev/posts/micro-django/">
+        <h2 class="post-title">Micro Django</h2>
+        
+        
+        
+    </a>
+
+    <p class="post-meta">
+        <span class="post-meta">
+  
+  
+  <i class="fas fa-calendar"></i>&nbsp;
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;8&nbsp;minutes
+  
+  
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;1559&nbsp;words
+  
+  
+    
+      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Lech Gudalewicz
+    
+  
+  
+</span>
+
+
+    </p>
+    <div class="post-entry">
+        
+        What is this all about? The Python ecosystem has a few Web application frameworks, most prominent being Flask and Django. They both enjoy their popularity in the community; The general consensus is, Hey, use Flask for the small projects and Django for the large projects. It is true though that with Flask, after the project reaches certain size and complexity, it becomes harder and harder to manage and compose together all 3rd party extensions (which may or may not work) to achieve the desired functionality.
+        <a href="https://aiki.dev/posts/micro-django/" class="post-read-more">[Read More]</a>
         
     </div>
 
@@ -244,12 +348,10 @@ Allowed Hosts Before we start working on the Dockerfile for the backend, we need
     <div class="blog-tags">
         
         <a href="https://aiki.dev//tags/tutorial/">tutorial</a>&nbsp;
-        
-        <a href="https://aiki.dev//tags/docker/">docker</a>&nbsp;
         
         <a href="https://aiki.dev//tags/django/">django</a>&nbsp;
         
-        <a href="https://aiki.dev//tags/drf/">drf</a>&nbsp;
+        <a href="https://aiki.dev//tags/python/">python</a>&nbsp;
         
     </div>
     
@@ -257,8 +359,8 @@ Allowed Hosts Before we start working on the Dockerfile for the backend, we need
 </article>
           
             <article class="post-preview">
-    <a href="https://aiki.dev/posts/rest-service/">
-        <h2 class="post-title">Pixies, part 8: The Rest Service</h2>
+    <a href="https://aiki.dev/posts/csharp-docker/">
+        <h2 class="post-title">Docker for the C# developers Crash Course</h2>
         
         
         
@@ -271,10 +373,10 @@ Allowed Hosts Before we start working on the Dockerfile for the backend, we need
   <i class="fas fa-calendar"></i>&nbsp;
   
   
-    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;4&nbsp;minutes
+    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;12&nbsp;minutes
   
   
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;660&nbsp;words
+    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;2547&nbsp;words
   
   
     
@@ -288,426 +390,18 @@ Allowed Hosts Before we start working on the Dockerfile for the backend, we need
     </p>
     <div class="post-entry">
         
-        Django Rest Framework Once we have the data in our backend, we want to expose it to be consumed by our React frontend. Django, per se, is a traditional Web framework, it produces the html files, not json documents. There is this amazing library, called Django Rest Framework (DRF), which allows to easily add the ability to add the Rest API to the Django application. At the moment, DRF is not technically a part of Django and must be installed separately
-        <a href="https://aiki.dev/posts/rest-service/" class="post-read-more">[Read More]</a>
+        What are we going to learn? The goal is to help you achieve practical, working knowledge of Docker so you can build containerized micro-services in C# with relative ease. We are going to use .Net core as it is cross-platform and well supported on Linux-based Docker containers. Having said that, the Windows-based Docker containers exist too, but the haven&rsquo;t got much traction.
+Source code The source code is available on github
+        <a href="https://aiki.dev/posts/csharp-docker/" class="post-read-more">[Read More]</a>
         
     </div>
 
     
     <div class="blog-tags">
         
-        <a href="https://aiki.dev//tags/tutorial/">tutorial</a>&nbsp;
+        <a href="https://aiki.dev//tags/csharp/">csharp</a>&nbsp;
         
-        <a href="https://aiki.dev//tags/django/">Django</a>&nbsp;
-        
-        <a href="https://aiki.dev//tags/drf/">DRF</a>&nbsp;
-        
-    </div>
-    
-
-</article>
-          
-            <article class="post-preview">
-    <a href="https://aiki.dev/posts/django-apps/">
-        <h2 class="post-title">Pixies, part 7: Django Apps</h2>
-        
-        
-        
-    </a>
-
-    <p class="post-meta">
-        <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;5&nbsp;minutes
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;863&nbsp;words
-  
-  
-    
-      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Lech Gudalewicz
-    
-  
-  
-</span>
-
-
-    </p>
-    <div class="post-entry">
-        
-        Photos app Django encourages to encapsulate the related things into so called apps. It provides several built-in, like an admin app we&rsquo;ve already seen. And, of course you create your own. We will create one app called &lsquo;photos&rsquo;. Create a new directory inside the backend/pixies directory and add an empt file __init__.py which, if Python is not your forte, turns the directory into a module
-mkdir pixies/photos touch pixies/photos/__init__.py The next step is to declare that this is Django app.
-        <a href="https://aiki.dev/posts/django-apps/" class="post-read-more">[Read More]</a>
-        
-    </div>
-
-    
-    <div class="blog-tags">
-        
-        <a href="https://aiki.dev//tags/tutorial/">tutorial</a>&nbsp;
-        
-        <a href="https://aiki.dev//tags/django/">Django</a>&nbsp;
-        
-    </div>
-    
-
-</article>
-          
-            <article class="post-preview">
-    <a href="https://aiki.dev/posts/lean-django/">
-        <h2 class="post-title">Pixies, part 6: Lean Django</h2>
-        
-        
-        
-    </a>
-
-    <p class="post-meta">
-        <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;6&nbsp;minutes
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;1208&nbsp;words
-  
-  
-    
-      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Lech Gudalewicz
-    
-  
-  
-</span>
-
-
-    </p>
-    <div class="post-entry">
-        
-        The approach Django is a relatively large framework. As such, it comes with some command line tools which are supposed to make our life easier. Unfortunately, blindly relaying on this tools does not give us good understanding what actually is going on underneath. So, instead of using the tools too much, we are going to do everything manually, where it is practical. Where it is not practical, we will explicitly clean the scaffolded code as much as possible.
-        <a href="https://aiki.dev/posts/lean-django/" class="post-read-more">[Read More]</a>
-        
-    </div>
-
-    
-    <div class="blog-tags">
-        
-        <a href="https://aiki.dev//tags/tutorial/">tutorial</a>&nbsp;
-        
-        <a href="https://aiki.dev//tags/django/">Django</a>&nbsp;
-        
-    </div>
-    
-
-</article>
-          
-            <article class="post-preview">
-    <a href="https://aiki.dev/posts/easy-postgres-setup/">
-        <h2 class="post-title">Pixies, part 5: Easy PostgreSQL setup</h2>
-        
-        
-        
-    </a>
-
-    <p class="post-meta">
-        <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;4&nbsp;minutes
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;793&nbsp;words
-  
-  
-    
-      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Lech Gudalewicz
-    
-  
-  
-</span>
-
-
-    </p>
-    <div class="post-entry">
-        
-        Why Postgres? As our backend is going to be Django-based, we will need a relational database to store the data. Most Django tutorials assume sqlite which is a simple, one-file database which works just fine for the tutorials. The problem, however, begins when you want to deploy your application to production: because of its limitations, it might not be such a good idea. PostgreSQL (a.k.a. Postgres) is a production grade database, with a widespread use.
-        <a href="https://aiki.dev/posts/easy-postgres-setup/" class="post-read-more">[Read More]</a>
-        
-    </div>
-
-    
-    <div class="blog-tags">
-        
-        <a href="https://aiki.dev//tags/tutorial/">tutorial</a>&nbsp;
-        
-        <a href="https://aiki.dev//tags/docker/">docker</a>&nbsp;
-        
-        <a href="https://aiki.dev//tags/postgres/">Postgres</a>&nbsp;
-        
-    </div>
-    
-
-</article>
-          
-            <article class="post-preview">
-    <a href="https://aiki.dev/posts/a-bit-of-react/">
-        <h2 class="post-title">Pixies, part 4: A Bit of React</h2>
-        
-        
-        
-    </a>
-
-    <p class="post-meta">
-        <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;5&nbsp;minutes
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;912&nbsp;words
-  
-  
-    
-      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Lech Gudalewicz
-    
-  
-  
-</span>
-
-
-    </p>
-    <div class="post-entry">
-        
-        ES6 ES6(ECMAScript 6) is the latest standard of the Javascript language. It has much cleaned, modernized syntax. It is less confusing from the people coming from other environments and, generally, a pleasure to work with. There is on problem though If you write your app with ES6, there is no guarantee that it will work on all (especially old) browsers. The community came up with Babel, a javascript &ldquo;compiler&rdquo; which takes modern Javascript, like ES6 and produces the classical javascript which should be consumed by all, even old browser.
-        <a href="https://aiki.dev/posts/a-bit-of-react/" class="post-read-more">[Read More]</a>
-        
-    </div>
-
-    
-    <div class="blog-tags">
-        
-        <a href="https://aiki.dev//tags/tutorial/">tutorial</a>&nbsp;
-        
-        <a href="https://aiki.dev//tags/javascript/">javascript</a>&nbsp;
-        
-        <a href="https://aiki.dev//tags/webpack/">webpack</a>&nbsp;
-        
-        <a href="https://aiki.dev//tags/react/">react</a>&nbsp;
-        
-    </div>
-    
-
-</article>
-          
-            <article class="post-preview">
-    <a href="https://aiki.dev/posts/go-live/">
-        <h2 class="post-title">Pixies, part 3: Go Live</h2>
-        
-        
-        
-    </a>
-
-    <p class="post-meta">
-        <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;6&nbsp;minutes
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;1069&nbsp;words
-  
-  
-    
-      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Lech Gudalewicz
-    
-  
-  
-</span>
-
-
-    </p>
-    <div class="post-entry">
-        
-        Source control Now it is a good time to add everything to the git repository if you haven&rsquo;t done that yet. Create a .gitignore file which contains the stuff you don&rsquo;t want to check in. Her&rsquo;s mine:
-node_modules build .vscode Now check in your project. You know the drill:
-git init git add -A git commit -m &#34;initial commit&#34; Heroku In this module we are going to deploy our frontend application so the whole world can admire our doing-nothing application.
-        <a href="https://aiki.dev/posts/go-live/" class="post-read-more">[Read More]</a>
-        
-    </div>
-
-    
-    <div class="blog-tags">
-        
-        <a href="https://aiki.dev//tags/tutorial/">tutorial</a>&nbsp;
-        
-        <a href="https://aiki.dev//tags/docker/">docker</a>&nbsp;
-        
-        <a href="https://aiki.dev//tags/heroku/">heroku</a>&nbsp;
-        
-    </div>
-    
-
-</article>
-          
-            <article class="post-preview">
-    <a href="https://aiki.dev/posts/what-you-wanted-to-know-about-docker/">
-        <h2 class="post-title">Pixies, part 2: What you wanted to know about Docker but were afraid to ask</h2>
-        
-        
-        
-    </a>
-
-    <p class="post-meta">
-        <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;6&nbsp;minutes
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;1234&nbsp;words
-  
-  
-    
-      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Lech Gudalewicz
-    
-  
-  
-</span>
-
-
-    </p>
-    <div class="post-entry">
-        
-        Docker in a nutshell Docker allows you to create self-contained turnkey images which contain everything one needs to run your application. These can be copied, shared, uploaded and deleted, when not needed anymore. When I need to run PostgreSQL or, say, Redis on my box I do not bother anymore installing this software and pollute my hard-drive. I just pull corresponding image and run it on my box. When I don&rsquo;t need the image anymore I simply delete it and my hard-disk is back to the state it was before.
-        <a href="https://aiki.dev/posts/what-you-wanted-to-know-about-docker/" class="post-read-more">[Read More]</a>
-        
-    </div>
-
-    
-    <div class="blog-tags">
-        
-        <a href="https://aiki.dev//tags/tutorial/">tutorial</a>&nbsp;
-        
-        <a href="https://aiki.dev//tags/docker/">docker</a>&nbsp;
-        
-        <a href="https://aiki.dev//tags/javascript/">javascript</a>&nbsp;
-        
-        <a href="https://aiki.dev//tags/nginx/">nginx</a>&nbsp;
-        
-    </div>
-    
-
-</article>
-          
-            <article class="post-preview">
-    <a href="https://aiki.dev/posts/just-enough-webpack/">
-        <h2 class="post-title">Pixies, part 1: Just Enough Webpack</h2>
-        
-        
-        
-    </a>
-
-    <p class="post-meta">
-        <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;10&nbsp;minutes
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;2044&nbsp;words
-  
-  
-    
-      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Lech Gudalewicz
-    
-  
-  
-</span>
-
-
-    </p>
-    <div class="post-entry">
-        
-        What is this Webpack thing, anyway? Your typical front-end project is made of a bunch of html, css and javascript files. Also, your javascript code undoubtedly calls into various third party libraries to accomplish its purpose, these, in turn, have their own dependencies and so on. You provide necessary &lt;script&gt; links in your html files, carefully making sure that these are included in the right order, so the dependencies are satisfied.
-        <a href="https://aiki.dev/posts/just-enough-webpack/" class="post-read-more">[Read More]</a>
-        
-    </div>
-
-    
-    <div class="blog-tags">
-        
-        <a href="https://aiki.dev//tags/tutorial/">tutorial</a>&nbsp;
-        
-        <a href="https://aiki.dev//tags/javascript/">javascript</a>&nbsp;
-        
-        <a href="https://aiki.dev//tags/webpack/">webpack</a>&nbsp;
-        
-    </div>
-    
-
-</article>
-          
-            <article class="post-preview">
-    <a href="https://aiki.dev/posts/django-react-docker-intro/">
-        <h2 class="post-title">Pixies, part 0: Build an app with Django, React and Docker: Introduction</h2>
-        
-        
-        
-    </a>
-
-    <p class="post-meta">
-        <span class="post-meta">
-  
-  
-  <i class="fas fa-calendar"></i>&nbsp;
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;4&nbsp;minutes
-  
-  
-    &nbsp;|&nbsp;<i class="fas fa-book"></i>&nbsp;782&nbsp;words
-  
-  
-    
-      &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Lech Gudalewicz
-    
-  
-  
-</span>
-
-
-    </p>
-    <div class="post-entry">
-        
-        Why this tutorial? I assume you are competent enough software developer. Maybe at your work you are involved with building some enterprise-y Java Spring application or, maybe Asp.Net application or something equally boring. Obviously you are not living in vacuum, so you are hearing all those terms Docker, React, Single Page Application, 12 factor methodology and so on. They sound cool but, in part, a little frightening. Your skills seem kind of obsolete.
-        <a href="https://aiki.dev/posts/django-react-docker-intro/" class="post-read-more">[Read More]</a>
-        
-    </div>
-
-    
-    <div class="blog-tags">
-        
-        <a href="https://aiki.dev//tags/tutorial/">tutorial</a>&nbsp;
+        <a href="https://aiki.dev//tags/docker/">Docker</a>&nbsp;
         
     </div>
     
@@ -774,7 +468,7 @@ git init git add -A git commit -m &#34;initial commit&#34; Heroku In this module
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.83.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          <a href="https://gohugo.io">Hugo v0.88.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>

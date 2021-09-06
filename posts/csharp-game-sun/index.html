@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+  <head>
+    
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Make a game with C# in a Weekend: Sunday - aiki.dev</title>
+  <meta name="description" content="source code
+Fonts In our game, we will be wanting to display some text, for example current level and score. The way Monogame deals with assets like fonts, images or sounds is through so called &ldquo;content pipeline&rdquo;. The idea was that optimized binary formats for such assets may be different for different target platforms Monogame supports. This sounds good in theory, the bad news though is that the development of content pipeline tools somewhat lags the development of the actual library.">
+  <meta name="author" content="Lech Gudalewicz"/><script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "aiki.dev",
+    
+    "url": "https:\/\/aiki.dev\/"
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": "",
+  "url": "https:\/\/aiki.dev\/"
+  
+  
+  
+  
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https:\/\/aiki.dev\/",
+          "name": "home"
+        }
+    },{
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https:\/\/aiki.dev\/posts\/csharp-game-sun\/",
+          "name": "Make a game with c# in a weekend sunday"
+        }
+    }]
+}
+</script><script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": {
+    "name" : "Lech Gudalewicz"
+  },
+  "headline": "Make a game with C# in a Weekend: Sunday",
+  "description" : "source code\nFonts In our game, we will be wanting to display some text, for example current level and score. The way Monogame deals with assets like fonts, images or sounds is through so called \u0026ldquo;content pipeline\u0026rdquo;. The idea was that optimized binary formats for such assets may be different for different target platforms Monogame supports. This sounds good in theory, the bad news though is that the development of content pipeline tools somewhat lags the development of the actual library.",
+  "inLanguage" : "en",
+  "wordCount":  1807 ,
+  "datePublished" : "2021-09-06T09:01:23",
+  "dateModified" : "2021-09-06T09:01:23",
+  "image" : "https:\/\/aiki.dev\/images\/logo.png",
+  "keywords" : [ "csharp, monogame, tutorial" ],
+  "mainEntityOfPage" : "https:\/\/aiki.dev\/posts\/csharp-game-sun\/",
+  "publisher" : {
+    "@type": "Organization",
+    "name" : "https:\/\/aiki.dev\/",
+    "logo" : {
+        "@type" : "ImageObject",
+        "url" : "https:\/\/aiki.dev\/images\/logo.png",
+        "height" :  60 ,
+        "width" :  60
+    }
+  }
+}
+</script>
+
+<meta property="og:title" content="Make a game with C# in a Weekend: Sunday" />
+<meta property="og:description" content="source code
+Fonts In our game, we will be wanting to display some text, for example current level and score. The way Monogame deals with assets like fonts, images or sounds is through so called &ldquo;content pipeline&rdquo;. The idea was that optimized binary formats for such assets may be different for different target platforms Monogame supports. This sounds good in theory, the bad news though is that the development of content pipeline tools somewhat lags the development of the actual library.">
+<meta property="og:image" content="https://aiki.dev/images/logo.png" />
+<meta property="og:url" content="https://aiki.dev/posts/csharp-game-sun/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="aiki.dev" />
+
+  <meta name="twitter:title" content="Make a game with C# in a Weekend: Sunday" />
+  <meta name="twitter:description" content="source code
+Fonts In our game, we will be wanting to display some text, for example current level and score. The way Monogame deals with assets like fonts, images or sounds is through so called …">
+  <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
+  <meta name="twitter:card" content="summary" />
+  <link href='https://aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
+  <meta name="generator" content="Hugo 0.88.1" />
+  <link rel="alternate" href="https://aiki.dev/index.xml" type="application/rss+xml" title="aiki.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://aiki.dev/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://aiki.dev/css/highlight.min.css" /><link rel="stylesheet" href="https://aiki.dev/css/codeblock.css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-159944114-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://aiki.dev/">aiki.dev</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Series" href="/series">Series</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+
+        
+
+        
+      </ul>
+    </div>
+
+    
+      <div class="avatar-container">
+        <div class="avatar-img-border">
+          <a title="aiki.dev" href="https://aiki.dev/">
+            <img class="avatar-img" src="https://aiki.dev/images/logo.png" alt="aiki.dev" />
+          </a>
+        </div>
+      </div>
+    
+
+  </div>
+</nav>
+
+
+
+
+    
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+
+  
+  
+  
+
+
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="posts-heading">
+              
+                <h1>Make a game with C# in a Weekend: Sunday</h1>
+              
+              
+                <hr class="small">
+              
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p><a href="https://github.com/lechgu/csharp_game.git">source code</a></p>
+<h3 id="fonts">Fonts</h3>
+<p>In our game, we will be wanting to display some text, for example current level and score.
+The way Monogame deals with assets like fonts, images or sounds is through so called &ldquo;content pipeline&rdquo;. The idea was that optimized binary formats for such assets may be different for different target platforms Monogame supports. This sounds good in theory, the bad news though is that the development of content pipeline tools somewhat lags the development of the actual library. At the time of the writing, the .net 5.0 support for the content pipeline tools is not yet available in the main branch. There are workarounds, but for our game we are not going to use the content pipeline at all, and use nice library called FontStashSharp for our font rendering needs.</p>
+<p>Let&rsquo;s add it to the project</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">dotnet</span> <span class="nx">add</span> <span class="kn">package</span> <span class="nx">FontStashSharp</span><span class="p">.</span><span class="nx">MonoGame</span>
+</code></pre></div><p>Next, we&rsquo;ll need a font. I am going to use <a href="https://www.cufonfonts.com/font/fixedsys-excelsior-301">Fixedsys Excelsior</a>.</p>
+<p>Create the directory</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">mkdir assets
+</code></pre></div><p>and move the file <code>FSEX300.ttf</code> into it. Next, we need to ensure that the contents of the <code>assets</code> directory gets copied upon build, to the target directory. In your projects file, add the following</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">&lt;ItemGroup&gt;
+    &lt;Content Include=&#34;assets/*&#34;&gt;
+      &lt;CopyToOutputDirectory&gt;Always&lt;/CopyToOutputDirectory&gt;
+    &lt;/Content&gt;
+&lt;/ItemGroup&gt;
+</code></pre></div><p>This will do the trick.</p>
+<p>Head over your <code>App</code> class and add a new field</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">private readonly FontSystem fontSystem = new();
+</code></pre></div><p>The <code>FontSystem</code> class resides in the <code>FontStashSharp</code> namespace.
+Monogame app can override the <code>LoadContent</code> method which is the best place to actually load the font into the font system.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">protected override void LoadContent()
+{
+    fontSystem.AddFont(File.ReadAllBytes(&#34;assets/FSEX300.ttf&#34;));
+}
+</code></pre></div><p>make sure you import <code>System.IO</code> to get access to the <code>File</code> class. For now, we are going to use the font of size 18, so add the field and expose it with the property</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">// ...
+// new
+private SpriteFontBase font18;
+public SpriteFontBase Font18
+{
+    get =&gt; font18;
+}
+</code></pre></div><p>Initializing this field is as simple as adding, after the font bytes are loaded</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">protected override void LoadContent()
+{
+    fontSystem.AddFont(File.ReadAllBytes(&#34;assets/FSEX300.ttf&#34;));
+    // new
+    font18 = fontSystem.GetFont(18);
+}
+</code></pre></div><h3 id="levels-and-score">Levels and score</h3>
+<p>To make the game more challenging we&rsquo;ll implement a simple leveling system. Increasing the level will make the pieces fall faster, thus controlling the piece more challenging. The score should depend on how many full lines were completed, by taking the account the current level: higher level - more points.
+in the <code>PlayScene</code> class let&rsquo;s add two fields</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">// new
+int score;
+int level;
+</code></pre></div><p>First things first, we want to display the level and the score on the screen.
+At the end of your <code>Render</code> method, add these lines:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">var font = App.Instance.Font18;
+font.DrawText(
+    spriteBatch,
+    $&#34;Level: {level + 1}&#34;,
+    new Vector2(16, 16),
+    Color.White
+    );
+font.DrawText(
+    spriteBatch,
+    $&#34;Score: {score}&#34;,
+    new Vector2(16, 32),
+    Color.White
+    );
+</code></pre></div><p>Notice that the level is translated from &lsquo;programese&rsquo; to the human language.
+The above snippet displays the level and the score at the left upper corner. Tweak the position to your liking.</p>
+<h3 id="increasing-the-level">Increasing the level</h3>
+<p>we are going to increase the level every 20 seconds and shorten the delay 1.1 times.
+Add these constants:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public const double LEVEL_SECS = 20;
+public const double SPEED_BUMP = 1.1;
+</code></pre></div><p>We need to track how much time the player has spent in the level.
+Add this field to the <code>PlayScene</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">private double? timeInLevel;
+</code></pre></div><p>At the end of the <code>Update</code> function implement the logic which increases the level once it player stays in level longer than <code>LEVEL_SECS</code>. It could be as simple as</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public void Update(double dt)
+{
+    // ...
+    // new
+    if (!timeInLevel.HasValue)
+    {
+        timeInLevel = dt;
+    }
+    else
+    {
+        timeInLevel += dt;
+    }
+    if (timeInLevel &gt; LEVEL_SECS)
+    {
+        timeInLevel = null;
+        level++;
+        baseDelay /= SPEED_BUMP;
+    }
+}
+</code></pre></div><h3 id="updating-the-score">Updating the score</h3>
+<p>We are going to update the score once the full line/lines are removed. Since the &lsquo;Engine&rsquo; takes care of that we need to communicate these events up to the &lsquo;PlayScene&rsquo;.
+Here&rsquo;s one way of doing this: In the <code>Engine</code> class add</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">private Action&lt;int&gt; linesRemoved = (rows) =&gt; { };
+public Action&lt;int&gt; LinesRemoved
+{
+    set =&gt; linesRemoved = value;
+}
+</code></pre></div><p>Make sure that you are calling this action once the lines are removed, in the <code>Down</code> method, replace the line</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">board.RemoveFullRows();
+</code></pre></div><p>with the following</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">var rows = board.RemoveFullRows();
+linesRemoved(rows);
+</code></pre></div><p>In the <code>PlayScene</code> add the following helper method</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">private void UpdateScore(int removed)
+{
+    var scoreMultipliers = new[] { 0, 40, 100, 300, 1200 };
+    score += scoreMultipliers[removed] *  (level + 1);
+
+}
+</code></pre></div><p>Note that the score increase depends on the number of lines removed and the current level.
+Make sure this is called when the lines are removed. At the end of the <code>Reset</code> method</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">private void Reset()
+{
+    // ...
+    // new
+    engine.LinesRemoved = UpdateScore;
+    engine.Down();
+}
+</code></pre></div><h3 id="scenes">Scenes</h3>
+<p>The game developers often call separate game screens as &ldquo;scenes&rdquo;. For now, everything is happening in the <code>PlayScene</code>, but it is not really hard to add another scene which handles, say, game over screen. We&rsquo;ll also need a class to manage scenes. Create a new file <code>ScreenManager</code> with the code</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">namespace Blocks
+{
+    public class SceneManager
+    {
+
+    }
+}
+</code></pre></div><p>We will add content to it shortly. Let&rsquo;s abstract the scene into an interface. The file <code>IScene.cs</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">using Microsoft.Xna.Framework.Graphics;
+
+namespace Blocks
+{
+    public interface IScene
+    {
+        public void Render(SpriteBatch spriteBatch);
+        public void Update(double dt);
+        public void Enter(SceneManager manager, object state);
+        public void Leave();
+    }
+}
+</code></pre></div><p>The scene will know how to <code>Render</code> and <code>Update</code> itself. The <code>SceneManager</code> is going to maintain a &ldquo;current scene&rdquo; and allow to switch between them.</p>
+<p>Implementation is pretty straightforward</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">using System.Collections.Generic;
+
+namespace Blocks
+{
+    public class SceneManager
+    {
+        private readonly Dictionary&lt;string, IScene&gt; scenes;
+        private IScene currentScene;
+
+        public SceneManager(Dictionary&lt;string, IScene&gt; scenes, string initial)
+        {
+            this.scenes = scenes;
+            currentScene = this.scenes[initial];
+            currentScene.Enter(this, null);
+        }
+
+        public void SwitchScene(string newScene, object state)
+        {
+            currentScene.Leave();
+            currentScene = scenes[newScene];
+            currentScene.Enter(this, state);
+        }
+    }
+
+}
+</code></pre></div><p>The <code>state</code> parameter int the <code>SwitchScene</code> allows passing information between the scenes.</p>
+<p>For simplicity we&rsquo;ll allow refer to scenes by name, therefore <code>SceneManager</code> holds a dictionary of scenes with strings as keys.
+For the <code>Render</code> and <code>Update</code> logic, the <code>SceneManager</code> should delegate to the current scene. Add this</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public void Render(SpriteBatch spriteBatch)
+{
+    currentScene.Render(spriteBatch);
+}
+
+public void Update(double dt)
+{
+    currentScene.Update(dt);
+}
+
+</code></pre></div><h3 id="wiring-up-the-scenemanager">Wiring up the SceneManager</h3>
+<p>Head to the <code>App</code> class and replace the line</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">private readonly PlayScene scene = new();
+</code></pre></div><p>with</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">private readonly SceneManager sceneManager;
+</code></pre></div><p>Create this object in the constructor</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public App()
+{
+    // new
+    sceneManager = new SceneManager(
+        new Dictionary&lt;string, IScene&gt;{
+            {&#34;play&#34;, new PlayScene()}
+        }, &#34;play&#34;
+    );
+    graphics = new GraphicsDeviceManager(this);
+    instance = this;
+}
+</code></pre></div><p>Replace the calls to &lsquo;Render<code>and</code>Update` to refer to the sceneManager instead of the single scene.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">protected override void Draw(GameTime gameTime)
+{
+
+    // ...
+    // replace
+    sceneManager.Render(spriteBatch);
+    // ...
+}
+
+protected override void Update(GameTime gameTime)
+{
+    // ...
+    // replace
+    sceneManager.Update(dt);
+    // ...
+    }
+}
+</code></pre></div><p>Run the game. It should work as before. If it doesn&rsquo;t, retrace your steps and find what you missed.</p>
+<p>So what&rsquo;s the point?, you may ask. If the game works as before, why we went through the trouble to creating the <code>SceneManager</code> and such? With the single scene, the benefit indeed is negligible, but once you have multiple scenes, managing and switching between them becomes much easier.</p>
+<h3 id="gameoverscene">GameOverScene</h3>
+<p>Once the <code>PlayScene</code> detects that the game is done, we want to switch to a new scene which displays the game summary (score and level reached) and ask if the player wants to play again.
+To share the summary let&rsquo;s create a new file <code>GameSummary.cs</code> with the following</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">namespace Blocks
+{
+    public record GameSummary(int Score, int Level);
+}
+</code></pre></div><p>Create the new class <code>GameOverScene</code> which implements <code>IScene</code>. Let&rsquo;s start with the placeholder</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">using Microsoft.Xna.Framework.Graphics;
+
+namespace Blocks
+{
+    class GameOverScene : IScene
+    {
+        public void Enter(SceneManager manager, object state)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Leave()
+        {
+        }
+
+        public void Render(SpriteBatch spriteBatch)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Update(double dt)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+}
+</code></pre></div><p>We&rsquo;ll remember the <code>SceneManager</code> and the <code>state</code> passed in the <code>Enter</code> call.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">class GameOveScene : IScene
+{
+    // new
+    private SceneManager sceneManager;
+    private GameSummary gameSummary;
+    // ...
+    // change
+    public void Enter(SceneManager manager, object state)
+    {
+        sceneManager = manager;
+        gameSummary = state as GameSummary;
+    }
+}
+</code></pre></div><p>We&rsquo;ll also take advantage of the <code>InputManager</code> class which we have already used in the <code>PlayScene</code>. Add the field</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">private readonly InputManager inputManager = new();
+</code></pre></div><p>Once the user hits Enter in the <code>GameOverScene</code>, we want to start a new game, to exit the app, user would press Escape. Wire this logic at the end of the <code>Enter</code> implementation</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public void Enter(SceneManager manager, object state)
+{
+    sceneManager = manager;
+    gameSummary = state as GameSummary;
+    // new
+    inputManager.Handle(Keys.Enter, () =&gt;
+    {
+        sceneManager.SwitchScene(&#34;play&#34;, null);
+    });
+    inputManager.Handle(Keys.Escape, () =&gt;
+    {
+        App.Instance.Exit();
+    });
+}
+</code></pre></div><p>Here, we don&rsquo;t want to pass anything back to the <code>PlayScene</code>, therefore the <code>state</code> argument value is null;</p>
+<p>And, as you may recall, in order for the <code>InputManager</code> to work, its <code>Update</code> has to be called.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public void Update(double dt)
+{
+    inputManager.Update(dt);
+}
+</code></pre></div><p>In order to display the info screen, implement <code>Render</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public void Render(SpriteBatch spriteBatch)
+{
+    App.Instance.Font18.DrawText(
+        spriteBatch,
+        &#34;GAME OVER&#34;,
+        new Vector2(128, 100),
+        Color.White
+    );
+    App.Instance.Font18.DrawText(
+        spriteBatch,
+        $&#34;Final Level: {gameSummary.Level + 1}&#34;,
+        new Vector2(128, 132),
+        Color.White
+    );
+    App.Instance.Font18.DrawText(
+        spriteBatch,
+        $&#34;Final score: {gameSummary.Score}&#34;,
+        new Vector2(128, 148),
+        Color.White
+    );
+    App.Instance.Font18.DrawText(
+        spriteBatch,
+        &#34;[enter] to play again&#34;,
+        new Vector2(128, 164),
+        Color.White
+    );
+    App.Instance.Font18.DrawText(
+        spriteBatch,
+        &#34;[escape] to exit&#34;,
+        new Vector2(128, 180),
+        Color.White
+    );
+}
+</code></pre></div><p>Nothing fancy. Feel free to tweak to make it look better.</p>
+<h3 id="wiring-up-the-gameoverscene">Wiring up the GameOverScene</h3>
+<p>When the game is over? The simplest way to think about it is when the <code>Engine</code> tries to <code>Spawn</code> a new piece and there is no place to put it (or, more, precisely, one cell down), that is the game over condition.
+Replace the <code>Spawn</code> with</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public void Spawn()
+{
+    int which = rnd.Next(PIECES.Length);
+    curCol = 4;
+    curRow = 0;
+    curPiece = PIECES[which].Cloned;
+    if (!board.CanPlace(curPiece, curRow + 1, curCol))
+    {
+        gameOver();
+    }
+}
+</code></pre></div><p>The last thing left to do is to switch to the <code>GameOverScene</code> once the game is actually over.
+Head back to the <code>PlayScene</code> and add make it remember the <code>SceneManager</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public class PlayScene : IScene
+{
+    // ...
+    // new
+    private SceneManager sceneManager;
+    // ...
+    public void Enter(SceneManager manager, object _)
+    {
+        // new
+        sceneManager = manager;
+        score = 0;
+        level = 0;
+        Reset();
+    }
+}
+</code></pre></div><p>Switch handling the game over condition in the <code>Reset</code> method to this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">private void Reset()
+{
+    // ...
+    // change
+    engine.GameOver = () =&gt;
+    {
+        sceneManager.SwitchScene(&#34;gameOver&#34;, new GameSummary(score, level));
+    };
+    // ...
+}
+</code></pre></div><p>The last thing is to add the <code>GameOverScene</code> to the dictionary of available scenes.
+In the <code>App</code> constructor make the following change</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public App()
+        {
+            sceneManager = new SceneManager(
+                // changed
+                new Dictionary&lt;string, IScene&gt;{
+                    {&#34;play&#34;, new PlayScene()},
+                    {&#34;gameOver&#34;, new GameOverScene()}
+                }, &#34;play&#34;
+            );
+            // ...
+        }
+</code></pre></div><p>You can run the game now. Everything should work as expected.</p>
+<h3 id="summary">Summary</h3>
+<p>Here you go. We implemented a cross-platform game in C# from scratch to finish using C#.</p>
+
+
+        
+          <div class="blog-tags">
+            
+              <a href="https://aiki.dev//tags/csharp/">csharp</a>&nbsp;
+            
+              <a href="https://aiki.dev//tags/monogame/">monogame</a>&nbsp;
+            
+              <a href="https://aiki.dev//tags/tutorial/">tutorial</a>&nbsp;
+            
+          </div>
+        
+
+        
+            <hr/>
+            <section id="social-share">
+              <div class="list-inline footer-links">
+                
+
+<div class="share-box" aria-hidden="true">
+    <ul class="share">
+      
+      <li>
+        <a href="//twitter.com/share?url=https%3a%2f%2faiki.dev%2fposts%2fcsharp-game-sun%2f&amp;text=Make%20a%20game%20with%20C%23%20in%20a%20Weekend%3a%20Sunday&amp;via=" target="_blank" title="Share on Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2faiki.dev%2fposts%2fcsharp-game-sun%2f" target="_blank" title="Share on Facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//reddit.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fcsharp-game-sun%2f&amp;title=Make%20a%20game%20with%20C%23%20in%20a%20Weekend%3a%20Sunday" target="_blank" title="Share on Reddit">
+          <i class="fab fa-reddit"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2faiki.dev%2fposts%2fcsharp-game-sun%2f&amp;title=Make%20a%20game%20with%20C%23%20in%20a%20Weekend%3a%20Sunday" target="_blank" title="Share on LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.stumbleupon.com/submit?url=https%3a%2f%2faiki.dev%2fposts%2fcsharp-game-sun%2f&amp;title=Make%20a%20game%20with%20C%23%20in%20a%20Weekend%3a%20Sunday" target="_blank" title="Share on StumbleUpon">
+          <i class="fab fa-stumbleupon"></i>
+        </a>
+      </li>
+  
+      
+      <li>
+        <a href="//www.pinterest.com/pin/create/button/?url=https%3a%2f%2faiki.dev%2fposts%2fcsharp-game-sun%2f&amp;description=Make%20a%20game%20with%20C%23%20in%20a%20Weekend%3a%20Sunday" target="_blank" title="Share on Pinterest">
+          <i class="fab fa-pinterest"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
+
+              </div>
+            </section>
+        
+
+        
+          
+            
+          
+
+          
+                  <h4 class="see-also">See also</h4>
+                  <ul>
+                
+                
+                    <li><a href="/posts/csharp-game-sat/">Make a game with C# in a Weekend: Saturday</a></li>
+                
+                    <li><a href="/posts/csharp-rsa/">Asymmetric encryption in C# for fun and profit</a></li>
+                
+                    <li><a href="/posts/csharp-grpc-interop/">No-nonsense gRPC guide for the C# developers, Bonus: Interoperability</a></li>
+                
+                    <li><a href="/posts/csharp-grpc-streaming/">No-nonsense gRPC guide for the C# developers, Part Three: Streaming</a></li>
+                
+                    <li><a href="/posts/csharp-grpc-secure/">No-nonsense gRPC guide for the C# developers, Part Two: Secure service</a></li>
+                
+              </ul>
+
+          
+        
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://aiki.dev/posts/csharp-game-sat/" data-toggle="tooltip" data-placement="top" title="Make a game with C# in a Weekend: Saturday">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      
+
+
+      
+        
+          
+          <div class="disqus-comments">                  
+            <button id="show-comments" class="btn btn-default" type="button">Show <span class="disqus-comment-count" data-disqus-url="https://aiki.dev/posts/csharp-game-sun">comments</span></button>
+            <div id="disqus_thread"></div>
+
+            <script type="text/javascript">
+              var disqus_config = function () {
+              this.page.url = 'https:\/\/aiki.dev\/posts\/csharp-game-sun';
+            };
+
+          </script>
+          </div>
+          
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+      
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="https://github.com/lechgu" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fas fa-circle fa-stack-2x"></i>
+                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            <a href="" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fas fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="aiki.dev">Lech Gudalewicz</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;&copy;
+          
+            2021
+          
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://aiki.dev/">aiki.dev</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="https://gohugo.io">Hugo v0.88.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer><script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://aiki.dev/js/main.js"></script>
+<script src="https://aiki.dev/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script><script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script><script src="https://aiki.dev/js/load-photoswipe.js"></script>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+$(function(){
+  $('#show-comments').on('click', function(){
+    var disqus_shortname = 'aiki-dev';
+      
+    (function() {
+      var disqus = document.createElement('script'); 
+      disqus.type = 'text/javascript'; 
+      disqus.async = true;
+      disqus.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(disqus);
+    })();
+      
+    $(this).hide(); 
+    });
+  });
+      
+</script>
+<script id="dsq-count-scr" src="//aiki-dev.disqus.com/count.js" async></script>
+
+
+
+
+    
+  </body>
+</html>
+

@@ -65,7 +65,7 @@ A few disclaimers:  gRPC, at the moment, does not have the best in-browser suppo
   "datePublished" : "2020-11-14T15:22:30",
   "dateModified" : "2020-11-14T15:22:30",
   "image" : "https:\/\/aiki.dev\/images\/logo.png",
-  "keywords" : [ "C#, gRPC" ],
+  "keywords" : [ "csharp, grpc, tutorial" ],
   "mainEntityOfPage" : "https:\/\/aiki.dev\/posts\/csharp-grpc-basic\/",
   "publisher" : {
     "@type": "Organization",
@@ -95,7 +95,7 @@ What are we going to talk about? gRPC is a high performance program-to-program c
   <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
   <meta name="twitter:card" content="summary" />
   <link href='https://aiki.dev/images/favicon.ico' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.88.0" />
+  <meta name="generator" content="Hugo 0.88.1" />
   <link rel="alternate" href="https://aiki.dev/index.xml" type="application/rss+xml" title="aiki.dev"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="https://aiki.dev/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -266,7 +266,7 @@ I will not to bore you with the marketing speech, go for the details to the <a h
 <li>Microsoft&rsquo;s ASP.Net has its own implementation of gRPC, tightly coupled with the ASP.Net stack. We are not going to be talking about it but, instead, we will build our services with the traditional, interoperable, close-to-the-metal gRPC. When you google for &ldquo;grpc c#&rdquo; your may find some links pointing to the ASP.Net thing, so consider yourself warned.</li>
 </ul>
 <h2 id="what-do-you-need-to-follow-along">What do you need to follow along?</h2>
-<p>You will need the latest <a href="https://dotnet.microsoft.com/download/dotnet/5.0">.Net SDK</a> installed,  which is the version 5.0 at the moment of writing. Yo will also need a text editor. I use <a href="https://code.visualstudio.com/">Visual Studio Code</a>, but your favorite text editor will work fine too. Familiarity with the command line is assumed. You can work on Windows, Mac or Linux. To keep the examples as universal as possible, I will assume bash as the shell (for Windows, you can install <a href="https://gitforwindows.org/">git bash</a>). If you are using different shell, it is not going to be hard to adapt the commands to it.
+<p>You will need the latest <a href="https://dotnet.microsoft.com/download/dotnet/5.0">.Net SDK</a> installed, which is the version 5.0 at the moment of writing. Yo will also need a text editor. I use <a href="https://code.visualstudio.com/">Visual Studio Code</a>, but your favorite text editor will work fine too. Familiarity with the command line is assumed. You can work on Windows, Mac or Linux. To keep the examples as universal as possible, I will assume bash as the shell (for Windows, you can install <a href="https://gitforwindows.org/">git bash</a>). If you are using different shell, it is not going to be hard to adapt the commands to it.
 In the second part, we will have to generate a bunch of security certificates. To keep the story as cross-platform as possible I will use the tools available with <a href="https://www.docker.com/">Docker</a>, So you may want to have that installed to. While we are at it, I have a <a href="https://aiki.dev/posts/csharp-docker/">short crash course on Docker for the C# developers</a> on my site, in case you want to refresh your knowledge.
 As an optional exercise we&rsquo;ll have our C# services connected with the Python clients. If you want to do that too, you will need <a href="https://www.python.org/">Python</a> installed.</p>
 <h2 id="the-roadmap">The Roadmap</h2>
@@ -368,7 +368,7 @@ service Svc {
 }
 </code></pre></div><h3 id="the-service-code">the Service Code.</h3>
 <p>We need to add a few necessary usings.
-As we are going to use the  generated code which we asked to live in the <code>Shared</code> namespace, add this at the top of the file:</p>
+As we are going to use the generated code which we asked to live in the <code>Shared</code> namespace, add this at the top of the file:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">using System;
 using System.Threading.Tasks;
 using Grpc.Core;
@@ -523,12 +523,12 @@ using Shared;
 // ...
 // new
 var channel = new Channel(
-    host, 
-    port, 
+    host,
+    port,
     ChannelCredentials.Insecure
     );
     var client = new Svc.SvcClient(channel);
-    var reply = client.Calculate(new CalculateRequest { 
+    var reply = client.Calculate(new CalculateRequest {
         X = x, Y = y, Op = op });
     Console.WriteLine($&#34;The calculated result is: {reply.Result}&#34;);
 </code></pre></div><h4 id="try-it-out-1">Try it out</h4>
@@ -584,9 +584,11 @@ in</p>
         
           <div class="blog-tags">
             
-              <a href="https://aiki.dev//tags/c/">C#</a>&nbsp;
+              <a href="https://aiki.dev//tags/csharp/">csharp</a>&nbsp;
             
-              <a href="https://aiki.dev//tags/grpc/">gRPC</a>&nbsp;
+              <a href="https://aiki.dev//tags/grpc/">grpc</a>&nbsp;
+            
+              <a href="https://aiki.dev//tags/tutorial/">tutorial</a>&nbsp;
             
           </div>
         
@@ -658,15 +660,15 @@ in</p>
                   <ul>
                 
                 
+                    <li><a href="/posts/csharp-game-sun/">Make a game with C# in a Weekend: Sunday</a></li>
+                
+                    <li><a href="/posts/csharp-game-sat/">Make a game with C# in a Weekend: Saturday</a></li>
+                
                     <li><a href="/posts/csharp-rsa/">Asymmetric encryption in C# for fun and profit</a></li>
                 
                     <li><a href="/posts/csharp-grpc-interop/">No-nonsense gRPC guide for the C# developers, Bonus: Interoperability</a></li>
                 
                     <li><a href="/posts/csharp-grpc-streaming/">No-nonsense gRPC guide for the C# developers, Part Three: Streaming</a></li>
-                
-                    <li><a href="/posts/csharp-grpc-secure/">No-nonsense gRPC guide for the C# developers, Part Two: Secure service</a></li>
-                
-                    <li><a href="/posts/csharp-docker/">Docker for the C# developers Crash Course</a></li>
                 
               </ul>
 
@@ -758,7 +760,7 @@ in</p>
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.88.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          <a href="https://gohugo.io">Hugo v0.88.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
           
         </p>
       </div>
