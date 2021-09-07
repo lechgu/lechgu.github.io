@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <title>Make a game with C# in a Weekend: Saturday - aiki.dev</title>
-  <meta name="description" content="source code
+  <meta name="description" content="Source code
 What and why In addition of being a great tool for building cloud services and such, C# shines, perhaps surprisingly, in video game development. Unity game engine, for example, uses C# as a scripting language. For my taste, however, Unity is a little bit too magical, too much of mouse dragging and button clicking in order to get something workable. So for this guide we will use Monogame, a wonderful cross-platform C# framework for building games which can run on Windows, Mac, Linux, as well as on a few popular mobile platforms and game consoles.">
   <meta name="author" content="Lech Gudalewicz"/><script type="application/ld+json">
 {
@@ -58,9 +58,9 @@ What and why In addition of being a great tool for building cloud services and s
     "name" : "Lech Gudalewicz"
   },
   "headline": "Make a game with C# in a Weekend: Saturday",
-  "description" : "source code\nWhat and why In addition of being a great tool for building cloud services and such, C# shines, perhaps surprisingly, in video game development. Unity game engine, for example, uses C# as a scripting language. For my taste, however, Unity is a little bit too magical, too much of mouse dragging and button clicking in order to get something workable. So for this guide we will use Monogame, a wonderful cross-platform C# framework for building games which can run on Windows, Mac, Linux, as well as on a few popular mobile platforms and game consoles.",
+  "description" : "Source code\nWhat and why In addition of being a great tool for building cloud services and such, C# shines, perhaps surprisingly, in video game development. Unity game engine, for example, uses C# as a scripting language. For my taste, however, Unity is a little bit too magical, too much of mouse dragging and button clicking in order to get something workable. So for this guide we will use Monogame, a wonderful cross-platform C# framework for building games which can run on Windows, Mac, Linux, as well as on a few popular mobile platforms and game consoles.",
   "inLanguage" : "en",
-  "wordCount":  5799 ,
+  "wordCount":  5800 ,
   "datePublished" : "2021-09-05T09:00:32",
   "dateModified" : "2021-09-05T09:00:32",
   "image" : "https:\/\/aiki.dev\/images\/logo.png",
@@ -80,7 +80,7 @@ What and why In addition of being a great tool for building cloud services and s
 </script>
 
 <meta property="og:title" content="Make a game with C# in a Weekend: Saturday" />
-<meta property="og:description" content="source code
+<meta property="og:description" content="Source code
 What and why In addition of being a great tool for building cloud services and such, C# shines, perhaps surprisingly, in video game development. Unity game engine, for example, uses C# as a scripting language. For my taste, however, Unity is a little bit too magical, too much of mouse dragging and button clicking in order to get something workable. So for this guide we will use Monogame, a wonderful cross-platform C# framework for building games which can run on Windows, Mac, Linux, as well as on a few popular mobile platforms and game consoles.">
 <meta property="og:image" content="https://aiki.dev/images/logo.png" />
 <meta property="og:url" content="https://aiki.dev/posts/csharp-game-sat/" />
@@ -88,7 +88,7 @@ What and why In addition of being a great tool for building cloud services and s
 <meta property="og:site_name" content="aiki.dev" />
 
   <meta name="twitter:title" content="Make a game with C# in a Weekend: Saturday" />
-  <meta name="twitter:description" content="source code
+  <meta name="twitter:description" content="Source code
 What and why In addition of being a great tool for building cloud services and such, C# shines, perhaps surprisingly, in video game development. Unity game engine, for example, uses C# as …">
   <meta name="twitter:image" content="https://aiki.dev/images/logo.png" />
   <meta name="twitter:card" content="summary" />
@@ -254,13 +254,13 @@ if (!doNotTrack) {
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <p><a href="https://github.com/lechgu/csharp_game.git">source code</a></p>
+        <p><a href="https://github.com/lechgu/csharp_game.git">Source code</a></p>
 <h3 id="what-and-why">What and why</h3>
 <p>In addition of being a great tool for building cloud services and such, C# shines, perhaps surprisingly, in video game development. <a href="https://unity.com/">Unity game engine</a>, for example, uses C# as a scripting language. For my taste, however, Unity is a little bit too magical, too much of mouse dragging and button clicking in order to get something workable. So for this guide we will use <a href="https://www.monogame.net/">Monogame</a>, a wonderful cross-platform C# framework for building games which can run on Windows, Mac, Linux, as well as on a few popular mobile platforms and game consoles. We are going to concentrate on building a desktop game. This will be a Tetris-like game and it will be able to run on any popular desktop platform.</p>
 <p>We are going to build something like this:
 <img src="/images/blocks.png" alt="Blocks"></p>
 <h3 id="ultra-brief-history-of-monogame">Ultra-brief history of Monogame</h3>
-<p>Around 15 years ago, Microsoft toyed with the idea of making game development accessible to the hobbyists and indie developers so they released set of libraries and tools called Microsoft XNA, aimed at the cross-platform game development. Of course, the term &ldquo;cross-platform&rdquo; was understood the traditional Microsoft&rsquo;s way, i.e. Windows and Xbox. The toolkit was actually pretty well received by the indie games developers community. But, as it often happens with them, Microsoft eventually lost interest and pretty much abandoned the project. The open source community stepped in, and reimplemented the XNA Api as an open source project, which got a name Monogame. Since then the support for many platforms has been added and currently one may use it to develop games for macOS, Linux, Windows, iOS, Android and a few game console platforms, like Nintendo Switch. Monogame powers quite a few popular video games, <a href="https://www.stardewvalley.net/">Stardew Valley</a> being one such example.</p>
+<p>Around 15 years ago, Microsoft toyed with the idea of making game development accessible to the hobbyists and indie developers alike so they released set of libraries and tools called Microsoft XNA, aimed at the cross-platform game development. Of course, the term &ldquo;cross-platform&rdquo; was understood in the traditional Microsoft&rsquo;s way, i.e. Windows and Xbox. The toolkit was actually pretty well received by the indie games developers community. But, as it often happens with them, Microsoft eventually lost interest and pretty much abandoned the project. The open source community stepped in, and reimplemented the XNA Api as an open source project, which got a name Monogame. Since then the support for many platforms has been added and currently one may use it to develop games for macOS, Linux, Windows, iOS, Android and a few game console platforms, like Nintendo Switch. Monogame powers quite a few popular video games, <a href="https://www.stardewvalley.net/">Stardew Valley</a> being one such example.</p>
 <h3 id="what-you-need-to-follow-along">What you need to follow along</h3>
 <p>You&rsquo;ll need a <a href="https://dotnet.microsoft.com/">.net SDK</a> installed on Windows, Mac or Linux. We are going to use the latest version which is 5.0. You will also need a code editor, something like <a href="https://code.visualstudio.com/">Visual Studio Code</a> although any other editor will work too. Familiarity with the terminal and the basics of C# is assumed. For uniformity, I am going to use bash. On Windows you may use <a href="https://git-scm.com/">git bash</a> but it is pretty trivial to port commands to the standard Windows <code>cmd.exe</code>.</p>
 <h3 id="initial-setup">Initial setup</h3>
@@ -333,11 +333,11 @@ namespace Blocks
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">dotnet run
 </code></pre></div><p>You should see a window filled with the gray color.</p>
 <h3 id="draw-something">Draw something</h3>
-<p>Monogame usually expect you to provide images (sprites etc) to be displayed as graphical assets in your game.
-There is quite sophisticated pre-processing pipeline built-in into the framework which convert png or jpg images into the format expected by Monogame. The bad news is that, as at the moment of writing this, the content processing pipeline has not been yet ported to .net 5.0. It works fine with .net core 3.1. The good news though, that all we need to display are pretty much rectangles of various colors.</p>
-<p>Here&rsquo;s a little trick. the image of 1 pixel wide and 1 pixel tall is, technically, a rectangle, albeit a small one. Monogame has the ability to scale the images arbitrarily, so 1 pixel can be scaled to the rectangle of desired size. Ok, what about the color?. In addition to scaling the image, Monogame can also tint it to any desired color. So, if we would have a 1x1 image of a white pixel, that would be enough to produce a rectangle of any size and any color.
+<p>Monogame usually expects you to provide images (sprites etc) to be displayed as graphical assets in your game.
+There is a quite sophisticated pre-processing pipeline built-in into the framework which convert png or jpg images into the format expected by Monogame. The bad news is that, as at the moment of writing this, the content processing pipeline has not been yet ported to .net 5.0. It works fine with .net core 3.1. The good news though, that all we need to display are pretty much rectangles of various colors.</p>
+<p>Here&rsquo;s a little trick: the image of 1 pixel wide and 1 pixel tall is, technically, a rectangle, albeit a small one. Monogame has the ability to scale the images arbitrarily, so 1 pixel can be scaled to the rectangle of desired size. Ok, what about the color?. In addition to scaling the image, Monogame can also tint it to any desired color. So, if we would have a 1x1 image of a white pixel, that would be enough to produce a rectangle of any size and any color.
 Creating such image programmatically is not that hard in Monogame.
-create a field in the <code>App</code> class which will represent our pixel. Also, expose it as a property.</p>
+Create a field in the <code>App</code> class which will represent our pixel. Also, expose it as a property.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">private Texture2D pixel;
 
 public Texture2D Pixel
@@ -345,7 +345,7 @@ public Texture2D Pixel
     get =&gt; pixel;
 }
 </code></pre></div><p><code>Texture2D</code> is the Monogame object representing images, sprites etc. It lives in the <code>Microsoft.Xna.Framework.Graphics</code> namespace.</p>
-<p>The actual creation of our pixel texture can be done in the <code>Initialize</code> call, when all graphics plumbing has been completed by the Monogame</p>
+<p>The actual creation of our pixel texture can be done in the <code>Initialize</code> call, when all graphics plumbing setup has been completed by the Monogame</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">protected override void Initialize()
 {
     base.Initialize();
@@ -353,7 +353,7 @@ public Texture2D Pixel
     pixel.SetData&lt;Color&gt;(new[] { Color.White });
 }
 </code></pre></div><p>Ok, we got our pixel.
-We will want to access this <code>Pixel</code> property from anywhere in the program and, eventually we&rsquo;ll want that with our class <code>App</code> also. So let&rsquo;s turn it into a simple singleton.</p>
+We will want to access this <code>Pixel</code> property from anywhere in the program and, eventually, we&rsquo;ll want also access from everywhere our class <code>App</code> itself. So let&rsquo;s turn it into a simple singleton.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">//...
 class App: Game
 {
@@ -392,7 +392,7 @@ protected override void Initialize()
         spriteBatch = new SpriteBatch(GraphicsDevice);
     }
 }
-</code></pre></div><p>In order to not pollute the <code>App</code> class we are going to create a separate class that will hold the main game flow. Create a new file</p>
+</code></pre></div><p>In order to not pollute the <code>App</code> class we are going to create a separate class that holds the main game flow. Create a new file</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">touch PlayScene.cs
 </code></pre></div><p>Make it look like this:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">using Microsoft.Xna.Framework;
@@ -414,9 +414,9 @@ namespace Blocks
     }
 }
 </code></pre></div><p>The <code>Render</code> method of the scene uses the <code>SpriteBatch</code> to draw our pixel.
-<code>Draw</code> has many overloads, this particular, in addition of having the source texture parameter (our 1x1 white pixel), also takes the destination rectangle and the tint into which to color the texture. So the pixel will be scaled to a 100x100 pixel rectangle and colored red.</p>
+<code>Draw</code> has many overloads, this particular, in addition of having the source texture parameter (our 1x1 white pixel), also takes the destination rectangle and the tint into which to color the texture. So the pixel is scaled to a 100x100 rectangle and colored red.</p>
 <p>Ok, now we need to add the <code>PlayScene</code> object to the <code>App</code> and call its <code>Render</code> in the `Draw implementation.
-Add the new field:</p>
+Add a new field:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">// ...
 public class App: Game
 {
@@ -434,7 +434,7 @@ public class App: Game
     }
 }
 </code></pre></div><p>Note that the call to scene&rsquo;s <code>Render</code> is sandwiched between <code>Begin</code> and <code>End</code> on the <code>SpriteBatch</code>.</p>
-<p>Try to run it, you will see a red square on the gray background.</p>
+<p>Try to run the application, you will see a red square on the gray background.</p>
 <h3 id="windowing">Windowing</h3>
 <p>Monogame allows you to run your game in fullscreen mode, or in the window. In our case we are going to run it in the window. We set it to some initial size and let the user resize the window if he/she wants.
 First create the file <code>Constants.cs</code> where we are going to keep all our constants, so we can find and modify them easily.</p>
@@ -461,7 +461,7 @@ First create the file <code>Constants.cs</code> where we are going to keep all o
 </code></pre></div><p>In order for these constants to be accessible in the file, make sure you add</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">using static Blocks.Constants;
 </code></pre></div><p>on top of it.</p>
-<p>We are setting the window dimensions here as well as its title and allowing the user to resize the window. Try to run it, the red square on the gray background still appears. Now it is possible to change the window size and the content becomes &ldquo;responsive&rdquo;, that is it adapts to the window size. This is fine but it is going to be a little hard to position our content, as the user can change the the window dimensions and its aspect ratio. We can make our life a little easier by using virtual dimensions.</p>
+<p>We are setting the window dimensions here as well as its title and allowing the user to resize the window. Try to run the application, the red square on the gray background still appears. Now it is possible to change the window size and the content becomes &ldquo;responsive&rdquo;, that is it adapts to the window size. This is fine but it is going to be a little hard to position our content, as the user can change the the window dimensions and its aspect ratio. We can make our life a little easier by using virtual dimensions.</p>
 <h3 id="drawing-in-terms-of-the-virtual-dimensions">Drawing in terms of the Virtual Dimensions.</h3>
 <p>Let&rsquo;s say, we want to treat our window as always having a predefined fixed size,
 say 640x480, position all elements according to this size, and let Monogame scale it appropriately.
@@ -500,7 +500,7 @@ Next, we need to make the the <code>Draw</code> method to look like this</p>
     spriteBatch.End();
 }
 </code></pre></div><p>This code does what has been described above: we set the render target, do the clearing and drawing to that target, set the target to default, and blast the whole target into the window, which current dimensions are held in <code>Window.ClientBounds</code>.
-if we run the app again, we&rsquo;ll see that the red square still shows up, but its dimensions might be slightly different than before, as its coordinates are interpreted in the terms of the virtual coordinates. Ok, by now we can draw rectangles and have adequate control how to position them.</p>
+if we run the application again, we&rsquo;ll see that the red square still shows up, but its dimensions might be slightly different than before, as its coordinates are interpreted in the terms of the virtual coordinates. Ok, by now we can draw rectangles and have adequate control how to position them.</p>
 <h3 id="arrays">Arrays</h3>
 <p>I bet you have played a Tetris-like game before, so I won&rsquo;t bother to specify the rules in detail. You have a rectangular board, and a falling piece which could be also viewed as 4x4 square; with some cells filled and some not. We are going to use two-dimensional arrays to represent both the board and the falling piece. The values equal to 0 in array means that the particular cell is empty, non zero value stands for the occupied cell. In theory, we could use a standard C# array structure for it, but eventually we are going to have bunch of helper methods and properties so, in order to keep the code organized, let&rsquo;s create the class <code>Arr</code> in the file <code>Arr.cs</code> that is going to represent the array we need.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">namespace Blocks
@@ -523,13 +523,13 @@ if we run the app again, we&rsquo;ll see that the red square still shows up, but
     }
 }
 </code></pre></div><p>the data itself is going to be kept in a simple, one-dimensional array, so we need some helper indexer which gets and sets the value, given the row and the column.
-Add the indexer to the <code>Arr</code> class.</p>
+Add this indexer to the <code>Arr</code> class.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public int this[int r, int c]
 {
     get =&gt; buf[cols * r + c];
     set =&gt; buf[cols * r + c] = value;
 }
-</code></pre></div><p>We also need to construct somehow instances of the <code>Arr</code> class. Let&rsquo;s add two constructors, one would initialize an array filled with zeros by simply specifying number or rows and cols. Another constructor will just take the copy of the given array and represent it in rectangular way.
+</code></pre></div><p>We also need to construct somehow instances of the <code>Arr</code> class. Let&rsquo;s add two constructors, one would initialize an array filled with zeros by simply specifying number or rows and cols. Another constructor will just take the copy of the given array and represents it in a rectangular way.
 These are the constructors</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public Arr(int rows, int cols)
         {
@@ -569,7 +569,7 @@ namespace Blocks
         }
     }
 
-</code></pre></div><p>Nothing fancy. the initial board will be just an empty 10x22 array.</p>
+</code></pre></div><p>Nothing special. the initial board is just an empty 22x10 array.</p>
 <p>Let&rsquo;s instantiate it in the <code>PlayScene</code> and display on screen. Add the following to the <code>PlayScene</code></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">
 private Engine engine;
@@ -671,11 +671,11 @@ So create a file <code>Pieces.cs</code> with the following.</p>
 
     }
 }
-</code></pre></div><p>The name of the piece reflects the English letter which the piece vaguely resembles. The cell set to zero means an empty cell, otherwise it
+</code></pre></div><p>The cell set to zero means an empty cell, otherwise it
 indicates the color of the particular cell.
 Obviously it is one of these occasions where it is just fine to copy paste the code snippet as there is little learning value in typing this in. We give each piece a name which refers to a letter that vaguely resembles its shape. Finally, the <code>PIECES</code> holds all of them in a single array.</p>
 <h3 id="the-current-piece">The current piece</h3>
-<p>Ok, what it takes to put one piece on the board? First we need to check if there is space for it in the desired position, then just blast the non-0 entries into the board. For that we will add two helpers <code>CanPlace</code> and <code>Place</code> to the `Arr&rsquo; class.
+<p>Ok, what it takes to put one piece on the board? First we need to check if there is space for it in the desired position, then just blast the non-0 entries into the board. For that we will add two helpers <code>CanPlace</code> and <code>Place</code> to the <code>Arr</code> class.
 The former is supposed to return a boolean indicating if it is possible to put the piece into the board at desired position.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"> public bool CanPlace(Arr piece, int r, int c)
 {
@@ -729,7 +729,7 @@ The former is supposed to return a boolean indicating if it is possible to put t
 {
     get =&gt; new(buf, rows);
 }
-</code></pre></div><p>Ok, now we are prepared start putting pieces of the board. Let&rsquo;s add the following fields into the <code>Model</code> class which represent what is the current piece in play and what is its position.</p>
+</code></pre></div><p>Ok, now we are prepared start putting pieces of the board. Let&rsquo;s add the following fields into the <code>Engine</code> class which represent what is the current piece in play and what is its position.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public class Engine
 {
     //...
@@ -789,7 +789,7 @@ Add the following field</p>
     }
 }
 </code></pre></div><p>Ok, this looks like everything we need in order to display at list one piece. But if you run the the app now, the board still seems to be black.
-How come? Well we spawned a new piece in the model but haven&rsquo;t actually placed it on board.</p>
+How come? Well we spawned a new piece in the engine but haven&rsquo;t actually placed it on board. Moving the piece one position down will accomplish the goal.</p>
 <h3 id="piece-down">Piece Down</h3>
 <p>So, what do we need to move the piece down? In the simplest terms, we remove the piece from the current position increase the current row by one and place it again. So firstly, we need a new method in the <code>Arr</code> class which removes the piece in the give position:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public void Remove(Arr piece, int r, int c)
@@ -981,7 +981,7 @@ public void Left()
         // ...
     }
 }
-</code></pre></div><p>In the <code>Reset</code> implementation handle the Left and Right keys and delegate to the model&rsquo;s Left and Right correspondingly.</p>
+</code></pre></div><p>In the <code>Reset</code> implementation handle the Left and Right keys and delegate to the engine&rsquo;s Left and Right correspondingly.</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">private void Reset()
 {
     engine = new();
@@ -1179,7 +1179,7 @@ Let&rsquo;s implement these primitives:</p>
     return removed;
 }
 </code></pre></div><p>We are returning the number of rows actually removed.</p>
-<p>Everything is ready to hook this code into the <code>Model.cs</code>. Modify the <code>Down</code> method so it removes the full rows once it is not able to move the piece down. Like this</p>
+<p>Everything is ready to hook this code into the <code>Engine.cs</code>. Modify the <code>Down</code> method so it removes the full rows once it is not able to move the piece down. Like this</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">public void Down()
 {
     var clone = board.Cloned;
